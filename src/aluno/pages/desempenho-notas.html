@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desempenho e Estatística</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles/desempenho-notas.css">
+    <link rel="stylesheet" href="../../common/styles/menu.css">
+    <link rel="stylesheet" href="../../common/styles/changepass.css">
+    <link rel="stylesheet" href="../../common/styles/exitpopup.css">
+</head>
+<body>
+    <header class="header">
+        <div class="menu-icon-mobile">
+            <span id="menu-icon-mobile" class="material-symbols-outlined">menu</span>
+        </div>
+        <div class="logo-Header">
+            <p class="logo"><img src="" alt=""></p>
+        </div>
+        <div class="menuheader"> 
+            <span id="notifications-icon" class="material-symbols-outlined" onclick="clickMenu()">notifications</span>
+            <div id="notifications-popup" class="notifications-popup">
+                <p>Notificações</p>
+                <ul>
+                    <li>Notificação</li>
+                    <li>Notificação</li>
+                    <li>Notificação</li>
+                </ul>
+            </div>
+            <li><p id="user-name-header">Guilherme Moura</p></li>
+            <span id="user-icon" class="material-symbols-outlined">account_circle</span>
+            <div id="user-icon-popup" class="user-icon-popup">
+                <p>Notificações</p>
+                <ul>
+                    <li>Notificação</li>
+                    <li>Notificação</li>
+                    <li>Notificação</li>
+                    <li>Notificação</li>
+                    <li>Notificação</li>
+                    <li>Notificação</li>
+                    <li>Notificação</li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <div id="sidebar">
+        <div class="topmenu">
+            <span id="menu-icon" class="material-symbols-outlined" onclick="clickMenu()">menu</span>
+            <h3 id="menu-tittle">Menu</h3>
+            <img id="logomenu" src="" alt="">
+        </div>
+        <menu id="menu-hidden">
+            <div class="navbar">
+                <ul>
+                    <li>
+                        <a href="#"><span id="dashboard-icon" class="material-symbols-outlined">Dashboard</span><p>Dashboard</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span id="desempenho-icon" class="material-symbols-outlined">Bar_chart_4_bars</span><p>Desempenho</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span id="atividades" class="material-symbols-outlined">menu_book</span><p>Atividades</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span id="relatorios-icon" class="material-symbols-outlined">Docs</span><p>Relatórios</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span id="redacao-icon" class="material-symbols-outlined">History_edu</span><p>Redação</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span id="chat-icon" class="material-symbols-outlined">Chat</span><p>Chat</p></a>
+                    </li>
+                </ul>
+            </div>
+        </menu>
+    </div>
+    </menu>
+
+    <div class="container">
+        <h2>Estatística de Desempenho</h2>
+        <div class="inputs">
+            <div class="select-inputs">
+                <div class="label-division">
+                    <label for="etapa">Etapa:</label>
+                    <select id="etapa" onchange="updateChart()">
+                        <option selected>1° Trimestre</option>
+                        <option>2° Trimestre</option>
+                        <option>3° Trimestre</option>
+                    </select>
+                </div>
+                <div class="label-division">
+                    <label for="comparar">Comparar:</label>
+                    <select id="comparar" onchange="updateChart()">
+                        <option selected>Nenhum</option>
+                        <option>1° Trimestre</option>
+                        <option>2° Trimestre</option>
+                        <option>3° Trimestre</option>
+                    </select>
+                </div>
+            </div>
+            <button class="save-button" onclick="saveAsImage()">Salvar em Imagem</button>
+        </div>
+        <div class="chart-container">
+            <canvas id="performanceChart"></canvas>
+        </div>
+    </div>
+
+    <script src="../scripts/desempenho-notas.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="../../common/scripts/changepass.js"></script>
+    <script src="../../common/scripts/exitpopup.js"></script>
+    <script src="../../common/scripts/menu.js"></script>        
+</body>
+</html>

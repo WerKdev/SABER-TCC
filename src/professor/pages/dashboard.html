@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pagina desempenho</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles/dashboard.css">
+</head>
+<body>
+    <header class="header">
+        <div class="menu-icon-mobile">
+            <span id="menu-icon-mobile" class="material-symbols-outlined">menu</span>
+        </div>
+        <div class="logo-Header">
+            <p class="logo"><img src="" alt=""></p>
+        </div>
+        <div class="menuheader"> 
+            <ul class="menuheader-list">
+                <li>
+                    <span id="notifications-icon" class="material-symbols-outlined" onclick="clickMenu()">notifications</span>
+                    <div id="notifications-popup" class="notifications-popup">
+                        <p>Notificações</p>
+                        <ul>
+                            <li>Notificação</li>
+                            <li>Notificação</li>
+                            <li>Notificação</li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <p id="user-name-header">Guilherme Moura</p>
+                </li>
+                <li>
+                    <span id="user-icon" class="material-symbols-outlined">account_circle</span>
+            <div id="user-icon-popup" class="user-icon-popup">
+                <p>Configurações</p>
+                <ul>
+                    <li>Configuração</li>
+                    <li>Configuração</li>
+                    <li>Configuração</li>
+                    <li>Configuração</li>
+                    <li>Configuração</li>
+                    <li>Configuração</li>
+                    <li>Configuração</li>
+                </ul>
+            </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <div id="sidebar">
+        <div class="topmenu">
+            <span id="menu-icon" class="material-symbols-outlined" onclick="">menu</span>
+            <h3 id="menu-tittle">Menu</h3>
+            <img id="logomenu" src="" alt="">
+        </div>
+        <menu id="menu-hidden">
+            <div class="navbar">
+                <ul>
+                    <li>
+                        <a href="#"><span id="dashboard-icon" class="material-symbols-outlined">Dashboard</span><p>Dashboard</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span id="desempenho-icon" class="material-symbols-outlined">Bar_chart_4_bars</span><p>Desempenho</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span id="atividades" class="material-symbols-outlined">menu_book</span><p>Atividades</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span id="relatorios-icon" class="material-symbols-outlined">Docs</span><p>Relatórios</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span id="redacao-icon" class="material-symbols-outlined">History_edu</span><p>Redação</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span id="chat-icon" class="material-symbols-outlined">Chat</span><p>Chat</p></a>
+                    </li>
+                </ul>
+            </div>
+        </menu>
+    </div>
+    </menu>
+
+
+    <main class="main">
+        <div class="dashboard-container">
+            <!-- Teacher Profile Card -->
+            <div class="teacher-profile">
+                <div class="teacher-avatar">
+                    <span class="material-symbols-outlined">person</span>
+                </div>
+                <div class="teacher-info">
+                    <h2>Guilherme Moura</h2>
+                    <p>Professor de Matemática</p>
+                    <p>ID: P-2023-045 • Escola Sesi Djalma Pessoa - Bahia</p>
+                </div>
+            </div>
+            
+            <!-- Stats Cards -->
+            <div class="stats-container">
+                <div class="stat-card">
+                    <h3>Média de notas da turma</h3>
+                    <div class="stat-value">7.6</div>
+                    <div class="stat-comparison stat-positive">
+                        <span class="material-symbols-outlined">trending_up</span> +0.5 desde o último trimestre
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <h3>Taxa de entrega de atividades</h3>
+                    <div class="stat-value">85%</div>
+                    <div class="stat-comparison stat-positive">
+                        <span class="material-symbols-outlined">trending_up</span> +2% desde o último mês
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <h3>Média de frequência dos alunos</h3>
+                    <div class="stat-value">91%</div>
+                    <div class="stat-comparison stat-negative">
+                        <span class="material-symbols-outlined">trending_down</span> -2 desde o último trimestre
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <h3>Turmas em monitoramento</h3>
+                    <div class="stat-value">5</div>
+                    <div class="stat-comparison">
+                        Número de salas que você da aula
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Charts -->
+            <div class="chart-card">
+                <div class="chart-card-header">
+                    <h3>Progresso de Desempenho da Turma</h3>
+                    <div class="chart-filters">
+                        <div class="filter-group">
+                            <label for="performance-grade-select">Ano Escolar:</label>
+                            <select id="performance-grade-select" class="filter-select">
+                                <option value="all">Todos os Anos</option>
+                                <option value="fund1">1º Ano - Fundamental</option>
+                                <option value="fund2">2º Ano - Fundamental</option>
+                                <option value="fund3">3º Ano - Fundamental</option>
+                                <option value="fund4">4º Ano - Fundamental</option>
+                                <option value="fund5">5º Ano - Fundamental</option>
+                                <option value="fund6">6º Ano - Fundamental</option>
+                                <option value="fund7">7º Ano - Fundamental</option>
+                                <option value="fund8">8º Ano - Fundamental</option>
+                                <option value="fund9">9º Ano - Fundamental</option>
+                                <option value="medio1">1º Ano - Ensino Médio</option>
+                                <option value="medio2">2º Ano - Ensino Médio</option>
+                                <option value="medio3">3º Ano - Ensino Médio</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="performance-class-select">Turma:</label>
+                            <select id="performance-class-select" class="filter-select">
+                                <option value="all">Todas as Turmas</option>
+                                <option value="601">6º Ano - Turma 01</option>
+                                <option value="602">6º Ano - Turma 02</option>
+                                <option value="701">7º Ano - Turma 01</option>
+                                <option value="702">7º Ano - Turma 02</option>
+                                <option value="801">8º Ano - Turma 01</option>
+                                <option value="901">9º Ano - Turma 01</option>
+                                <option value="1001">1º EM - Turma 01</option>
+                                <option value="2001">2º EM - Turma 01</option>
+                                <option value="3001">3º EM - Turma 01</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="performanceChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="chart-card">
+                <div class="chart-card-header">
+                    <h3>Distribuição de Notas</h3>
+                    <div class="chart-filters">
+                        <div class="filter-group">
+                            <label for="distribution-grade-select">Ano Escolar:</label>
+                            <select id="distribution-grade-select" class="filter-select">
+                                <option value="all">Todos os Anos</option>
+                                <option value="fund1">1º Ano - Fundamental</option>
+                                <option value="fund2">2º Ano - Fundamental</option>
+                                <option value="fund3">3º Ano - Fundamental</option>
+                                <option value="fund4">4º Ano - Fundamental</option>
+                                <option value="fund5">5º Ano - Fundamental</option>
+                                <option value="fund6">6º Ano - Fundamental</option>
+                                <option value="fund7">7º Ano - Fundamental</option>
+                                <option value="fund8">8º Ano - Fundamental</option>
+                                <option value="fund9">9º Ano - Fundamental</option>
+                                <option value="medio1">1º Ano - Ensino Médio</option>
+                                <option value="medio2">2º Ano - Ensino Médio</option>
+                                <option value="medio3">3º Ano - Ensino Médio</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="distribution-class-select">Turma:</label>
+                            <select id="distribution-class-select" class="filter-select">
+                                <option value="all">Todas as Turmas</option>
+                                <option value="601">6º Ano - Turma 01</option>
+                                <option value="602">6º Ano - Turma 02</option>
+                                <option value="701">7º Ano - Turma 01</option>
+                                <option value="702">7º Ano - Turma 02</option>
+                                <option value="801">8º Ano - Turma 01</option>
+                                <option value="901">9º Ano - Turma 01</option>
+                                <option value="1001">1º EM - Turma 01</option>
+                                <option value="2001">2º EM - Turma 01</option>
+                                <option value="3001">3º EM - Turma 01</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="gradesDistributionChart"></canvas>
+                </div>
+            </div>
+            
+            <!-- Student Performance Table -->
+            <div class="students-performance">
+                <h3>Desempenho dos Alunos</h3>
+                <table class="performance-table">
+                    <thead>
+                        <tr>
+                            <th>Aluno</th>
+                            <th>Média</th>
+                            <th>Progresso</th>
+                            <th>Frequência</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="student-name">
+                                    <div class="student-avatar">AM</div>
+                                    Ana Maria Silva
+                                </div>
+                            </td>
+                            <td>9.2</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-value progress-excellent" style="width: 92%"></div>
+                                </div>
+                            </td>
+                            <td>98%</td>
+                            <td><span class="badge badge-excellent">Excelente</span></td>
+                            <td>
+                                <span class="material-symbols-outlined">visibility</span>
+                                <span class="material-symbols-outlined">edit</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="student-name">
+                                    <div class="student-avatar">LS</div>
+                                    Lucas Santos
+                                </div>
+                            </td>
+                            <td>8.5</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-value progress-good" style="width: 85%"></div>
+                                </div>
+                            </td>
+                            <td>92%</td>
+                            <td><span class="badge badge-good">Bom</span></td>
+                            <td>
+                                <span class="material-symbols-outlined">visibility</span>
+                                <span class="material-symbols-outlined">edit</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="student-name">
+                                    <div class="student-avatar">JO</div>
+                                    Julia Oliveira
+                                </div>
+                            </td>
+                            <td>7.0</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-value progress-average" style="width: 70%"></div>
+                                </div>
+                            </td>
+                            <td>85%</td>
+                            <td><span class="badge badge-average">Médio</span></td>
+                            <td>
+                                <span class="material-symbols-outlined">visibility</span>
+                                <span class="material-symbols-outlined">edit</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="student-name">
+                                    <div class="student-avatar">TP</div>
+                                    Thiago Pereira
+                                </div>
+                            </td>
+                            <td>5.2</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-value progress-needs-improvement" style="width: 52%"></div>
+                                </div>
+                            </td>
+                            <td>75%</td>
+                            <td><span class="badge badge-needs-improvement">Precisa melhorar</span></td>
+                            <td>
+                                <span class="material-symbols-outlined">visibility</span>
+                                <span class="material-symbols-outlined">edit</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="student-name">
+                                    <div class="student-avatar">MC</div>
+                                    Mariana Costa
+                                </div>
+                            </td>
+                            <td>8.0</td>
+                            <td>
+                                <div class="progress-bar">
+                                    <div class="progress-value progress-good" style="width: 80%"></div>
+                                </div>
+                            </td>
+                            <td>90%</td>
+                            <td><span class="badge badge-good">Bom</span></td>
+                            <td>
+                                <span class="material-symbols-outlined">visibility</span>
+                                <span class="material-symbols-outlined">edit</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            
+            <!-- Recent Activities -->
+            <div class="recent-activities">
+                <h3>Atividades Recentes</h3>
+                <ul class="activity-list">
+                    <li class="activity-item">
+                        <div class="activity-icon">
+                            <span class="material-symbols-outlined">grading</span>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Notas da prova de Álgebra lançadas</div>
+                            <div class="activity-time">Hoje, 10:25</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-icon">
+                            <span class="material-symbols-outlined">menu_book</span>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Nova atividade "Geometria Espacial" criada</div>
+                            <div class="activity-time">Ontem, 15:40</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-icon">
+                            <span class="material-symbols-outlined">forum</span>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Comentário em trabalho de Lucas Santos</div>
+                            <div class="activity-time">Ontem, 13:15</div>
+                        </div>
+                    </li>
+                    <li class="activity-item">
+                        <div class="activity-icon">
+                            <span class="material-symbols-outlined">calendar_month</span>
+                        </div>
+                        <div class="activity-content">
+                            <div class="activity-title">Agendada reunião com pais de Thiago Pereira</div>
+                            <div class="activity-time">29/03/2025, 09:30</div>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </main>
+
+    <script src="../scripts/dashboard.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="../../common/scripts/changepass.js"></script>
+    <script src="../../common/scripts/exitpopup.js"></script>
+    <script src="../../common/scripts/menu.js"></script>    
+</body>
+</html>

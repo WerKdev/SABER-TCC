@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Escolar - Turma 3º</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/turmas-status.css">
+</head>
+<body>
+    <header class="header">
+        <div class="menu-icon-mobile">
+            <span id="menu-icon-mobile" class="material-symbols-outlined">menu</span>
+        </div>
+        <div class="logo-Header">
+            <p class="logo"><img src="" alt=""></p>
+        </div>
+        <div class="menuheader"> 
+            <span id="notifications-icon" class="material-symbols-outlined">notifications</span>
+            <div id="notifications-popup" class="notifications-popup">
+                <p>Notificações</p>
+                <ul>
+                    <li>Notificação</li>
+                    <li>Notificação</li>
+                    <li>Notificação</li>
+                </ul>
+            </div>
+            <li><p id="user-name-header">Guilherme Moura</p></li>
+            <span id="user-icon" class="material-symbols-outlined">account_circle</span>
+            <div id="user-icon-popup" class="user-icon-popup">
+                <p>Notificações</p>
+                <ul>
+                    <li>Notificação</li>
+                    <li>Notificação</li>
+                    <li>Notificação</li>
+                    <li>Notificação</li>
+                    <li>Notificação</li>
+                    <li>Notificação</li>
+                    <li>Notificação</li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <div id="sidebar">
+        <div class="topmenu">
+            <span id="menu-icon" class="material-symbols-outlined">menu</span>
+            <h3 id="menu-tittle">Menu</h3>
+            <img id="logomenu" src="" alt="">
+        </div>
+        <menu id="menu-hidden">
+            <div class="navbar">
+                <ul>
+                    <li>
+                        <a href="#"><span id="dashboard-icon" class="material-symbols-outlined">Dashboard</span><p>Dashboard</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span id="desempenho-icon" class="material-symbols-outlined">Bar_chart_4_bars</span><p>Desempenho</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span id="atividades" class="material-symbols-outlined">menu_book</span><p>Atividades</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span id="relatorios-icon" class="material-symbols-outlined">Docs</span><p>Relatórios</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span id="redacao-icon" class="material-symbols-outlined">History_edu</span><p>Redação</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span id="chat-icon" class="material-symbols-outlined">Chat</span><p>Chat</p></a>
+                    </li>
+                </ul>
+            </div>
+        </menu>
+    </div>
+
+    <main class="main">
+        <a href="#" class="back-link">
+            <span class="material-symbols-outlined">arrow_back</span> Voltar
+        </a>
+        <br>
+
+        <h1 class="page-title">Lista de Aluno > Turma 3º</h1>
+
+        <div class="report-container">
+            <div class="report-header">
+                <h2>Relatório rápido: turma 3º O</h2>
+                <div class="report-type">
+                    <label for="report-type">Tipo de relatório:</label>
+                    <select id="report-type">
+                        <option>Resumo Geral</option>
+                        <option>Desempenho por Disciplina</option>
+                        <option>Frequência</option>
+                    </select>
+                </div>
+                <button class="generate-button">Gerar Relatório Completo</button>
+            </div>
+
+            <div class="graphs">
+                <div class="graph-container">
+                    <div class="subject-bar ling-bar">
+                        <span class="subject-label">LING</span>
+                        <span class="subject-value">7.5</span>
+                    </div>
+                    <div class="subject-bar mat-bar">
+                        <span class="subject-label">MAT</span>
+                        <span class="subject-value">6.5</span>
+                    </div>
+                    <div class="subject-bar hum-bar">
+                        <span class="subject-label">HUM</span>
+                        <span class="subject-value">7.0</span>
+                    </div>
+                    <div class="subject-bar nat-bar">
+                        <span class="subject-label">NAT</span>
+                        <span class="subject-value">6.0</span>
+                    </div>
+                    <div class="subject-bar red-bar">
+                        <span class="subject-label">RED</span>
+                        <span class="subject-value">8.0</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="report-content">
+                <h3 class="report-title">Relatório - Resumo Geral</h3>
+                <p class="report-text">
+                    A turma 3B apresentou um desempenho geral satisfatório ao longo do semestre, com 85% 
+                    de frequência regular. A maioria dos alunos tem demonstrado interesse nas aulas e 
+                    participado de forma ativa das atividades propostas. Os estudantes apresentam maior 
+                    recorrência no aprendizado da matemática, especialmente em conceitos de álgebra. Apesar 
+                    de uma boa base, muitos alunos têm encontrado desafios ao resolver equações mais 
+                    complexas.
+                </p>
+                <p class="report-text">
+                    É recomendada a realização de atividades de reforço e acompanhamento individualizado 
+                    para melhorar a compreensão nesse conteúdo. Com isso, espera-se que o desempenho geral 
+                    da turma melhore, proporcionando uma preparação mais sólida para os próximos desafios 
+                    acadêmicos.
+                </p>
+                <p class="report-status">
+                    Status da turma: Aprovada com possibilidade de ajustes no ensino de álgebra.
+                </p>
+            </div>
+        </div>
+
+        <h1 class="page-title">Lista de Aluno > Turma 3º</h1>
+
+        <div class="students-list-container">
+            <div class="list-header">
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Pesquisar alunos">
+                </div>
+                <div class="filter-container">
+                    <select class="filter-select">
+                        <option>Ordenar por:</option>
+                        <option>Nome (A-Z)</option>
+                        <option>Nome (Z-A)</option>
+                        <option>Desempenho (Maior-Menor)</option>
+                        <option>Desempenho (Menor-Maior)</option>
+                    </select>
+                    <select class="filter-select">
+                        <option>Filtrar análise:</option>
+                        <option>Todos</option>
+                        <option>Aprovados</option>
+                        <option>Em recuperação</option>
+                        <option>Reprovados</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="list-actions">
+                <button class="list-action-button attendance-button">Lista de Presença</button>
+                <button class="list-action-button schedule-button">Cronograma de aula</button>
+            </div>
+
+            <table class="students-table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Matrícula</th>
+                        <th>Desempenho</th>
+                        <th>Frequência</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <div class="student-avatar"></div>
+                                <span>Guilherme Moura Nobre</span>
+                            </div>
+                        </td>
+                        <td>0000235662</td>
+                        <td><span class="performance-pill low-performance">7.4</span></td>
+                        <td><span class="attendance-pill high-attendance">90%</span></td>
+                        <td><button class="view-report-button"><a class="relatorioview" href="/tela relatório/index.html">Ver Relatório</a></button></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <div class="student-avatar"></div>
+                                <span>Ruan Reller</span>
+                            </div>
+                        </td>
+                        <td>0000235662</td>
+                        <td><span class="performance-pill medium-performance">8.1</span></td>
+                        <td><span class="attendance-pill high-attendance">95%</span></td>
+                        <td><button class="view-report-button">Ver Relatório</button></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <div class="student-avatar"></div>
+                                <span>Kenal Almeida Nascimento</span>
+                            </div>
+                        </td>
+                        <td>0000235662</td>
+                        <td><span class="performance-pill high-performance">9.2</span></td>
+                        <td><span class="attendance-pill high-attendance">89%</span></td>
+                        <td><button class="view-report-button">Ver Relatório</button></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <div class="student-avatar"></div>
+                                <span>Lucas Borges</span>
+                            </div>
+                        </td>
+                        <td>0000235662</td>
+                        <td><span class="performance-pill medium-performance">7.9</span></td>
+                        <td><span class="attendance-pill high-attendance">93%</span></td>
+                        <td><button class="view-report-button">Ver Relatório</button></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <div class="student-avatar"></div>
+                                <span>Ramon Pires Mendonça</span>
+                            </div>
+                        </td>
+                        <td>0000235662</td>
+                        <td><span class="performance-pill low-performance">6.3</span></td>
+                        <td><span class="attendance-pill medium-attendance">83%</span></td>
+                        <td><button class="view-report-button">Ver Relatório</button></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <div class="student-avatar"></div>
+                                <span>Luis Otávio</span>
+                            </div>
+                        </td>
+                        <td>0000235662</td>
+                        <td><span class="performance-pill medium-performance">8.1</span></td>
+                        <td><span class="attendance-pill high-attendance">95%</span></td>
+                        <td><button class="view-report-button">Ver Relatório</button></td>
+                    </tr>
+                    <!-- Adicionando mais alunos à lista -->
+                    <tr>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <div class="student-avatar"></div>
+                                <span>Ana Carolina Silva</span>
+                            </div>
+                        </td>
+                        <td>0000235663</td>
+                        <td><span class="performance-pill high-performance">9.5</span></td>
+                        <td><span class="attendance-pill high-attendance">98%</span></td>
+                        <td><button class="view-report-button">Ver Relatório</button></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <div class="student-avatar"></div>
+                                <span>Pedro Henrique Santos</span>
+                            </div>
+                        </td>
+                        <td>0000235664</td>
+                        <td><span class="performance-pill medium-performance">7.8</span></td>
+                        <td><span class="attendance-pill medium-attendance">85%</span></td>
+                        <td><button class="view-report-button">Ver Relatório</button></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <div class="student-avatar"></div>
+                                <span>Mariana Costa Oliveira</span>
+                            </div>
+                        </td>
+                        <td>0000235665</td>
+                        <td><span class="performance-pill high-performance">9.0</span></td>
+                        <td><span class="attendance-pill high-attendance">92%</span></td>
+                        <td><button class="view-report-button">Ver Relatório</button></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <div class="student-avatar"></div>
+                                <span>Rafael Souza Lima</span>
+                            </div>
+                        </td>
+                        <td>0000235666</td>
+                        <td><span class="performance-pill low-performance">6.5</span></td>
+                        <td><span class="attendance-pill medium-attendance">78%</span></td>
+                        <td><button class="view-report-button">Ver Relatório</button></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <div class="student-avatar"></div>
+                                <span>Juliana Pereira Martins</span>
+                            </div>
+                        </td>
+                        <td>0000235667</td>
+                        <td><span class="performance-pill medium-performance">8.2</span></td>
+                        <td><span class="attendance-pill high-attendance">91%</span></td>
+                        <td><button class="view-report-button">Ver Relatório</button></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div style="display: flex; align-items: center; gap: 10px;">
+                                <div class="student-avatar"></div>
+                                <span>Bruno Rodrigues</span>
+                            </div>
+                        </td>
+                        <td>0000235668</td>
+                        <td><span class="performance-pill low-performance">6.7</span></td>
+                        <td><span class="attendance-pill medium-attendance">80%</span></td>
+                        <td><button class="view-report-button">Ver Relatório</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </main>
+
+    <script src="../scripts/turmas-status.js"></script>
+    <script src="../../common/scripts/changepass.js"></script>
+    <script src="../../common/scripts/exitpopup.js"></script>
+    <script src="../../common/scripts/menu.js"></script>    
+</body>
+</html>

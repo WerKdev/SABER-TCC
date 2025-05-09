@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes da Redação</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/redacoes.css">
+    <link rel="stylesheet" href="../styles/redacao-status.css">
+</head>
+<body>
+    <header class="header">
+        <div class="menu-icon-mobile">
+            <span id="menu-icon-mobile" class="material-symbols-outlined">menu</span>
+        </div>
+        <div class="logo-Header">
+            <p class="logo"><img src="" alt=""></p>
+        </div>
+        <div class="menuheader"> 
+            <ul class="menuheader-list">
+                <li>
+                    <span id="notifications-icon" class="material-symbols-outlined">notifications</span>
+                    <div id="notifications-popup" class="notifications-popup">
+                        <p>Notificações</p>
+                        <ul>
+                            <li>Notificação</li>
+                            <li>Notificação</li>
+                            <li>Notificação</li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <p id="user-name-header">Guilherme Moura</p>
+                </li>
+                <li>
+                    <span id="user-icon" class="material-symbols-outlined">account_circle</span>
+                    <div id="user-icon-popup" class="user-icon-popup">
+                        <p>Configurações</p>
+                        <ul>
+                            <li>Configuração</li>
+                            <li>Configuração</li>
+                            <li>Configuração</li>
+                            <li>Configuração</li>
+                            <li>Configuração</li>
+                            <li>Configuração</li>
+                            <li>Configuração</li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <div id="sidebar">
+        <div class="topmenu">
+            <span id="menu-icon" class="material-symbols-outlined">menu</span>
+            <h3 id="menu-tittle">Menu</h3>
+            <img id="logomenu" src="" alt="">
+        </div>
+        <menu id="menu-hidden">
+            <div class="navbar">
+                <ul>
+                    <li>
+                        <a href="#"><span id="dashboard-icon" class="material-symbols-outlined">Dashboard</span><p>Dashboard</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span id="desempenho-icon" class="material-symbols-outlined">Bar_chart_4_bars</span><p>Desempenho</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span id="atividades" class="material-symbols-outlined">menu_book</span><p>Atividades</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span id="relatorios-icon" class="material-symbols-outlined">Docs</span><p>Relatórios</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span id="redacao-icon" class="material-symbols-outlined">History_edu</span><p>Redação</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span id="chat-icon" class="material-symbols-outlined">Chat</span><p>Chat</p></a>
+                    </li>
+                </ul>
+            </div>
+        </menu>
+    </div>
+
+    <main class="main">
+        <div class="redacao-detail-container">
+            <div class="breadcrumb">
+                <a href="index.html">Redações</a> &gt; <span id="redacao-title-breadcrumb">Detalhes da Redação</span>
+            </div>
+            
+            <div class="redacao-detail-header">
+                <div class="redacao-info">
+                    <h1 id="redacao-title">Carregando título da redação...</h1>
+                    <p id="redacao-description">Carregando descrição...</p>
+                    <div class="redacao-meta-details">
+                        <div class="meta-item">
+                            <span class="material-symbols-outlined">event</span>
+                            <p>Criado em: <span id="redacao-created">--/--/----</span></p>
+                        </div>
+                        <div class="meta-item">
+                            <span class="material-symbols-outlined">schedule</span>
+                            <p>Entrega até: <span id="redacao-deadline">--/--/----</span></p>
+                        </div>
+                        <div class="meta-item" id="attachment-container">
+                            <span class="material-symbols-outlined">description</span>
+                            <p>Anexo: <span id="redacao-attachment">Nenhum</span></p>
+                        </div>
+                    </div>
+                </div>
+                <div class="redacao-actions">
+                    <button class="btn-secondary">
+                        <span class="material-symbols-outlined">edit</span> Editar
+                    </button>
+                    <button class="btn-primary">
+                        <span class="material-symbols-outlined">download</span> Baixar Entregas
+                    </button>
+                </div>
+            </div>
+
+            <div class="redacao-detail-stats">
+                <div class="stat-card">
+                    <span class="material-symbols-outlined">groups</span>
+                    <div class="stat-content">
+                        <h3>Alunos</h3>
+                        <p id="total-students">0/0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <span class="material-symbols-outlined">assignment_turned_in</span>
+                    <div class="stat-content">
+                        <h3>Entregas</h3>
+                        <p id="total-submissions">0 (0%)</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <span class="material-symbols-outlined">grading</span>
+                    <div class="stat-content">
+                        <h3>Corrigidas</h3>
+                        <p id="total-graded">0 (0%)</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <span class="material-symbols-outlined">trending_up</span>
+                    <div class="stat-content">
+                        <h3>Média</h3>
+                        <p id="average-grade">-</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="submissions-container">
+                <div class="submissions-header">
+                    <h2>Entregas dos Alunos</h2>
+                    <div class="submissions-filters">
+                        <div class="filter-group">
+                            <label for="filter-class">Turma:</label>
+                            <select id="filter-class">
+                                <option value="all">Todas</option>
+                                <option value="3A">3º Ano A</option>
+                                <option value="3B">3º Ano B</option>
+                                <option value="3C">3º Ano C</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="filter-status">Status:</label>
+                            <select id="filter-status">
+                                <option value="all">Todos</option>
+                                <option value="submitted">Entregue</option>
+                                <option value="pending">Pendente</option>
+                                <option value="graded">Corrigido</option>
+                            </select>
+                        </div>
+                        <div class="search-container submissions-search">
+                            <input type="text" id="search-students" placeholder="Buscar aluno...">
+                            <span class="material-symbols-outlined">search</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="submissions-table-container">
+                    <table class="submissions-table">
+                        <thead>
+                            <tr>
+                                <th>Aluno</th>
+                                <th>Turma</th>
+                                <th>Status</th>
+                                <th>Data de Entrega</th>
+                                <th>Nota</th>
+                                <th>Ações</th>
+                            </tr>
+                        </thead>
+                        <tbody id="submissions-list">
+                            <!-- Dados dos alunos serão inseridos aqui via JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../scripts/redacao-status.js"></script>
+    <script src="../../common/scripts/changepass.js"></script>
+    <script src="../../common/scripts/exitpopup.js"></script>
+    <script src="../../common/scripts/menu.js"></script>    
+</body>
+</html>

@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Plataforma Educacional</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles/atividade-status.css">
+    <link rel="stylesheet" href="../../common/styles/menu.css">
+    <link rel="stylesheet" href="../../common/styles/changepass.css">
+    <link rel="stylesheet" href="../../common/styles/exitpopup.css">
+</head>
+<body>
+    <header class="header">
+        <div class="menu-icon-mobile">
+            <span id="menu-icon-mobile" class="material-symbols-outlined">menu</span>
+        </div>  
+        <div class="menuheader"> 
+            <ul class="menuheader-list">
+                <li class="notification-item">
+                    <span id="notifications-icon" class="material-symbols-outlined">notifications</span>
+                    <span class="notification-badge">3</span>
+                    <div id="notifications-popup" class="notifications-popup">
+                        <div class="popup-header">
+                            <p>Notificações</p>
+                            <span class="material-symbols-outlined close-popup">close</span>
+                        </div>
+                        <div class="notifications-content">
+                            <ul>
+                                <li class="notification unread">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">history_edu</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Nova redação disponível</p>
+                                        <p class="notification-desc">Redação sobre meio ambiente já pode ser iniciada</p>
+                                        <p class="notification-time">há 10 minutos</p>
+                                    </div>
+                                </li>
+                                <li class="notification">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">grade</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Redação avaliada</p>
+                                        <p class="notification-desc">Sua redação "Tecnologia e Educação" foi avaliada</p>
+                                        <p class="notification-time">há 1 dia</p>
+                                    </div>
+                                </li>
+                                <li class="notification">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">calendar_today</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Prazo de entrega</p>
+                                        <p class="notification-desc">Redação sobre "Saúde Mental" vence em 2 dias</p>
+                                        <p class="notification-time">há 2 dias</p>
+                                    </div>
+                                </li>
+                                <li class="notification">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">assignment_turned_in</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Atividade concluída</p>
+                                        <p class="notification-desc">Você completou a atividade de gramática</p>
+                                        <p class="notification-time">há 3 dias</p>
+                                    </div>
+                                </li>
+                                <li class="notification">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">comment</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Novo comentário</p>
+                                        <p class="notification-desc">Professor comentou na sua redação</p>
+                                        <p class="notification-time">há 4 dias</p>
+                                    </div>
+                                </li>
+                                <li class="notification">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">assignment</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Nova atividade</p>
+                                        <p class="notification-desc">Atividade de literatura disponível</p>
+                                        <p class="notification-time">há 5 dias</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="popup-footer">
+                            <a href="#todas-notificacoes">Ver todas as notificações</a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <p id="user-name-header">Kenai Almeida</p>
+                </li>
+                <li class="user-settings-item">
+                    <span id="user-icon" class="material-symbols-outlined">account_circle</span>
+                    <div id="user-icon-popup" class="user-icon-popup">
+                        <div class="popup-header">
+                            <div class="user-info">
+                                <div class="user-avatar">
+                                    <span class="material-symbols-outlined">person</span>
+                                </div>
+                                <div class="user-details">
+                                    <p class="user-name">Kenai Almeida</p>
+                                    <p class="user-email">kenai.almeida@email.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="settings-content">
+                            <div class="settings-group">
+                                <p class="settings-group-title">Conta</p>
+                                <ul>
+                                    <li>
+                                        <a href="#perfil">
+                                            <span class="material-symbols-outlined">manage_accounts</span>
+                                            <span>Meu Perfil</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#  " class="alterar-senha-link">
+                                            <span class="material-symbols-outlined">key</span>
+                                            <span>Alterar senha</span>
+                                        </a>
+                                    </li>   
+                                </ul>
+                            </div>
+                            <div class="settings-group">
+                                <p class="settings-group-title">Sistema</p>
+                                <ul>
+                                    <li>
+                                        <a href="#tema" class="theme-toggle-container">
+                                            <span class="material-symbols-outlined">dark_mode</span>
+                                            <span>Tema Escuro</span>
+                                            <label class="switch">
+                                                <input type="checkbox" id="theme-toggle">
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </a>
+                                    </li>
+                                    <li class="settings-item language-selector-container">
+                                        <a href="#idioma" class="language-selector">
+                                            <span class="material-symbols-outlined">translate</span>
+                                            <span>Idioma</span>
+                                            <span class="selected-language">Português</span>
+                                            <span class="material-symbols-outlined toggle-arrow">expand_more</span>
+                                        </a>
+                                        <div class="language-options">
+                                            <ul>
+                                                <li data-lang="pt-BR" class="active">
+                                                    <span class="language-flag">🇧🇷</span>
+                                                    <span class="language-name">Português</span>
+                                                </li>
+                                                <li data-lang="en-US">
+                                                    <span class="language-flag">🇺🇸</span>
+                                                    <span class="language-name">English</span>
+                                                </li>
+                                                <li data-lang="es-ES">
+                                                    <span class="language-flag">🇪🇸</span>
+                                                    <span class="language-name">Español</span>
+                                                </li>
+                                                <li data-lang="fr-FR">
+                                                    <span class="language-flag">🇫🇷</span>
+                                                    <span class="language-name">Français</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="settings-group">
+                                <ul>
+                                    <li>
+                                        <a href="#ajuda">
+                                            <span class="material-symbols-outlined">help</span>
+                                            <span>Ajuda</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#sair" class="logout-button">
+                                            <span class="material-symbols-outlined">logout</span>
+                                            <span>Sair</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- SIDEBAR -->
+    <div id="sidebar">
+        <div class="topmenu">
+            <span id="menu-icon" class="material-symbols-outlined">menu</span>
+            <h3 id="menu-tittle">Menu</h3>
+            <img id="logomenu" src="../../../assets/images/logo-saber.png" alt="Logo menu">
+        </div>
+        <nav id="menu-hidden">
+            <div class="navbar">
+                <ul>    
+                    <li>
+                        <a href="#">
+                            <span id="dashboard-icon" class="material-symbols-outlined">dashboard</span>
+                            <p>Desempenho</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span id="desempenho-icon" class="material-symbols-outlined">bar_chart_4_bars</span>
+                            <p>Estatística</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span id="atividades" class="material-symbols-outlined">menu_book</span>
+                            <p>Atividades</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span id="relatorios-icon" class="material-symbols-outlined">docs</span>
+                            <p>Relatórios</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" class="active">
+                            <span id="redacao-icon" class="material-symbols-outlined">history_edu</span>
+                            <p>Redação</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span id="chat-icon" class="material-symbols-outlined">chat</span>
+                            <p>Chat</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+
+    <div id="password-popup" class="popup-overlay" style="display: none;">
+        <div class="popup">
+            <div class="popup-header">
+                <h2>Alterar senha</h2>
+                <span class="material-symbols-outlined close-popup">close</span>
+            </div>
+            <div class="popup-content">
+                <p class="popup-description">Informe a senha atual e a nova senha</p>
+                <form id="change-password-form">
+                    <div class="form-group">
+                        <label for="current-password">Senha atual <span class="required">*</span></label>
+                        <div class="password-input">
+                            <input type="password" id="current-password" name="current-password" required>
+                            <span class="material-symbols-outlined toggle-password">visibility_off</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-password">Nova senha <span class="required">*</span></label>
+                        <div class="password-input">
+                            <input type="password" id="new-password" name="new-password" required>
+                            <span class="material-symbols-outlined toggle-password">visibility_off</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Confirmação de senha <span class="required">*</span></label>
+                        <div class="password-input">
+                            <input type="password" id="confirm-password" name="confirm-password" required>
+                            <span class="material-symbols-outlined toggle-password">visibility_off</span>
+                        </div>
+                    </div>
+                    <div class="forgot-password">
+                        <a href="#" id="forgot-password-link">Esqueceu a senha?</a>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel">Cancelar</button>
+                        <button type="submit" class="btn-confirm">Alterar senha</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup de Redefinição de Senha -->
+    <div id="reset-password-popup" class="popup-overlay" style="display: none;">
+        <div class="popup">
+            <div class="popup-header">
+                <h2>Redefinição de senha!</h2>
+                <span class="material-symbols-outlined close-popup">close</span>
+            </div>
+            <div class="popup-content">
+                <p class="popup-description">Informe um email e enviaremos um link para recuperação da sua senha.</p>
+                <form id="reset-password-form">
+                    <div class="form-group">
+                        <label for="recovery-email">Email <span class="required">*</span></label>
+                        <input type="email" id="recovery-email" name="recovery-email" required placeholder="seu@email.com">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-back">
+                            <span class="material-symbols-outlined">arrow_back</span>
+                            Voltar
+                        </button>
+                        <button type="submit" class="btn-send">Enviar link de recuperação</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="logout-popup" class="popup-overlay" style="display: none;">
+        <div class="popup logout-popup">
+            <div class="logout-content">
+                <div class="logout-icon">
+                    <span class="material-symbols-outlined">logout</span>
+                </div>
+                <h2 class="logout-title">Sair da conta?</h2>
+                <p class="logout-description">Você poderá entrar novamente a qualquer momento. Se quiser trocar de conta, faça isso adicionando uma conta existente.</p>
+                
+                <div class="logout-actions">
+                    <button type="button" class="btn-logout">Sair</button>
+                    <button type="button" class="btn-cancel-logout">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="activity-container">
+            <div class="activity-content">
+                <h2>Atividades > Atividade de Matemática - Análise Combinatória</h2>
+                <br>
+                <br>
+                <div class="activity-card">
+                    <h2>Atividade de Matemática</h2>
+                    
+                    <div class="activity-details">
+                        <h3>Análise Combinatória</h3>
+                        <ul>
+                            <li><strong>Matéria:</strong> Matemática</li>
+                            <li><strong>Descrição:</strong><br>
+                                A biblioteca Leitura Livre deseja um sistema online para gerenciamento do empréstimo de livros. 
+                                O sistema permite que os usuários façam empréstimos online, renovem prazo e reservem obras. 
+                                Além disso, o sistema enviará notificações sobre prazos de devolução e aplicará multas para atrasos. 
+                                Identifique de 2 a 10 requisitos para tal sistema.<br><br>
+                                Após isso, adicione pelo menos 5 casos de testes que cubram diferentes cenários do sistema.<br><br>
+                                A atividade deverá ser entregue como um breve relatório, nas normas ABNT em formato Word ou PDF.
+                            </li>
+                        </ul>
+                        
+                        <div class="file-attachment">
+                            <p>PDF: <a href="#">anexado_atividade.pdf</a></p>
+                        </div>
+                    </div>
+                    
+                    <div class="class-comments">
+                        <h3>Comentários da Sala:</h3>
+                        <div class="comment">
+                            <strong>Ana Maria:</strong>
+                            <p>Professor, como eu faço pra colocar o arquivo que você me mandou no drive?</p>
+                        </div>
+                        <div class="comment reply">
+                            <strong>Professor Luiz:</strong>
+                            <p>Você tem que baixar ele ali no canto inferior esquerdo no anexado</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="activity-actions">
+                <div class="submission-box">
+                    <div class="submission-header">
+                        <h3>Sua atividade:</h3>
+                        <p class="status">Aguardando envio</p>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="attach-file-btn">
+                            <span class="material-symbols-outlined">attach_file</span>
+                            Anexar arquivo
+                        </button>
+                        <button class="mark-complete-btn">
+                            <span class="material-symbols-outlined">check_circle</span>
+                            Marcar como concluído
+                        </button>
+                    </div>
+                    
+                    <p class="deadline">Prazo: 3/03/26 23:59</p>
+                    <input type="file" id="file-upload" style="display: none;">
+                </div>
+                
+                <div class="teacher-help">
+                    <h3>Tire Dúvidas com o Professor</h3>
+                    <textarea placeholder="Escreva sua dúvida aqui..."></textarea>
+                    <button class="send-question-btn">Enviar dúvida</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../scripts/atividade-status.js" defer></script>
+    <script src="../../common/scripts/changepass.js"></script>
+    <script src="../../common/scripts/exitpopup.js"></script>
+     <script src="../../common/scripts/menu.js"></script>
+</body>
+</html>

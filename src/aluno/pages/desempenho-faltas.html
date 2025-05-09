@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desempenho faltas - Aluno</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/desempenho-faltas.css">
+    <link rel="stylesheet" href="../../common/styles/menu.css">
+    <link rel="stylesheet" href="../../common/styles/changepass.css">
+    <link rel="stylesheet" href="../../common/styles/exitpopup.css">
+</head>
+<body>
+    <header class="header">
+        <div class="menu-icon-mobile">
+            <span id="menu-icon-mobile" class="material-symbols-outlined">menu</span>
+        </div>
+        <div class="logo-Header">
+            <p class="logo"></p>
+        </div>
+        <div class="menuheader"> 
+            <span id="notifications-icon" class="material-symbols-outlined">notifications</span>
+            <div id="notifications-popup" class="notifications-popup">
+                <p>Notificações</p>
+                <ul>
+                    <li>Notificação</li>
+                    <li>Notificação</li>
+                    <li>Notificação</li>
+                </ul>
+            </div>
+            <li><p id="user-name-header">Guilherme Moura</p></li>
+            <span id="user-icon" class="material-symbols-outlined">account_circle</span>
+            <div id="user-icon-popup" class="user-icon-popup">
+                <p>Notificações</p>
+                <ul>
+                    <li>Notificação</li>
+                    <li>Notificação</li>
+                    <li>Notificação</li>
+                    <li>Notificação</li>
+                    <li>Notificação</li>
+                    <li>Notificação</li>
+                    <li>Notificação</li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <div id="sidebar">
+        <div class="topmenu">
+            <span id="menu-icon" class="material-symbols-outlined">menu</span>
+            <h3 id="menu-tittle">Menu</h3>
+        </div>
+        <menu id="menu-hidden">
+            <div class="navbar">
+                <ul>
+                    <li>
+                        <a href="#"><span id="dashboard-icon" class="material-symbols-outlined">dashboard</span><p>Dashboard</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span id="desempenho-icon" class="material-symbols-outlined">bar_chart_4_bars</span><p>Desempenho</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span id="atividades" class="material-symbols-outlined">menu_book</span><p>Atividades</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span id="relatorios-icon" class="material-symbols-outlined">docs</span><p>Relatórios</p></a>
+                    </li>
+                    <li>
+                        <a href="#" class="active"><span id="redacao-icon" class="material-symbols-outlined">history_edu</span><p>Redação</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span id="chat-icon" class="material-symbols-outlined">chat</span><p>Chat</p></a>
+                    </li>
+                </ul>
+            </div>
+        </menu>
+    </div>
+    <div class="main">
+        <div class="stats-container">
+            <h1 class="stats-header">Estatísticas de Desempenho - Faltas</h1>
+            
+            <div class="stats-filters">
+                <div class="filter-group">
+                    <label for="ano">Ano:</label>
+                    <select id="ano">
+                        <option value="2025">2025</option>
+                        <option value="2024">2024</option>
+                    </select>
+                </div>
+                
+                <div class="filter-group">
+                    <label for="disciplina">Disciplina:</label>
+                    <select id="disciplina">
+                        <option value="todas">Todas</option>
+                        <option value="matematica">Matemática</option>
+                        <option value="portugues">Português</option>
+                        <option value="ciencias">Ciências</option>
+                    </select>
+                </div>
+                
+                <button class="save-button">Salvar em Imagem</button>
+            </div>
+            
+            <div class="flex-container">
+                <div class="main-stats">
+                    <table class="stats-table">
+                        <thead>
+                            <tr>
+                                <th>Disciplina</th>
+                                <th>Faltas</th>
+                                <th>Porcentagem de falta</th>
+                                <th>Limite de falta</th>
+                                <th>Situação</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>Ciências da Natureza</td>
+                                <td>9</td>
+                                <td>13%</td>
+                                <td>17</td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill status-warning" style="width: 53%"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Matemática</td>
+                                <td>19</td>
+                                <td>20%</td>
+                                <td>24</td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill status-danger" style="width: 79%"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Ciências Humanas</td>
+                                <td>3</td>
+                                <td>5%</td>
+                                <td>15</td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill status-good" style="width: 20%"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Linguagens</td>
+                                <td>6</td>
+                                <td>13%</td>
+                                <td>20</td>
+                                <td>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill status-warning" style="width: 30%"></div>
+                                    </div>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>Banco de dados</td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+                
+                <div class="stats-summary">
+                    <div class="summary-title">Total de Faltas</div>
+                    <div class="total-faltas">37</div>
+                    <div class="permitidas">de 75 permitidas</div>
+                    
+                    <div class="disciplina-critica">
+                        <div class="critica-title">Disciplina crítica:</div>
+                        <div class="critica-nome">Matemática</div>
+                        <div class="critica-aviso">Você só pode ter no máximo mais 5 faltas nessa matéria</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../scripts/desempenho-faltas.js"></script>
+    <script src="../../common/scripts/changepass.js"></script>
+    <script src="../../common/scripts/exitpopup.js"></script>
+    <script src="../../common/scripts/menu.js"></script>
+</body>
+</html>

@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema Escolar - Atividades</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles/atividades.css">
+</head>
+<body>
+    <header class="header">
+        <div class="menu-icon-mobile">
+            <span id="menu-icon-mobile" class="material-symbols-outlined">menu</span>
+        </div>
+        <div class="logo-Header">
+            <p class="logo"><img src="" alt=""></p>
+        </div>
+        <div class="menuheader"> 
+            <span id="notifications-icon" class="material-symbols-outlined">notifications</span>
+            <div id="notifications-popup" class="notifications-popup">
+                <p>Notificações</p>
+                <ul>
+                    <li>Notificação</li>
+                    <li>Notificação</li>
+                    <li>Notificação</li>
+                </ul>
+            </div>
+            <li><p id="user-name-header">Guilherme Moura</p></li>
+            <span id="user-icon" class="material-symbols-outlined">account_circle</span>
+            <div id="user-icon-popup" class="user-icon-popup">
+                <p>Menu do Usuário</p>
+                <ul>
+                    <li>Perfil</li>
+                    <li>Configurações</li>
+                    <li>Sair</li>
+                </ul>
+            </div>
+        </div>
+    </header>
+
+    <div id="sidebar">
+        <div class="topmenu">
+            <span id="menu-icon" class="material-symbols-outlined">menu</span>
+            <h3 id="menu-tittle">Menu</h3>
+            <img id="logomenu" src="" alt="">
+        </div>
+        <menu id="menu-hidden">
+            <div class="navbar">
+                <ul>
+                    <li>
+                        <a href="#"><span class="material-symbols-outlined">dashboard</span><p>Dashboard</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="material-symbols-outlined">bar_chart_4_bars</span><p>Desempenho</p></a>
+                    </li>
+                    <li>
+                        <a href="#" class="active"><span class="material-symbols-outlined">menu_book</span><p>Atividades</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="material-symbols-outlined">description</span><p>Relatórios</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="material-symbols-outlined">history_edu</span><p>Redação</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="material-symbols-outlined">chat</span><p>Chat</p></a>
+                    </li>
+                </ul>
+            </div>
+        </menu>
+    </div>
+
+    <main class="main">
+        <div class="activities-container">
+            <div class="activities-header">
+                <h1>Atividades</h1>
+                <button id="new-activity-btn" class="btn-primary">
+                    <span class="material-symbols-outlined">add</span> Nova Atividade
+                </button>
+            </div>
+
+            <div class="filters">
+                <div class="filter-group">
+                    <label for="class-filter">Turma:</label>
+                    <select id="class-filter" class="filter-select">
+                        <option value="all">Todas</option>
+                        <option value="A">A</option>
+                        <option value="B">B</option>
+                        <option value="C">C</option>
+                        <option value="D">D</option>
+                        <option value="E">E</option>
+                        <option value="F">F</option>
+                        <option value="G">G</option>
+                        <option value="H">H</option>
+                        <option value="I">I</option>
+                        <option value="J">J</option>
+                        <option value="K">K</option>
+                        <option value="L">L</option>
+                        <option value="M">M</option>
+                        <option value="N">N</option>
+                        <option value="O">O</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="year-filter">Ano:</label>
+                    <select id="year-filter" class="filter-select">
+                        <option value="all">Todos</option>
+                        <option value="1">1º Ano</option>
+                        <option value="2">2º Ano</option>
+                        <option value="3">3º Ano</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="subject-filter">Matéria:</label>
+                    <select id="subject-filter" class="filter-select">
+                        <option value="all">Todas</option>
+                        <option value="matematica">Matemática</option>
+                        <option value="portugues">Português</option>
+                        <option value="historia">História</option>
+                        <option value="geografia">Geografia</option>
+                        <option value="ciencias">Ciências</option>
+                        <option value="ingles">Inglês</option>
+                    </select>
+                </div>
+                <button id="apply-filters" class="btn-secondary">Aplicar Filtros</button>
+            </div>
+
+            <div class="activities-list">
+                
+            </div>
+        </div>
+
+       
+        <div id="activity-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="modal-title">Nova Atividade</h2>
+                    <span class="close-modal">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <form id="activity-form">
+                        <div class="form-group">
+                            <label for="activity-title">Título:</label>
+                            <input type="text" id="activity-title" required>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="activity-class">Turma:</label>
+                                <select id="activity-class" required>
+                                    <option value="A">A</option>
+                                    <option value="B">B</option>
+                                    <option value="C">C</option>
+                                    <option value="D">D</option>
+                                    <option value="E">E</option>
+                                    <option value="F">F</option>
+                                    <option value="G">G</option>
+                                    <option value="H">H</option>
+                                    <option value="I">I</option>
+                                    <option value="J">J</option>
+                                    <option value="K">K</option>
+                                    <option value="L">L</option>
+                                    <option value="M">M</option>
+                                    <option value="N">N</option>
+                                    <option value="O">O</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="activity-year">Ano:</label>
+                                <select id="activity-year" required>
+                                    <option value="1">1º Ano</option>
+                                    <option value="2">2º Ano</option>
+                                    <option value="3">3º Ano</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="activity-subject">Matéria:</label>
+                            <select id="activity-subject" required>
+                                <option value="matematica">Matemática</option>
+                                <option value="portugues">Português</option>
+                                <option value="historia">História</option>
+                                <option value="geografia">Geografia</option>
+                                <option value="ciencias">Ciências</option>
+                                <option value="ingles">Inglês</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="activity-due-date">Data de Entrega:</label>
+                            <input type="date" id="activity-due-date" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="activity-questions">Questões:</label>
+                            <textarea id="activity-questions" rows="6" required></textarea>
+                        </div>
+                        <div class="form-actions">
+                            <button type="button" class="btn-secondary close-modal">Cancelar</button>
+                            <button type="submit" class="btn-primary">Salvar</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+
+        
+        <div id="delivery-modal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 id="delivery-modal-title">Entregas da Atividade</h2>
+                    <span class="close-delivery-modal">&times;</span>
+                </div>
+                <div class="modal-body">
+                    <div class="delivery-stats">
+                        <div class="stat-card">
+                            <span class="stat-number" id="total-students">0</span>
+                            <span class="stat-label">Alunos</span>
+                        </div>
+                        <div class="stat-card delivered">
+                            <span class="stat-number" id="delivered-count">0</span>
+                            <span class="stat-label">Entregues</span>
+                        </div>
+                        <div class="stat-card not-delivered">
+                            <span class="stat-number" id="not-delivered-count">0</span>
+                            <span class="stat-label">Pendentes</span>
+                        </div>
+                    </div>
+                    <div class="delivery-list-container">
+                        <div class="tabs">
+                            <button class="tab-btn active" data-tab="delivered">Entregues (<span id="delivered-tab-count">0</span>)</button>
+                            <button class="tab-btn" data-tab="not-delivered">Pendentes (<span id="not-delivered-tab-count">0</span>)</button>
+                        </div>
+                        <div class="tab-content active" id="delivered-tab">
+                            <ul class="student-list" id="delivered-list">
+                                
+                            </ul>
+                        </div>
+                        <div class="tab-content" id="not-delivered-tab">
+                            <ul class="student-list" id="not-delivered-list">
+                                
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../scripts/atividades.js"></script>
+    <script src="../../common/scripts/changepass.js"></script>
+    <script src="../../common/scripts/exitpopup.js"></script>
+    <script src="../../common/scripts/menu.js"></script>    
+</body>
+</html>

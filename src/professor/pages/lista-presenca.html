@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lista de Presença</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles/lista-presenca.css">
+</head>
+<body>
+    <header class="header">
+        <div class="menu-icon-mobile">
+            <span id="menu-icon-mobile" class="material-symbols-outlined">menu</span>
+        </div>
+        <div class="logo-Header">
+            <p class="logo"><img src="" alt=""></p>
+        </div>
+        <div class="menuheader"> 
+            <ul class="menuheader-list">
+                <li>
+                    <span id="notifications-icon" class="material-symbols-outlined" onclick="toggleNotifications()">notifications</span>
+                    <div id="notifications-popup" class="notifications-popup">
+                        <p>Notificações</p>
+                        <ul>
+                            <li>Notificação</li>
+                            <li>Notificação</li>
+                            <li>Notificação</li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <p id="user-name-header">Guilherme Moura</p>
+                </li>
+                <li>
+                    <span id="user-icon" class="material-symbols-outlined" onclick="toggleUserMenu()">account_circle</span>
+                    <div id="user-icon-popup" class="user-icon-popup">
+                        <p>Configurações</p>
+                        <ul>
+                            <li>Configuração</li>
+                            <li>Configuração</li>
+                            <li>Configuração</li>
+                            <li>Configuração</li>
+                            <li>Configuração</li>
+                            <li>Configuração</li>
+                            <li>Configuração</li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <nav class="sidebar" id="sidebar">
+        <div class="topmenu">
+            <span id="menu-icon" class="material-symbols-outlined" onclick="toggleSidebar()">menu</span>
+            <h3 id="menu-tittle">Menu</h3>
+            <img id="logomenu" src="" alt="">
+        </div>
+        <menu id="menu-hidden">
+            <div class="navbar">
+                <ul>
+                    <li>
+                        <a href="#"><span class="material-symbols-outlined">Dashboard</span><p>Dashboard</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="material-symbols-outlined">Bar_chart_4_bars</span><p>Desempenho</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="material-symbols-outlined">menu_book</span><p>Atividades</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="material-symbols-outlined">Docs</span><p>Relatórios</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="material-symbols-outlined">History_edu</span><p>Redação</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span class="material-symbols-outlined">Chat</span><p>Chat</p></a>
+                    </li>
+                </ul>
+            </div>
+        </menu>
+    </nav>
+
+    <div class="main-content" id="mainContent">
+        <section class="content">
+            <h1>Lista de Aluno → Turma 3º Presença</h1>
+            <div class="filters">
+                <select id="serieSelect">
+                    <option value="1">Série: 1°</option>
+                    <option value="2">Série: 2°</option>
+                    <option value="3">Série: 3°</option>
+                </select>
+                <select id="turmaSelect">
+                    <option value="A">Turma: A</option>
+                    <option value="B">Turma: B</option>
+                    <option value="C">Turma: C</option>
+                </select>
+                <select id="disciplineSelect">
+                    <option value="matematica">Disciplina: Matemática - 3 aulas</option>
+                    <option value="portugues">Disciplina: Português - 2 aulas</option>
+                    <option value="historia">Disciplina: História - 2 aulas</option>
+                    <option value="geografia">Disciplina: Geografia - 1 aula</option>
+                    <option value="ciencias">Disciplina: Ciências - 3 aulas</option>
+                </select>
+                <select id="dateSelect">
+                    <option value="31-03-25">Data: 31/03/25, segunda-feira</option>
+                    <option value="01-04-25">Data: 01/04/25, terça-feira</option>
+                    <option value="02-04-25">Data: 02/04/25, quarta-feira</option>
+                    <option value="03-04-25">Data: 03/04/25, quinta-feira</option>
+                    <option value="04-04-25">Data: 04/04/25, sexta-feira</option>
+                    <option value="05-04-25">Data: 05/04/25, sábado</option>
+                    <option value="06-04-25">Data: 06/04/25, domingo</option>
+                </select>
+            </div>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Matrícula</th>
+                        <th>Presença</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Ian de Paula</td>
+                        <td>00000005662</td>
+                        <td>
+                            <input type="checkbox">
+                            <input type="checkbox">
+                            <input type="checkbox">
+                            <input type="checkbox">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Guilherme Moura Nobre</td>
+                        <td>00000005662</td>
+                        <td>
+                            <input type="checkbox">
+                            <input type="checkbox">
+                            <input type="checkbox">
+                            <input type="checkbox">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Ruan Reiler</td>
+                        <td>00000005662</td>
+                        <td>
+                            <input type="checkbox">
+                            <input type="checkbox">
+                            <input type="checkbox">
+                            <input type="checkbox">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Kenai Almeida Nascimento</td>
+                        <td>00000005662</td>
+                        <td>
+                            <input type="checkbox">
+                            <input type="checkbox">
+                            <input type="checkbox">
+                            <input type="checkbox">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Lucas Borges</td>
+                        <td>00000005662</td>
+                        <td>
+                            <input type="checkbox">
+                            <input type="checkbox">
+                            <input type="checkbox">
+                            <input type="checkbox">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Ramon Pires Mendonça</td>
+                        <td>00000005662</td>
+                        <td>
+                            <input type="checkbox">
+                            <input type="checkbox">
+                            <input type="checkbox">
+                            <input type="checkbox">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Luis Otávio</td>
+                        <td>00000005662</td>
+                        <td>
+                            <input type="checkbox">
+                            <input type="checkbox">
+                            <input type="checkbox">
+                            <input type="checkbox">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Ian de Paula</td>
+                        <td>00000005662</td>
+                        <td>
+                            <input type="checkbox">
+                            <input type="checkbox">
+                            <input type="checkbox">
+                            <input type="checkbox">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Guilherme Moura Nobre</td>
+                        <td>00000005662</td>
+                        <td>
+                            <input type="checkbox">
+                            <input type="checkbox">
+                            <input type="checkbox">
+                            <input type="checkbox">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Ruan Reiler</td>
+                        <td>00000005662</td>
+                        <td>
+                            <input type="checkbox">
+                            <input type="checkbox">
+                            <input type="checkbox">
+                            <input type="checkbox">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Kenai Almeida Nascimento</td>
+                        <td>00000005662</td>
+                        <td>
+                            <input type="checkbox">
+                            <input type="checkbox">
+                            <input type="checkbox">
+                            <input type="checkbox">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Lucas Borges</td>
+                        <td>00000005662</td>
+                        <td>
+                            <input type="checkbox">
+                            <input type="checkbox">
+                            <input type="checkbox">
+                            <input type="checkbox">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Ramon Pires Mendonça</td>
+                        <td>00000005662</td>
+                        <td>
+                            <input type="checkbox">
+                            <input type="checkbox">
+                            <input type="checkbox">
+                            <input type="checkbox">
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>Luis Otávio</td>
+                        <td>00000005662</td>
+                        <td>
+                            <input type="checkbox">
+                            <input type="checkbox">
+                            <input type="checkbox">
+                            <input type="checkbox">
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+            <div class="button-container">
+                <button class="submit-btn">Enviar</button>
+            </div>
+        </section>
+    </div>
+
+    <script src="../scripts/lista-presenca.js"></script>
+    <script src="../../common/scripts/changepass.js"></script>
+    <script src="../../common/scripts/exitpopup.js"></script>
+    <script src="../../common/scripts/menu.js"></script>    
+</body>
+</html>

@@ -1,0 +1,469 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portal do Aluno - Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles/dashboard.css">
+    <link rel="stylesheet" href="../../common/styles/menu.css">
+    <link rel="stylesheet" href="../../common/styles/changepass.css">
+    <link rel="stylesheet" href="../../common/styles/exitpopup.css">
+</head>
+<body>
+    <header class="header">
+        <div class="menu-icon-mobile">
+            <span id="menu-icon-mobile" class="material-symbols-outlined">menu</span>
+        </div>
+        <div class="logo-Header">
+            <p class="logo"><img src="" alt=""></p>
+        </div>
+        <div class="menuheader"> 
+            <ul class="menuheader-list">
+                <li>
+                    <span id="notifications-icon" class="material-symbols-outlined">notifications</span>
+                    <div id="notifications-popup" class="notifications-popup">
+                        <p>Notificações</p>
+                        <ul>
+                            <li>Prova de Matemática amanhã!</li>
+                            <li>Trabalho de História entregue</li>
+                            <li>Novo material disponível</li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <p id="user-name-header">Maria Silva</p>
+                </li>
+                <li>
+                    <span id="user-icon" class="material-symbols-outlined">account_circle</span>
+                    <div id="user-icon-popup" class="user-icon-popup">
+                        <p>Configurações</p>
+                        <ul>
+                            <li>Perfil</li>
+                            <li>Preferências</li>
+                            <li>Notificações</li>
+                            <li>Segurança</li>
+                            <li>Ajuda</li>
+                            <li>Termos de Uso</li>
+                            <li>Sair</li>
+                        </ul>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <div id="sidebar">
+        <div class="topmenu">
+            <span id="menu-icon" class="material-symbols-outlined">menu</span>
+            <h3 id="menu-tittle">Menu</h3>
+            <img id="logomenu" src="" alt="">
+        </div>
+        <menu id="menu-hidden">
+            <div class="navbar">
+                <ul>
+                    <li>
+                        <a href="#"><span id="dashboard-icon" class="material-symbols-outlined">dashboard</span><p>Dashboard</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span id="desempenho-icon" class="material-symbols-outlined">bar_chart_4_bars</span><p>Desempenho</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span id="atividades" class="material-symbols-outlined">menu_book</span><p>Atividades</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span id="relatorios-icon" class="material-symbols-outlined">docs</span><p>Boletim</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span id="redacao-icon" class="material-symbols-outlined">history_edu</span><p>Redação</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span id="chat-icon" class="material-symbols-outlined">chat</span><p>Chat</p></a>
+                    </li>
+                </ul>
+            </div>
+        </menu>
+    </div>
+
+    <main class="main">
+        <div class="dashboard-container">
+            <!-- Student Profile Card -->
+            <div class="student-profile">
+                <div class="student-avatar">
+                    <span class="material-symbols-outlined">person</span>
+                </div>
+                <div class="student-info">
+                    <h2>Maria Silva</h2>
+                    <p>Aluna - 3° Ano Ensino Médio</p>
+                    <p>ID: A-2023-078 • Escola Sesi Djalma Pessoa - Bahia</p>
+                </div>
+            </div>
+            
+            <!-- Stats Cards -->
+            <div class="stats-container">
+                <div class="stat-card">
+                    <h3>Média Geral</h3>
+                    <div class="stat-value">7.8</div>
+                    <div class="stat-comparison stat-positive">
+                        <span class="material-symbols-outlined">trending_up</span> +0.5 desde o último trimestre
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <h3>Taxa de entrega de atividades</h3>
+                    <div class="stat-value">92%</div>
+                    <div class="stat-comparison stat-positive">
+                        <span class="material-symbols-outlined">trending_up</span> +4% desde o último mês
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <h3>Frequência</h3>
+                    <div class="stat-value">95%</div>
+                    <div class="stat-comparison stat-positive">
+                        <span class="material-symbols-outlined">trending_up</span> +2% desde o último trimestre
+                    </div>
+                </div>
+                
+                <div class="stat-card">
+                    <h3>Posição na turma</h3>
+                    <div class="stat-value">5°</div>
+                    <div class="stat-comparison stat-positive">
+                        <span class="material-symbols-outlined">trending_up</span> +2 posições desde o último trimestre
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Performance Chart -->
+            <div class="chart-card">
+                <div class="chart-card-header">
+                    <h3>Evolução de Notas</h3>
+                    <div class="chart-filters">
+                        <div class="filter-group">
+                            <label for="performance-subject-select">Disciplina:</label>
+                            <select id="performance-subject-select" class="filter-select">
+                                <option value="all">Todas as Disciplinas</option>
+                                <option value="math">Matemática</option>
+                                <option value="physics">Física</option>
+                                <option value="chemistry">Química</option>
+                                <option value="biology">Biologia</option>
+                                <option value="portuguese">Português</option>
+                                <option value="history">História</option>
+                                <option value="geography">Geografia</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="performanceChart"></canvas>
+                </div>
+            </div>
+            
+            <!-- Distribution Chart -->
+            <div class="chart-card">
+                <div class="chart-card-header">
+                    <h3>Notas do Trimestre</h3>
+                    <div class="chart-filters"> 
+                        <div class="filter-group">
+                            <label for="distribution-period-select">Período:</label>
+                            <select id="distribution-period-select" class="filter-select">
+                                <option value="current">Trimestre Atual</option>
+                                <option value="term1">1° Trimestre</option>
+                                <option value="term2">2° Trimestre</option>
+                                <option value="term3">3° Trimestre</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="distributionChart"></canvas>
+                </div>
+            </div>
+            
+            <!-- Attendance Chart -->
+            <div class="chart-card">
+                <div class="chart-card-header">
+                    <h3>Registro de Frequência</h3>
+                    <div class="chart-filters">
+                        <div class="filter-group">
+                            <label for="attendance-subject-select">Disciplina:</label>
+                            <select id="attendance-subject-select" class="filter-select">
+                                <option value="all">Todas as Disciplinas</option>
+                                <option value="math">Matemática</option>
+                                <option value="physics">Física</option>
+                                <option value="chemistry">Química</option>
+                                <option value="biology">Biologia</option>
+                                <option value="portuguese">Português</option>
+                                <option value="history">História</option>
+                                <option value="geography">Geografia</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="attendance-period-select">Período:</label>
+                            <select id="attendance-period-select" class="filter-select">
+                                <option value="current">Trimestre Atual</option>
+                                <option value="term1">1° Trimestre</option>
+                                <option value="term2">2° Trimestre</option>
+                                <option value="term3">3° Trimestre</option>
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="chart-container">
+                    <canvas id="attendanceChart"></canvas>
+                </div>
+            </div>
+        
+</div><!-- Desempenho por Disciplina -->
+<div class="performance-section">
+    <h3>Desempenho por Disciplina</h3>
+    <table class="performance-table">
+        <thead>
+            <tr>
+                <th>Disciplina</th>
+                <th>Nota Atual</th>
+                <th>Média da Turma</th>
+                <th>Frequência</th>
+                <th>Status</th>
+                <th>Atividades</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td>
+                    <div class="subject-name">
+                        <span class="subject-initial math-initial">M</span>
+                        Matemática
+                    </div>
+                </td>
+                <td>7.5</td>
+                <td>6.8</td>
+                <td>90%</td>
+                <td><span class="status-badge status-good">Bom</span></td>
+                <td>25/30</td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="subject-name">
+                        <span class="subject-initial physics-initial">F</span>
+                        Física
+                    </div>
+                </td>
+                <td>6.8</td>
+                <td>7.0</td>
+                <td>88%</td>
+                <td><span class="status-badge status-regular">Regular</span></td>
+                <td>22/28</td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="subject-name">
+                        <span class="subject-initial portuguese-initial">P</span>
+                        Português
+                    </div>
+                </td>
+                <td>8.5</td>
+                <td>7.2</td>
+                <td>95%</td>
+                <td><span class="status-badge status-excellent">Excelente</span></td>
+                <td>30/32</td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="subject-name">
+                        <span class="subject-initial history-initial">H</span>
+                        História
+                    </div>
+                </td>
+                <td>9.0</td>
+                <td>7.6</td>
+                <td>98%</td>
+                <td><span class="status-badge status-excellent">Excelente</span></td>
+                <td>28/28</td>
+            </tr>
+            <tr>
+                <td>
+                    <div class="subject-name">
+                        <span class="subject-initial chemistry-initial">Q</span>
+                        Química
+                    </div>
+                </td>
+                <td>7.2</td>
+                <td>6.8</td>
+                <td>85%</td>
+                <td><span class="status-badge status-good">Bom</span></td>
+                <td>20/25</td>
+            </tr>
+        </tbody>
+    </table>
+</div>
+
+<!-- Container para Atividades e Eventos -->
+<div class="activities-container">
+    <!-- Atividades Pendentes -->
+    <div class="activities-card">
+        <h3>
+            <span class="material-symbols-outlined icon">assignment_late</span>
+            Atividades Pendentes
+        </h3>
+        <ul class="activities-list">
+            <li class="activity-item">
+                <div class="title">Trabalho de Física - Termodinâmica</div>
+                <div class="deadline">Prazo: 12/05/2025</div>
+                <span class="activity-priority priority-high">Alta</span>
+            </li>
+            <li class="activity-item">
+                <div class="title">Redação - Tecnologias Emergentes</div>
+                <div class="deadline">Prazo: 15/05/2025</div>
+                <span class="activity-priority priority-medium">Média</span>
+            </li>
+            <li class="activity-item">
+                <div class="title">Lista de Exercícios - Matemática</div>
+                <div class="deadline">Prazo: 18/05/2025</div>
+                <span class="activity-priority priority-medium">Média</span>
+            </li>
+        </ul>
+        <a href="#" class="view-all-link">Ver todas</a>
+    </div>
+
+    <!-- Próximos Eventos -->
+    <div class="activities-card">
+        <h3>
+            <span class="material-symbols-outlined icon">event</span>
+            Próximos Eventos
+        </h3>
+        <ul class="activities-list">
+            <li class="activity-item">
+                <div class="title">Prova Bimestral - Matemática/Física</div>
+                <div class="deadline">10/05/2025</div>
+                <span class="activity-type type-exam">Prova</span>
+            </li>
+            <li class="activity-item">
+                <div class="title">Feira de Ciências</div>
+                <div class="deadline">15/05/2025</div>
+                <span class="activity-type type-event">Evento</span>
+            </li>
+            <li class="activity-item">
+                <div class="title">Entrega de Boletins</div>
+                <div class="deadline">22/05/2025</div>
+                <span class="activity-type type-meeting">Reunião</span>
+            </li>
+        </ul>
+        <a href="#" class="view-all-link">Ver todos</a>
+    </div>
+</div>
+
+<!-- Atividades Recentes -->
+<div class="recent-activities">
+    <h3>Atividades Recentes</h3>
+    <ul class="recent-activity-list">
+        <li class="recent-activity-item">
+            <div class="activity-icon">
+                <span class="material-symbols-outlined">grading</span>
+            </div>
+            <div class="activity-content">
+                <div class="activity-title">Notas da prova de Português lançadas - Nota: 8.5</div>
+                <div class="activity-date">Hoje, 10:25</div>
+            </div>
+        </li>
+        <li class="recent-activity-item">
+            <div class="activity-icon">
+                <span class="material-symbols-outlined">menu_book</span>
+            </div>
+            <div class="activity-content">
+                <div class="activity-title">Nova atividade "Geometria Espacial" disponível</div>
+                <div class="activity-date">Ontem, 15:40</div>
+            </div>
+        </li>
+        <li class="recent-activity-item">
+            <div class="activity-icon">
+                <span class="material-symbols-outlined">edit_note</span>
+            </div>
+            <div class="activity-content">
+                <div class="activity-title">Entregou trabalho de História - "Revolução Industrial"</div>
+                <div class="activity-date">Ontem, 13:15</div>
+            </div>
+        </li>
+        <li class="recent-activity-item">
+            <div class="activity-icon">
+                <span class="material-symbols-outlined">forum</span>
+            </div>
+            <div class="activity-content">
+                <div class="activity-title">Comentário do professor em sua redação</div>
+                <div class="activity-date">02/05/2025, 09:30</div>
+            </div>
+        </li>
+    </ul>
+</div>
+
+<!-- Relatório de Desempenho -->
+<div class="performance-report">
+    <h3>Relatório de Desempenho</h3>
+    
+    <div class="report-section">
+        <div class="report-section-title">Análise do Trimestre:</div>
+        <div class="report-section-content">
+            Seu desempenho apresentou uma melhoria consistente ao longo dos últimos três meses, com destaque para a progressão nas disciplinas de Português e História.
+        </div>
+    </div>
+    
+    <div class="report-section">
+        <div class="report-section-title">Pontos Fortes:</div>
+        <div class="report-section-content">
+            Excelente capacidade analítica e participação ativa nas atividades em grupo. Suas notas em trabalhos práticos estão entre as mais altas da turma.
+        </div>
+    </div>
+    
+    <div class="report-section">
+        <div class="report-section-title">Áreas para Desenvolvimento:</div>
+        <div class="report-section-content">
+            Recomenda-se maior dedicação às disciplinas de Física e Matemática, onde as notas estão abaixo da sua média geral. O programa de monitoria está disponível para auxiliar nestas áreas.
+        </div>
+    </div>
+    
+    <div class="report-section">
+        <div class="report-section-title">Comparação com a Turma:</div>
+        <div class="report-section-content">
+            Seu desempenho está acima da média da turma em 6 de 8 disciplinas. Você se destaca especialmente em História e Português, onde suas notas estão mais de 10% acima da média.
+        </div>
+    </div>
+    
+    <div class="report-section">
+        <div class="report-section-title">Recomendações:</div>
+        <div class="report-section-content">
+            Considere participar do grupo de estudos de Física às quartas-feiras e utilizar os recursos online disponíveis na plataforma. Para manter o bom desempenho em Português, continue com a rotina atual de estudos.
+        </div>
+    </div>
+    
+    <button class="report-button">Ver Relatório Completo</button>
+</div>
+            
+            <!-- Radar Chart for Skills -->
+            <div class="chart-card">
+                <div class="chart-card-header">
+                    <h3>Desenvolvimento de Habilidades</h3>
+                </div>
+                <div class="chart-container">
+                    <canvas id="skillsRadarChart"></canvas>
+                </div>
+                <div class="chart-legend">
+                    <div class="legend-item">
+                        <div class="legend-color student"></div>
+                        <span>Seu Desempenho</span>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-color class"></div>
+                        <span>Média da Turma</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="../scripts/dashboard.js" defer></script>
+    <script src="../../common/scripts/changepass.js"></script>
+    <script src="../../common/scripts/exitpopup.js"></script>
+    <script src="../../common/scripts/menu.js"></script>
+</body>
+</html>

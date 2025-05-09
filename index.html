@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SABER</title>
+    <link rel="stylesheet" href="src/main/styles/home.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+</head>
+
+<body>
+    <header class="header">
+        <span id="menu-icon" class="material-symbols-outlined" onclick="abrirMenu()">menu</span>
+        <a class="logo" href="index.html">SABER</a>
+        <ul class="menu">
+            <li><a href="src/main/pages/assinaturas.html">Assinaturas</a></li>
+            <li><a href="src/main/pages/suporte.html">Suporte</a></li>
+            <li><a href="src/main/pages/login.html">Login</a></li>
+            <li class="button-switch">
+                <svg display="none">
+                  <symbol id="light" viewBox="0 0 24 24">
+                    <g stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                      <line x1="12" y1="17" x2="12" y2="20" transform="rotate(0,12,12)" />
+                      <line x1="12" y1="17" x2="12" y2="20" transform="rotate(45,12,12)" />
+                      <line x1="12" y1="17" x2="12" y2="20" transform="rotate(90,12,12)" />
+                      <line x1="12" y1="17" x2="12" y2="20" transform="rotate(135,12,12)" />
+                      <line x1="12" y1="17" x2="12" y2="20" transform="rotate(180,12,12)" />
+                      <line x1="12" y1="17" x2="12" y2="20" transform="rotate(225,12,12)" />
+                      <line x1="12" y1="17" x2="12" y2="20" transform="rotate(270,12,12)" />
+                      <line x1="12" y1="17" x2="12" y2="20" transform="rotate(315,12,12)" />
+                    </g>
+                    <circle fill="currentColor" cx="12" cy="12" r="5" />
+                    </symbol>
+                    <symbol id="dark" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M15.1,14.9c-3-0.5-5.5-3-6-6C8.8,7.1,9.1,5.4,9.9,4c0.4-0.8-0.4-1.7-1.2-1.4C4.6,4,1.8,7.9,2,12.5c0.2,5.1,4.4,9.3,9.5,9.5c4.5,0.2,8.5-2.6,9.9-6.6c0.3-0.8-0.6-1.7-1.4-1.2C18.6,14.9,16.9,15.2,15.1,14.9z" />
+                  </symbol>
+                </svg>
+                
+                <label class="switch">
+                  <input class="switch__input" type="checkbox" id="theme-toggle" aria-label="Alternar tema claro/escuro">
+                  <span class="switch__track">
+                    <svg class="switch__icon switch__icon--light" aria-hidden="true">
+                      <use href="#light" />
+                    </svg>
+                    <svg class="switch__icon switch__icon--dark" aria-hidden="true">
+                      <use href="#dark" />
+                    </svg>
+                    <span class="switch__handle"></span>
+                  </span>
+                </label></li>
+        </ul>
+    </header>
+
+    <aside class="sidebar" id="sidebar">
+        <ul>
+            <li><a href="src/pages/assinaturas/index.html">Assinaturas</a></li>
+            <li><a href="src/pages/support/index.html">Suporte</a></li>
+            <li><a href="src/pages/login/index.html">Login</a></li>
+            <li class="button-switch">
+                <svg display="none">
+                    <symbol id="light" viewBox="0 0 24 24">
+                        <g stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                          <line x1="12" y1="17" x2="12" y2="20" transform="rotate(0,12,12)" />
+                          <line x1="12" y1="17" x2="12" y2="20" transform="rotate(45,12,12)" />
+                          <line x1="12" y1="17" x2="12" y2="20" transform="rotate(90,12,12)" />
+                          <line x1="12" y1="17" x2="12" y2="20" transform="rotate(135,12,12)" />
+                          <line x1="12" y1="17" x2="12" y2="20" transform="rotate(180,12,12)" />
+                          <line x1="12" y1="17" x2="12" y2="20" transform="rotate(225,12,12)" />
+                          <line x1="12" y1="17" x2="12" y2="20" transform="rotate(270,12,12)" />
+                          <line x1="12" y1="17" x2="12" y2="20" transform="rotate(315,12,12)" />
+                        </g>
+                        <circle fill="currentColor" cx="12" cy="12" r="5" />
+                      </symbol>
+                      <symbol id="dark" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M15.1,14.9c-3-0.5-5.5-3-6-6C8.8,7.1,9.1,5.4,9.9,4c0.4-0.8-0.4-1.7-1.2-1.4C4.6,4,1.8,7.9,2,12.5c0.2,5.1,4.4,9.3,9.5,9.5c4.5,0.2,8.5-2.6,9.9-6.6c0.3-0.8-0.6-1.7-1.4-1.2C18.6,14.9,16.9,15.2,15.1,14.9z" />
+                      </symbol>
+                    </svg>
+                    
+                    <label class="switch">
+                      <input class="switch__input" type="checkbox" id="theme-toggle-2" aria-label="Alternar tema claro/escuro">
+                      <span class="switch__track">
+                        <svg class="switch__icon switch__icon--light" aria-hidden="true">
+                          <use href="#light" />
+                        </svg>
+                        <svg class="switch__icon switch__icon--dark" aria-hidden="true">
+                          <use href="#dark" />
+                        </svg>
+                        <span class="switch__handle"></span>
+                      </span>
+                    </label></li>
+            </ul>
+        </aside>
+
+  <section class="hero">
+      <div class="hero-content">
+          <h1 class="hero-text">"Decifrando padrões para transformar o <span id="h1-ensino-span">ensino</span>."</h1>
+          <p>O sistema de inteligencia artificial analisa dados de desempenho e comportamento dos alunos, identificando padrões e tendências no aprendizado.</p>
+          <br><br><br>
+          <a href="src/pages/login/index.html" class="hero-button-register">Comece já!</a>
+      </div>
+      <div class="hero-image"></div>
+  </section>
+  <br><br>
+  <section class="content">
+      <div class="container">
+          <div class="second-image">
+              <img src="src/pages/assets/college-project-animate.f5c000a7.svg" alt="">
+          </div>
+          <div class="text-2">
+              <h1 class="major-text">Otimize o processo de avaliação da sala a partir de relatórios gerados por I.A</h1>
+              <br><br><br>
+              <p>O SABER é um sistema desenvolvido por uma equipe de estudantes da turma de 
+              Informática do IFTP na Escola SESI. Composta por Ramon Pires, Kenai Almeida,
+              Ruan Reiler, Lucas Borges, Ian de Paula, Luís Otávio e Guilherme Moura, nossa 
+              equipe se uniu para criar uma solução que atenda às necessidades tanto dos 
+              professores quanto dos alunos.</p>
+              <br><br>
+              <p>Após uma análise cuidadosa das demandas enfrentadas em sala de aula,
+                  identificamos que a integração de uma inteligência artificial poderia revolucionar
+                  o ambiente educacional. O SABER não apenas visa facilitar o trabalho dos
+                  professores, fornecendo dados e insights valiosos sobre o desempenho dos
+                  alunos, mas também busca potencializar a aprendizagem dos estudantes,
+                  oferecendo recursos personalizados que atendam às suas necessidades 
+                  individuais.
+              </p>  
+          </div>
+      </div>
+  </section>   
+  <br><br><br><br>
+  <footer class="footer">
+      <br>
+      <p>© 2024 SABER - Sistema de Análise e Benefício Educacional em Relatório. Todos os direitos reservados.</p>
+
+      <div class="footer-links">
+          <a href="#">Política de Privacidade</a> | 
+          <a href="#">Termos de Uso</a> | 
+          <a href="#">Suporte</a>
+      </div>
+
+      <p>Desenvolvido com inteligência artificial para aprimorar o aprendizado e promover uma educação personalizada. <br>
+      Este site e seu conteúdo são protegidos por leis de direitos autorais e propriedade intelectual. Qualquer reprodução, distribuição ou uso não autorizado do material aqui contido está estritamente proibido sem a devida permissão.</p>
+
+      <p>Contato: <a href="mailto:contatosaberia@gmail.com">contatosaberia@gmail.com</a> | 
+        Telefone: +55 (71) 98300-0082 | 
+        Instagram: <a href="https://instagram.com/sabe.oficial" target="_blank">@sabe.oficial</a>
+      </p>
+  </footer>
+    
+  <script src="src/main/scripts/home.js"></script>
+</body>
+</html>

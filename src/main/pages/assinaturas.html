@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SABER - Planos</title>
+    <link rel="stylesheet" href="../styles/assinaturas.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+</head>
+<body>
+  <header class="site-header">
+    <span id="menu-icon" class="material-symbols-outlined" onclick="abrirMenu()">menu</span>
+    <a class="logo" href="../../../index.html">SABER</a>
+    <ul class="menu">
+        <li><a href="#">Assinaturas</a></li>
+        <li><a href="../pages/suporte.html">Suporte</a></li>
+        <li><a href="../pages/login.html">Login</a></li>
+        <li class="button-switch">
+            <svg display="none">
+              <symbol id="light" viewBox="0 0 24 24">
+                <g stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                  <line x1="12" y1="17" x2="12" y2="20" transform="rotate(0,12,12)" />
+                  <line x1="12" y1="17" x2="12" y2="20" transform="rotate(45,12,12)" />
+                  <line x1="12" y1="17" x2="12" y2="20" transform="rotate(90,12,12)" />
+                  <line x1="12" y1="17" x2="12" y2="20" transform="rotate(135,12,12)" />
+                  <line x1="12" y1="17" x2="12" y2="20" transform="rotate(180,12,12)" />
+                  <line x1="12" y1="17" x2="12" y2="20" transform="rotate(225,12,12)" />
+                  <line x1="12" y1="17" x2="12" y2="20" transform="rotate(270,12,12)" />
+                  <line x1="12" y1="17" x2="12" y2="20" transform="rotate(315,12,12)" />
+                </g>
+                <circle fill="currentColor" cx="12" cy="12" r="5" />
+                </symbol>
+                <symbol id="dark" viewBox="0 0 24 24">
+                <path fill="currentColor" d="M15.1,14.9c-3-0.5-5.5-3-6-6C8.8,7.1,9.1,5.4,9.9,4c0.4-0.8-0.4-1.7-1.2-1.4C4.6,4,1.8,7.9,2,12.5c0.2,5.1,4.4,9.3,9.5,9.5c4.5,0.2,8.5-2.6,9.9-6.6c0.3-0.8-0.6-1.7-1.4-1.2C18.6,14.9,16.9,15.2,15.1,14.9z" />
+              </symbol>
+            </svg>
+            
+            <label class="switch">
+              <input class="switch__input" type="checkbox" id="theme-toggle" aria-label="Alternar tema claro/escuro">
+              <span class="switch__track">
+                <svg class="switch__icon switch__icon--light" aria-hidden="true">
+                  <use href="#light" />
+                </svg>
+                <svg class="switch__icon switch__icon--dark" aria-hidden="true">
+                  <use href="#dark" />
+                </svg>
+                <span class="switch__handle"></span>
+              </span>
+            </label></li>
+    </ul>
+</header>
+
+<aside class="sidebar" id="sidebar">
+    <ul>
+        <li><a href="#">Assinaturas</a></li>
+        <li><a href="../support/index.html">Suporte</a></li>
+        <li><a href="../login/index.html">Login</a></li>
+        <li class="button-switch">
+            <svg display="none">
+                <symbol id="light-sidebar" viewBox="0 0 24 24">
+                    <g stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                      <line x1="12" y1="17" x2="12" y2="20" transform="rotate(0,12,12)" />
+                      <line x1="12" y1="17" x2="12" y2="20" transform="rotate(45,12,12)" />
+                      <line x1="12" y1="17" x2="12" y2="20" transform="rotate(90,12,12)" />
+                      <line x1="12" y1="17" x2="12" y2="20" transform="rotate(135,12,12)" />
+                      <line x1="12" y1="17" x2="12" y2="20" transform="rotate(180,12,12)" />
+                      <line x1="12" y1="17" x2="12" y2="20" transform="rotate(225,12,12)" />
+                      <line x1="12" y1="17" x2="12" y2="20" transform="rotate(270,12,12)" />
+                      <line x1="12" y1="17" x2="12" y2="20" transform="rotate(315,12,12)" />
+                    </g>
+                    <circle fill="currentColor" cx="12" cy="12" r="5" />
+                  </symbol>
+                  <symbol id="dark-sidebar" viewBox="0 0 24 24">
+                    <path fill="currentColor" d="M15.1,14.9c-3-0.5-5.5-3-6-6C8.8,7.1,9.1,5.4,9.9,4c0.4-0.8-0.4-1.7-1.2-1.4C4.6,4,1.8,7.9,2,12.5c0.2,5.1,4.4,9.3,9.5,9.5c4.5,0.2,8.5-2.6,9.9-6.6c0.3-0.8-0.6-1.7-1.4-1.2C18.6,14.9,16.9,15.2,15.1,14.9z" />
+                  </symbol>
+                </svg>
+                
+                <label class="switch">
+                  <input class="switch__input" type="checkbox" id="theme-toggle-2" aria-label="Alternar tema claro/escuro">
+                  <span class="switch__track">
+                    <svg class="switch__icon switch__icon--light" aria-hidden="true">
+                      <use href="#light-sidebar" />
+                    </svg>
+                    <svg class="switch__icon switch__icon--dark" aria-hidden="true">
+                      <use href="#dark-sidebar" />
+                    </svg>
+                    <span class="switch__handle"></span>
+                  </span>
+                </label></li>
+        </ul>
+    </aside>
+    
+    <div class="container">
+        <div class="section-header">
+            <p>PLANOS & PREÇOS</p>
+            <h1>Escolha seu plano</h1>
+        </div>
+        
+        <div class="pricing-grid">
+            <div class="pricing-card">
+                <div class="plan-name">Start</div>
+                <div class="price">$29</div>
+                <div class="price-period">R$/mês</div>
+                <p class="payment-terms">O essencial para otimizar a aprendizagem</p>
+                <button class="primary-btn">Começar</button>
+                
+                <div class="feature-list">
+                    <h4>Recursos principais</h4>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span>Correção automática de redações</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span>Geração de relatórios de desempenho</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span>Suporte via chat e e-mail</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span>Cadastro ilimitado de alunos</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span>Acompanhamento individual por aluno</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pricing-card featured">
+                <div class="featured-label">MAIS POPULAR</div>
+                <div class="plan-name">Intelligence</div>
+                <div class="price">$89</div>
+                <div class="price-period">R$/mês</div>
+                <p class="payment-terms">Para quem precisa de mais detalhes...</p>
+                <button class="primary-btn">Começar</button>
+                
+                <div class="feature-list">
+                    <h4>Tudo do Start mais...</h4>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span>Análises preditivas de desempenho</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span>Exportação de relatórios personalizados</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span>Comparação entre turmas e períodos</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span>Feedback mais detalhado por IA</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="pricing-card">
+                <div class="plan-name">Hero</div>
+                <div class="price">A combinar</div>
+                <div class="price-period">Entre em contato com a equipe</div>
+                <p class="payment-terms">A experiência completa para instituições</p>
+                <button class="primary-btn">Falar com um consultor</button>
+                
+                <div class="feature-list">
+                    <h4>Tudo do Intelligence mais...</h4>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span>Relatórios gerenciais trimestrais</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span>Acesso a funcionalidades beta</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span>Suporte prioritário e consultoria exclusiva</span>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">✓</span>
+                        <span>Integração com sistemas externos</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <table class="comparison-table">
+            <thead>
+                <tr>
+                    <th style="width: 30%;">Plano</th>
+                    <th>Start<br>R$29/mês<br><button class="secondary-btn">Começar</button></th>
+                    <th>Intelligence<br>R$89/mês<br><button class="secondary-btn">Começar</button></th>
+                    <th>Hero<br>A combinar<br><button class="secondary-btn">Falar com um consultor</button></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td colspan="4" class="feature-heading">Inteligência Artificial</td>
+                </tr>
+                <tr>
+                    <td>Correção Automática de Atividades</td>
+                    <td class="table-check">✓</td>
+                    <td class="table-check">✓</td>
+                    <td class="table-check">✓</td>
+                </tr>
+                <tr>
+                    <td>Suporte a templates de email HTML</td>
+                    <td class="table-check">✓</td>
+                    <td class="table-check">✓</td>
+                    <td class="table-check">✓</td>
+                </tr>
+                <tr>
+                    <td>Sugestões de Melhorias Baseadas em IA</td>
+                    <td class="table-check">✓</td>
+                    <td class="table-check">✓</td>
+                    <td class="table-check">✓</td>
+                </tr>
+                <tr>
+                    <td>Análises de Erros e Dificuldades</td>
+                    <td class="table-check">✓</td>
+                    <td class="table-check">✓</td>
+                    <td class="table-check">✓</td>
+                </tr>
+                <tr>
+                    <td>Painel de Monitoramento de Alunos</td>
+                    <td class="table-check">✓</td>
+                    <td class="table-check">✓</td>
+                    <td class="table-check">✓</td>
+                </tr>
+                <tr>
+                    <td>Personalização de Relatórios</td>
+                    <td class="table-check">X</td>
+                    <td class="table-check">✓</td>
+                    <td class="table-check">✓</td>
+                </tr>
+                <tr>
+                    <td>Comparação de Desempenho entre Turmas</td>
+                    <td class="table-check">X</td>
+                    <td class="table-check">✓</td>
+                    <td class="table-check">✓</td>
+                </tr>
+                <tr>
+                    <td>Correção e Feedback Personalizado de Redações</td>
+                    <td class="table-check">X</td>
+                    <td class="table-check">✓</td>
+                    <td class="table-check">✓</td>
+                </tr>
+                <tr>
+                    <td>Identificação de Padrões de Aprendizagem</td>
+                    <td class="table-check">X</td>
+                    <td class="table-check">✓</td>
+                    <td class="table-check">✓</td>
+                </tr>
+                <tr>
+                    <td>Recomendações de Materiais Complementares</td>
+                    <td class="table-check">X</td>
+                    <td class="table-check">✓</td>
+                    <td class="table-check">✓</td>
+                </tr>
+                <tr>
+                    <td>Previsão de Desempenho dos Alunos (Machine Learning)</td>
+                    <td class="table-check">X</td>
+                    <td class="table-check">X</td>
+                    <td class="table-check">✓</td>
+                </tr>
+                <tr>
+                    <td>Customização Avançada da IA</td>
+                    <td class="table-check">X</td>
+                    <td class="table-check">X</td>
+                    <td class="table-check">✓</td>
+                </tr>
+                <tr>
+                    <td>Múltiplos Perfis de Usuário (Diretores, Coordenadores, Professores)</td>
+                    <td class="table-check">X</td>
+                    <td class="table-check">X</td>
+                    <td class="table-check">✓</td>
+                </tr>
+                <tr>
+                    <td>Exportação de Dados para Planilhas e Sistemas Externos</td>
+                    <td class="table-check">X</td>
+                    <td class="table-check">X</td>
+                    <td class="table-check">✓</td>
+                </tr>
+                <tr>
+                    <td>Relatórios Trimestrais com Análises Detalhadas</td>
+                    <td class="table-check">X</td>
+                    <td class="table-check">X</td>
+                    <td class="table-check">✓</td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <footer class="footer">
+      <br>
+      <p>© 2024 SABER - Sistema de Análise e Benefício Educacional em Relatório. Todos os direitos reservados.</p>
+  
+      <div class="footer-links">
+          <a href="#">Política de Privacidade</a> | 
+          <a href="#">Termos de Uso</a> | 
+          <a href="#">Suporte</a>
+      </div>
+  
+      <p>Desenvolvido com inteligência artificial para aprimorar o aprendizado e promover uma educação personalizada. <br>
+      Este site e seu conteúdo são protegidos por leis de direitos autorais e propriedade intelectual. Qualquer reprodução, distribuição ou uso não autorizado do material aqui contido está estritamente proibido sem a devida permissão.</p>
+  
+      <p>Contato: <a href="mailto:contatosaberia@gmail.com">contatosaberia@gmail.com</a> | 
+         Telefone: +55 (71) 98300-0082 | 
+         Instagram: <a href="https://instagram.com/sabe.oficial" target="_blank">@sabe.oficial</a>
+      </p>
+  </footer>
+
+    <script src="../scripts/assinaturas.js"></script>
+</body>
+</html>

@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sistema de Redações</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/redacoes.css">
+</head>
+<body>
+    <header class="header">
+        <div class="menu-icon-mobile">
+            <span id="menu-icon-mobile" class="material-symbols-outlined">menu</span>
+        </div>
+        <div class="logo-Header">
+            <p class="logo"><img src="" alt=""></p>
+        </div>
+        <div class="menuheader"> 
+            <ul class="menuheader-list">
+                <li>
+                    <span id="notifications-icon" class="material-symbols-outlined" onclick="clickMenu()">notifications</span>
+                    <div id="notifications-popup" class="notifications-popup">
+                        <p>Notificações</p>
+                        <ul>
+                            <li>Notificação</li>
+                            <li>Notificação</li>
+                            <li>Notificação</li>
+                        </ul>
+                    </div>
+                </li>
+                <li>
+                    <p id="user-name-header">Guilherme Moura</p>
+                </li>
+                <li>
+                    <span id="user-icon" class="material-symbols-outlined">account_circle</span>
+            <div id="user-icon-popup" class="user-icon-popup">
+                <p>Configurações</p>
+                <ul>
+                    <li>Configuração</li>
+                    <li>Configuração</li>
+                    <li>Configuração</li>
+                    <li>Configuração</li>
+                    <li>Configuração</li>
+                    <li>Configuração</li>
+                    <li>Configuração</li>
+                </ul>
+            </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <div id="sidebar">
+        <div class="topmenu">
+            <span id="menu-icon" class="material-symbols-outlined">menu</span>
+            <h3 id="menu-tittle">Menu</h3>
+            <img id="logomenu" src="" alt="">
+        </div>
+        <menu id="menu-hidden">
+            <div class="navbar">
+                <ul>
+                    <li>
+                        <a href="#"><span id="dashboard-icon" class="material-symbols-outlined">Dashboard</span><p>Dashboard</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span id="desempenho-icon" class="material-symbols-outlined">Bar_chart_4_bars</span><p>Desempenho</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span id="atividades" class="material-symbols-outlined">menu_book</span><p>Atividades</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span id="relatorios-icon" class="material-symbols-outlined">Docs</span><p>Relatórios</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span id="redacao-icon" class="material-symbols-outlined">History_edu</span><p>Redação</p></a>
+                    </li>
+                    <li>
+                        <a href="#"><span id="chat-icon" class="material-symbols-outlined">Chat</span><p>Chat</p></a>
+                    </li>
+                </ul>
+            </div>
+        </menu>
+    </div>
+    </menu>
+
+    <main class="main">
+        <div class="redacao-container">
+            <div class="redacao-header">
+                <h1>Redações</h1>
+                <div class="search-container">
+                    <input type="text" id="search-redacao" placeholder="Pesquisar redação...">
+                    <span class="material-symbols-outlined">search</span>
+                </div>
+                <button id="nova-redacao-btn" class="btn-primary">
+                    <span class="material-symbols-outlined">add</span> Nova Redação
+                </button>
+            </div>
+
+            <div id="redacoes-list" class="redacoes-list">
+                <p class="no-results">Nenhuma redação criada</p>
+            </div>
+
+            <div id="nova-redacao-modal" class="modal">
+                <div class="modal-content">
+                    <span class="close-modal">&times;</span>
+                    <h2>Nova Redação</h2>
+                    <form id="nova-redacao-form">
+                        <div class="form-group">
+                            <label for="redacao-tema">Tema da Redação</label>
+                            <input type="text" id="redacao-tema" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="redacao-descricao">Descrição</label>
+                            <textarea id="redacao-descricao" rows="3"></textarea>
+                        </div>
+                        <div class="form-group">
+                            <label for="redacao-entrega">Data de Entrega</label>
+                            <input type="date" id="redacao-entrega" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="redacao-arquivo">Anexar Arquivo (opcional)</label>
+                            <input type="file" id="redacao-arquivo">
+                        </div>
+                        <button type="submit" class="btn-primary">Enviar Redação</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="../scripts/redacoes.js"></script>
+    <script src="../../common/scripts/changepass.js"></script>
+    <script src="../../common/scripts/exitpopup.js"></script>
+    <script src="../../common/scripts/menu.js"></script>    
+</body>
+</html>
