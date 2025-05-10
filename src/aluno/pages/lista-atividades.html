@@ -3,12 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema Escolar - Atividades</title>
+    <title>Lista de Atividades - Portal do Aluno</title>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-    <link rel="stylesheet" href="../styles/atividades.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/lista-atividades.css">
+    <link rel="stylesheet" href="../../common/styles/menu.css">
+    <link rel="stylesheet" href="../../common/styles/changepass.css">
+    <link rel="stylesheet" href="../../common/styles/exitpopup.css">
 </head>
 <body>
-    <!-- HEADER -->
+<!-- HEADER -->
 <header class="header">
     <div class="menu-icon-mobile">
         <span id="menu-icon-mobile" class="material-symbols-outlined">menu</span>
@@ -162,19 +166,19 @@
     <div class="topmenu">
         <span id="menu-icon" class="material-symbols-outlined">menu</span>
         <h3 id="menu-tittle">Menu</h3>
-        <img id="logomenu" src="../../../assets/images/logo-saber.png" alt="Logo menu">
+        <img id="logomenu" src="src/20250507_090343_0000.png" alt="Logo menu">
     </div>
     <nav id="menu-hidden">
         <div class="navbar">
             <ul>
                 <li>
-                    <a href="dashboard.html">
+                    <a href="#">
                         <span class="material-symbols-outlined">dashboard</span>
                         <p>Dashboard</p>
                     </a>
                 </li>
                 <li>
-                    <a href="turmas.html">
+                    <a href="#">
                         <span class="material-symbols-outlined">groups</span>
                         <p>Turmas</p>
                     </a>
@@ -192,13 +196,13 @@
                     </a>
                 </li>
                 <li>
-                    <a href="redacoes.html">
+                    <a href="#">
                         <span class="material-symbols-outlined">history_edu</span>
                         <p>Redações</p>
                     </a>
                 </li>
                 <li>
-                    <a href="calendario-aulas.html">
+                    <a href="#">
                         <span class="material-symbols-outlined">event_note</span>
                         <p>Plano de Aulas</p>
                     </a>
@@ -216,7 +220,7 @@
                     </a>
                 </li>
                 <li>
-                    <a href="">
+                    <a href="#">
                         <span class="material-symbols-outlined">insert_chart</span>
                         <p>Relatórios</p>
                     </a>
@@ -226,184 +230,130 @@
     </nav>
 </div>
 
+<!-- CONTEÚDO PRINCIPAL -->
+<main>
+    <div class="page-header">
+        <div class="page-title">
+            <h1>Atividades > Lista de Atividades</h1>
+            <p>Todas as atividades atribuídas</p>
+        </div>
+        <div class="page-actions">
+            <button onclick="window.location.href='atividades.html'" class="btn-secondary">
+                <span class="material-symbols-outlined">arrow_back</span>
+                Voltar
+            </button>
+        </div>
+    </div>
 
-    <main class="main">
-        <div class="activities-container">
-            <div class="activities-header">
-                <h1>Atividades</h1>
-                <button id="new-activity-btn" class="btn-primary">
-                    <span class="material-symbols-outlined">add</span> Nova Atividade
-                </button>
-            </div>
+    <div class="content-container">
+        <div class="activity-list-container">
+            <div class="activities-section">
+                <div class="filter-bar">
 
-            <div class="filters">
-                <div class="filter-group">
-                    <label for="class-filter">Turma:</label>
-                    <select id="class-filter" class="filter-select">
-                        <option value="all">Todas</option>
-                        <option value="A">A</option>
-                        <option value="B">B</option>
-                        <option value="C">C</option>
-                        <option value="D">D</option>
-                        <option value="E">E</option>
-                        <option value="F">F</option>
-                        <option value="G">G</option>
-                        <option value="H">H</option>
-                        <option value="I">I</option>
-                        <option value="J">J</option>
-                        <option value="K">K</option>
-                        <option value="L">L</option>
-                        <option value="M">M</option>
-                        <option value="N">N</option>
-                        <option value="O">O</option>
-                    </select>
+                    <div class="search-container">
+                        <input type="text" placeholder="Buscar atividade..." class="activity-search">
+                        <span class="material-symbols-outlined">search</span>
+                    </div>
                 </div>
-                <div class="filter-group">
-                    <label for="year-filter">Ano:</label>
-                    <select id="year-filter" class="filter-select">
-                        <option value="all">Todos</option>
-                        <option value="1">1º Ano</option>
-                        <option value="2">2º Ano</option>
-                        <option value="3">3º Ano</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label for="subject-filter">Matéria:</label>
-                    <select id="subject-filter" class="filter-select">
-                        <option value="all">Todas</option>
-                        <option value="matematica">Matemática</option>
-                        <option value="portugues">Português</option>
-                        <option value="historia">História</option>
-                        <option value="geografia">Geografia</option>
-                        <option value="ciencias">Ciências</option>
-                        <option value="ingles">Inglês</option>
-                    </select>
-                </div>
-                <button id="apply-filters" class="btn-secondary">Aplicar Filtros</button>
-            </div>
-
-            <div class="activities-list">
                 
-            </div>
-        </div>
-
-       
-        <div id="activity-modal" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 id="modal-title">Nova Atividade</h2>
-                    <span class="close-modal">&times;</span>
-                </div>
-                <div class="modal-body">
-                    <form id="activity-form">
-                        <div class="form-group">
-                            <label for="activity-title">Título:</label>
-                            <input type="text" id="activity-title" required>
+                <div class="activities-list-wrapper">
+                    <div class="activity-item">
+                        <span class="material-symbols-outlined activity-type-icon pending">description</span>
+                        <div class="activity-details">
+                            <h4>Revisão AV2 - Testes de Front-End</h4>
+                            <span class="activity-deadline">Sem data de entrega</span>
                         </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="activity-class">Turma:</label>
-                                <select id="activity-class" required>
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                    <option value="C">C</option>
-                                    <option value="D">D</option>
-                                    <option value="E">E</option>
-                                    <option value="F">F</option>
-                                    <option value="G">G</option>
-                                    <option value="H">H</option>
-                                    <option value="I">I</option>
-                                    <option value="J">J</option>
-                                    <option value="K">K</option>
-                                    <option value="L">L</option>
-                                    <option value="M">M</option>
-                                    <option value="N">N</option>
-                                    <option value="O">O</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="activity-year">Ano:</label>
-                                <select id="activity-year" required>
-                                    <option value="1">1º Ano</option>
-                                    <option value="2">2º Ano</option>
-                                    <option value="3">3º Ano</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="activity-subject">Matéria:</label>
-                            <select id="activity-subject" required>
-                                <option value="matematica">Matemática</option>
-                                <option value="portugues">Português</option>
-                                <option value="historia">História</option>
-                                <option value="geografia">Geografia</option>
-                                <option value="ciencias">Ciências</option>
-                                <option value="ingles">Inglês</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="activity-due-date">Data de Entrega:</label>
-                            <input type="date" id="activity-due-date" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="activity-questions">Questões:</label>
-                            <textarea id="activity-questions" rows="6" required></textarea>
-                        </div>
-                        <div class="form-actions">
-                            <button type="button" class="btn-secondary close-modal">Cancelar</button>
-                            <button type="submit" class="btn-primary">Salvar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        
-        <div id="delivery-modal" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 id="delivery-modal-title">Entregas da Atividade</h2>
-                    <span class="close-delivery-modal">&times;</span>
-                </div>
-                <div class="modal-body">
-                    <div class="delivery-stats">
-                        <div class="stat-card">
-                            <span class="stat-number" id="total-students">0</span>
-                            <span class="stat-label">Alunos</span>
-                        </div>
-                        <div class="stat-card delivered">
-                            <span class="stat-number" id="delivered-count">0</span>
-                            <span class="stat-label">Entregues</span>
-                        </div>
-                        <div class="stat-card not-delivered">
-                            <span class="stat-number" id="not-delivered-count">0</span>
-                            <span class="stat-label">Pendentes</span>
-                        </div>
+                        <span class="activity-status waiting">Aguardando envio</span>
+                        <span class="material-symbols-outlined more-options">more_vert</span>
                     </div>
-                    <div class="delivery-list-container">
-                        <div class="tabs">
-                            <button class="tab-btn active" data-tab="delivered">Entregues (<span id="delivered-tab-count">0</span>)</button>
-                            <button class="tab-btn" data-tab="not-delivered">Pendentes (<span id="not-delivered-tab-count">0</span>)</button>
+                    
+                    <div class="activity-item">
+                        <span class="material-symbols-outlined activity-type-icon pending">description</span>
+                        <div class="activity-details">
+                            <h4>Envio de Slides</h4>
+                            <span class="activity-deadline">Sem data de entrega</span>
                         </div>
-                        <div class="tab-content active" id="delivered-tab">
-                            <ul class="student-list" id="delivered-list">
-                                
-                            </ul>
+                        <span class="activity-status waiting">Aguardando envio</span>
+                        <span class="material-symbols-outlined more-options">more_vert</span>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <span class="material-symbols-outlined activity-type-icon pending">description</span>
+                        <div class="activity-details">
+                            <h4>Atividade de Automação com Ghost Inspector</h4>
+                            <span class="activity-deadline">Data de entrega: 14 de mai., 23:59</span>
                         </div>
-                        <div class="tab-content" id="not-delivered-tab">
-                            <ul class="student-list" id="not-delivered-list">
-                                
-                            </ul>
+                        <span class="activity-status late">Atrasado</span>
+                        <span class="material-symbols-outlined more-options">more_vert</span>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <span class="material-symbols-outlined activity-type-icon submitted">assignment</span>
+                        <div class="activity-details">
+                            <h4>AULA 07 - Introdução à automação de testes</h4>
+                            <span class="activity-deadline">Item postado: 16 de abr.</span>
                         </div>
+                        <span class="activity-status completed">Entregue</span>
+                        <span class="material-symbols-outlined more-options">more_vert</span>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <span class="material-symbols-outlined activity-type-icon submitted">assignment</span>
+                        <div class="activity-details">
+                            <h4>INSTRUÇÕES PARA O SEMINÁRIO 30/04</h4>
+                            <span class="activity-deadline">Item postado: 9 de abr.</span>
+                        </div>
+                        <span class="activity-status completed">Entregue</span>
+                        <span class="material-symbols-outlined more-options">more_vert</span>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <span class="material-symbols-outlined activity-type-icon pending">description</span>
+                        <div class="activity-details">
+                            <h4>PROVA AV1 - Testes de Front-End</h4>
+                            <span class="activity-deadline">Sem data de entrega</span>
+                        </div>
+                        <span class="activity-status waiting">Aguardando envio</span>
+                        <span class="material-symbols-outlined more-options">more_vert</span>
+                    </div>
+                    
+                    <div class="activity-item">
+                        <span class="material-symbols-outlined activity-type-icon pending">description</span>
+                        <div class="activity-details">
+                            <h4>ATIVIDADE DE REVISÃO PARA A PROVA <span class="badge">1</span></h4>
+                            <span class="activity-deadline">Sem data de entrega</span>
+                        </div>
+                        <span class="activity-status waiting">Aguardando envio</span>
+                        <span class="material-symbols-outlined more-options">more_vert</span>
+                    </div>
+                    
+                    <button class="load-more-btn">Ver mais</button>
+                </div>
+            </div>
+            
+            <div class="stats-section">
+                <div class="stats-card">
+                    <h3>Total de Entregas</h3>
+                    <div class="stats-number">16</div>
+                    <p>de 20 permitidas</p>
+                    
+                    <div class="chart-container">
+                        <canvas id="activities-chart"></canvas>
+                    </div>
+                    
+                    <div class="progress-info">
+                        <p>80% concluído</p>
                     </div>
                 </div>
             </div>
         </div>
-    </main>
+    </div>
+</main>
 
-    <script src="../scripts/atividades.js"></script>
-    <script src="../../common/scripts/changepass.js"></script>
-    <script src="../../common/scripts/exitpopup.js"></script>
-    <script src="../../common/scripts/menu.js"></script>    
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="../scripts/lista-atividades.js"></script>
+<script src="../../common/scripts/changepass.js"></script>
+<script src="../../common/scripts/exitpopup.js"></script>
+<script src="../../common/scripts/menu.js"></script>
 </body>
 </html>

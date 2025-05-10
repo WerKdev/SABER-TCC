@@ -258,7 +258,7 @@ body.dark-theme .user-icon-popup li {
     width: 100%;
     color: #F1F5F9;
     text-decoration: none;
-    
+    white-space: nowrap
 }
 
 .navbar a:hover {
