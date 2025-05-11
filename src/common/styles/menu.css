@@ -300,10 +300,6 @@ body.dark-theme main {
     background-color: var(--background-escuro);
 }
 
-#sidebar.active ~ main {
-    margin-left: 15vw;
-}
-
 /* ====== NOTIFICAÇÕES E MENU DE USUÁRIO ====== */
 
 /* Estrutura da lista do header */
@@ -882,6 +878,10 @@ body.dark-theme .language-options ul li.active {
     .menuheader {
         margin-right: 15px; /* Reduzido para dar mais espaço */
         gap: 10px;
+    }
+
+    .menuheader-list{
+        margin-right: 10px;
     }
 
     #user-icon, #notifications-icon {

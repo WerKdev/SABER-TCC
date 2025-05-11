@@ -1,5 +1,80 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
+/* =========== CABEÇALHO DA PÁGINA =========== */
+.page-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+}
+
+.page-title h1 {
+    font-size: 24px;
+    font-weight: 600;
+    margin-bottom: 4px;
+    color: var(--texto-claro);
+}
+
+body.dark-theme .page-title h1 {
+    color: var(--texto-escuro);
+}
+
+.page-title p {
+    color: var(--texto-secundario);
+    font-size: 14px;
+}
+
+body.dark-theme .page-title p {
+    color: var(--texto-terciario);
+}
+
+.page-actions {
+    display: flex;
+    gap: 12px;
+}
+
+.btn-primary, .btn-secondary {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;    
+    border: none;
+    transition: all 0.2s ease;
+}
+
+.btn-primary {
+    background-color: var(--azul-padrao);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: var(--azul-hover);
+}
+
+.btn-secondary {
+    background-color: transparent;
+    color: var(--texto-claro);
+    border: 1px solid #ddd;
+}
+
+body.dark-theme .btn-secondary {
+    color: var(--texto-escuro);
+    border: 1px solid #444;
+}
+
+.btn-secondary:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+body.dark-theme .btn-secondary:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* =========== ESTRUTURA EXISTENTE =========== */
 .activity-container {
     display: flex;
     gap: 30px;
@@ -23,6 +98,7 @@
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
     padding: 25px;
     margin-bottom: 25px;
+    position: relative;
 }
 
 .activity-card h1 {
@@ -217,6 +293,298 @@
     background: #2563eb;
 }
 
+/* =========== ACTIVITY CARD HEADER COM BOTÃO DE OPÇÕES =========== */
+.activity-card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.activity-card-header h2 {
+    margin: 0;
+}
+
+.activity-options {
+    display: flex;
+    align-items: center;
+}
+
+.more-options {
+    color: #64748b;
+    cursor: pointer;
+    padding: 5px;
+    border-radius: 50%;
+    transition: background-color 0.2s;
+}
+
+.more-options:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+body.dark-theme .more-options:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* =========== MENU DE OPÇÕES =========== */
+.options-menu {
+    position: absolute;
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    min-width: 150px;
+    z-index: 1000;
+    overflow: hidden;
+}
+
+body.dark-theme .options-menu {
+    background-color: #1a1a1a;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.options-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 4px 0;
+}
+
+.options-menu li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 16px;
+    cursor: pointer;
+    transition: background-color 0.15s ease;
+    color: var(--texto-claro);
+    font-size: 14px;
+}
+
+body.dark-theme .options-menu li {
+    color: var(--texto-escuro);
+}
+
+.options-menu li:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+body.dark-theme .options-menu li:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.options-menu li .material-symbols-outlined {
+    font-size: 18px;
+    color: var(--texto-secundario);
+}
+
+body.dark-theme .options-menu li .material-symbols-outlined {
+    color: var(--texto-terciario);
+}
+
+/* =========== POPUPS DE CONFIRMAÇÃO =========== */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 9999;
+}
+
+.popup-overlay.complete-confirm-popup,
+.popup-overlay.cancel-confirm-popup {
+    position: fixed;
+}
+
+.complete-confirm-popup .confirm-popup,
+.cancel-confirm-popup .confirm-popup {
+    max-width: 400px;
+    width: 90%;
+    margin: 20px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    position: relative;
+}
+
+body.dark-theme .popup-overlay {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+body.dark-theme .complete-confirm-popup .confirm-popup,
+body.dark-theme .cancel-confirm-popup .confirm-popup {
+    background-color: var(--background-elemento-escuro);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.confirm-popup .popup-header {
+    padding: 20px;
+    border-bottom: 1px solid var(--borda-clara);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.confirm-popup .close-popup {
+    cursor: pointer;
+    color: var(--texto-secundario);
+    transition: color 0.2s ease;
+}
+
+.confirm-popup .close-popup:hover {
+    color: var(--texto-claro);
+}
+
+body.dark-theme .confirm-popup .close-popup {
+    color: var(--texto-terciario);
+}
+
+body.dark-theme .confirm-popup .close-popup:hover {
+    color: var(--texto-escuro);
+}
+
+body.dark-theme .confirm-popup .popup-header {
+    border-bottom: 1px solid var(--borda-escura);
+}
+
+.confirm-popup .popup-header h2 {
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--texto-claro);
+    margin-right: 20px;
+}
+
+body.dark-theme .confirm-popup .popup-header h2 {
+    color: var(--texto-escuro);
+}
+
+.confirm-popup .popup-content {
+    padding: 20px;
+}
+
+.confirm-popup .popup-content p {
+    margin-bottom: 20px;
+    color: var(--texto-secundario);
+}
+
+body.dark-theme .confirm-popup .popup-content p {
+    color: var(--texto-terciario);
+}
+
+.confirm-popup .popup-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+.confirm-popup .btn-cancel,
+.confirm-popup .btn-confirm {
+    padding: 10px 20px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    border: none;
+    transition: all 0.2s ease;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+.confirm-popup .btn-cancel {
+    background-color: transparent;
+    color: var(--texto-claro);
+    border: 1px solid var(--borda-clara);
+}
+
+body.dark-theme .confirm-popup .btn-cancel {
+    color: var(--texto-escuro);
+    border: 1px solid var(--borda-escura);
+}
+
+.confirm-popup .btn-cancel:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+body.dark-theme .confirm-popup .btn-cancel:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.confirm-popup .btn-confirm {
+    background-color: var(--azul-padrao);
+    color: white;
+}
+
+.confirm-popup .btn-confirm:hover {
+    background-color: var(--azul-hover);
+}
+
+/* =========== TOAST NOTIFICATION =========== */
+.toast {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #333;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 8px;
+    font-size: 14px;
+    z-index: 1001;
+    opacity: 0;
+    animation: toastIn 0.3s ease forwards;
+}
+
+@keyframes toastIn {
+    from {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+}
+
+.toast.fade-out {
+    animation: toastOut 0.3s ease forwards;
+}
+
+@keyframes toastOut {
+    from {
+        opacity: 1;
+        transform: translateX(-50%) translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateX(-50%) translateY(20px);
+    }
+}
+
+/* Animações para o menu */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+        transform: translateY(0);
+    }
+    to {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+}
+
 /* =========== TEMA ESCURO =========== */
 
 /* Main e container principal */
@@ -384,3 +752,37 @@ body.dark-theme ::-webkit-scrollbar-thumb {
 body.dark-theme ::-webkit-scrollbar-thumb:hover {
     background: #5a5a5a;
 }
+
+/* =========== RESPONSIVIDADE =========== */
+@media (max-width: 768px) {
+    .page-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 16px;
+    }
+    
+    .page-actions {
+        width: 100%;
+    }
+    
+    .btn-primary, .btn-secondary {
+        flex: 1;
+        justify-content: center;
+    }
+    
+    .activity-container {
+        flex-direction: column;
+    }
+    
+    .activity-actions {
+        width: 100%;
+    }
+    
+    .activity-card-header {
+        gap: 10px;
+    }
+    
+    .activity-card-header h2 {
+        font-size: 18px;
+    }
+}   

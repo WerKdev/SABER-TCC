@@ -9,6 +9,17 @@ document.addEventListener("DOMContentLoaded", function() {
     const feedbackButtons = document.querySelectorAll('.btn-feedback');
     const feedbackPopup = document.getElementById('feedback-popup');
     const closePopupButtons = document.querySelectorAll('.close-popup');
+
+    // Encontrar o botão "Ver Calendário"
+    const verCalendarioBtn = document.querySelector('.btn-secondary');
+    if (verCalendarioBtn) {
+        // Adicionar evento de clique para redirecionamento
+        verCalendarioBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            // Redirecionar para a página de calendário
+            window.location.href = 'calendario-atividades.html';
+        });
+    }
     
     // Encontrar o botão "Lista de atividades"
     const listaAtividadesBtn = document.querySelector('.btn-primary');
@@ -113,10 +124,23 @@ document.addEventListener("DOMContentLoaded", function() {
         button.addEventListener('click', function(e) {
             e.stopPropagation();
             
-            // Fecha qualquer popup aberto anteriormente
-            if (feedbackPopup.style.display === 'block') {
+            // Se o popup já está aberto para este botão, fecha
+            if (feedbackPopup.style.display === 'block' && 
+                feedbackPopup.dataset.activeButton === this.dataset.buttonId) {
                 feedbackPopup.style.display = 'none';
+                feedbackPopup.dataset.activeButton = null;
+                return;
             }
+            
+            // Fecha qualquer popup aberto anteriormente
+            feedbackPopup.style.display = 'none';
+            feedbackPopup.dataset.activeButton = null;
+            
+            // Gera um ID único para o botão se não tiver
+            if (!this.dataset.buttonId) {
+                this.dataset.buttonId = 'btn-' + Date.now();
+            }
+            feedbackPopup.dataset.activeButton = this.dataset.buttonId;
             
             // Encontra o card da atividade
             const card = this.closest('.activity-card');
@@ -131,63 +155,47 @@ document.addEventListener("DOMContentLoaded", function() {
                 grade: gradeText
             });
             
-            // Garante que o popup esteja no body
+            // Anexa o popup ao body
             document.body.appendChild(feedbackPopup);
             
-            // Remove qualquer classe de overlay remanescente
-            feedbackPopup.classList.remove('popup-overlay');
+            // Define estilos do popup
+            feedbackPopup.style.position = 'absolute';
+            feedbackPopup.style.display = 'block';
             
             // Posiciona o popup
             const buttonRect = this.getBoundingClientRect();
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
             
-            // Define estilos para o popup usando position fixed
-            feedbackPopup.style.position = 'fixed';
-            feedbackPopup.style.display = 'block';
-            feedbackPopup.style.width = '400px';
+            // Calcula posição absoluta incluindo scroll
+            let top = buttonRect.bottom + scrollTop + 10;
+            let left = buttonRect.left + scrollLeft;
             
-            // Calcula dimensões do popup
-            const popupRect = feedbackPopup.getBoundingClientRect();
-            
-            // Decide se mostra em cima ou embaixo do botão baseado na posição na tela
-            let top;
-            let left = buttonRect.left;
-            
-            // Se o botão estiver na metade superior da tela, abre para baixo
-            // Se estiver na metade inferior, abre para cima
-            const isInTopHalf = buttonRect.top < window.innerHeight / 2;
-            
-            if (isInTopHalf) {
-                // Abre para baixo
-                top = buttonRect.bottom + 10;
-                // Verifica se ultrapassa o bottom da tela
-                if (top + popupRect.height > window.innerHeight - 20) {
-                    // Se não couber embaixo, abre em cima
-                    top = buttonRect.top - popupRect.height - 10;
-                }
-            } else {
-                // Abre para cima
-                top = buttonRect.top - popupRect.height - 10;
-                // Verifica se ultrapassa o top da tela
-                if (top < 20) {
-                    // Se não couber em cima, abre embaixo
-                    top = buttonRect.bottom + 10;
-                }
-            }
-            
-            // Ajusta para não sair da tela horizontalmente
-            if (left + popupRect.width > window.innerWidth) {
-                left = window.innerWidth - popupRect.width - 20;
-            }
-            
-            // Garantir que não saia da tela pela esquerda
-            if (left < 10) {
-                left = 10;
-            }
-            
-            // Aplica as posições
+            // Define posição inicial
             feedbackPopup.style.top = top + 'px';
             feedbackPopup.style.left = left + 'px';
-            feedbackPopup.style.zIndex = '1000';
+            
+            // Ajusta posição após renderização
+            setTimeout(() => {
+                const popupRect = feedbackPopup.getBoundingClientRect();
+                
+                // Verifica se ultrapassa os limites da viewport
+                if (popupRect.bottom > window.innerHeight - 20) {
+                    // Se não cabe embaixo, abre em cima
+                    top = buttonRect.top + scrollTop - popupRect.height - 10;
+                    feedbackPopup.style.top = top + 'px';
+                }
+                
+                if (popupRect.right > window.innerWidth - 20) {
+                    // Se sai pela direita, alinha à direita do botão
+                    left = buttonRect.right + scrollLeft - popupRect.width;
+                    feedbackPopup.style.left = left + 'px';
+                }
+                
+                if (left < 10) {
+                    feedbackPopup.style.left = '10px';
+                }
+            }, 0);
         });
     });
     
@@ -198,6 +206,7 @@ document.addEventListener("DOMContentLoaded", function() {
             const popup = this.closest('#feedback-popup');
             if (popup) {
                 popup.style.display = 'none';
+                popup.dataset.activeButton = null;
             }
         });
     });
@@ -210,6 +219,7 @@ document.addEventListener("DOMContentLoaded", function() {
             
             if (!isClickInside && !isClickOnButton) {
                 feedbackPopup.style.display = 'none';
+                feedbackPopup.dataset.activeButton = null;
             }
         }
     });
@@ -218,6 +228,7 @@ document.addEventListener("DOMContentLoaded", function() {
     document.addEventListener('keydown', function(e) {
         if (e.key === 'Escape' && feedbackPopup.style.display === 'block') {
             feedbackPopup.style.display = 'none';
+            feedbackPopup.dataset.activeButton = null;
         }
     });
 

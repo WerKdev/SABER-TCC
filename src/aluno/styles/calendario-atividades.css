@@ -1,0 +1,620 @@
+/* Importação de estilos base */
+@import url('./atividades.css');
+
+/* =========== CALENDÁRIO =========== */
+.calendar-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+body.dark-theme .calendar-container {
+    background-color: var(--background-elemento-escuro);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Controles do Calendário */
+.calendar-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.month-navigation {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.nav-btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background-color: #f8fafc;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+body.dark-theme .nav-btn {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--texto-escuro);
+}
+
+.nav-btn:hover {
+    background-color: var(--azul-padrao);
+    color: white;
+}
+
+#current-month-year {
+    font-size: 22px;
+    font-weight: 600;
+    min-width: 200px;
+    text-align: center;
+    color: var(--texto-claro);
+}
+
+body.dark-theme #current-month-year {
+    color: var(--texto-escuro);
+}
+
+/* Grid do Calendário */
+.calendar-grid {
+    margin-bottom: 30px;
+}
+
+.calendar-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1px;
+    background-color: #e5e7eb;
+    padding: 1px;
+    border-radius: 8px 8px 0 0;
+}
+
+body.dark-theme .calendar-header {
+    background-color: #444;
+}
+
+.day-header {
+    padding: 12px;
+    text-align: center;
+    font-weight: 600;
+    color: var(--texto-secundario);
+    background-color: #f8fafc;
+}
+
+body.dark-theme .day-header {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--texto-terciario);
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1px;
+    background-color: #e5e7eb;
+    padding: 1px;
+    border-radius: 0 0 8px 8px;
+}
+
+body.dark-theme .calendar-days {
+    background-color: #444;
+}
+
+/* Células do Calendário */
+.calendar-day {
+    background-color: white;
+    min-height: 100px;
+    padding: 8px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+body.dark-theme .calendar-day {
+    background-color: var(--background-elemento-escuro);
+}
+
+.calendar-day:hover {
+    background-color: #f8fafc;
+}
+
+body.dark-theme .calendar-day:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.calendar-day.other-month {
+    opacity: 0.4;
+}
+
+.calendar-day.today {
+    background-color: #e8f3ff;
+    border: 2px solid var(--azul-padrao);
+}
+
+body.dark-theme .calendar-day.today {
+    background-color: rgba(12, 20, 43, 0.2);
+}
+
+.calendar-day.selected {
+    background-color: #f0f9ff;
+    border: 2px solid var(--azul-info);
+}
+
+body.dark-theme .calendar-day.selected {
+    background-color: rgba(59, 130, 246, 0.2);
+}
+
+.day-number {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--texto-claro);
+}
+
+body.dark-theme .day-number {
+    color: var(--texto-escuro);
+}
+
+/* Indicadores de Atividades */
+.activity-indicators {
+    display: flex;
+    gap: 2px;
+    margin-top: 5px;
+    flex-wrap: wrap;
+}
+
+.activity-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.activity-dot.pendente {
+    background-color: var(--vermelho);
+}
+
+.activity-dot.concluida {
+    background-color: var(--verde);
+}
+
+.activity-dot.avaliada {
+    background-color: var(--azul-info);
+}
+
+/* Mini cards de atividades */
+.activity-mini-card {
+    background-color: #f8fafc;
+    padding: 4px 6px;
+    margin-top: 4px;
+    border-radius: 4px;
+    font-size: 11px;
+    border-left: 3px solid;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+body.dark-theme .activity-mini-card {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.activity-mini-card.pendente {
+    border-left-color: var(--vermelho);
+}
+
+.activity-mini-card.concluida {
+    border-left-color: var(--verde);
+}
+
+.activity-mini-card.avaliada {
+    border-left-color: var(--azul-info);
+}
+
+/* Legenda */
+.calendar-legend {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    padding: 15px;
+    background-color: #f8fafc;
+    border-radius: 8px;
+    flex-wrap: wrap;
+}
+
+body.dark-theme .calendar-legend {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--texto-secundario);
+}
+
+body.dark-theme .legend-item {
+    color: var(--texto-terciario);
+}
+
+.legend-indicator {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+}
+
+.legend-indicator.pendente {
+    background-color: var(--vermelho);
+}
+
+.legend-indicator.concluida {
+    background-color: var(--verde);
+}
+
+.legend-indicator.avaliada {
+    background-color: var(--azul-info);
+}
+
+.legend-indicator.hoje {
+    background-color: var(--azul-padrao);
+}
+
+.legend-indicator.prazo-proximo {
+    background-color: var(--laranja);
+}
+
+/* Atividades do dia selecionado */
+.selected-day-activities {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f8fafc;
+    border-radius: 8px;
+}
+
+body.dark-theme .selected-day-activities {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+#selected-date-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: var(--texto-claro);
+}
+
+body.dark-theme #selected-date-title {
+    color: var(--texto-escuro);
+}
+
+.day-activities-list {
+    display: grid;
+    gap: 15px;
+}
+
+.day-activity-card {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+body.dark-theme .day-activity-card {
+    background-color: var(--background-elemento-escuro);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.day-activity-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.day-activity-card.pendente {
+    border-left-color: var(--vermelho);
+}
+
+.day-activity-card.concluida {
+    border-left-color: var(--verde);
+}
+
+.day-activity-card.avaliada {
+    border-left-color: var(--azul-info);
+}
+
+.day-activity-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+}
+
+.day-activity-title {
+    font-weight: 600;
+    color: var(--texto-claro);
+}
+
+body.dark-theme .day-activity-title {
+    color: var(--texto-escuro);
+}
+
+.day-activity-subject {
+    font-size: 13px;
+    color: var(--azul-padrao);
+}
+
+.day-activity-time {
+    font-size: 12px;
+    color: var(--texto-secundario);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+body.dark-theme .day-activity-time {
+    color: var(--texto-terciario);
+}
+
+/* Notificações de prazos */
+.deadline-notifications {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+}
+
+body.dark-theme .deadline-notifications {
+    background-color: var(--background-elemento-escuro);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.notifications-list {
+    display: grid;
+    gap: 15px;
+}
+
+.notification-card {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid;
+}
+
+.notification-card.urgent {
+    background-color: var(--vermelho-claro);
+    border-left-color: var(--vermelho);
+}
+
+.notification-card.warning {
+    background-color: var(--laranja-claro);
+    border-left-color: var(--laranja);
+}
+
+.notification-card.info {
+    background-color: var(--azul-info-claro);
+    border-left-color: var(--azul-info);
+}
+
+body.dark-theme .notification-card.urgent {
+    background-color: rgba(227, 64, 64, 0.1);
+}
+
+body.dark-theme .notification-card.warning {
+    background-color: rgba(247, 144, 9, 0.1);
+}
+
+body.dark-theme .notification-card.info {
+    background-color: rgba(59, 130, 246, 0.1);
+}
+
+.notification-icon {
+    font-size: 24px;
+}
+
+.notification-content {
+    flex: 1;
+}
+
+.notification-title {
+    font-weight: 600;
+    margin-bottom: 2px;
+    color: var(--texto-claro);
+}
+
+body.dark-theme .notification-title {
+    color: var(--texto-escuro);
+}
+
+.notification-description {
+    font-size: 14px;
+    color: var(--texto-secundario);
+}
+
+body.dark-theme .notification-description {
+    color: var(--texto-terciario);
+}
+
+/* Popup de detalhes */
+.activity-detail-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.activity-detail-popup .popup {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    max-width: 600px;
+    width: 90%;
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+body.dark-theme .activity-detail-popup .popup {
+    background-color: var(--background-elemento-escuro);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+/* Popup de detalhes - Estilização melhorada */
+.activity-detail {
+    padding: 10px;
+}
+
+.activity-detail-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+body.dark-theme .activity-detail-header {
+    border-bottom-color: #444;
+}
+
+.activity-detail-header h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0;
+    color: var(--texto-claro);
+}
+
+body.dark-theme .activity-detail-header h3 {
+    color: var(--texto-escuro);
+}
+
+.activity-detail-header .activity-status {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.activity-detail-header .activity-status.pendente {
+    background-color: var(--vermelho-claro);
+    color: var(--vermelho);
+}
+
+.activity-detail-header .activity-status.concluida {
+    background-color: var(--verde-claro);
+    color: var(--verde);
+}
+
+.activity-detail-header .activity-status.avaliada {
+    background-color: var(--azul-info-claro);
+    color: var(--azul-info);
+}
+
+.activity-detail-info {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 25px;
+}
+
+.activity-detail-info p {
+    margin: 0;
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    font-size: 15px;
+    line-height: 1.5;
+}
+
+.activity-detail-info strong {
+    color: var(--texto-secundario);
+    min-width: 80px;
+    flex-shrink: 0;
+}
+
+body.dark-theme .activity-detail-info strong {
+    color: var(--texto-terciario);
+}
+
+.activity-detail-actions {
+    display: flex;
+    justify-content: flex-end;
+    padding-top: 20px;
+    border-top: 1px solid #e5e7eb;
+}
+
+body.dark-theme .activity-detail-actions {
+    border-top-color: #444;
+}
+
+/* Melhorar estilo do botão de fechar */
+.popup-header .close-popup {
+    transition: all 0.2s ease;
+    border-radius: 4px;
+    padding: 4px;
+}
+
+.popup-header .close-popup:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: var(--vermelho);
+}
+
+body.dark-theme .popup-header .close-popup:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Corrigir cursor do botão de fechar */
+.close-popup {
+    cursor: pointer;
+}   
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .calendar-day {
+        min-height: 80px;
+        padding: 4px;
+    }
+    
+    .day-number {
+        font-size: 12px;
+    }
+    
+    .activity-mini-card {
+        font-size: 10px;
+        padding: 2px 4px;
+    }
+    
+    .calendar-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .month-navigation {
+        justify-content: center;
+    }
+    
+    .view-options {
+        width: 100%;
+    }
+    
+    #activity-filter {
+        width: 100%;
+    }
+}
