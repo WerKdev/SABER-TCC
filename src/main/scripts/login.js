@@ -98,16 +98,66 @@ document.addEventListener("DOMContentLoaded", function() {
         loginForm.addEventListener("submit", function(e) {
             e.preventDefault();
             
-            const email = document.getElementById("email").value;
+            const email = document.getElementById("email").value.trim().toLowerCase();
             const password = document.getElementById("password").value;
             const remember = document.getElementById("remember").checked;
             
             console.log("Tentativa de login:", { email, password, remember });
             
-            alert("Login realizado com sucesso!");
-            
+            // Emails de teste para cada tipo de usuário
+            const emailAluno = "aluno@saber.com";
+            const emailProfessor = "professor@saber.com";
+            const emailAdmin = "admin@saber.com";
 
+            const senhaCorreta = "12345678";
+            
+            if (password !== senhaCorreta) {
+                exibirMensagemErro("Senha incorreta. Por favor, tente novamente.");
+                return;
+            }
+            
+            if (email === emailAluno) {
+                console.log("Redirecionando para sistema de aluno...");
+                window.location.href = "/src/aluno/pages/dashboard.html";
+                return;
+            } else if (email === emailProfessor) {
+                console.log("Redirecionando para sistema de professor...");
+                window.location.href = "/src/professor/pages/dashboard.html";
+                return;
+            } else if (email === emailAdmin) {
+                console.log("Redirecionando para sistema de admin...");
+                window.location.href = "/src/admin/pages/dashboard.html";
+                return;
+            } else {
+                exibirMensagemErro("Email não cadastrado. Verifique suas credenciais.");
+            }
         });
+    }
+    
+    function exibirMensagemErro(mensagem) {
+
+        let divErro = document.querySelector(".erro-login");
+        
+        if (!divErro) {
+            divErro = document.createElement("div");
+            divErro.className = "erro-login";
+            divErro.style.color = "#ff3860";
+            divErro.style.backgroundColor = "#feecf0";
+            divErro.style.padding = "10px";
+            divErro.style.borderRadius = "4px";
+            divErro.style.marginTop = "15px";
+            divErro.style.textAlign = "center";
+            divErro.style.fontSize = "14px";
+
+            loginForm.after(divErro);
+        }
+        
+        divErro.textContent = mensagem;
+        divErro.style.display = "block";
+        
+        setTimeout(() => {
+            divErro.style.display = "none";
+        }, 5000);
     }
     
     recoveryForm.addEventListener("submit", function(e) {
