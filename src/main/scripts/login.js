@@ -209,4 +209,17 @@ document.addEventListener("DOMContentLoaded", function() {
             return true;
         }
     }
+
+        try {
+        var animation = bodymovin.loadAnimation({
+            container: document.getElementById('lottie-container'),
+            renderer: 'svg',
+            loop: true,
+            autoplay: true,
+            path: '../assets/login/animationsvg.json'
+        });
+    } catch (error) {
+        console.log("Erro ao carregar animação:", error);
+    }
+
 });
