@@ -3,10 +3,10 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Desempenho faltas - Aluno</title>
+    <title>Desempenho - Aluno</title>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../styles/desempenho-faltas.css">
+    <link rel="stylesheet" href="../styles/desempenho.css">
     <link rel="stylesheet" href="../../common/styles/menu.css">
     <link rel="stylesheet" href="../../common/styles/changepass.css">
     <link rel="stylesheet" href="../../common/styles/exitpopup.css">
@@ -188,57 +188,63 @@
             <div class="navbar">
                 <ul>
                     <li>
-                        <a href="#">
+                        <a href="dashboard.html">
                             <span class="material-symbols-outlined">dashboard</span>
                             <p>Dashboard</p>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
-                            <span class="material-symbols-outlined">groups</span>
-                            <p>Turmas</p>
+                        <a href="desempenho.html" class="active">
+                            <span class="material-symbols-outlined">analytics</span>
+                            <p>Desempenho</p>
                         </a>
                     </li>
                     <li>
-                        <a href="#" class="active">
+                        <a href="atividades.html">
                             <span class="material-symbols-outlined">assignment</span>
                             <p>Atividades</p>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
-                            <span class="material-symbols-outlined">fact_check</span>
-                            <p>Avaliações</p>
+                        <a href="calendario-atividades.html">
+                            <span class="material-symbols-outlined">event_note</span>
+                            <p>Calendário</p>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="redacoes.html">
                             <span class="material-symbols-outlined">history_edu</span>
                             <p>Redações</p>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
-                            <span class="material-symbols-outlined">event_note</span>
-                            <p>Plano de Aulas</p>
+                        <a href="documentos.html">
+                            <span class="material-symbols-outlined">folder</span>
+                            <p>Documentos</p>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
-                            <span class="material-symbols-outlined">book</span>
+                        <a href="materiais.html">
+                            <span class="material-symbols-outlined">menu_book</span>
                             <p>Materiais</p>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
+                        <a href="mensagens.html">
                             <span class="material-symbols-outlined">chat</span>
-                            <p>Comunicação</p>
+                            <p>Comunicados</p>
                         </a>
                     </li>
                     <li>
-                        <a href="#">
-                            <span class="material-symbols-outlined">insert_chart</span>
-                            <p>Relatórios</p>
+                        <a href="eventos.html">
+                            <span class="material-symbols-outlined">event</span>
+                            <p>Eventos</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="suporte.html">
+                            <span class="material-symbols-outlined">help</span>
+                            <p>Suporte</p>
                         </a>
                     </li>
                 </ul>
@@ -246,7 +252,8 @@
         </nav>
     </div>
 
-            <div id="password-popup" class="popup-overlay" style="display: none;">
+    <!-- Popups -->
+    <div id="password-popup" class="popup-overlay" style="display: none;">
         <div class="popup">
             <div class="popup-header">
                 <h2>Alterar senha</h2>
@@ -288,7 +295,6 @@
         </div>
     </div>
 
-    <!-- Popup de Redefinição de Senha -->
     <div id="reset-password-popup" class="popup-overlay" style="display: none;">
         <div class="popup">
             <div class="popup-header">
@@ -332,115 +338,175 @@
     </div>
 
     <div class="main">
-        <div class="stats-container">
-            <h1 class="stats-header">Estatísticas de Desempenho - Faltas</h1>
-            
-            <div class="stats-filters">
-                <div class="filter-group">
-                    <label for="ano">Ano:</label>
-                    <select id="ano">
-                        <option value="2025">2025</option>
-                        <option value="2024">2024</option>
-                    </select>
+        <div class="tabs-navigation">
+            <ul class="tabs-list">
+                <li class="tab-item active" data-tab="notas">
+                    <a href="#notas">Notas</a>
+                </li>
+                <li class="tab-item" data-tab="faltas">
+                    <a href="#faltas">Faltas</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- CONTEÚDO DAS ABAS -->
+        <!-- ABA DE NOTAS -->
+        <div id="notas-content" class="tab-content active">
+            <div class="container">
+                <h2>Estatística de Desempenho</h2>
+                <div class="inputs">
+                    <div class="select-inputs">
+                        <div class="label-division">
+                            <label for="etapa">Etapa:</label>
+                            <select id="etapa" onchange="updateChart()">
+                                <option selected>1° Trimestre</option>
+                                <option>2° Trimestre</option>
+                                <option>3° Trimestre</option>
+                            </select>
+                        </div>
+                        <div class="label-division">
+                            <label for="comparar">Comparar:</label>
+                            <select id="comparar" onchange="updateChart()">
+                                <option selected>Nenhum</option>
+                                <option>1° Trimestre</option>
+                                <option>2° Trimestre</option>
+                                <option>3° Trimestre</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="save-button" onclick="saveAsImage()">Salvar em Imagem</button>
                 </div>
-                
-                <div class="filter-group">
-                    <label for="disciplina">Disciplina:</label>
-                    <select id="disciplina">
-                        <option value="todas">Todas</option>
-                        <option value="matematica">Matemática</option>
-                        <option value="portugues">Português</option>
-                        <option value="ciencias">Ciências</option>
-                    </select>
+                <div class="chart-container">
+                    <canvas id="performanceChart"></canvas>
                 </div>
-                
-                <button class="save-button">Salvar em Imagem</button>
             </div>
-            
-            <div class="flex-container">
-                <div class="main-stats">
-                    <table class="stats-table">
-                        <thead>
-                            <tr>
-                                <th>Disciplina</th>
-                                <th>Faltas</th>
-                                <th>Porcentagem de falta</th>
-                                <th>Limite de falta</th>
-                                <th>Situação</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>Ciências da Natureza</td>
-                                <td>9</td>
-                                <td>13%</td>
-                                <td>17</td>
-                                <td>
-                                    <div class="progress-bar">
-                                        <div class="progress-fill status-warning" style="width: 53%"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Matemática</td>
-                                <td>19</td>
-                                <td>20%</td>
-                                <td>24</td>
-                                <td>
-                                    <div class="progress-bar">
-                                        <div class="progress-fill status-danger" style="width: 79%"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Ciências Humanas</td>
-                                <td>3</td>
-                                <td>5%</td>
-                                <td>15</td>
-                                <td>
-                                    <div class="progress-bar">
-                                        <div class="progress-fill status-good" style="width: 20%"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Linguagens</td>
-                                <td>6</td>
-                                <td>13%</td>
-                                <td>20</td>
-                                <td>
-                                    <div class="progress-bar">
-                                        <div class="progress-fill status-warning" style="width: 30%"></div>
-                                    </div>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>Banco de dados</td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                                <td></td>
-                            </tr>
-                        </tbody>
-                    </table>
+        </div>
+
+        <!-- ABA DE FALTAS -->
+        <div id="faltas-content" class="tab-content">
+            <div class="stats-container faltas-container">
+                <h1 class="stats-header">Estatísticas de Desempenho - Faltas</h1>
+                
+                <div class="stats-filters">
+                    <div class="filter-group">
+                        <label for="ano">Ano:</label>
+                        <select id="ano">
+                            <option value="2025">2025</option>
+                            <option value="2024">2024</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="trimestre">Trimestre:</label>
+                        <select id="trimestre">
+                            <option value="Ano Todo">Ano Todo</option>
+                            <option value="Trimestre 1">1° Trimestre</option>
+                            <option value="Trimestre 2">2° Trimestre</option>
+                            <option value="Trimestre 3">3° Trimestre</option>
+                        </select>
+                    </div>
+                    
+                    <div class="filter-group">
+                        <label for="disciplina">Disciplina:</label>
+                        <select id="disciplina">
+                            <option value="todas">Todas</option>
+                            <option value="matematica">Matemática</option>
+                            <option value="ciencias">Ciências da Natureza</option>
+                            <option value="humanas">Ciências Humanas</option>
+                            <option value="linguagens">Linguagens</option>
+                            <option value="banco">Banco de dados</option>
+                        </select>
+                    </div>
+                    
+                    <button class="save-button save-faltas-button">Salvar em Imagem</button>
                 </div>
                 
-                <div class="stats-summary">
-                    <div class="summary-title">Total de Faltas</div>
-                    <div class="total-faltas">37</div>
-                    <div class="permitidas">de 75 permitidas</div>
+                <div class="flex-container">
+                    <div class="main-stats">
+                        <table class="stats-table">
+                            <thead>
+                                <tr>
+                                    <th>Disciplina</th>
+                                    <th>Faltas</th>
+                                    <th>Porcentagem de falta</th>
+                                    <th>Limite de falta</th>
+                                    <th>Situação</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <!-- Dados serão preenchidos dinamicamente via JavaScript -->
+                            </tbody>
+                        </table>
+                        
+                        <!-- Detalhes de disciplina selecionada -->
+                        <div id="detalhes-disciplina" class="detalhes-disciplina" style="display: none;">
+                            <!-- Conteúdo será preenchido via JavaScript -->
+                        </div>
+                        
+                        <!-- Gráficos adicionais para faltas -->
+                        <div class="faltas-charts">
+                            <div class="faltas-chart-container">
+                                <canvas id="faltasMensalChart"></canvas>
+                            </div>
+                            <div class="faltas-chart-container">
+                                <canvas id="faltasDisciplinaChart"></canvas>
+                            </div>
+                        </div>
+                    </div>
                     
-                    <div class="disciplina-critica">
-                        <div class="critica-title">Disciplina crítica:</div>
-                        <div class="critica-nome">Matemática</div>
-                        <div class="critica-aviso">Você só pode ter no máximo mais 5 faltas nessa matéria</div>
+                    <div class="stats-summary">
+                        <div class="summary-title">Total de Faltas</div>
+                        <div class="total-faltas">37</div>
+                        <div class="permitidas">de 75 permitidas</div>
+                        
+                        <div class="progresso-container">
+                            <div class="progresso-label">Progresso de faltas:</div>
+                            <div class="progress-bar summary-progress">
+                                <div id="progresso-total" class="progress-fill status-warning" style="width: 49%"></div>
+                            </div>
+                        </div>
+                        
+                        <div class="disciplina-critica">
+                            <div class="critica-title">Disciplina crítica:</div>
+                            <div class="critica-nome">Matemática</div>
+                            <div class="critica-aviso">Você só pode ter no máximo mais 5 faltas nessa matéria</div>
+                        </div>
+                        
+                        <div class="faltas-info">
+                            <div class="info-item">
+                                <div class="info-icon">
+                                    <span class="material-symbols-outlined">calendar_today</span>
+                                </div>
+                                <div class="info-content">
+                                    <div class="info-title">Última falta</div>
+                                    <div class="info-value">12/05/2025</div>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-icon">
+                                    <span class="material-symbols-outlined">trending_up</span>
+                                </div>
+                                <div class="info-content">
+                                    <div class="info-title">Tendência</div>
+                                    <div class="info-value">Em alta <span class="trend-up">▲</span></div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <div class="faltas-actions">
+                            <button class="btn-justify">Justificar Falta</button>
+                            <button class="btn-report">Gerar Relatório</button>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 
-    <script src="../scripts/desempenho-faltas.js"></script>
+    <!-- SCRIPTS -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
+    <script src="../scripts/desempenho.js"></script>
     <script src="../../common/scripts/changepass.js"></script>
     <script src="../../common/scripts/exitpopup.js"></script>
     <script src="../../common/scripts/menu.js"></script>

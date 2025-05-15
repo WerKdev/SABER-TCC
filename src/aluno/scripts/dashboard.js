@@ -689,19 +689,6 @@ document.addEventListener("DOMContentLoaded", function() {
          });
      }
      
-     // Função para verificar o tamanho da janela e ajustar o layout
-     function checkWindowSize() {
-         // Fechar sidebar em telas menores
-         if (window.innerWidth < 768) {
-             if (sidebar) {
-                 sidebar.classList.remove("active");
-                 if (sidebarOverlay) {
-                     sidebarOverlay.classList.remove("active");
-                 }
-             }
-         }
-     }
-     
      // Otimizar gráficos para o tamanho atual da tela
      function updateChartsForScreenSize() {
          const isMobile = window.innerWidth < 768;

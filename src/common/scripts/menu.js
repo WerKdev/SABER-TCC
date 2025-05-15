@@ -124,8 +124,6 @@ document.addEventListener("DOMContentLoaded", function() {
     // Verificar tamanho da janela para ajustes responsivos
     function checkWindowSize() {
         if (window.innerWidth <= 768) {
-            // Em telas menores que 768px, NÃO redefine a sidebar
-            // Apenas mantém o estado atual e ajusta a logo
             checkMenuState();
         }
     }
