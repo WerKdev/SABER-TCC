@@ -269,11 +269,26 @@ function atualizarTabelaFaltas() {
     const tbody = document.querySelector('.stats-table tbody');
     tbody.innerHTML = '';
     
+    // Mapeamento de valores do select para nomes de disciplinas
+    const mapeamentoDisciplinas = {
+        'matematica': 'Matemática',
+        'ciencias': 'Ciências da Natureza',
+        'humanas': 'Ciências Humanas',
+        'linguagens': 'Linguagens',
+        'banco': 'Banco de dados'
+    };
+    
     // Filtrar disciplinas se necessário
     const disciplinas = Object.keys(dadosPeriodo);
-    const disciplinasFiltradas = disciplinaSelecionada === 'todas' ? 
-        disciplinas : 
-        disciplinas.filter(d => d.toLowerCase().includes(disciplinaSelecionada.toLowerCase()));
+    let disciplinasFiltradas = disciplinas;
+    
+    if (disciplinaSelecionada !== 'todas') {
+        // Se uma disciplina específica foi selecionada, procurar pelo nome mapeado
+        const nomeDisciplina = mapeamentoDisciplinas[disciplinaSelecionada];
+        if (nomeDisciplina) {
+            disciplinasFiltradas = disciplinas.filter(d => d === nomeDisciplina);
+        }
+    }
     
     // Variáveis para calcular totais
     let totalFaltas = 0;
@@ -325,7 +340,7 @@ function atualizarTabelaFaltas() {
     atualizarResumoFaltas(totalFaltas, totalPermitidas, disciplinaCritica, dadosPeriodo);
     
     // Atualizar os gráficos de faltas
-    atualizarGraficosFaltas(periodoSelecionado);
+    atualizarGraficosFaltas(periodoSelecionado, disciplinaSelecionada);
     
     // Adicionar evento de clique às linhas da tabela
     const linhasTabela = document.querySelectorAll('.stats-table tbody tr');
@@ -483,9 +498,17 @@ function initFaltasCharts() {
 }
 
 // Função para atualizar os gráficos com base nos filtros
-function atualizarGraficosFaltas(periodoSelecionado) {
+function atualizarGraficosFaltas(periodoSelecionado, disciplinaSelecionada) {
     const anoSelecionado = document.getElementById('ano').value;
-    const disciplinaSelecionada = document.getElementById('disciplina').value;
+    
+    // Mapeamento de valores do select para nomes de disciplinas
+    const mapeamentoDisciplinas = {
+        'matematica': 'Matemática',
+        'ciencias': 'Ciências da Natureza',
+        'humanas': 'Ciências Humanas',
+        'linguagens': 'Linguagens',
+        'banco': 'Banco de dados'
+    };
     
     // Atualizar o gráfico de evolução mensal
     if (faltasMensalChart) {
@@ -495,12 +518,27 @@ function atualizarGraficosFaltas(periodoSelecionado) {
         // Se a disciplina específica for selecionada, filtrar os dados (simulação)
         let dadosFiltrados = [...dadosMensais];
         if (disciplinaSelecionada !== 'todas') {
-            // Esta é uma simulação - em uma implementação real, teríamos dados específicos por disciplina
-            dadosFiltrados = dadosMensais.map(value => 
-                disciplinaSelecionada === 'matematica' ? Math.ceil(value * 0.7) : 
-                disciplinaSelecionada === 'ciencias' ? Math.ceil(value * 0.3) : 
-                Math.ceil(value * 0.5)
-            );
+            // Aplicar fatores de multiplicação específicos por disciplina
+            switch (disciplinaSelecionada) {
+                case 'matematica':
+                    dadosFiltrados = dadosMensais.map(value => Math.ceil(value * 0.7));
+                    break;
+                case 'ciencias':
+                    dadosFiltrados = dadosMensais.map(value => Math.ceil(value * 0.3));
+                    break;
+                case 'humanas':
+                    dadosFiltrados = dadosMensais.map(value => Math.ceil(value * 0.2));
+                    break;
+                case 'linguagens':
+                    dadosFiltrados = dadosMensais.map(value => Math.ceil(value * 0.4));
+                    break;
+                case 'banco':
+                    dadosFiltrados = dadosMensais.map(() => 0); // Sem faltas para banco de dados
+                    break;
+                default:
+                    // Manter dados originais
+                    break;
+            }
         }
         
         faltasMensalChart.data.datasets[0].data = dadosFiltrados;
@@ -521,9 +559,15 @@ function atualizarGraficosFaltas(periodoSelecionado) {
         };
         
         // Filtrar dados se necessário
-        const disciplinasFiltradas = disciplinaSelecionada === 'todas' ? 
-            disciplinas : 
-            disciplinas.filter(d => d.toLowerCase().includes(disciplinaSelecionada.toLowerCase()));
+        let disciplinasFiltradas = disciplinas;
+        
+        if (disciplinaSelecionada !== 'todas') {
+            // Se uma disciplina específica foi selecionada, procurar pelo nome mapeado
+            const nomeDisciplina = mapeamentoDisciplinas[disciplinaSelecionada];
+            if (nomeDisciplina) {
+                disciplinasFiltradas = disciplinas.filter(d => d === nomeDisciplina);
+            }
+        }
         
         // Preparar dados para o gráfico
         disciplinasFiltradas.forEach(disciplina => {
