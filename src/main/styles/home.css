@@ -343,7 +343,7 @@ body.dark-mode .hero p {
 }
 
 .hero-image {
-  background-image: url('pages/assets/log-in-girl.svg');
+  background-image: url('../assets/log-in-girl.svg');
   background-position: center;
   background-size: cover;
   border-radius: 12px;
