@@ -36,6 +36,10 @@
     min-width: 300px;
 }
 
+#sidebar.active ~ main {
+    margin-left: 270px;
+}
+
 .redacao-info h1 {
     font-size: 28px;
     color: #0c142b;

@@ -246,6 +246,91 @@
         </nav>
     </div>
 
+        <div id="password-popup" class="popup-overlay" style="display: none;">
+        <div class="popup">
+            <div class="popup-header">
+                <h2>Alterar senha</h2>
+                <span class="material-symbols-outlined close-popup">close</span>
+            </div>
+            <div class="popup-content">
+                <p class="popup-description">Informe a senha atual e a nova senha</p>
+                <form id="change-password-form">
+                    <div class="form-group">
+                        <label for="current-password">Senha atual <span class="required">*</span></label>
+                        <div class="password-input">
+                            <input type="password" id="current-password" name="current-password" required>
+                            <span class="material-symbols-outlined toggle-password">visibility_off</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-password">Nova senha <span class="required">*</span></label>
+                        <div class="password-input">
+                            <input type="password" id="new-password" name="new-password" required>
+                            <span class="material-symbols-outlined toggle-password">visibility_off</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Confirmação de senha <span class="required">*</span></label>
+                        <div class="password-input">
+                            <input type="password" id="confirm-password" name="confirm-password" required>
+                            <span class="material-symbols-outlined toggle-password">visibility_off</span>
+                        </div>
+                    </div>
+                    <div class="forgot-password">
+                        <a href="#" id="forgot-password-link">Esqueceu a senha?</a>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel">Cancelar</button>
+                        <button type="submit" class="btn-confirm">Alterar senha</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup de Redefinição de Senha -->
+    <div id="reset-password-popup" class="popup-overlay" style="display: none;">
+        <div class="popup">
+            <div class="popup-header">
+                <h2>Redefinição de senha!</h2>
+                <span class="material-symbols-outlined close-popup">close</span>
+            </div>
+            <div class="popup-content">
+                <p class="popup-description">Informe um email e enviaremos um link para recuperação da sua senha.</p>
+                <form id="reset-password-form">
+                    <div class="form-group">
+                        <label for="recovery-email">Email <span class="required">*</span></label>
+                        <input type="email" id="recovery-email" name="recovery-email" required placeholder="seu@email.com">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-back">
+                            <span class="material-symbols-outlined">arrow_back</span>
+                            Voltar
+                        </button>
+                        <button type="submit" class="btn-send">Enviar link de recuperação</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="logout-popup" class="popup-overlay" style="display: none;">
+        <div class="popup logout-popup">
+            <div class="logout-content">
+                <div class="logout-icon">
+                    <span class="material-symbols-outlined">logout</span>
+                </div>
+                <h2 class="logout-title">Sair da conta?</h2>
+                <p class="logout-description">Você poderá entrar novamente a qualquer momento. Se quiser trocar de conta, faça isso adicionando uma conta existente.</p>
+                
+                <div class="logout-actions">
+                    <button type="button" class="btn-logout">Sair</button>
+                    <button type="button" class="btn-cancel-logout">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- CONTEÚDO PRINCIPAL -->
     <main>
         <div class="page-header">
@@ -586,91 +671,6 @@
                         <p><strong>Comentário do Professor:</strong></p>
                         <p>Bom trabalho na análise do conto. Você demonstrou boa compreensão da narrativa e dos elementos literários. Sua análise dos personagens foi bem detalhada, mas poderia ter explorado mais as relações entre eles. Preste mais atenção à revisão gramatical para evitar pequenos erros. Continue assim!</p>
                     </div>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div id="password-popup" class="popup-overlay" style="display: none;">
-        <div class="popup">
-            <div class="popup-header">
-                <h2>Alterar senha</h2>
-                <span class="material-symbols-outlined close-popup">close</span>
-            </div>
-            <div class="popup-content">
-                <p class="popup-description">Informe a senha atual e a nova senha</p>
-                <form id="change-password-form">
-                    <div class="form-group">
-                        <label for="current-password">Senha atual <span class="required">*</span></label>
-                        <div class="password-input">
-                            <input type="password" id="current-password" name="current-password" required>
-                            <span class="material-symbols-outlined toggle-password">visibility_off</span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="new-password">Nova senha <span class="required">*</span></label>
-                        <div class="password-input">
-                            <input type="password" id="new-password" name="new-password" required>
-                            <span class="material-symbols-outlined toggle-password">visibility_off</span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="confirm-password">Confirmação de senha <span class="required">*</span></label>
-                        <div class="password-input">
-                            <input type="password" id="confirm-password" name="confirm-password" required>
-                            <span class="material-symbols-outlined toggle-password">visibility_off</span>
-                        </div>
-                    </div>
-                    <div class="forgot-password">
-                        <a href="#" id="forgot-password-link">Esqueceu a senha?</a>
-                    </div>
-                    <div class="form-actions">
-                        <button type="button" class="btn-cancel">Cancelar</button>
-                        <button type="submit" class="btn-confirm">Alterar senha</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Popup de Redefinição de Senha -->
-    <div id="reset-password-popup" class="popup-overlay" style="display: none;">
-        <div class="popup">
-            <div class="popup-header">
-                <h2>Redefinição de senha!</h2>
-                <span class="material-symbols-outlined close-popup">close</span>
-            </div>
-            <div class="popup-content">
-                <p class="popup-description">Informe um email e enviaremos um link para recuperação da sua senha.</p>
-                <form id="reset-password-form">
-                    <div class="form-group">
-                        <label for="recovery-email">Email <span class="required">*</span></label>
-                        <input type="email" id="recovery-email" name="recovery-email" required placeholder="seu@email.com">
-                    </div>
-                    <div class="form-actions">
-                        <button type="button" class="btn-back">
-                            <span class="material-symbols-outlined">arrow_back</span>
-                            Voltar
-                        </button>
-                        <button type="submit" class="btn-send">Enviar link de recuperação</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <div id="logout-popup" class="popup-overlay" style="display: none;">
-        <div class="popup logout-popup">
-            <div class="logout-content">
-                <div class="logout-icon">
-                    <span class="material-symbols-outlined">logout</span>
-                </div>
-                <h2 class="logout-title">Sair da conta?</h2>
-                <p class="logout-description">Você poderá entrar novamente a qualquer momento. Se quiser trocar de conta, faça isso adicionando uma conta existente.</p>
-                
-                <div class="logout-actions">
-                    <button type="button" class="btn-logout">Sair</button>
-                    <button type="button" class="btn-cancel-logout">Cancelar</button>
                 </div>
             </div>
         </div>

@@ -3,407 +3,1087 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema Escolar - Atividades</title>
+    <title>Portal do Professor - Gestão de Atividades</title>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../styles/atividades.css">
+    <link rel="stylesheet" href="../../common/styles/menu.css">
+    <link rel="stylesheet" href="../../common/styles/changepass.css">
+    <link rel="stylesheet" href="../../common/styles/exitpopup.css">
 </head>
 <body>
     <!-- HEADER -->
-<header class="header">
-    <div class="menu-icon-mobile">
-        <span id="menu-icon-mobile" class="material-symbols-outlined">menu</span>
-    </div>  
-    <div class="menuheader"> 
-        <ul class="menuheader-list">
-            <li class="notification-item">
-                <span id="notifications-icon" class="material-symbols-outlined">notifications</span>
-                <span class="notification-badge">3</span>
-                <div id="notifications-popup" class="notifications-popup">
-                    <div class="popup-header">
-                        <p>Notificações</p>
-                        <span class="material-symbols-outlined close-popup">close</span>
-                    </div>
-                    <div class="notifications-content">
-                        <ul>
-                            <li class="notification unread">
-                                <div class="notification-icon"><span class="material-symbols-outlined">assignment</span></div>
-                                <div class="notification-text">
-                                    <p class="notification-title">Nova atividade disponível</p>
-                                    <p class="notification-desc">Exercícios de Álgebra - Matemática</p>
-                                    <p class="notification-time">há 10 minutos</p>
-                                </div>
-                            </li>
-                            <li class="notification">
-                                <div class="notification-icon"><span class="material-symbols-outlined">grade</span></div>
-                                <div class="notification-text">
-                                    <p class="notification-title">Atividade avaliada</p>
-                                    <p class="notification-desc">Revolução Industrial - História</p>
-                                    <p class="notification-time">há 1 dia</p>
-                                </div>
-                            </li>
-                            <li class="notification">
-                                <div class="notification-icon"><span class="material-symbols-outlined">calendar_today</span></div>
-                                <div class="notification-text">
-                                    <p class="notification-title">Prazo de entrega próximo</p>
-                                    <p class="notification-desc">Análise Combinatória vence em 2 dias</p>
-                                    <p class="notification-time">há 2 dias</p>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                    <div class="popup-footer">
-                        <a href="#todas-notificacoes">Ver todas as notificações</a>
-                    </div>
-                </div>
-            </li>
-            <li>
-                <p id="user-name-header">Kenai Almeida</p>
-            </li>
-            <li class="user-settings-item">
-                <span id="user-icon" class="material-symbols-outlined">account_circle</span>
-                <div id="user-icon-popup" class="user-icon-popup">
-                    <div class="popup-header">
-                        <div class="user-info">
-                            <div class="user-avatar">
-                                <span class="material-symbols-outlined">person</span>
-                            </div>
-                            <div class="user-details">
-                                <p class="user-name">Kenai Almeida</p>
-                                <p class="user-email">kenai.almeida@email.com</p>
-                            </div>
+    <header class="header">
+        <div class="menu-icon-mobile">
+            <span id="menu-icon-mobile" class="material-symbols-outlined">menu</span>
+        </div>  
+        <div class="logo-Header">
+            <p class="logo"><img src="/api/placeholder/120/40" alt="Logo Escola"></p>
+        </div>
+        <div class="menuheader"> 
+            <ul class="menuheader-list">
+                <li class="notification-item">
+                    <span id="notifications-icon" class="material-symbols-outlined">notifications</span>
+                    <span class="notification-badge">5</span>
+                    <div id="notifications-popup" class="notifications-popup">
+                        <div class="popup-header">
+                            <p>Notificações</p>
+                            <span class="material-symbols-outlined close-popup">close</span>
                         </div>
-                    </div>
-                    <div class="settings-content">
-                        <div class="settings-group">
-                            <p class="settings-group-title">Conta</p>
+                        <div class="notifications-content">
                             <ul>
-                                <li>
-                                    <a href="#perfil">
-                                        <span class="material-symbols-outlined">manage_accounts</span>
-                                        <span>Meu Perfil</span>
-                                    </a>
+                                <li class="notification unread">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">assignment_turned_in</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Nova entrega</p>
+                                        <p class="notification-desc">Carlos Silva - Exercícios de Álgebra</p>
+                                        <p class="notification-time">há 5 minutos</p>
+                                    </div>
                                 </li>
-                                <li>
-                                    <a href="#" class="alterar-senha-link">
-                                        <span class="material-symbols-outlined">key</span>
-                                        <span>Alterar senha</span>
-                                    </a>
-                                </li>   
-                            </ul>
-                        </div>
-                        <div class="settings-group">
-                            <p class="settings-group-title">Sistema</p>
-                            <ul>
-                                <li>
-                                    <a href="#tema" class="theme-toggle-container">
-                                        <span class="material-symbols-outlined">dark_mode</span>
-                                        <span>Tema Escuro</span>
-                                        <label class="switch">
-                                            <input type="checkbox" id="theme-toggle">
-                                            <span class="slider round"></span>
-                                        </label>
-                                    </a>
+                                <li class="notification unread">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">question_answer</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Nova dúvida</p>
+                                        <p class="notification-desc">Maria Oliveira - Química Orgânica</p>
+                                        <p class="notification-time">há 15 minutos</p>
+                                    </div>
                                 </li>
-                                <li class="settings-item language-selector-container">
-                                    <a href="#idioma" class="language-selector">
-                                        <span class="material-symbols-outlined">translate</span>
-                                        <span>Idioma</span>
-                                        <span class="selected-language">Português</span>
-                                        <span class="material-symbols-outlined toggle-arrow">expand_more</span>
-                                    </a>
-                                    <div class="language-options">
-                                        <ul>
-                                            <li data-lang="pt-BR" class="active">
-                                                <span class="language-flag">🇧🇷</span>
-                                                <span class="language-name">Português</span>
-                                            </li>
-                                            <li data-lang="en-US">
-                                                <span class="language-flag">🇺🇸</span>
-                                                <span class="language-name">English</span>
-                                            </li>
-                                            <li data-lang="es-ES">
-                                                <span class="language-flag">🇪🇸</span>
-                                                <span class="language-name">Español</span>
-                                            </li>
-                                            <li data-lang="fr-FR">
-                                                <span class="language-flag">🇫🇷</span>
-                                                <span class="language-name">Français</span>
-                                            </li>
-                                        </ul>
+                                <li class="notification unread">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">campaign</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Reunião pedagógica</p>
+                                        <p class="notification-desc">Amanhã às 14:00 - Sala dos professores</p>
+                                        <p class="notification-time">há 1 hora</p>
+                                    </div>
+                                </li>
+                                <li class="notification">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">event_available</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Conselho de Classe</p>
+                                        <p class="notification-desc">Agendado para 23/05 às 13:30</p>
+                                        <p class="notification-time">há 1 dia</p>
+                                    </div>
+                                </li>
+                                <li class="notification">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">admin_panel_settings</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Acesso liberado</p>
+                                        <p class="notification-desc">Nova funcionalidade de relatórios</p>
+                                        <p class="notification-time">há 2 dias</p>
                                     </div>
                                 </li>
                             </ul>
                         </div>
-                        <div class="settings-group">
-                            <ul>
-                                <li>
-                                    <a href="#ajuda">
-                                        <span class="material-symbols-outlined">help</span>
-                                        <span>Ajuda</span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="#sair" class="logout-button">
-                                        <span class="material-symbols-outlined">logout</span>
-                                        <span>Sair</span>
-                                    </a>
-                                </li>
-                            </ul>
+                        <div class="popup-footer">
+                            <a href="#todas-notificacoes">Ver todas as notificações</a>
                         </div>
                     </div>
-                </div>
-            </li>
-        </ul>
-    </div>
-</header>
-
-<!-- SIDEBAR -->
-<div id="sidebar">
-    <div class="topmenu">
-        <span id="menu-icon" class="material-symbols-outlined">menu</span>
-        <h3 id="menu-tittle">Menu</h3>
-        <img id="logomenu" src="../../../assets/images/logo-saber.png" alt="Logo menu">
-    </div>
-    <nav id="menu-hidden">
-        <div class="navbar">
-            <ul>
-                <li>
-                    <a href="dashboard.html">
-                        <span class="material-symbols-outlined">dashboard</span>
-                        <p>Dashboard</p>
-                    </a>
                 </li>
                 <li>
-                    <a href="turmas.html">
-                        <span class="material-symbols-outlined">groups</span>
-                        <p>Turmas</p>
-                    </a>
+                    <p id="user-name-header">Prof. Ricardo Soares</p>
                 </li>
-                <li>
-                    <a href="atividades.html" class="active">
-                        <span class="material-symbols-outlined">assignment</span>
-                        <p>Atividades</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="material-symbols-outlined">fact_check</span>
-                        <p>Avaliações</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="redacoes.html">
-                        <span class="material-symbols-outlined">history_edu</span>
-                        <p>Redações</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="calendario-aulas.html">
-                        <span class="material-symbols-outlined">event_note</span>
-                        <p>Plano de Aulas</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="material-symbols-outlined">book</span>
-                        <p>Materiais</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="#">
-                        <span class="material-symbols-outlined">chat</span>
-                        <p>Comunicação</p>
-                    </a>
-                </li>
-                <li>
-                    <a href="">
-                        <span class="material-symbols-outlined">insert_chart</span>
-                        <p>Relatórios</p>
-                    </a>
+                <li class="user-settings-item">
+                    <span id="user-icon" class="material-symbols-outlined">account_circle</span>
+                    <div id="user-icon-popup" class="user-icon-popup">
+                        <div class="popup-header">
+                            <div class="user-info">
+                                <div class="user-avatar">
+                                    <span class="material-symbols-outlined">person</span>
+                                </div>
+                                <div class="user-details">
+                                    <p class="user-name">Ricardo Soares</p>
+                                    <p class="user-email">ricardo.soares@escola.edu.br</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="settings-content">
+                            <div class="settings-group">
+                                <p class="settings-group-title">Conta</p>
+                                <ul>
+                                    <li>
+                                        <a href="#perfil">
+                                            <span class="material-symbols-outlined">manage_accounts</span>
+                                            <span>Meu Perfil</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="alterar-senha-link">
+                                            <span class="material-symbols-outlined">key</span>
+                                            <span>Alterar senha</span>
+                                        </a>
+                                    </li>   
+                                </ul>
+                            </div>
+                            <div class="settings-group">
+                                <p class="settings-group-title">Sistema</p>
+                                <ul>
+                                    <li>
+                                        <a href="#tema" class="theme-toggle-container">
+                                            <span class="material-symbols-outlined">dark_mode</span>
+                                            <span>Tema Escuro</span>
+                                            <label class="switch">
+                                                <input type="checkbox" id="theme-toggle">
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#ajuda">
+                                            <span class="material-symbols-outlined">help</span>
+                                            <span>Ajuda</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#sair" class="logout-button">
+                                            <span class="material-symbols-outlined">logout</span>
+                                            <span>Sair</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
                 </li>
             </ul>
         </div>
-    </nav>
-</div>
+    </header>
 
+    <!-- SIDEBAR -->
+       <div id="sidebar">
+        <div class="topmenu">
+            <span id="menu-icon" class="material-symbols-outlined">menu</span>
+            <h3 id="menu-tittle">Menu</h3>
+            <img id="logomenu" src="../../../assets/images/logo-saber.png" alt="Logo menu">
+        </div>
+        <nav id="menu-hidden">
+            <div class="navbar">
+                <ul>
+                    <li>
+                        <a href="dashboard.html">
+                            <span class="material-symbols-outlined">dashboard</span>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="turmas.html">
+                            <span class="material-symbols-outlined">groups</span>
+                            <p>Turmas</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="atividades.html" class="active">
+                            <span class="material-symbols-outlined">assignment</span>
+                            <p>Atividades</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="redacoes.html">
+                            <span class="material-symbols-outlined">history_edu</span>
+                            <p>Redações</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="calendario-aulas.html">
+                            <span class="material-symbols-outlined">event_note</span>
+                            <p>Plano de Aulas</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="material-symbols-outlined">book</span>
+                            <p>Materiais</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="material-symbols-outlined">chat</span>
+                            <p>Comunicação</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="material-symbols-outlined">insert_chart</span>
+                            <p>Relatórios</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
 
-    <main class="main">
-        <div class="activities-container">
-            <div class="activities-header">
-                <h1>Atividades</h1>
-                <button id="new-activity-btn" class="btn-primary">
-                    <span class="material-symbols-outlined">add</span> Nova Atividade
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main>
+        <div class="page-header">
+            <div class="page-title">
+                <h1>Gestão de Atividades</h1>
+                <p>Crie, gerencie e acompanhe as atividades de suas turmas</p>
+            </div>
+            <div class="page-actions">
+                <button class="btn-secondary" id="btn-calendario">
+                    <span class="material-symbols-outlined">calendar_month</span>
+                    Calendário
+                </button>
+                <button class="btn-secondary" id="btn-relatorios">
+                    <span class="material-symbols-outlined">summarize</span>
+                    Relatórios
+                </button>
+                <button class="btn-primary" id="btn-criar-atividade">
+                    <span class="material-symbols-outlined">add</span>
+                    Nova Atividade
                 </button>
             </div>
+        </div>
 
-            <div class="filters">
+        <!-- Estatísticas de Desempenho -->
+        <div class="stats-container">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <span class="material-symbols-outlined">assignment</span>
+                </div>
+                <div class="stat-info">
+                    <h3>12</h3>
+                    <p>Atividades ativas</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <span class="material-symbols-outlined">assignment_turned_in</span>
+                </div>
+                <div class="stat-info">
+                    <h3>74%</h3>
+                    <p>Taxa de entrega</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <span class="material-symbols-outlined">grading</span>
+                </div>
+                <div class="stat-info">
+                    <h3>8</h3>
+                    <p>Para avaliar</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <span class="material-symbols-outlined">pending_actions</span>
+                </div>
+                <div class="stat-info">
+                    <h3>3</h3>
+                    <p>Finalizando hoje</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="content-container">
+            <!-- FILTROS -->
+            <div class="filter-section">
                 <div class="filter-group">
-                    <label for="class-filter">Turma:</label>
-                    <select id="class-filter" class="filter-select">
-                        <option value="all">Todas</option>
-                        <option value="A">A</option>
-                        <option value="B">B</option>
-                        <option value="C">C</option>
-                        <option value="D">D</option>
-                        <option value="E">E</option>
-                        <option value="F">F</option>
-                        <option value="G">G</option>
-                        <option value="H">H</option>
-                        <option value="I">I</option>
-                        <option value="J">J</option>
-                        <option value="K">K</option>
-                        <option value="L">L</option>
-                        <option value="M">M</option>
-                        <option value="N">N</option>
-                        <option value="O">O</option>
+                    <label for="turma-select">Turma</label>
+                    <select id="turma-select" class="select-field">
+                        <option value="todas" selected>Todas as turmas</option>
+                        <option value="1-A">1º Ano A</option>
+                        <option value="1-B">1º Ano B</option>
+                        <option value="2-A">2º Ano A</option>
+                        <option value="2-B">2º Ano B</option>
+                        <option value="3-A">3º Ano A</option>
+                        <option value="3-B">3º Ano B</option>
                     </select>
                 </div>
                 <div class="filter-group">
-                    <label for="year-filter">Ano:</label>
-                    <select id="year-filter" class="filter-select">
-                        <option value="all">Todos</option>
-                        <option value="1">1º Ano</option>
-                        <option value="2">2º Ano</option>
-                        <option value="3">3º Ano</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label for="subject-filter">Matéria:</label>
-                    <select id="subject-filter" class="filter-select">
-                        <option value="all">Todas</option>
+                    <label for="materia-select">Matéria</label>
+                    <select id="materia-select" class="select-field">
+                        <option value="todas" selected>Todas as matérias</option>
                         <option value="matematica">Matemática</option>
                         <option value="portugues">Português</option>
                         <option value="historia">História</option>
                         <option value="geografia">Geografia</option>
                         <option value="ciencias">Ciências</option>
+                        <option value="fisica">Física</option>
+                        <option value="quimica">Química</option>
+                        <option value="biologia">Biologia</option>
                         <option value="ingles">Inglês</option>
                     </select>
                 </div>
-                <button id="apply-filters" class="btn-secondary">Aplicar Filtros</button>
+                <div class="filter-group">
+                    <label for="status-select">Status</label>
+                    <select id="status-select" class="select-field">
+                        <option value="todos" selected>Todos os status</option>
+                        <option value="ativas">Ativas</option>
+                        <option value="pendentes">Com entregas pendentes</option>
+                        <option value="para-avaliar">Para avaliar</option>
+                        <option value="finalizadas">Finalizadas</option>
+                        <option value="arquivadas">Arquivadas</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="periodo-select">Período</label>
+                    <select id="periodo-select" class="select-field">
+                        <option value="todos" selected>Todos os períodos</option>
+                        <option value="hoje">Hoje</option>
+                        <option value="semana">Esta semana</option>
+                        <option value="mes">Este mês</option>
+                        <option value="bimestre">Este bimestre</option>
+                        <option value="ano">Este ano</option>
+                    </select>
+                </div>
+                <div class="filter-group search-group">
+                    <label for="search-input">Pesquisar</label>
+                    <div class="search-input-container">
+                        <input type="text" id="search-input" placeholder="Buscar atividade...">
+                        <span class="material-symbols-outlined search-icon">search</span>
+                    </div>
+                </div>
             </div>
 
+            <!-- ABAS DE NAVEGAÇÃO -->
+            <div class="activities-tabs">
+                <button class="tab-button active" data-tab="todas">Todas as Atividades</button>
+                <button class="tab-button" data-tab="ativas">Ativas</button>
+                <button class="tab-button" data-tab="pendentes">Entregas Pendentes</button>
+                <button class="tab-button" data-tab="avaliar">Para Avaliar</button>
+                <button class="tab-button" data-tab="finalizadas">Finalizadas</button>
+            </div>
+
+            <!-- LISTA DE ATIVIDADES -->
             <div class="activities-list">
-                
-            </div>
-        </div>
-
-       
-        <div id="activity-modal" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 id="modal-title">Nova Atividade</h2>
-                    <span class="close-modal">&times;</span>
-                </div>
-                <div class="modal-body">
-                    <form id="activity-form">
-                        <div class="form-group">
-                            <label for="activity-title">Título:</label>
-                            <input type="text" id="activity-title" required>
+                <!-- Atividade 1 -->
+                <div class="activity-card" data-status="ativa" data-turma="2-A" data-materia="matematica">
+                    <div class="activity-status ativa">Ativa</div>
+                    <div class="activity-header">
+                        <div class="activity-subject-info">
+                            <span class="material-symbols-outlined activity-icon">calculate</span>
+                            <h3 class="activity-subject">Matemática</h3>
+                            <span class="activity-turma">2º Ano A</span>
                         </div>
-                        <div class="form-row">
-                            <div class="form-group">
-                                <label for="activity-class">Turma:</label>
-                                <select id="activity-class" required>
-                                    <option value="A">A</option>
-                                    <option value="B">B</option>
-                                    <option value="C">C</option>
-                                    <option value="D">D</option>
-                                    <option value="E">E</option>
-                                    <option value="F">F</option>
-                                    <option value="G">G</option>
-                                    <option value="H">H</option>
-                                    <option value="I">I</option>
-                                    <option value="J">J</option>
-                                    <option value="K">K</option>
-                                    <option value="L">L</option>
-                                    <option value="M">M</option>
-                                    <option value="N">N</option>
-                                    <option value="O">O</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label for="activity-year">Ano:</label>
-                                <select id="activity-year" required>
-                                    <option value="1">1º Ano</option>
-                                    <option value="2">2º Ano</option>
-                                    <option value="3">3º Ano</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group">
-                            <label for="activity-subject">Matéria:</label>
-                            <select id="activity-subject" required>
-                                <option value="matematica">Matemática</option>
-                                <option value="portugues">Português</option>
-                                <option value="historia">História</option>
-                                <option value="geografia">Geografia</option>
-                                <option value="ciencias">Ciências</option>
-                                <option value="ingles">Inglês</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="activity-due-date">Data de Entrega:</label>
-                            <input type="date" id="activity-due-date" required>
-                        </div>
-                        <div class="form-group">
-                            <label for="activity-questions">Questões:</label>
-                            <textarea id="activity-questions" rows="6" required></textarea>
-                        </div>
-                        <div class="form-actions">
-                            <button type="button" class="btn-secondary close-modal">Cancelar</button>
-                            <button type="submit" class="btn-primary">Salvar</button>
-                        </div>
-                    </form>
-                </div>
-            </div>
-        </div>
-
-        
-        <div id="delivery-modal" class="modal">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h2 id="delivery-modal-title">Entregas da Atividade</h2>
-                    <span class="close-delivery-modal">&times;</span>
-                </div>
-                <div class="modal-body">
-                    <div class="delivery-stats">
-                        <div class="stat-card">
-                            <span class="stat-number" id="total-students">0</span>
-                            <span class="stat-label">Alunos</span>
-                        </div>
-                        <div class="stat-card delivered">
-                            <span class="stat-number" id="delivered-count">0</span>
-                            <span class="stat-label">Entregues</span>
-                        </div>
-                        <div class="stat-card not-delivered">
-                            <span class="stat-number" id="not-delivered-count">0</span>
-                            <span class="stat-label">Pendentes</span>
+                        <div class="activity-date">
+                            <span class="material-symbols-outlined">event</span>
+                            <span>Entrega: 16/05/2025</span>
                         </div>
                     </div>
-                    <div class="delivery-list-container">
-                        <div class="tabs">
-                            <button class="tab-btn active" data-tab="delivered">Entregues (<span id="delivered-tab-count">0</span>)</button>
-                            <button class="tab-btn" data-tab="not-delivered">Pendentes (<span id="not-delivered-tab-count">0</span>)</button>
-                        </div>
-                        <div class="tab-content active" id="delivered-tab">
-                            <ul class="student-list" id="delivered-list">
-                                
-                            </ul>
-                        </div>
-                        <div class="tab-content" id="not-delivered-tab">
-                            <ul class="student-list" id="not-delivered-list">
-                                
-                            </ul>
+                    <div class="activity-body">
+                        <h4 class="activity-title">Exercícios de Álgebra</h4>
+                        <p class="activity-description">Lista com exercícios sobre equações do 2º grau e função quadrática.</p>
+                    </div>
+                    <div class="activity-meta">
+                        <div class="delivery-stats">
+                            <div class="delivery-stat">
+                                <span class="material-symbols-outlined">people</span>
+                                <span>35 alunos</span>
+                            </div>
+                            <div class="delivery-stat">
+                                <span class="material-symbols-outlined">assignment_turned_in</span>
+                                <span>23 entregas (66%)</span>
+                            </div>
+                            <div class="delivery-stat">
+                                <span class="material-symbols-outlined">grading</span>
+                                <span>10 avaliados</span>
+                            </div>
                         </div>
                     </div>
+                    <div class="activity-actions">
+                        <button class="btn-action btn-edit">
+                            <span class="material-symbols-outlined">edit</span>
+                            Editar
+                        </button>
+                        <button class="btn-action btn-view-deliveries">
+                            <span class="material-symbols-outlined">inbox</span>
+                            Entregas
+                        </button>
+                        <button class="btn-action btn-options">
+                            <span class="material-symbols-outlined">more_vert</span>
+                        </button>
+                    </div>
                 </div>
+
+                <!-- Atividade 2 -->
+                <div class="activity-card" data-status="ativa" data-turma="3-B" data-materia="fisica">
+                    <div class="activity-status ativa">Ativa</div>
+                    <div class="activity-header">
+                        <div class="activity-subject-info">
+                            <span class="material-symbols-outlined activity-icon">science</span>
+                            <h3 class="activity-subject">Física</h3>
+                            <span class="activity-turma">3º Ano B</span>
+                        </div>
+                        <div class="activity-date">
+                            <span class="material-symbols-outlined">event</span>
+                            <span>Entrega: 12/05/2025</span>
+                        </div>
+                    </div>
+                    <div class="activity-body">
+                        <h4 class="activity-title">Relatório: Leis de Newton</h4>
+                        <p class="activity-description">Elaboração de relatório sobre as três leis de Newton e suas aplicações práticas.</p>
+                    </div>
+                    <div class="activity-meta">
+                        <div class="delivery-stats">
+                            <div class="delivery-stat">
+                                <span class="material-symbols-outlined">people</span>
+                                <span>30 alunos</span>
+                            </div>
+                            <div class="delivery-stat">
+                                <span class="material-symbols-outlined">assignment_turned_in</span>
+                                <span>28 entregas (93%)</span>
+                            </div>
+                            <div class="delivery-stat done">
+                                <span class="material-symbols-outlined">grading</span>
+                                <span>0 avaliados</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="activity-actions">
+                        <button class="btn-action btn-edit">
+                            <span class="material-symbols-outlined">edit</span>
+                            Editar
+                        </button>
+                        <button class="btn-action btn-view-deliveries">
+                            <span class="material-symbols-outlined">inbox</span>
+                            Entregas
+                        </button>
+                        <button class="btn-action btn-options">
+                            <span class="material-symbols-outlined">more_vert</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Atividade 3 -->
+                <div class="activity-card" data-status="ativa" data-turma="1-A" data-materia="portugues">
+                    <div class="activity-status ativa">Ativa</div>
+                    <div class="activity-header">
+                        <div class="activity-subject-info">
+                            <span class="material-symbols-outlined activity-icon">menu_book</span>
+                            <h3 class="activity-subject">Português</h3>
+                            <span class="activity-turma">1º Ano A</span>
+                        </div>
+                        <div class="activity-date">
+                            <span class="material-symbols-outlined">event</span>
+                            <span>Entrega: 14/05/2025</span>
+                        </div>
+                    </div>
+                    <div class="activity-body">
+                        <h4 class="activity-title">Análise de Conto</h4>
+                        <p class="activity-description">Análise do conto "A Cartomante" de Machado de Assis, com foco nos elementos narrativos e estilísticos.</p>
+                    </div>
+                    <div class="activity-meta">
+                        <div class="delivery-stats">
+                            <div class="delivery-stat">
+                                <span class="material-symbols-outlined">people</span>
+                                <span>32 alunos</span>
+                            </div>
+                            <div class="delivery-stat warning">
+                                <span class="material-symbols-outlined">assignment_turned_in</span>
+                                <span>15 entregas (47%)</span>
+                            </div>
+                            <div class="delivery-stat">
+                                <span class="material-symbols-outlined">grading</span>
+                                <span>8 avaliados</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="activity-actions">
+                        <button class="btn-action btn-edit">
+                            <span class="material-symbols-outlined">edit</span>
+                            Editar
+                        </button>
+                        <button class="btn-action btn-view-deliveries">
+                            <span class="material-symbols-outlined">inbox</span>
+                            Entregas
+                        </button>
+                        <button class="btn-action btn-options">
+                            <span class="material-symbols-outlined">more_vert</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Atividade 4 -->
+                <div class="activity-card" data-status="finalizada" data-turma="2-B" data-materia="historia">
+                    <div class="activity-status finalizada">Finalizada</div>
+                    <div class="activity-header">
+                        <div class="activity-subject-info">
+                            <span class="material-symbols-outlined activity-icon">history_edu</span>
+                            <h3 class="activity-subject">História</h3>
+                            <span class="activity-turma">2º Ano B</span>
+                        </div>
+                        <div class="activity-date">
+                            <span class="material-symbols-outlined">event</span>
+                            <span>Entrega: 05/05/2025</span>
+                        </div>
+                    </div>
+                    <div class="activity-body">
+                        <h4 class="activity-title">Revolução Industrial</h4>
+                        <p class="activity-description">Resumo sobre as causas e consequências da Revolução Industrial para a sociedade contemporânea.</p>
+                    </div>
+                    <div class="activity-meta">
+                        <div class="delivery-stats">
+                            <div class="delivery-stat">
+                                <span class="material-symbols-outlined">people</span>
+                                <span>33 alunos</span>
+                            </div>
+                            <div class="delivery-stat">
+                                <span class="material-symbols-outlined">assignment_turned_in</span>
+                                <span>31 entregas (94%)</span>
+                            </div>
+                            <div class="delivery-stat">
+                                <span class="material-symbols-outlined">grading</span>
+                                <span>31 avaliados</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="activity-actions">
+                        <button class="btn-action btn-view">
+                            <span class="material-symbols-outlined">visibility</span>
+                            Visualizar
+                        </button>
+                        <button class="btn-action btn-report">
+                            <span class="material-symbols-outlined">assessment</span>
+                            Relatório
+                        </button>
+                        <button class="btn-action btn-options">
+                            <span class="material-symbols-outlined">more_vert</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Atividade 5 -->
+                <div class="activity-card urgente" data-status="ativa" data-turma="1-B" data-materia="ciencias">
+                    <div class="activity-status ativa">Ativa</div>
+                    <div class="activity-header">
+                        <div class="activity-subject-info">
+                            <span class="material-symbols-outlined activity-icon">biotech</span>
+                            <h3 class="activity-subject">Ciências</h3>
+                            <span class="activity-turma">1º Ano B</span>
+                        </div>
+                        <div class="activity-date urgente">
+                            <span class="material-symbols-outlined">event</span>
+                            <span>Entrega: HOJE 23:59</span>
+                        </div>
+                    </div>
+                    <div class="activity-body">
+                        <h4 class="activity-title">Ciclo da Água</h4>
+                        <p class="activity-description">Elaboração de diagrama e explicação do ciclo da água na natureza e sua importância para os ecossistemas.</p>
+                    </div>
+                    <div class="activity-meta">
+                        <div class="delivery-stats">
+                            <div class="delivery-stat">
+                                <span class="material-symbols-outlined">people</span>
+                                <span>36 alunos</span>
+                            </div>
+                            <div class="delivery-stat warning">
+                                <span class="material-symbols-outlined">assignment_turned_in</span>
+                                <span>20 entregas (56%)</span>
+                            </div>
+                            <div class="delivery-stat">
+                                <span class="material-symbols-outlined">grading</span>
+                                <span>12 avaliados</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="activity-actions">
+                        <button class="btn-action btn-edit">
+                            <span class="material-symbols-outlined">edit</span>
+                            Editar
+                        </button>
+                        <button class="btn-action btn-view-deliveries">
+                            <span class="material-symbols-outlined">inbox</span>
+                            Entregas
+                        </button>
+                        <button class="btn-action btn-options">
+                            <span class="material-symbols-outlined">more_vert</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Atividade 6 -->
+                <div class="activity-card" data-status="ativa" data-turma="3-A" data-materia="biologia">
+                    <div class="activity-status ativa">Ativa</div>
+                    <div class="activity-header">
+                        <div class="activity-subject-info">
+                            <span class="material-symbols-outlined activity-icon">biotech</span>
+                            <h3 class="activity-subject">Biologia</h3>
+                            <span class="activity-turma">3º Ano A</span>
+                        </div>
+                        <div class="activity-date">
+                            <span class="material-symbols-outlined">event</span>
+                            <span>Entrega: 20/05/2025</span>
+                        </div>
+                    </div>
+                    <div class="activity-body">
+                        <h4 class="activity-title">Genética Mendeliana</h4>
+                        <p class="activity-description">Resolução de problemas envolvendo cruzamentos e hereditariedade segundo as leis de Mendel.</p>
+                    </div>
+                    <div class="activity-meta">
+                        <div class="delivery-stats">
+                            <div class="delivery-stat">
+                                <span class="material-symbols-outlined">people</span>
+                                <span>28 alunos</span>
+                            </div>
+                            <div class="delivery-stat">
+                                <span class="material-symbols-outlined">assignment_turned_in</span>
+                                <span>10 entregas (36%)</span>
+                            </div>
+                            <div class="delivery-stat">
+                                <span class="material-symbols-outlined">grading</span>
+                                <span>5 avaliados</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="activity-actions">
+                        <button class="btn-action btn-edit">
+                            <span class="material-symbols-outlined">edit</span>
+                            Editar
+                        </button>
+                        <button class="btn-action btn-view-deliveries">
+                            <span class="material-symbols-outlined">inbox</span>
+                            Entregas
+                        </button>
+                        <button class="btn-action btn-options">
+                            <span class="material-symbols-outlined">more_vert</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- PAGINAÇÃO -->
+            <div class="pagination">
+                <button class="pagination-btn" disabled>
+                    <span class="material-symbols-outlined">navigate_before</span>
+                </button>
+                <button class="pagination-btn active">1</button>
+                <button class="pagination-btn">2</button>
+                <button class="pagination-btn">3</button>
+                <button class="pagination-btn">
+                    <span class="material-symbols-outlined">navigate_next</span>
+                </button>
             </div>
         </div>
     </main>
 
+    <!-- MODAL PARA CRIAR/EDITAR ATIVIDADE -->
+    <div id="activity-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Nova Atividade</h2>
+                <span class="material-symbols-outlined close-modal">close</span>
+            </div>
+            <div class="modal-body">
+                <form id="activity-form">
+                    <div class="form-section">
+                        <h3 class="form-section-title">Informações Básicas</h3>
+                        <div class="form-group full-width">
+                            <label for="activity-title">Título da Atividade <span class="required">*</span></label>
+                            <input type="text" id="activity-title" name="activity-title" required placeholder="Ex: Exercícios de Álgebra">
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="activity-subject">Matéria <span class="required">*</span></label>
+                                <select id="activity-subject" name="activity-subject" required>
+                                    <option value="" disabled selected>Selecione...</option>
+                                    <option value="matematica">Matemática</option>
+                                    <option value="portugues">Português</option>
+                                    <option value="historia">História</option>
+                                    <option value="geografia">Geografia</option>
+                                    <option value="ciencias">Ciências</option>
+                                    <option value="fisica">Física</option>
+                                    <option value="quimica">Química</option>
+                                    <option value="biologia">Biologia</option>
+                                    <option value="ingles">Inglês</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="activity-type">Tipo de Atividade <span class="required">*</span></label>
+                                <select id="activity-type" name="activity-type" required>
+                                    <option value="" disabled selected>Selecione...</option>
+                                    <option value="exercicios">Exercícios</option>
+                                    <option value="redacao">Redação/Produção textual</option>
+                                    <option value="pesquisa">Pesquisa</option>
+                                    <option value="resumo">Resumo</option>
+                                    <option value="relatorio">Relatório</option>
+                                    <option value="projeto">Projeto</option>
+                                    <option value="estudo-dirigido">Estudo Dirigido</option>
+                                    <option value="questionario">Questionário</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-group full-width">
+                            <label for="activity-description">Descrição <span class="required">*</span></label>
+                            <textarea id="activity-description" name="activity-description" rows="3" required 
+                            placeholder="Descreva brevemente o objetivo e conteúdo da atividade..."></textarea>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3 class="form-section-title">Turmas e Prazos</h3>
+                        <div class="form-row">
+                            <div class="form-group checkbox-group">
+                                <label>Selecione as Turmas <span class="required">*</span></label>
+                                <div class="checkbox-container">
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="turma-1A" name="turmas[]" value="1-A">
+                                        <label for="turma-1A">1º Ano A</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="turma-1B" name="turmas[]" value="1-B">
+                                        <label for="turma-1B">1º Ano B</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="turma-2A" name="turmas[]" value="2-A">
+                                        <label for="turma-2A">2º Ano A</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="turma-2B" name="turmas[]" value="2-B">
+                                        <label for="turma-2B">2º Ano B</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="turma-3A" name="turmas[]" value="3-A">
+                                        <label for="turma-3A">3º Ano A</label>
+                                    </div>
+                                    <div class="checkbox-item">
+                                        <input type="checkbox" id="turma-3B" name="turmas[]" value="3-B">
+                                        <label for="turma-3B">3º Ano B</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group date-group">
+                                <div class="form-row">
+                                    <div class="form-group">
+                                        <label for="activity-start-date">Data de Início <span class="required">*</span></label>
+                                        <input type="date" id="activity-start-date" name="activity-start-date" required>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="activity-due-date">Data de Entrega <span class="required">*</span></label>
+                                        <input type="date" id="activity-due-date" name="activity-due-date" required>
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    <label for="activity-due-time">Horário de Entrega</label>
+                                    <input type="time" id="activity-due-time" name="activity-due-time" value="23:59">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3 class="form-section-title">Conteúdo da Atividade</h3>
+                        <div class="form-group full-width">
+                            <label for="activity-instructions">Instruções <span class="required">*</span></label>
+                            <textarea id="activity-instructions" name="activity-instructions" rows="5" required 
+                            placeholder="Instruções detalhadas para a realização da atividade..."></textarea>
+                        </div>
+                        <div class="form-group full-width">
+                            <label>Material de Apoio</label>
+                            <div class="file-upload-container">
+                                <div class="file-upload-area">
+                                    <span class="material-symbols-outlined">cloud_upload</span>
+                                    <p>Arraste arquivos aqui ou clique para enviar</p>
+                                    <input type="file" id="activity-files" name="activity-files" multiple>
+                                </div>
+                                <div class="uploaded-files">
+                                    <div class="no-files">Nenhum arquivo anexado</div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-section">
+                        <h3 class="form-section-title">Configurações Adicionais</h3>
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label for="activity-points">Pontos <span class="required">*</span></label>
+                                <input type="number" id="activity-points" name="activity-points" min="0" step="0.5" value="10" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="activity-category">Categoria de Avaliação</label>
+                                <select id="activity-category" name="activity-category">
+                                    <option value="tarefa">Tarefa de Casa</option>
+                                    <option value="trabalho">Trabalho</option>
+                                    <option value="projeto">Projeto</option>
+                                    <option value="participacao">Participação</option>
+                                    <option value="extra">Atividade Extra</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="form-row">
+                            <div class="form-group checkbox-single">
+                                <input type="checkbox" id="allow-late-submission" name="allow-late-submission">
+                                <label for="allow-late-submission">Permitir envios atrasados</label>
+                            </div>
+                            <div class="form-group checkbox-single">
+                                <input type="checkbox" id="allow-resubmission" name="allow-resubmission">
+                                <label for="allow-resubmission">Permitir reenvios</label>
+                            </div>
+                            <div class="form-group checkbox-single">
+                                <input type="checkbox" id="notify-students" name="notify-students" checked>
+                                <label for="notify-students">Notificar alunos</label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn-secondary close-modal">Cancelar</button>
+                        <button type="button" class="btn-secondary btn-save-draft">Salvar Rascunho</button>
+                        <button type="submit" class="btn-primary">Publicar Atividade</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL DE VISUALIZAÇÃO DE ENTREGAS -->
+    <div id="deliveries-modal" class="modal">
+        <div class="modal-content large-modal">
+            <div class="modal-header">
+                <h2 id="deliveries-modal-title">Entregas: Exercícios de Álgebra - 2º Ano A</h2>
+                <span class="material-symbols-outlined close-modal">close</span>
+            </div>
+            <div class="modal-body">
+                <div class="deliveries-stats">
+                    <div class="delivery-stat-card">
+                        <span class="stat-number">35</span>
+                        <span class="stat-label">Total de Alunos</span>
+                    </div>
+                    <div class="delivery-stat-card success">
+                        <span class="stat-number">23</span>
+                        <span class="stat-label">Entregas (66%)</span>
+                    </div>
+                    <div class="delivery-stat-card warning">
+                        <span class="stat-number">12</span>
+                        <span class="stat-label">Pendentes (34%)</span>
+                    </div>
+                    <div class="delivery-stat-card info">
+                        <span class="stat-number">10</span>
+                        <span class="stat-label">Avaliados (43%)</span>
+                    </div>
+                </div>
+
+                <div class="deliveries-filters">
+                    <div class="filter-group">
+                        <label for="delivery-status-filter">Status</label>
+                        <select id="delivery-status-filter" class="select-field">
+                            <option value="all">Todos</option>
+                            <option value="submitted">Entregues</option>
+                            <option value="pending">Pendentes</option>
+                            <option value="late">Atrasados</option>
+                            <option value="graded">Avaliados</option>
+                        </select>
+                    </div>
+                    <div class="search-delivery">
+                        <input type="text" placeholder="Buscar aluno...">
+                        <span class="material-symbols-outlined">search</span>
+                    </div>
+                </div>
+
+                <div class="tabs-container">
+                    <div class="tabs">
+                        <button class="tab active" data-tab="submissions">Entregues (23)</button>
+                        <button class="tab" data-tab="pending">Pendentes (12)</button>
+                    </div>
+
+                    <div class="tab-content active" id="submissions-tab">
+                        <div class="deliveries-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Aluno</th>
+                                        <th>Data de Entrega</th>
+                                        <th>Status</th>
+                                        <th>Nota</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="student-info">
+                                                <span class="material-symbols-outlined">account_circle</span>
+                                                <span>Ana Carolina Silva</span>
+                                            </div>
+                                        </td>
+                                        <td>12/05/2025 - 15:30</td>
+                                        <td><span class="status-badge evaluated">Avaliado</span></td>
+                                        <td>9.5</td>
+                                        <td>
+                                            <div class="row-actions">
+                                                <button class="btn-row-action"><span class="material-symbols-outlined">visibility</span></button>
+                                                <button class="btn-row-action"><span class="material-symbols-outlined">edit</span></button>
+                                                <button class="btn-row-action"><span class="material-symbols-outlined">comment</span></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="student-info">
+                                                <span class="material-symbols-outlined">account_circle</span>
+                                                <span>Bruno Mendes</span>
+                                            </div>
+                                        </td>
+                                        <td>12/05/2025 - 16:45</td>
+                                        <td><span class="status-badge evaluated">Avaliado</span></td>
+                                        <td>8.0</td>
+                                        <td>
+                                            <div class="row-actions">
+                                                <button class="btn-row-action"><span class="material-symbols-outlined">visibility</span></button>
+                                                <button class="btn-row-action"><span class="material-symbols-outlined">edit</span></button>
+                                                <button class="btn-row-action"><span class="material-symbols-outlined">comment</span></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="student-info">
+                                                <span class="material-symbols-outlined">account_circle</span>
+                                                <span>Camila Alves</span>
+                                            </div>
+                                        </td>
+                                        <td>13/05/2025 - 09:22</td>
+                                        <td><span class="status-badge pending-evaluation">Para Avaliar</span></td>
+                                        <td>-</td>
+                                        <td>
+                                            <div class="row-actions">
+                                                <button class="btn-row-action primary"><span class="material-symbols-outlined">grading</span></button>
+                                                <button class="btn-row-action"><span class="material-symbols-outlined">visibility</span></button>
+                                                <button class="btn-row-action"><span class="material-symbols-outlined">comment</span></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="student-info">
+                                                <span class="material-symbols-outlined">account_circle</span>
+                                                <span>Daniel Costa</span>
+                                            </div>
+                                        </td>
+                                        <td>13/05/2025 - 14:10</td>
+                                        <td><span class="status-badge pending-evaluation">Para Avaliar</span></td>
+                                        <td>-</td>
+                                        <td>
+                                            <div class="row-actions">
+                                                <button class="btn-row-action primary"><span class="material-symbols-outlined">grading</span></button>
+                                                <button class="btn-row-action"><span class="material-symbols-outlined">visibility</span></button>
+                                                <button class="btn-row-action"><span class="material-symbols-outlined">comment</span></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="student-info">
+                                                <span class="material-symbols-outlined">account_circle</span>
+                                                <span>Eduardo Nunes</span>
+                                            </div>
+                                        </td>
+                                        <td>16/05/2025 - 08:15</td>
+                                        <td><span class="status-badge late">Atrasado</span></td>
+                                        <td>-</td>
+                                        <td>
+                                            <div class="row-actions">
+                                                <button class="btn-row-action primary"><span class="material-symbols-outlined">grading</span></button>
+                                                <button class="btn-row-action"><span class="material-symbols-outlined">visibility</span></button>
+                                                <button class="btn-row-action"><span class="material-symbols-outlined">comment</span></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="table-pagination">
+                            <span>Exibindo 1-5 de 23 entregas</span>
+                            <div class="pagination-controls">
+                                <button disabled><span class="material-symbols-outlined">first_page</span></button>
+                                <button disabled><span class="material-symbols-outlined">navigate_before</span></button>
+                                <span>Página 1 de 5</span>
+                                <button><span class="material-symbols-outlined">navigate_next</span></button>
+                                <button><span class="material-symbols-outlined">last_page</span></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="tab-content" id="pending-tab">
+                        <div class="deliveries-table">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Aluno</th>
+                                        <th>Status</th>
+                                        <th>Último Acesso</th>
+                                        <th>Ações</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td>
+                                            <div class="student-info">
+                                                <span class="material-symbols-outlined">account_circle</span>
+                                                <span>Felipe Rodrigues</span>
+                                            </div>
+                                        </td>
+                                        <td><span class="status-badge not-started">Não Iniciado</span></td>
+                                        <td>12/05/2025 - 10:45</td>
+                                        <td>
+                                            <div class="row-actions">
+                                                <button class="btn-row-action"><span class="material-symbols-outlined">mail</span></button>
+                                                <button class="btn-row-action"><span class="material-symbols-outlined">chat</span></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="student-info">
+                                                <span class="material-symbols-outlined">account_circle</span>
+                                                <span>Gabriela Santos</span>
+                                            </div>
+                                        </td>
+                                        <td><span class="status-badge in-progress">Em Andamento</span></td>
+                                        <td>14/05/2025 - 16:20</td>
+                                        <td>
+                                            <div class="row-actions">
+                                                <button class="btn-row-action"><span class="material-symbols-outlined">mail</span></button>
+                                                <button class="btn-row-action"><span class="material-symbols-outlined">chat</span></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr>
+                                        <td>
+                                            <div class="student-info">
+                                                <span class="material-symbols-outlined">account_circle</span>
+                                                <span>Henrique Lima</span>
+                                            </div>
+                                        </td>
+                                        <td><span class="status-badge not-viewed">Não Visualizado</span></td>
+                                        <td>10/05/2025 - 08:50</td>
+                                        <td>
+                                            <div class="row-actions">
+                                                <button class="btn-row-action"><span class="material-symbols-outlined">mail</span></button>
+                                                <button class="btn-row-action"><span class="material-symbols-outlined">chat</span></button>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        
+                        <div class="table-pagination">
+                            <span>Exibindo 1-3 de 12 alunos</span>
+                            <div class="pagination-controls">
+                                <button disabled><span class="material-symbols-outlined">first_page</span></button>
+                                <button disabled><span class="material-symbols-outlined">navigate_before</span></button>
+                                <span>Página 1 de 4</span>
+                                <button><span class="material-symbols-outlined">navigate_next</span></button>
+                                <button><span class="material-symbols-outlined">last_page</span></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-actions">
+                    <button class="btn-secondary">Enviar Lembrete</button>
+                    <button class="btn-secondary">Baixar Entregas</button>
+                    <button class="btn-primary">Avaliar Pendentes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script src="../scripts/atividades.js"></script>
     <script src="../../common/scripts/changepass.js"></script>
     <script src="../../common/scripts/exitpopup.js"></script>
-    <script src="../../common/scripts/menu.js"></script>    
+    <script src="../../common/scripts/menu.js"></script>
 </body>
 </html>

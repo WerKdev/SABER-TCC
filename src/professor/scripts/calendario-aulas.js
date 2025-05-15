@@ -1,12 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
     // Elementos DOM frequentemente usados
-    const sidebar = document.getElementById("sidebar");
-    const menuIconSidebar = document.getElementById("menu-icon");
-    const menuIconMobile = document.getElementById("menu-icon-mobile");
-    const notificationsIcon = document.getElementById("notifications-icon");
-    const notificationsPopup = document.getElementById("notifications-popup");
-    const userIcon = document.getElementById("user-icon");
-    const userIconPopup = document.getElementById("user-icon-popup");
     const disciplinasInput = document.getElementById('disciplinas');
     
     // Mostrar data atual
@@ -20,47 +13,7 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     mostrarDataAtual();
     
-    // Toggle para sidebar (desktop e mobile)
-    if (menuIconSidebar && sidebar) {
-        menuIconSidebar.addEventListener("click", () => sidebar.classList.toggle("active"));
-    }
-    
-    if (menuIconMobile && sidebar) {
-        menuIconMobile.addEventListener("click", () => sidebar.classList.toggle("active"));
-    }
-    
-    // Função de toggle para popups
-    function togglePopup(popup) {
-        if (popup) {
-            popup.style.display = (popup.style.display === "none" || popup.style.display === "") ? "block" : "none";
-        }
-    }
-    
-    // Popups de notificações e usuário
-    if (notificationsIcon && notificationsPopup) {
-        notificationsIcon.addEventListener("click", function(event) {
-            togglePopup(notificationsPopup);
-            event.stopPropagation();
-        });
-    }
-    
-    if (userIcon && userIconPopup) {
-        userIcon.addEventListener("click", function(event) {
-            togglePopup(userIconPopup);
-            event.stopPropagation();
-        });
-    }
-    
-    // Fechar popups ao clicar fora
-    document.addEventListener("click", function(event) {
-        if (notificationsPopup && !notificationsPopup.contains(event.target) && event.target !== notificationsIcon) {
-            notificationsPopup.style.display = "none";
-        }
-        if (userIconPopup && !userIconPopup.contains(event.target) && event.target !== userIcon) {
-            userIconPopup.style.display = "none";
-        }
-    });
-    
+   
     // Verificar tamanho da janela
     function checkWindowSize() {
         if (window.innerWidth <= 768) {

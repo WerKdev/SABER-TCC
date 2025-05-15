@@ -1,0 +1,828 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Avaliações e Notas - Professor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/avaliacoes.css">
+    <link rel="stylesheet" href="../../common/styles/menu.css">
+    <link rel="stylesheet" href="../../common/styles/changepass.css">
+    <link rel="stylesheet" href="../../common/styles/exitpopup.css">
+</head>
+<body>
+<!-- HEADER -->
+    <header class="header">
+        <div class="menu-icon-mobile">
+            <span id="menu-icon-mobile" class="material-symbols-outlined">menu</span>
+        </div>  
+        <div class="menuheader"> 
+            <ul class="menuheader-list">
+                <li class="notification-item">
+                    <span id="notifications-icon" class="material-symbols-outlined">notifications</span>
+                    <span class="notification-badge">3</span>
+                    <div id="notifications-popup" class="notifications-popup">
+                        <div class="popup-header">
+                            <p>Notificações</p>
+                            <span class="material-symbols-outlined close-popup">close</span>
+                        </div>
+                        <div class="notifications-content">
+                            <ul>
+                                <li class="notification unread">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">campaign</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Comunicado importante</p>
+                                        <p class="notification-desc">Alteração no calendário de provas</p>
+                                        <p class="notification-time">há 5 minutos</p>
+                                    </div>
+                                </li>
+                                <li class="notification unread">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">assignment</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Nova atividade disponível</p>
+                                        <p class="notification-desc">Exercícios de Álgebra - Matemática</p>
+                                        <p class="notification-time">há 10 minutos</p>
+                                    </div>
+                                </li>
+                                <li class="notification unread">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">quiz</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Prova agendada</p>
+                                        <p class="notification-desc">Física Quântica - 25/05 às 14:00</p>
+                                        <p class="notification-time">há 2 horas</p>
+                                    </div>
+                                </li>
+                                <li class="notification">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">grade</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Atividade avaliada</p>
+                                        <p class="notification-desc">Revolução Industrial - História</p>
+                                        <p class="notification-time">há 1 dia</p>
+                                    </div>
+                                </li>
+                                <li class="notification">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">calendar_today</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Prazo de entrega próximo</p>
+                                        <p class="notification-desc">Análise Combinatória vence em 2 dias</p>
+                                        <p class="notification-time">há 2 dias</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="popup-footer">
+                            <a href="#todas-notificacoes">Ver todas as notificações</a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <p id="user-name-header">Kenai Almeida</p>
+                </li>
+                <li class="user-settings-item">
+                    <span id="user-icon" class="material-symbols-outlined">account_circle</span>
+                    <div id="user-icon-popup" class="user-icon-popup">
+                        <div class="popup-header">
+                            <div class="user-info">
+                                <div class="user-avatar">
+                                    <span class="material-symbols-outlined">person</span>
+                                </div>
+                                <div class="user-details">
+                                    <p class="user-name">Kenai Almeida</p>
+                                    <p class="user-email">kenai.almeida@email.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="settings-content">
+                            <div class="settings-group">
+                                <p class="settings-group-title">Conta</p>
+                                <ul>
+                                    <li>
+                                        <a href="#perfil">
+                                            <span class="material-symbols-outlined">manage_accounts</span>
+                                            <span>Meu Perfil</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="alterar-senha-link">
+                                            <span class="material-symbols-outlined">key</span>
+                                            <span>Alterar senha</span>
+                                        </a>
+                                    </li>   
+                                </ul>
+                            </div>
+                            <div class="settings-group">
+                                <p class="settings-group-title">Sistema</p>
+                                <ul>
+                                    <li>
+                                        <a href="#tema" class="theme-toggle-container">
+                                            <span class="material-symbols-outlined">dark_mode</span>
+                                            <span>Tema Escuro</span>
+                                            <label class="switch">
+                                                <input type="checkbox" id="theme-toggle">
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </a>
+                                    </li>
+                                    <li class="settings-item language-selector-container">
+                                        <a href="#idioma" class="language-selector">
+                                            <span class="material-symbols-outlined">translate</span>
+                                            <span>Idioma</span>
+                                            <span class="selected-language">Português</span>
+                                            <span class="material-symbols-outlined toggle-arrow">expand_more</span>
+                                        </a>
+                                        <div class="language-options">
+                                            <ul>
+                                                <li data-lang="pt-BR" class="active">
+                                                    <span class="language-flag">🇧🇷</span>
+                                                    <span class="language-name">Português</span>
+                                                </li>
+                                                <li data-lang="en-US">
+                                                    <span class="language-flag">🇺🇸</span>
+                                                    <span class="language-name">English</span>
+                                                </li>
+                                                <li data-lang="es-ES">
+                                                    <span class="language-flag">🇪🇸</span>
+                                                    <span class="language-name">Español</span>
+                                                </li>
+                                                <li data-lang="fr-FR">
+                                                    <span class="language-flag">🇫🇷</span>
+                                                    <span class="language-name">Français</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="settings-group">
+                                <ul>
+                                    <li>
+                                        <a href="#ajuda">
+                                            <span class="material-symbols-outlined">help</span>
+                                            <span>Ajuda</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#sair" class="logout-button">
+                                            <span class="material-symbols-outlined">logout</span>
+                                            <span>Sair</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- SIDEBAR -->
+    <div id="sidebar">
+        <div class="topmenu">
+            <span id="menu-icon" class="material-symbols-outlined">menu</span>
+            <h3 id="menu-tittle">Menu</h3>
+            <img id="logomenu" src="../../../assets/images/logo-saber.png" alt="Logo menu">
+        </div>
+        <nav id="menu-hidden">
+            <div class="navbar">
+                <ul>
+                    <li>
+                        <a href="dashboard.html">
+                            <span class="material-symbols-outlined">dashboard</span>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="turmas.html">
+                            <span class="material-symbols-outlined">groups</span>
+                            <p>Turmas</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="atividades.html" class="active">
+                            <span class="material-symbols-outlined">assignment</span>
+                            <p>Atividades</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="redacoes.html">
+                            <span class="material-symbols-outlined">history_edu</span>
+                            <p>Redações</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="calendario-aulas.html">
+                            <span class="material-symbols-outlined">event_note</span>
+                            <p>Plano de Aulas</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="material-symbols-outlined">book</span>
+                            <p>Materiais</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="material-symbols-outlined">chat</span>
+                            <p>Comunicação</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="material-symbols-outlined">insert_chart</span>
+                            <p>Relatórios</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div id="password-popup" class="popup-overlay" style="display: none;">
+        <div class="popup">
+            <div class="popup-header">
+                <h2>Alterar senha</h2>
+                <span class="material-symbols-outlined close-popup">close</span>
+            </div>
+            <div class="popup-content">
+                <p class="popup-description">Informe a senha atual e a nova senha</p>
+                <form id="change-password-form">
+                    <div class="form-group">
+                        <label for="current-password">Senha atual <span class="required">*</span></label>
+                        <div class="password-input">
+                            <input type="password" id="current-password" name="current-password" required>
+                            <span class="material-symbols-outlined toggle-password">visibility_off</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-password">Nova senha <span class="required">*</span></label>
+                        <div class="password-input">
+                            <input type="password" id="new-password" name="new-password" required>
+                            <span class="material-symbols-outlined toggle-password">visibility_off</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Confirmação de senha <span class="required">*</span></label>
+                        <div class="password-input">
+                            <input type="password" id="confirm-password" name="confirm-password" required>
+                            <span class="material-symbols-outlined toggle-password">visibility_off</span>
+                        </div>
+                    </div>
+                    <div class="forgot-password">
+                        <a href="#" id="forgot-password-link">Esqueceu a senha?</a>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel">Cancelar</button>
+                        <button type="submit" class="btn-confirm">Alterar senha</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup de Redefinição de Senha -->
+    <div id="reset-password-popup" class="popup-overlay" style="display: none;">
+        <div class="popup">
+            <div class="popup-header">
+                <h2>Redefinição de senha!</h2>
+                <span class="material-symbols-outlined close-popup">close</span>
+            </div>
+            <div class="popup-feedback-content">
+                <p class="popup-description">Informe um email e enviaremos um link para recuperação da sua senha.</p>
+                <form id="reset-password-form">
+                    <div class="form-group">
+                        <label for="recovery-email">Email <span class="required">*</span></label>
+                        <input type="email" id="recovery-email" name="recovery-email" required placeholder="seu@email.com">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-back">
+                            <span class="material-symbols-outlined">arrow_back</span>
+                            Voltar
+                        </button>
+                        <button type="submit" class="btn-send">Enviar link de recuperação</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="logout-popup" class="popup-overlay" style="display: none;">
+        <div class="popup logout-popup">
+            <div class="logout-content">
+                <div class="logout-icon">
+                    <span class="material-symbols-outlined">logout</span>
+                </div>
+                <h2 class="logout-title">Sair da conta?</h2>
+                <p class="logout-description">Você poderá entrar novamente a qualquer momento. Se quiser trocar de conta, faça isso adicionando uma conta existente.</p>
+                
+                <div class="logout-actions">
+                    <button type="button" class="btn-logout">Sair</button>
+                    <button type="button" class="btn-cancel-logout">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>v
+</div>
+
+<!-- CONTEÚDO PRINCIPAL -->
+<main>
+    <div class="page-header">
+        <div class="page-title">
+            <h1>Avaliações e Notas</h1>
+            <p>Gerencie as avaliações e notas dos alunos</p>
+        </div>
+        <div class="page-actions">
+            <button class="btn-secondary">
+                <span class="material-symbols-outlined">file_download</span>
+                Exportar
+            </button>
+            <button class="btn-primary">
+                <span class="material-symbols-outlined">add</span>
+                Nova Avaliação
+            </button>
+        </div>
+    </div>
+
+    <div class="content-container">
+        <!-- FILTROS -->
+        <div class="filter-section">
+            <div class="filter-group">
+                <label for="turma-select">Turma</label>
+                <select id="turma-select" class="select-field">
+                    <option value="todas">Todas as turmas</option>
+                    <option value="1A">1º Ano A</option>
+                    <option value="1B">1º Ano B</option>
+                    <option value="2A">2º Ano A</option>
+                    <option value="2B">2º Ano B</option>
+                    <option value="3A" selected>3º Ano A</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="periodo-select">Período</label>
+                <select id="periodo-select" class="select-field">
+                    <option value="1">1º Bimestre</option>
+                    <option value="2">2º Bimestre</option>
+                    <option value="3" selected>3º Bimestre</option>
+                    <option value="4">4º Bimestre</option>
+                    <option value="anual">Anual</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="tipo-select">Tipo</label>
+                <select id="tipo-select" class="select-field">
+                    <option value="todos" selected>Todos os tipos</option>
+                    <option value="prova">Provas</option>
+                    <option value="trabalho">Trabalhos</option>
+                    <option value="exercicio">Exercícios</option>
+                    <option value="projeto">Projetos</option>
+                </select>
+            </div>
+            <div class="filter-group">
+                <label for="status-select">Status</label>
+                <select id="status-select" class="select-field">
+                    <option value="todos" selected>Todos</option>
+                    <option value="agendada">Agendadas</option>
+                    <option value="realizada">Realizadas</option>
+                    <option value="corrigida">Corrigidas</option>
+                    <option value="publicada">Publicadas</option>
+                </select>
+            </div>
+            <div class="filter-group search-group">
+                <label for="search-input">Pesquisar</label>
+                <div class="search-input-container">
+                    <input type="text" id="search-input" placeholder="Buscar avaliação...">
+                    <span class="material-symbols-outlined search-icon">search</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ESTATÍSTICAS -->
+        <div class="stats-cards">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <span class="material-symbols-outlined">grading</span>
+                </div>
+                <div class="stat-info">
+                    <h3>15</h3>
+                    <p>Avaliações Totais</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon warning">
+                    <span class="material-symbols-outlined">pending</span>
+                </div>
+                <div class="stat-info">
+                    <h3>5</h3>
+                    <p>Pendentes</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon success">
+                    <span class="material-symbols-outlined">check_circle</span>
+                </div>
+                <div class="stat-info">
+                    <h3>10</h3>
+                    <p>Concluídas</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon info">
+                    <span class="material-symbols-outlined">trending_up</span>
+                </div>
+                <div class="stat-info">
+                    <h3>7.5</h3>
+                    <p>Média Geral</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- TABELA DE AVALIAÇÕES -->
+        <div class="card avaliacoes-table-card">
+            <div class="card-header">
+                <h2>Avaliações - 3º Ano A</h2>
+                <div class="view-toggle">
+                    <button class="toggle-btn active">
+                        <span class="material-symbols-outlined">view_list</span>
+                    </button>
+                    <button class="toggle-btn">
+                        <span class="material-symbols-outlined">grid_view</span>
+                    </button>
+                </div>
+            </div>
+            <div class="card-content">
+                <table class="data-table avaliacoes-table">
+                    <thead>
+                        <tr>
+                            <th>Título</th>
+                            <th>Tipo</th>
+                            <th>Data</th>
+                            <th>Peso</th>
+                            <th>Status</th>
+                            <th>Média</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>
+                                <div class="avaliacao-info">
+                                    <span class="material-symbols-outlined">quiz</span>
+                                    <div>
+                                        <p class="avaliacao-titulo">Prova Bimestral</p>
+                                        <p class="avaliacao-disciplina">Matemática</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>Prova</td>
+                            <td>12/05/2025</td>
+                            <td>2.0</td>
+                            <td><span class="status-badge status-publicada">Publicada</span></td>
+                            <td>
+                                <div class="media-container">
+                                    <div class="media-value">8.5</div>
+                                    <div class="media-bar">
+                                        <div class="media-fill" style="width: 85%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn">
+                                        <span class="material-symbols-outlined">edit</span>
+                                    </button>
+                                    <button class="action-btn">
+                                        <span class="material-symbols-outlined">visibility</span>
+                                    </button>
+                                    <button class="action-btn">
+                                        <span class="material-symbols-outlined">more_vert</span>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="avaliacao-info">
+                                    <span class="material-symbols-outlined">description</span>
+                                    <div>
+                                        <p class="avaliacao-titulo">Trabalho em Grupo</p>
+                                        <p class="avaliacao-disciplina">História</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>Trabalho</td>
+                            <td>05/05/2025</td>
+                            <td>1.5</td>
+                            <td><span class="status-badge status-corrigida">Corrigida</span></td>
+                            <td>
+                                <div class="media-container">
+                                    <div class="media-value">7.8</div>
+                                    <div class="media-bar">
+                                        <div class="media-fill" style="width: 78%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn">
+                                        <span class="material-symbols-outlined">edit</span>
+                                    </button>
+                                    <button class="action-btn">
+                                        <span class="material-symbols-outlined">visibility</span>
+                                    </button>
+                                    <button class="action-btn">
+                                        <span class="material-symbols-outlined">more_vert</span>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="avaliacao-info">
+                                    <span class="material-symbols-outlined">science</span>
+                                    <div>
+                                        <p class="avaliacao-titulo">Projeto Científico</p>
+                                        <p class="avaliacao-disciplina">Ciências</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>Projeto</td>
+                            <td>03/05/2025</td>
+                            <td>2.0</td>
+                            <td><span class="status-badge status-realizada">Realizada</span></td>
+                            <td>
+                                <div class="media-container">
+                                    <div class="media-value">--</div>
+                                    <div class="media-bar">
+                                        <div class="media-fill" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn highlight">
+                                        <span class="material-symbols-outlined">grading</span>
+                                    </button>
+                                    <button class="action-btn">
+                                        <span class="material-symbols-outlined">visibility</span>
+                                    </button>
+                                    <button class="action-btn">
+                                        <span class="material-symbols-outlined">more_vert</span>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="avaliacao-info">
+                                    <span class="material-symbols-outlined">auto_stories</span>
+                                    <div>
+                                        <p class="avaliacao-titulo">Interpretação de Texto</p>
+                                        <p class="avaliacao-disciplina">Português</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>Exercício</td>
+                            <td>28/04/2025</td>
+                            <td>1.0</td>
+                            <td><span class="status-badge status-publicada">Publicada</span></td>
+                            <td>
+                                <div class="media-container">
+                                    <div class="media-value">6.2</div>
+                                    <div class="media-bar">
+                                        <div class="media-fill" style="width: 62%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn">
+                                        <span class="material-symbols-outlined">edit</span>
+                                    </button>
+                                    <button class="action-btn">
+                                        <span class="material-symbols-outlined">visibility</span>
+                                    </button>
+                                    <button class="action-btn">
+                                        <span class="material-symbols-outlined">more_vert</span>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="avaliacao-info">
+                                    <span class="material-symbols-outlined">quiz</span>
+                                    <div>
+                                        <p class="avaliacao-titulo">Quiz Semanal</p>
+                                        <p class="avaliacao-disciplina">Geografia</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>Exercício</td>
+                            <td>21/04/2025</td>
+                            <td>0.5</td>
+                            <td><span class="status-badge status-publicada">Publicada</span></td>
+                            <td>
+                                <div class="media-container">
+                                    <div class="media-value">9.1</div>
+                                    <div class="media-bar">
+                                        <div class="media-fill" style="width: 91%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn">
+                                        <span class="material-symbols-outlined">edit</span>
+                                    </button>
+                                    <button class="action-btn">
+                                        <span class="material-symbols-outlined">visibility</span>
+                                    </button>
+                                    <button class="action-btn">
+                                        <span class="material-symbols-outlined">more_vert</span>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div class="avaliacao-info">
+                                    <span class="material-symbols-outlined">quiz</span>
+                                    <div>
+                                        <p class="avaliacao-titulo">Prova Final</p>
+                                        <p class="avaliacao-disciplina">Matemática</p>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>Prova</td>
+                            <td>01/06/2025</td>
+                            <td>3.0</td>
+                            <td><span class="status-badge status-agendada">Agendada</span></td>
+                            <td>
+                                <div class="media-container">
+                                    <div class="media-value">--</div>
+                                    <div class="media-bar">
+                                        <div class="media-fill" style="width: 0%"></div>
+                                    </div>
+                                </div>
+                            </td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="action-btn">
+                                        <span class="material-symbols-outlined">edit</span>
+                                    </button>
+                                    <button class="action-btn">
+                                        <span class="material-symbols-outlined">visibility</span>
+                                    </button>
+                                    <button class="action-btn">
+                                        <span class="material-symbols-outlined">more_vert</span>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div class="table-pagination">
+                    <div class="pagination-info">
+                        Mostrando 1-6 de 15 itens
+                    </div>
+                    <div class="pagination-controls">
+                        <button class="pagination-btn" disabled>
+                            <span class="material-symbols-outlined">arrow_back</span>
+                        </button>
+                        <button class="pagination-btn active">1</button>
+                        <button class="pagination-btn">2</button>
+                        <button class="pagination-btn">3</button>
+                        <button class="pagination-btn">
+                            <span class="material-symbols-outlined">arrow_forward</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- PAINEL DE DESEMPENHO -->
+        <div class="performance-section">
+            <div class="card desempenho-card">
+                <div class="card-header">
+                    <h2>Desempenho da Turma</h2>
+                    <button class="card-options-btn">
+                        <span class="material-symbols-outlined">more_horiz</span>
+                    </button>
+                </div>
+                <div class="card-content">
+                    <div class="desempenho-chart">
+                        <div class="chart-placeholder">
+                            <div class="chart-bars">
+                                <div class="chart-bar" style="height: 40%">
+                                    <span class="bar-value">4</span>
+                                    <span class="bar-label">0-4.9</span>
+                                </div>
+                                <div class="chart-bar" style="height: 65%">
+                                    <span class="bar-value">8</span>
+                                    <span class="bar-label">5-6.9</span>
+                                </div>
+                                <div class="chart-bar" style="height: 80%">
+                                    <span class="bar-value">12</span>
+                                    <span class="bar-label">7-8.9</span>
+                                </div>
+                                <div class="chart-bar" style="height: 55%">
+                                    <span class="bar-value">6</span>
+                                    <span class="bar-label">9-10</span>
+                                </div>
+                            </div>
+                            <div class="chart-axis">
+                                <div class="chart-line"></div>
+                                <div class="chart-line"></div>
+                                <div class="chart-line"></div>
+                                <div class="chart-line"></div>
+                                <div class="chart-line"></div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card disciplinas-card">
+                <div class="card-header">
+                    <h2>Disciplinas</h2>
+                    <button class="card-options-btn">
+                        <span class="material-symbols-outlined">more_horiz</span>
+                    </button>
+                </div>
+                <div class="card-content">
+                    <ul class="disciplinas-list">
+                        <li class="disciplina-item">
+                            <div class="disciplina-info">
+                                <span class="disciplina-color" style="background-color: #4285f4;"></span>
+                                <p>Matemática</p>
+                            </div>
+                            <div class="disciplina-media">
+                                <span class="media-value">7.5</span>
+                                <div class="media-bar">
+                                    <div class="media-fill" style="width: 75%; background-color: #4285f4;"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="disciplina-item">
+                            <div class="disciplina-info">
+                                <span class="disciplina-color" style="background-color: #0F9D58;"></span>
+                                <p>Português</p>
+                            </div>
+                            <div class="disciplina-media">
+                                <span class="media-value">6.8</span>
+                                <div class="media-bar">
+                                    <div class="media-fill" style="width: 68%; background-color: #0F9D58;"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="disciplina-item">
+                            <div class="disciplina-info">
+                                <span class="disciplina-color" style="background-color: #F4B400;"></span>
+                                <p>História</p>
+                            </div>
+                            <div class="disciplina-media">
+                                <span class="media-value">8.2</span>
+                                <div class="media-bar">
+                                    <div class="media-fill" style="width: 82%; background-color: #F4B400;"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="disciplina-item">
+                            <div class="disciplina-info">
+                                <span class="disciplina-color" style="background-color: #DB4437;"></span>
+                                <p>Ciências</p>
+                            </div>
+                            <div class="disciplina-media">
+                                <span class="media-value">7.9</span>
+                                <div class="media-bar">
+                                    <div class="media-fill" style="width: 79%; background-color: #DB4437;"></div>
+                                </div>
+                            </div>
+                        </li>
+                        <li class="disciplina-item">
+                            <div class="disciplina-info">
+                                <span class="disciplina-color" style="background-color: #9C27B0;"></span>
+                                <p>Geografia</p>
+                            </div>
+                            <div class="disciplina-media">
+                                <span class="media-value">8.7</span>
+                                <div class="media-bar">
+                                    <div class="media-fill" style="width: 87%; background-color: #9C27B0;"></div>
+                                </div>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+    <script src="../scripts/avaliacoes.js"></script>
+    <script src="../../common/scripts/menu.js"></script>
+    <script src="../../common/scripts/changepass.js"></script>
+    <script src="../../common/scripts/exitpopup.js"></script>
+</body>
+</html>

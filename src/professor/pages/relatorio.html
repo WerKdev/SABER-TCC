@@ -1,0 +1,934 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Escolar - Relatório Individual</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/relatorio.css">
+    <link rel="stylesheet" href="../../common/styles/menu.css">
+    <link rel="stylesheet" href="../../common/styles/changepass.css">
+    <link rel="stylesheet" href="../../common/styles/exitpopup.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+<!-- HEADER -->
+    <header class="header">
+        <div class="menu-icon-mobile">
+            <span id="menu-icon-mobile" class="material-symbols-outlined">menu</span>
+        </div>  
+        <div class="menuheader"> 
+            <ul class="menuheader-list">
+                <li class="notification-item">
+                    <span id="notifications-icon" class="material-symbols-outlined">notifications</span>
+                    <span class="notification-badge">3</span>
+                    <div id="notifications-popup" class="notifications-popup">
+                        <div class="popup-header">
+                            <p>Notificações</p>
+                            <span class="material-symbols-outlined close-popup">close</span>
+                        </div>
+                        <div class="notifications-content">
+                            <ul>
+                                <li class="notification unread">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">campaign</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Comunicado importante</p>
+                                        <p class="notification-desc">Alteração no calendário de provas</p>
+                                        <p class="notification-time">há 5 minutos</p>
+                                    </div>
+                                </li>
+                                <li class="notification unread">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">assignment</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Nova atividade disponível</p>
+                                        <p class="notification-desc">Exercícios de Álgebra - Matemática</p>
+                                        <p class="notification-time">há 10 minutos</p>
+                                    </div>
+                                </li>
+                                <li class="notification unread">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">quiz</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Prova agendada</p>
+                                        <p class="notification-desc">Física Quântica - 25/05 às 14:00</p>
+                                        <p class="notification-time">há 2 horas</p>
+                                    </div>
+                                </li>
+                                <li class="notification">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">grade</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Atividade avaliada</p>
+                                        <p class="notification-desc">Revolução Industrial - História</p>
+                                        <p class="notification-time">há 1 dia</p>
+                                    </div>
+                                </li>
+                                <li class="notification">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">calendar_today</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Prazo de entrega próximo</p>
+                                        <p class="notification-desc">Análise Combinatória vence em 2 dias</p>
+                                        <p class="notification-time">há 2 dias</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="popup-footer">
+                            <a href="#todas-notificacoes">Ver todas as notificações</a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <p id="user-name-header">Kenai Almeida</p>
+                </li>
+                <li class="user-settings-item">
+                    <span id="user-icon" class="material-symbols-outlined">account_circle</span>
+                    <div id="user-icon-popup" class="user-icon-popup">
+                        <div class="popup-header">
+                            <div class="user-info">
+                                <div class="user-avatar">
+                                    <span class="material-symbols-outlined">person</span>
+                                </div>
+                                <div class="user-details">
+                                    <p class="user-name">Kenai Almeida</p>
+                                    <p class="user-email">kenai.almeida@email.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="settings-content">
+                            <div class="settings-group">
+                                <p class="settings-group-title">Conta</p>
+                                <ul>
+                                    <li>
+                                        <a href="#perfil">
+                                            <span class="material-symbols-outlined">manage_accounts</span>
+                                            <span>Meu Perfil</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="alterar-senha-link">
+                                            <span class="material-symbols-outlined">key</span>
+                                            <span>Alterar senha</span>
+                                        </a>
+                                    </li>   
+                                </ul>
+                            </div>
+                            <div class="settings-group">
+                                <p class="settings-group-title">Sistema</p>
+                                <ul>
+                                    <li>
+                                        <a href="#tema" class="theme-toggle-container">
+                                            <span class="material-symbols-outlined">dark_mode</span>
+                                            <span>Tema Escuro</span>
+                                            <label class="switch">
+                                                <input type="checkbox" id="theme-toggle">
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </a>
+                                    </li>
+                                    <li class="settings-item language-selector-container">
+                                        <a href="#idioma" class="language-selector">
+                                            <span class="material-symbols-outlined">translate</span>
+                                            <span>Idioma</span>
+                                            <span class="selected-language">Português</span>
+                                            <span class="material-symbols-outlined toggle-arrow">expand_more</span>
+                                        </a>
+                                        <div class="language-options">
+                                            <ul>
+                                                <li data-lang="pt-BR" class="active">
+                                                    <span class="language-flag">🇧🇷</span>
+                                                    <span class="language-name">Português</span>
+                                                </li>
+                                                <li data-lang="en-US">
+                                                    <span class="language-flag">🇺🇸</span>
+                                                    <span class="language-name">English</span>
+                                                </li>
+                                                <li data-lang="es-ES">
+                                                    <span class="language-flag">🇪🇸</span>
+                                                    <span class="language-name">Español</span>
+                                                </li>
+                                                <li data-lang="fr-FR">
+                                                    <span class="language-flag">🇫🇷</span>
+                                                    <span class="language-name">Français</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="settings-group">
+                                <ul>
+                                    <li>
+                                        <a href="#ajuda">
+                                            <span class="material-symbols-outlined">help</span>
+                                            <span>Ajuda</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#sair" class="logout-button">
+                                            <span class="material-symbols-outlined">logout</span>
+                                            <span>Sair</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- SIDEBAR -->
+    <div id="sidebar">
+        <div class="topmenu">
+            <span id="menu-icon" class="material-symbols-outlined">menu</span>
+            <h3 id="menu-tittle">Menu</h3>
+            <img id="logomenu" src="../../../assets/images/logo-saber.png" alt="Logo menu">
+        </div>
+        <nav id="menu-hidden">
+            <div class="navbar">
+                <ul>
+                    <li>
+                        <a href="dashboard.html">
+                            <span class="material-symbols-outlined">dashboard</span>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="turmas.html" class="active">
+                            <span class="material-symbols-outlined">groups</span>
+                            <p>Turmas</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="atividades.html">
+                            <span class="material-symbols-outlined">assignment</span>
+                            <p>Atividades</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="redacoes.html">
+                            <span class="material-symbols-outlined">history_edu</span>
+                            <p>Redações</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="calendario-aulas.html">
+                            <span class="material-symbols-outlined">event_note</span>
+                            <p>Plano de Aulas</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="material-symbols-outlined">book</span>
+                            <p>Materiais</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="material-symbols-outlined">chat</span>
+                            <p>Comunicação</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="material-symbols-outlined">insert_chart</span>
+                            <p>Relatórios</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div id="password-popup" class="popup-overlay" style="display: none;">
+        <div class="popup">
+            <div class="popup-header">
+                <h2>Alterar senha</h2>
+                <span class="material-symbols-outlined close-popup">close</span>
+            </div>
+            <div class="popup-content">
+                <p class="popup-description">Informe a senha atual e a nova senha</p>
+                <form id="change-password-form">
+                    <div class="form-group">
+                        <label for="current-password">Senha atual <span class="required">*</span></label>
+                        <div class="password-input">
+                            <input type="password" id="current-password" name="current-password" required>
+                            <span class="material-symbols-outlined toggle-password">visibility_off</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-password">Nova senha <span class="required">*</span></label>
+                        <div class="password-input">
+                            <input type="password" id="new-password" name="new-password" required>
+                            <span class="material-symbols-outlined toggle-password">visibility_off</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Confirmação de senha <span class="required">*</span></label>
+                        <div class="password-input">
+                            <input type="password" id="confirm-password" name="confirm-password" required>
+                            <span class="material-symbols-outlined toggle-password">visibility_off</span>
+                        </div>
+                    </div>
+                    <div class="forgot-password">
+                        <a href="#" id="forgot-password-link">Esqueceu a senha?</a>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel">Cancelar</button>
+                        <button type="submit" class="btn-confirm">Alterar senha</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup de Redefinição de Senha -->
+    <div id="reset-password-popup" class="popup-overlay" style="display: none;">
+        <div class="popup">
+            <div class="popup-header">
+                <h2>Redefinição de senha!</h2>
+                <span class="material-symbols-outlined close-popup">close</span>
+            </div>
+            <div class="popup-feedback-content">
+                <p class="popup-description">Informe um email e enviaremos um link para recuperação da sua senha.</p>
+                <form id="reset-password-form">
+                    <div class="form-group">
+                        <label for="recovery-email">Email <span class="required">*</span></label>
+                        <input type="email" id="recovery-email" name="recovery-email" required placeholder="seu@email.com">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-back">
+                            <span class="material-symbols-outlined">arrow_back</span>
+                            Voltar
+                        </button>
+                        <button type="submit" class="btn-send">Enviar link de recuperação</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="logout-popup" class="popup-overlay" style="display: none;">
+        <div class="popup logout-popup">
+            <div class="logout-content">
+                <div class="logout-icon">
+                    <span class="material-symbols-outlined">logout</span>
+                </div>
+                <h2 class="logout-title">Sair da conta?</h2>
+                <p class="logout-description">Você poderá entrar novamente a qualquer momento. Se quiser trocar de conta, faça isso adicionando uma conta existente.</p>
+                
+                <div class="logout-actions">
+                    <button type="button" class="btn-logout">Sair</button>
+                    <button type="button" class="btn-cancel-logout">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="main">
+        <a href="#" class="back-link">
+            <span class="material-symbols-outlined">arrow_back</span> Voltar
+        </a>
+        <br>
+
+        <!-- Cabeçalho do perfil do aluno (estilo Sofascore) -->
+        <div class="student-profile">
+            <div class="student-profile-header">
+                <div class="student-avatar-container">
+                    <div class="student-avatar">GM</div>
+                </div>
+                <div class="student-info">
+                    <h1 class="student-name">Guilherme Moura Nobre</h1>
+                    <div class="student-details">
+                        <div class="student-detail">
+                            <span class="detail-label">Matrícula</span>
+                            <span class="detail-value">0000235662</span>
+                        </div>
+                        <div class="student-detail">
+                            <span class="detail-label">Turma</span>
+                            <span class="detail-value">3º Ano O</span>
+                        </div>
+                        <div class="student-detail">
+                            <span class="detail-label">Idade</span>
+                            <span class="detail-value">17 anos</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="student-actions">
+                    <div class="filters">
+                        <div class="filter-group">
+                            <label for="ano">Ano:</label>
+                            <select id="ano" class="filter-select">
+                                <option>2025</option>
+                                <option>2024</option>
+                                <option>2023</option>
+                            </select>
+                        </div>
+                        <div class="filter-group">
+                            <label for="trimestre">Trimestre:</label>
+                            <select id="trimestre" class="filter-select">
+                                <option>1º Trimestre</option>
+                                <option>2º Trimestre</option>
+                                <option>3º Trimestre</option>
+                                <option>Todos</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button class="report-button">Gerar Relatório PDF</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Resumo geral (cards com métricas principais) -->
+        <div class="summary-cards">
+            <div class="summary-card">
+                <div class="card-header">
+                    <span class="material-symbols-outlined">grade</span>
+                    <h3>Média Geral</h3>
+                </div>
+                <div class="card-value">7.4</div>
+                <div class="card-trend positive">↑ 0.3 pts</div>
+                <div class="card-progress">
+                    <div class="progress-bar" style="width: 74%;"></div>
+                </div>
+            </div>
+            <div class="summary-card">
+                <div class="card-header">
+                    <span class="material-symbols-outlined">event_available</span>
+                    <h3>Frequência</h3>
+                </div>
+                <div class="card-value">90%</div>
+                <div class="card-trend positive">↑ 2%</div>
+                <div class="card-progress">
+                    <div class="progress-bar" style="width: 90%;"></div>
+                </div>
+            </div>
+            <div class="summary-card">
+                <div class="card-header">
+                    <span class="material-symbols-outlined">task_alt</span>
+                    <h3>Taxa de Entrega</h3>
+                </div>
+                <div class="card-value">92%</div>
+                <div class="card-trend positive">↑ 4%</div>
+                <div class="card-progress">
+                    <div class="progress-bar" style="width: 92%;"></div>
+                </div>
+            </div>
+            <div class="summary-card">
+                <div class="card-header">
+                    <span class="material-symbols-outlined">leaderboard</span>
+                    <h3>Ranking na Turma</h3>
+                </div>
+                <div class="card-value">8º</div>
+                <div class="card-trend positive">↑ 3 posições</div>
+                <div class="card-progress">
+                    <div class="progress-bar" style="width: 76%;"></div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Gráficos principais -->
+        <div class="charts-container">
+            <div class="chart-card">
+                <h3 class="chart-title">Desempenho por Disciplina</h3>
+                <div class="subject-bars">
+                    <div class="subject-bar-container">
+                        <div class="subject-bar-header">
+                            <span>Linguagens (LING)</span>
+                            <span>7.5</span>
+                        </div>
+                        <div class="subject-bar-bg">
+                            <div class="subject-bar" style="width: 75%; background-color: #3b82f6;"></div>
+                        </div>
+                    </div>
+                    <div class="subject-bar-container">
+                        <div class="subject-bar-header">
+                            <span>Matemática (MAT)</span>
+                            <span>6.5</span>
+                        </div>
+                        <div class="subject-bar-bg">
+                            <div class="subject-bar" style="width: 65%; background-color: #2563eb;"></div>
+                        </div>
+                    </div>
+                    <div class="subject-bar-container">
+                        <div class="subject-bar-header">
+                            <span>Humanas (HUM)</span>
+                            <span>7.0</span>
+                        </div>
+                        <div class="subject-bar-bg">
+                            <div class="subject-bar" style="width: 70%; background-color: #1d4ed8;"></div>
+                        </div>
+                    </div>
+                    <div class="subject-bar-container">
+                        <div class="subject-bar-header">
+                            <span>Natureza (NAT)</span>
+                            <span>6.0</span>
+                        </div>
+                        <div class="subject-bar-bg">
+                            <div class="subject-bar" style="width: 60%; background-color: #1e40af;"></div>
+                        </div>
+                    </div>
+                    <div class="subject-bar-container">
+                        <div class="subject-bar-header">
+                            <span>Redação (RED)</span>
+                            <span>8.0</span>
+                        </div>
+                        <div class="subject-bar-bg">
+                            <div class="subject-bar" style="width: 80%; background-color: #1e3a8a;"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <h3 class="chart-title">Evolução das Notas</h3>
+                <div class="chart-container">
+                    <canvas id="evolutionChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <div class="charts-container">
+            <div class="chart-card">
+                <h3 class="chart-title">Faltas por Mês</h3>
+                <div class="chart-container">
+                    <canvas id="attendanceChart"></canvas>
+                </div>
+            </div>
+
+            <div class="chart-card">
+                <h3 class="chart-title">Taxa de Entrega de Atividades</h3>
+                <div class="chart-container">
+                    <canvas id="deliveryChart"></canvas>
+                </div>
+            </div>
+        </div>
+
+        <!-- Análise detalhada das habilidades -->
+        <div class="analysis-container">
+            <div class="chart-card">
+                <h3 class="chart-title">Análise de Habilidades</h3>
+                <div class="skills-container">
+                    <div class="radar-chart">
+                        <canvas id="skillsChart"></canvas>
+                    </div>
+                    <div class="skills-analysis">
+                        <div class="strengths-section">
+                            <h4 class="section-title">Pontos Fortes</h4>
+                            <ul class="strengths-list">
+                                <li class="strength-item">
+                                    <div class="strength-header">
+                                        <h5>Redação: Dissertação argumentativa</h5>
+                                        <span class="strength-score">8.5</span>
+                                    </div>
+                                    <div class="strength-bar-bg">
+                                        <div class="strength-bar" style="width: 85%;"></div>
+                                    </div>
+                                </li>
+                                <li class="strength-item">
+                                    <div class="strength-header">
+                                        <h5>Literatura: Literatura brasileira</h5>
+                                        <span class="strength-score">8.3</span>
+                                    </div>
+                                    <div class="strength-bar-bg">
+                                        <div class="strength-bar" style="width: 83%;"></div>
+                                    </div>
+                                </li>
+                                <li class="strength-item">
+                                    <div class="strength-header">
+                                        <h5>História: História do Brasil</h5>
+                                        <span class="strength-score">8.0</span>
+                                    </div>
+                                    <div class="strength-bar-bg">
+                                        <div class="strength-bar" style="width: 80%;"></div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="weaknesses-section">
+                            <h4 class="section-title">Pontos a Melhorar</h4>
+                            <ul class="weaknesses-list">
+                                <li class="weakness-item">
+                                    <div class="weakness-header">
+                                        <h5>Matemática: Equações do 2º grau</h5>
+                                        <span class="weakness-score">5.4</span>
+                                    </div>
+                                    <div class="weakness-bar-bg">
+                                        <div class="weakness-bar" style="width: 54%;"></div>
+                                    </div>
+                                </li>
+                                <li class="weakness-item">
+                                    <div class="weakness-header">
+                                        <h5>Física: Cinemática</h5>
+                                        <span class="weakness-score">5.2</span>
+                                    </div>
+                                    <div class="weakness-bar-bg">
+                                        <div class="weakness-bar" style="width: 52%;"></div>
+                                    </div>
+                                </li>
+                                <li class="weakness-item">
+                                    <div class="weakness-header">
+                                        <h5>Química: Tabela periódica</h5>
+                                        <span class="weakness-score">5.8</span>
+                                    </div>
+                                    <div class="weakness-bar-bg">
+                                        <div class="weakness-bar" style="width: 58%;"></div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Relatório detalhado -->
+        <div class="detailed-report">
+            <h3 class="report-title">Relatório Detalhado</h3>
+            <div class="report-content">
+                <div class="report-section">
+                    <h4 class="section-title">Análise de Desempenho</h4>
+                    <p class="report-text">
+                        O aluno Guilherme Moura Nobre apresentou um desempenho geral satisfatório no 1º trimestre de 2025, 
+                        com uma média geral de 7.4 e 90% de frequência. Destacou-se principalmente na disciplina de Redação, 
+                        onde obteve sua melhor nota (8.0).
+                    </p>
+                </div>
+                
+                <div class="report-section">
+                    <h4 class="section-title">Pontos Fortes</h4>
+                    <p class="report-text">
+                        Guilherme demonstra excelente desempenho em competências relacionadas à língua portuguesa, 
+                        com destaque para redação e literatura brasileira. Nas ciências humanas, apresenta bom domínio 
+                        de história do Brasil. Sua taxa de entrega de atividades é de 92%, 
+                        indicando compromisso com suas responsabilidades escolares.
+                    </p>
+                </div>
+                
+                <div class="report-section">
+                    <h4 class="section-title">Pontos a Melhorar</h4>
+                    <p class="report-text">
+                        O aluno apresenta maior dificuldade nas disciplinas de exatas, especialmente em Matemática 
+                        (com ênfase em equações do 2º grau) e Física (cinemática). Recomenda-se a realização de 
+                        atividades de reforço e acompanhamento individualizado nestas áreas para melhorar a compreensão.
+                    </p>
+                </div>
+                
+                <div class="report-section">
+                    <h4 class="section-title">Recomendações</h4>
+                    <p class="report-text">
+                        Sugerimos que Guilherme participe das aulas de reforço em Matemática e Física, oferecidas 
+                        às terças e quintas após o horário regular. Também recomendamos o uso da plataforma online 
+                        para exercícios complementares nas áreas de maior dificuldade. O desenvolvimento de um plano 
+                        de estudos com foco específico nos tópicos identificados como pontos fracos seria benéfico para 
+                        o seu progresso acadêmico.
+                    </p>
+                </div>
+                
+                <div class="report-status">
+                    <h4 class="status-title">Status do Aluno</h4>
+                    <p class="status-text">
+                        Aprovado no trimestre, com recomendação de acompanhamento nas disciplinas de exatas.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Comparativo trimestral -->
+        <div class="trimester-comparison">
+            <h3 class="report-title">Comparativo Trimestral</h3>
+            <div class="comparison-cards">
+                <div class="comparison-card">
+                    <div class="comparison-header">
+                        <h4>1º Trimestre</h4>
+                        <span>-</span>
+                    </div>
+                    <div class="comparison-value">6.8</div>
+                    <div class="comparison-details">
+                        <div class="comparison-detail">
+                            <span>Faltas</span>
+                            <span>5</span>
+                        </div>
+                        <div class="comparison-detail">
+                            <span>Entregas</span>
+                            <span>88%</span>
+                        </div>
+                        <div class="comparison-detail">
+                            <span>Ranking</span>
+                            <span>12º</span>
+                        </div>
+                    </div>
+                    <div class="comparison-subjects">
+                        <div class="comparison-subject">
+                            <span>LING</span>
+                            <span class="subject-pill">7.0</span>
+                        </div>
+                        <div class="comparison-subject">
+                            <span>MAT</span>
+                            <span class="subject-pill">6.0</span>
+                        </div>
+                        <div class="comparison-subject">
+                            <span>HUM</span>
+                            <span class="subject-pill">6.5</span>
+                        </div>
+                        <div class="comparison-subject">
+                            <span>NAT</span>
+                            <span class="subject-pill">5.5</span>
+                        </div>
+                        <div class="comparison-subject">
+                            <span>RED</span>
+                            <span class="subject-pill">7.5</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="comparison-card">
+                    <div class="comparison-header">
+                        <h4>2º Trimestre</h4>
+                        <span class="positive">↑ 0.3</span>
+                    </div>
+                    <div class="comparison-value">7.1</div>
+                    <div class="comparison-details">
+                        <div class="comparison-detail">
+                            <span>Faltas</span>
+                            <span>4</span>
+                        </div>
+                        <div class="comparison-detail">
+                            <span>Entregas</span>
+                            <span>90%</span>
+                        </div>
+                        <div class="comparison-detail">
+                            <span>Ranking</span>
+                            <span>10º</span>
+                        </div>
+                    </div>
+                    <div class="comparison-subjects">
+                        <div class="comparison-subject">
+                            <span>LING</span>
+                            <span class="subject-pill">7.2</span>
+                        </div>
+                        <div class="comparison-subject">
+                            <span>MAT</span>
+                            <span class="subject-pill">6.2</span>
+                        </div>
+                        <div class="comparison-subject">
+                            <span>HUM</span>
+                            <span class="subject-pill">6.8</span>
+                        </div>
+                        <div class="comparison-subject">
+                            <span>NAT</span>
+                            <span class="subject-pill">5.7</span>
+                        </div>
+                        <div class="comparison-subject">
+                            <span>RED</span>
+                            <span class="subject-pill">7.8</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="comparison-card current">
+                    <div class="comparison-header">
+                        <h4>3º Trimestre</h4>
+                        <span class="positive">↑ 0.3</span>
+                    </div>
+                    <div class="comparison-value">7.4</div>
+                    <div class="comparison-details">
+                        <div class="comparison-detail">
+                            <span>Faltas</span>
+                            <span>3</span>
+                        </div>
+                        <div class="comparison-detail">
+                            <span>Entregas</span>
+                            <span>92%</span>
+                        </div>
+                        <div class="comparison-detail">
+                            <span>Ranking</span>
+                            <span>8º</span>
+                        </div>
+                    </div>
+                    <div class="comparison-subjects">
+                        <div class="comparison-subject">
+                            <span>LING</span>
+                            <span class="subject-pill">7.5</span>
+                        </div>
+                        <div class="comparison-subject">
+                            <span>MAT</span>
+                            <span class="subject-pill">6.5</span>
+                        </div>
+                        <div class="comparison-subject">
+                            <span>HUM</span>
+                            <span class="subject-pill">7.0</span>
+                        </div>
+                        <div class="comparison-subject">
+                            <span>NAT</span>
+                            <span class="subject-pill">6.0</span>
+                        </div>
+                        <div class="comparison-subject">
+                            <span>RED</span>
+                            <span class="subject-pill">8.0</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+                    // Inicializar os gráficos quando o DOM estiver carregado
+        document.addEventListener('DOMContentLoaded', function() {
+            // Gráfico de evolução das notas
+            const evolutionCtx = document.getElementById('evolutionChart').getContext('2d');
+            const evolutionChart = new Chart(evolutionCtx, {
+                type: 'line',
+                data: {
+                    labels: ['Jan', 'Fev', 'Mar', 'Abr'],
+                    datasets: [
+                        {
+                            label: 'LING',
+                            data: [6.8, 7.0, 7.2, 7.5],
+                            borderColor: '#3b82f6',
+                            backgroundColor: 'rgba(59, 130, 246, 0.1)',
+                            tension: 0.3
+                        },
+                        {
+                            label: 'MAT',
+                            data: [5.9, 6.0, 6.2, 6.5],
+                            borderColor: '#2563eb',
+                            backgroundColor: 'rgba(37, 99, 235, 0.1)',
+                            tension: 0.3
+                        },
+                        {
+                            label: 'HUM',
+                            data: [6.5, 6.8, 6.9, 7.0],
+                            borderColor: '#1d4ed8',
+                            backgroundColor: 'rgba(29, 78, 216, 0.1)',
+                            tension: 0.3
+                        },
+                        {
+                            label: 'NAT',
+                            data: [5.7, 5.8, 5.9, 6.0],
+                            borderColor: '#1e40af',
+                            backgroundColor: 'rgba(30, 64, 175, 0.1)',
+                            tension: 0.3
+                        },
+                        {
+                            label: 'RED',
+                            data: [7.2, 7.5, 7.6, 8.0],
+                            borderColor: '#1e3a8a',
+                            backgroundColor: 'rgba(30, 58, 138, 0.1)',
+                            tension: 0.3
+                        }
+                    ]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: false,
+                            min: 5,
+                            max: 10
+                        }
+                    }
+                }
+            });
+
+            // Gráfico de faltas por mês
+            const attendanceCtx = document.getElementById('attendanceChart').getContext('2d');
+            const attendanceChart = new Chart(attendanceCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Jan', 'Fev', 'Mar', 'Abr'],
+                    datasets: [{
+                        label: 'Faltas',
+                        data: [2, 1, 3, 0],
+                        backgroundColor: '#ef4444',
+                        borderColor: '#dc2626',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 5
+                        }
+                    }
+                }
+            });
+
+            // Gráfico de taxa de entrega
+            const deliveryCtx = document.getElementById('deliveryChart').getContext('2d');
+            const deliveryChart = new Chart(deliveryCtx, {
+                type: 'bar',
+                data: {
+                    labels: ['Jan', 'Fev', 'Mar', 'Abr'],
+                    datasets: [{
+                        label: 'Taxa de Entrega (%)',
+                        data: [90, 95, 85, 100],
+                        backgroundColor: '#22c55e',
+                        borderColor: '#16a34a',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: {
+                            beginAtZero: true,
+                            max: 100
+                        }
+                    }
+                }
+            });
+
+            // Gráfico radar de habilidades
+            const skillsCtx = document.getElementById('skillsChart').getContext('2d');
+            const skillsChart = new Chart(skillsCtx, {
+                type: 'radar',
+                data: {
+                    labels: [
+                        'Gramática',
+                        'Redação',
+                        'Álgebra',
+                        'Geometria',
+                        'Física',
+                        'Química',
+                        'História',
+                        'Geografia'
+                    ],
+                    datasets: [{
+                        label: 'Habilidades',
+                        data: [8.2, 7.9, 6.0, 7.0, 5.8, 6.2, 7.5, 6.7],
+                        backgroundColor: 'rgba(59, 130, 246, 0.2)',
+                        borderColor: '#3b82f6',
+                        pointBackgroundColor: '#3b82f6',
+                        pointBorderColor: '#fff',
+                        pointHoverBackgroundColor: '#fff',
+                        pointHoverBorderColor: '#3b82f6'
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        r: {
+                            angleLines: {
+                                display: true
+                            },
+                            suggestedMin: 0,
+                            suggestedMax: 10
+                        }
+                    }
+                }
+            });
+        });
+    </script>
+    <script src="../scripts/relatorio.js"></script>
+    <script src="../../common/scripts/changepass.js"></script>
+    <script src="../../common/scripts/exitpopup.js"></script>
+    <script src="../../common/scripts/menu.js"></script>    
+</body>
+</html>

@@ -1,433 +1,551 @@
 document.addEventListener("DOMContentLoaded", function() {
+    // ===== ELEMENTOS DOM =====
+    // Atividades e modais
+    const activityCards = document.querySelectorAll(".activity-card");
+    const tabButtons = document.querySelectorAll(".tab-button");
+    const calendarBtn = document.getElementById("btn-calendario");
+    const reportsBtn = document.getElementById("btn-relatorios");
+    const newActivityBtn = document.getElementById("btn-criar-atividade");
+    const activityModal = document.getElementById("activity-modal");
+    const deliveriesModal = document.getElementById("deliveries-modal");
+    const closeModalButtons = document.querySelectorAll(".close-modal");
+    const editButtons = document.querySelectorAll(".btn-edit");
+    const viewDeliveriesButtons = document.querySelectorAll(".btn-view-deliveries");
     
-    const sidebar = document.getElementById("sidebar");
-    const menuIconSidebar = document.getElementById("menu-icon");
-    const menuIconMobile = document.getElementById("menu-icon-mobile");
+    // Filtros
+    const turmaSelect = document.getElementById("turma-select");
+    const materiaSelect = document.getElementById("materia-select");
+    const statusSelect = document.getElementById("status-select");
+    const periodoSelect = document.getElementById("periodo-select");
+    const searchInput = document.getElementById("search-input");
     
+    // Formulário
+    const activityForm = document.getElementById("activity-form");
+    const fileUploadArea = document.querySelector(".file-upload-area");
+    const fileInput = document.getElementById("activity-files");
+    const uploadedFilesContainer = document.querySelector(".uploaded-files");
+    const startDateInput = document.getElementById("activity-start-date");
+    const dueDateInput = document.getElementById("activity-due-date");
     
-    const notificationsIcon = document.getElementById("notifications-icon");
-    const notificationsPopup = document.getElementById("notifications-popup");
-    const userIcon = document.getElementById("user-icon");
-    const userIconPopup = document.getElementById("user-icon-popup");
+    // Modal de entregas
+    const deliveryTabs = document.querySelectorAll(".tabs .tab");
+    const tabContents = document.querySelectorAll(".tab-content");
+    const deliveryStatusFilter = document.getElementById("delivery-status-filter");
+    const deliverySearchInput = document.querySelector(".search-delivery input");
     
+    // ===== MODAIS =====
     
-    const activitiesList = document.querySelector('.activities-list');
-    const newActivityBtn = document.getElementById('new-activity-btn');
-    const activityModal = document.getElementById('activity-modal');
-    const deliveryModal = document.getElementById('delivery-modal');
-    const activityForm = document.getElementById('activity-form');
-    const closeModalBtns = document.querySelectorAll('.close-modal, .close-delivery-modal');
-    const applyFiltersBtn = document.getElementById('apply-filters');
-    
-    
-    let activities = [
-        {
-            id: 1,
-            title: "Exercícios de Matemática",
-            class: "A",
-            year: "1",
-            subject: "matematica",
-            dueDate: "2023-11-15",
-            questions: "1. Resolva as equações:\na) 2x + 5 = 17\nb) 3(x - 4) = 21\n\n2. Calcule a área de um retângulo com lados 5cm e 8cm.\n\n3. Resolva o problema:\nJoão tem 12 anos e é 3 anos mais novo que Maria. Quantos anos Maria tem?",
-            deliveries: {
-                delivered: [
-                    { name: "João Silva", date: "2023-11-14" },
-                    { name: "Maria Oliveira", date: "2023-11-13" }
-                ],
-                notDelivered: [
-                    { name: "Carlos Souza" },
-                    { name: "Ana Pereira" }
-                ]
-            }
-        },
-        {
-            id: 2,
-            title: "Redação sobre Sustentabilidade",
-            class: "B",
-            year: "2",
-            subject: "portugues",
-            dueDate: "2023-11-20",
-            questions: "Escreva uma redação de 30 linhas sobre sustentabilidade ambiental, abordando:\n\n- O conceito de desenvolvimento sustentável\n- Os principais problemas ambientais atuais\n- O que podemos fazer no dia a dia para preservar o meio ambiente\n\nA redação deve seguir a estrutura dissertativa-argumentativa com introdução, desenvolvimento e conclusão.",
-            deliveries: {
-                delivered: [
-                    { name: "Pedro Costa", date: "2023-11-19" }
-                ],
-                notDelivered: [
-                    { name: "Juliana Santos" },
-                    { name: "Lucas Martins" },
-                    { name: "Fernanda Lima" }
-                ]
-            }
-        },
-        {
-            id: 3,
-            title: "Revolução Industrial",
-            class: "C",
-            year: "3",
-            subject: "historia",
-            dueDate: "2023-11-18",
-            questions: "1. Quais foram as principais causas da Revolução Industrial na Inglaterra?\n\n2. Descreva as condições de trabalho nas fábricas durante a Revolução Industrial.\n\n3. Quais foram as consequências sociais da Revolução Industrial?\n\n4. Compare a Primeira e a Segunda Revolução Industrial.",
-            deliveries: {
-                delivered: [
-                    { name: "Rafael Almeida", date: "2023-11-17" },
-                    { name: "Camila Rocha", date: "2023-11-16" },
-                    { name: "Gustavo Henrique", date: "2023-11-17" }
-                ],
-                notDelivered: [
-                    { name: "Patricia Mendes" }
-                ]
-            }
-        }
-    ];
-
-    
-    menuIconSidebar.addEventListener("click", function() {
-        sidebar.classList.toggle("active");
-    });
-
-    menuIconMobile.addEventListener("click", function() {
-        sidebar.classList.toggle("active");
-    });
-
-    
-    notificationsIcon.addEventListener("click", function(event) {
-        notificationsPopup.style.display = 
-            (notificationsPopup.style.display === "none" || notificationsPopup.style.display === "") ? "block" : "none";
-        userIconPopup.style.display = "none";
-        event.stopPropagation();
-    });
-
-    userIcon.addEventListener("click", function(event) {
-        userIconPopup.style.display = 
-            (userIconPopup.style.display === "none" || userIconPopup.style.display === "") ? "block" : "none";
-        notificationsPopup.style.display = "none";
-        event.stopPropagation();
-    });
-
-    document.addEventListener("click", function(event) {
-        if (!notificationsPopup.contains(event.target) && event.target !== notificationsIcon) {
-            notificationsPopup.style.display = "none";
-        }
-        if (!userIconPopup.contains(event.target) && event.target !== userIcon) {
-            userIconPopup.style.display = "none";
-        }
-    });
-
-    
-    function checkWindowSize() {
-        if (window.innerWidth > 768) {
-            sidebar.classList.remove("active");
-        }
-    }
-
-    window.addEventListener("resize", checkWindowSize);
-    checkWindowSize();
-
-    
-    loadActivities();
-
-   
-    newActivityBtn.addEventListener('click', () => {
-        openActivityModal();
-    });
-
-    
-    closeModalBtns.forEach(btn => {
-        btn.addEventListener('click', () => {
-            activityModal.style.display = 'none';
-            deliveryModal.style.display = 'none';
-        });
-    });
-
-    
-    window.addEventListener('click', (event) => {
-        if (event.target === activityModal) {
-            activityModal.style.display = 'none';
-        }
-        if (event.target === deliveryModal) {
-            deliveryModal.style.display = 'none';
-        }
-    });
-
-   
-    activityForm.addEventListener('submit', (e) => {
-        e.preventDefault();
-        saveActivity();
-    });
-
-    
-    applyFiltersBtn.addEventListener('click', () => {
-        loadActivities();
-    });
-
-    
-    function loadActivities() {
-        const classFilter = document.getElementById('class-filter').value;
-        const yearFilter = document.getElementById('year-filter').value;
-        const subjectFilter = document.getElementById('subject-filter').value;
-
-        let filteredActivities = activities.filter(activity => {
-            return (classFilter === 'all' || activity.class === classFilter) &&
-                   (yearFilter === 'all' || activity.year === yearFilter) &&
-                   (subjectFilter === 'all' || activity.subject === subjectFilter);
-        });
-
-        renderActivities(filteredActivities);
-    }
-
-    
-    function renderActivities(activitiesToRender) {
-        activitiesList.innerHTML = '';
-
-        if (activitiesToRender.length === 0) {
-            activitiesList.innerHTML = '<p class="no-activities">Nenhuma atividade encontrada com os filtros selecionados.</p>';
-            return;
-        }
-
-        activitiesToRender.forEach(activity => {
-            const activityCard = document.createElement('div');
-            activityCard.className = 'activity-card';
-            activityCard.dataset.id = activity.id;
-
-            const dueDate = new Date(activity.dueDate);
-            const formattedDate = dueDate.toLocaleDateString('pt-BR');
-
-            activityCard.innerHTML = `
-                <h3>${activity.title}</h3>
-                <div class="activity-meta">
-                    <span class="activity-meta-item">
-                        <span class="material-symbols-outlined">groups</span>
-                        Turma ${activity.class} - ${activity.year}º Ano
-                    </span>
-                    <span class="activity-meta-item">
-                        <span class="material-symbols-outlined">book</span>
-                        ${getSubjectName(activity.subject)}
-                    </span>
-                </div>
-                <div class="activity-due-date">
-                    <span class="label">Data de entrega:</span>
-                    <span class="date">${formattedDate}</span>
-                </div>
-                <div class="activity-actions">
-                    <button class="action-btn edit" data-id="${activity.id}">
-                        <span class="material-symbols-outlined">edit</span>
-                        Editar
-                    </button>
-                    <button class="action-btn delete" data-id="${activity.id}">
-                        <span class="material-symbols-outlined">delete</span>
-                        Excluir
-                    </button>
-                    <button class="action-btn view-deliveries" data-id="${activity.id}">
-                        <span class="material-symbols-outlined">visibility</span>
-                        Entregas
-                    </button>
-                </div>
-            `;
-
-            activitiesList.appendChild(activityCard);
-        });
-
+    // Abrir modal de nova atividade
+    function openActivityModal(isEdit = false, activityId = null) {
+        const modalTitle = document.getElementById("modal-title");
         
-        document.querySelectorAll('.action-btn.edit').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const activityId = parseInt(e.currentTarget.dataset.id);
-                openActivityModal(activityId);
-            });
-        });
-
-        document.querySelectorAll('.action-btn.delete').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const activityId = parseInt(e.currentTarget.dataset.id);
-                deleteActivity(activityId);
-            });
-        });
-
-        document.querySelectorAll('.action-btn.view-deliveries').forEach(btn => {
-            btn.addEventListener('click', (e) => {
-                const activityId = parseInt(e.currentTarget.dataset.id);
-                viewDeliveries(activityId);
-            });
-        });
-    }
-
-    
-    function openActivityModal(activityId = null) {
-        const modalTitle = document.getElementById('modal-title');
-        const form = document.getElementById('activity-form');
+        // Resetar formulário
+        activityForm.reset();
         
-        if (activityId) {
+        if (isEdit) {
+            modalTitle.textContent = "Editar Atividade";
             
-            modalTitle.textContent = 'Editar Atividade';
-            const activity = activities.find(a => a.id === activityId);
-            
-            document.getElementById('activity-title').value = activity.title;
-            document.getElementById('activity-class').value = activity.class;
-            document.getElementById('activity-year').value = activity.year;
-            document.getElementById('activity-subject').value = activity.subject;
-            document.getElementById('activity-due-date').value = activity.dueDate;
-            document.getElementById('activity-questions').value = activity.questions;
-            
-            form.dataset.editId = activityId;
+            // Simulação de preenchimento para edição
+            // Em uma aplicação real, você buscaria os dados da atividade pelo ID
+            if (activityId) {
+                // Simulação de dados para demonstração
+                const sampleData = {
+                    title: "Exercícios de Álgebra",
+                    subject: "matematica",
+                    type: "exercicios",
+                    description: "Lista com exercícios sobre equações do 2º grau e função quadrática.",
+                    turmas: ["2-A"],
+                    startDate: "2025-05-09",
+                    dueDate: "2025-05-16",
+                    dueTime: "23:59",
+                    instructions: "Resolver os exercícios 1 ao 10 da página 45 do livro didático.\n\nMostrar todos os cálculos e procedimentos utilizados.",
+                    points: 10,
+                    category: "tarefa"
+                };
+                
+                // Preencher o formulário com os dados da atividade
+                document.getElementById("activity-title").value = sampleData.title;
+                document.getElementById("activity-subject").value = sampleData.subject;
+                document.getElementById("activity-type").value = sampleData.type;
+                document.getElementById("activity-description").value = sampleData.description;
+                document.getElementById("activity-start-date").value = sampleData.startDate;
+                document.getElementById("activity-due-date").value = sampleData.dueDate;
+                document.getElementById("activity-due-time").value = sampleData.dueTime;
+                document.getElementById("activity-instructions").value = sampleData.instructions;
+                document.getElementById("activity-points").value = sampleData.points;
+                document.getElementById("activity-category").value = sampleData.category;
+                
+                // Marcar as turmas
+                sampleData.turmas.forEach(turma => {
+                    const checkbox = document.getElementById(`turma-${turma}`);
+                    if (checkbox) checkbox.checked = true;
+                });
+                
+                // Simular arquivos anexados
+                updateFileList(["Exercicios_Algebra.pdf", "Gabarito_Professor.pdf"]);
+            }
         } else {
-          
-            modalTitle.textContent = 'Nova Atividade';
-            form.reset();
-            delete form.dataset.editId;
+            modalTitle.textContent = "Nova Atividade";
             
-          
+            // Definir valores padrão
             const today = new Date();
             const nextWeek = new Date(today);
             nextWeek.setDate(today.getDate() + 7);
-            const formattedDate = nextWeek.toISOString().split('T')[0];
-            document.getElementById('activity-due-date').value = formattedDate;
-        }
-        
-        activityModal.style.display = 'block';
-    }
-
-    
-    function saveActivity() {
-        const form = document.getElementById('activity-form');
-        const isEdit = form.dataset.editId !== undefined;
-        
-        const activityData = {
-            title: document.getElementById('activity-title').value,
-            class: document.getElementById('activity-class').value,
-            year: document.getElementById('activity-year').value,
-            subject: document.getElementById('activity-subject').value,
-            dueDate: document.getElementById('activity-due-date').value,
-            questions: document.getElementById('activity-questions').value
-        };
-        
-        if (isEdit) {
             
-            const activityId = parseInt(form.dataset.editId);
-            const index = activities.findIndex(a => a.id === activityId);
-            
-            if (index !== -1) {
-                
-                activityData.id = activityId;
-                activityData.deliveries = activities[index].deliveries;
-                activities[index] = activityData;
-            }
-        } else {
-            
-            const newId = activities.length > 0 ? Math.max(...activities.map(a => a.id)) + 1 : 1;
-            activityData.id = newId;
-            activityData.deliveries = {
-                delivered: [],
-                notDelivered: generateStudentList(activityData.class, activityData.year)
+            const formatDate = (date) => {
+                return date.toISOString().split('T')[0];
             };
-            activities.push(activityData);
+            
+            startDateInput.value = formatDate(today);
+            dueDateInput.value = formatDate(nextWeek);
+            
+            // Resetar a lista de arquivos
+            uploadedFilesContainer.innerHTML = '<div class="no-files">Nenhum arquivo anexado</div>';
         }
         
-        loadActivities();
-        activityModal.style.display = 'none';
+        activityModal.style.display = "block";
     }
-
     
-    function deleteActivity(activityId) {
-        if (confirm('Tem certeza que deseja excluir esta atividade? Esta ação não pode ser desfeita.')) {
-            activities = activities.filter(a => a.id !== activityId);
-            loadActivities();
+    // Abrir modal de entregas
+    function openDeliveriesModal(activityId) {
+        // Aqui você buscaria os dados reais da atividade e suas entregas
+        // Vou simular os dados para demonstração
+        const activityTitle = activityId ? 
+            document.querySelector(`.activity-card[data-id="${activityId}"] .activity-title`)?.textContent : 
+            "Exercícios de Álgebra";
+        
+        const activityClass = activityId ? 
+            document.querySelector(`.activity-card[data-id="${activityId}"] .activity-turma`)?.textContent : 
+            "2º Ano A";
+        
+        document.getElementById("deliveries-modal-title").textContent = `Entregas: ${activityTitle} - ${activityClass}`;
+        
+        // Ativar a primeira aba
+        deliveryTabs[0].classList.add("active");
+        tabContents[0].classList.add("active");
+        deliveryTabs[1].classList.remove("active");
+        tabContents[1].classList.remove("active");
+        
+        deliveriesModal.style.display = "block";
+    }
+    
+    // Fechar modais
+    function closeModals() {
+        activityModal.style.display = "none";
+        deliveriesModal.style.display = "none";
+    }
+    
+    // Fechar modal ao clicar fora
+    function closeModalOnClickOutside(event) {
+        if (event.target === activityModal) {
+            activityModal.style.display = "none";
+        }
+        if (event.target === deliveriesModal) {
+            deliveriesModal.style.display = "none";
         }
     }
-
     
-    function viewDeliveries(activityId) {
-        const activity = activities.find(a => a.id === activityId);
-        if (!activity) return;
+    // ===== GERENCIAMENTO DE ARQUIVOS =====
+    
+    // Atualizar lista de arquivos
+    function updateFileList(files = []) {
+        if (files.length === 0) {
+            uploadedFilesContainer.innerHTML = '<div class="no-files">Nenhum arquivo anexado</div>';
+            return;
+        }
         
-        document.getElementById('delivery-modal-title').textContent = `Entregas: ${activity.title}`;
-        document.getElementById('total-students').textContent = 
-            activity.deliveries.delivered.length + activity.deliveries.notDelivered.length;
-        document.getElementById('delivered-count').textContent = activity.deliveries.delivered.length;
-        document.getElementById('not-delivered-count').textContent = activity.deliveries.notDelivered.length;
-        
-        document.getElementById('delivered-tab-count').textContent = activity.deliveries.delivered.length;
-        document.getElementById('not-delivered-tab-count').textContent = activity.deliveries.notDelivered.length;
-        
-        
-        const deliveredList = document.getElementById('delivered-list');
-        deliveredList.innerHTML = '';
-        activity.deliveries.delivered.forEach(student => {
-            const li = document.createElement('li');
-            li.innerHTML = `
-                <span class="student-name">${student.name}</span>
-                <span class="student-delivery-date">Entregue em: ${formatDeliveryDate(student.date)}</span>
+        let fileListHTML = '';
+        files.forEach((file, index) => {
+            const fileName = typeof file === 'string' ? file : file.name;
+            const fileExt = fileName.split('.').pop().toLowerCase();
+            let fileIcon = 'description';
+            
+            // Ícones baseados na extensão
+            if (['jpg', 'jpeg', 'png', 'gif', 'svg'].includes(fileExt)) {
+                fileIcon = 'image';
+            } else if (['pdf'].includes(fileExt)) {
+                fileIcon = 'picture_as_pdf';
+            } else if (['doc', 'docx'].includes(fileExt)) {
+                fileIcon = 'article';
+            } else if (['xls', 'xlsx'].includes(fileExt)) {
+                fileIcon = 'table_view';
+            } else if (['ppt', 'pptx'].includes(fileExt)) {
+                fileIcon = 'slideshow';
+            }
+            
+            fileListHTML += `
+                <div class="file-item">
+                    <span class="material-symbols-outlined">${fileIcon}</span>
+                    <span class="file-name">${fileName}</span>
+                    <button class="btn-remove-file" data-index="${index}">
+                        <span class="material-symbols-outlined">close</span>
+                    </button>
+                </div>
             `;
-            deliveredList.appendChild(li);
         });
         
+        uploadedFilesContainer.innerHTML = fileListHTML;
         
-        const notDeliveredList = document.getElementById('not-delivered-list');
-        notDeliveredList.innerHTML = '';
-        activity.deliveries.notDelivered.forEach(student => {
-            const li = document.createElement('li');
-            li.innerHTML = `
-                <span class="student-name">${student.name}</span>
-                <span class="student-delivery-date">Pendente</span>
-            `;
-            notDeliveredList.appendChild(li);
-        });
-        
-        
-        setupTabs();
-        
-        deliveryModal.style.display = 'block';
-    }
-
-    
-    function getSubjectName(subjectKey) {
-        const subjects = {
-            matematica: 'Matemática',
-            portugues: 'Português',
-            historia: 'História',
-            geografia: 'Geografia',
-            ciencias: 'Ciências',
-            ingles: 'Inglês'
-        };
-        return subjects[subjectKey] || subjectKey;
-    }
-
-    function formatDeliveryDate(dateString) {
-        const date = new Date(dateString);
-        return date.toLocaleDateString('pt-BR');
-    }
-
-    function generateStudentList(classLetter, year) {
-        
-        const firstNames = ["João", "Maria", "Carlos", "Ana", "Pedro", "Juliana", "Lucas", "Fernanda", "Rafael", "Camila", "Gustavo", "Patricia"];
-        const lastNames = ["Silva", "Oliveira", "Souza", "Pereira", "Costa", "Santos", "Martins", "Lima", "Almeida", "Rocha", "Henrique", "Mendes"];
-        
-       
-        const studentNames = [];
-        for (let i = 0; i < 8; i++) {
-            const firstName = firstNames[Math.floor(Math.random() * firstNames.length)];
-            const lastName = lastNames[Math.floor(Math.random() * lastNames.length)];
-            studentNames.push(`${firstName} ${lastName}`);
-        }
-        
-        return studentNames.map(name => ({ name }));
-    }
-
-    function setupTabs() {
-        const tabBtns = document.querySelectorAll('.tab-btn');
-        const tabContents = document.querySelectorAll('.tab-content');
-        
-        tabBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-               
-                tabBtns.forEach(b => b.classList.remove('active'));
-                tabContents.forEach(c => c.classList.remove('active'));
+        // Adicionar event listeners para remover arquivos
+        document.querySelectorAll('.btn-remove-file').forEach(button => {
+            button.addEventListener('click', function() {
+                const index = this.dataset.index;
+                // Em uma aplicação real, você removeria o arquivo do FormData ou do servidor
+                this.closest('.file-item').remove();
                 
-                
-                btn.classList.add('active');
-                
-                
-                const tabId = btn.dataset.tab + '-tab';
-                document.getElementById(tabId).classList.add('active');
+                // Se não houver mais arquivos, mostrar mensagem
+                if (uploadedFilesContainer.querySelectorAll('.file-item').length === 0) {
+                    uploadedFilesContainer.innerHTML = '<div class="no-files">Nenhum arquivo anexado</div>';
+                }
             });
         });
     }
+    
+    // Processar upload de arquivos
+    function handleFileUpload(event) {
+        const files = event.target.files;
+        if (files.length === 0) return;
+        
+        const fileNames = Array.from(files).map(file => file.name);
+        updateFileList(fileNames);
+    }
+    
+    // ===== FILTROS E PESQUISA =====
+    
+    // Filtrar atividades
+    function filterActivities() {
+        const turmaFilter = turmaSelect.value;
+        const materiaFilter = materiaSelect.value;
+        const statusFilter = statusSelect.value;
+        const periodoFilter = periodoSelect.value;
+        const searchFilter = searchInput.value.toLowerCase();
+        
+        activityCards.forEach(card => {
+            const turmaMatch = turmaFilter === 'todas' || card.dataset.turma === turmaFilter;
+            const materiaMatch = materiaFilter === 'todas' || card.dataset.materia === materiaFilter;
+            const statusMatch = statusFilter === 'todos' || card.dataset.status === statusFilter;
+            // Simulamos o período para demonstração
+            const periodoMatch = periodoFilter === 'todos' || true;
+            
+            // Busca no título e descrição
+            const title = card.querySelector('.activity-title').textContent.toLowerCase();
+            const description = card.querySelector('.activity-description').textContent.toLowerCase();
+            const searchMatch = title.includes(searchFilter) || description.includes(searchFilter);
+            
+            if (turmaMatch && materiaMatch && statusMatch && periodoMatch && searchMatch) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+    
+    // Filtrar por abas
+    function filterByTab(tabName) {
+        activityCards.forEach(card => {
+            if (tabName === 'todas' || card.dataset.status === tabName) {
+                card.style.display = 'flex';
+            } else {
+                card.style.display = 'none';
+            }
+        });
+    }
+    
+    // Filtrar entregas
+    function filterDeliveries() {
+        const statusFilter = deliveryStatusFilter.value;
+        const searchFilter = deliverySearchInput.value.toLowerCase();
+        
+        // Lógica para filtrar entregas baseada no status e termos de busca
+        // Em uma aplicação real, você manipularia as linhas da tabela
+        console.log(`Filtrando entregas por status: ${statusFilter} e busca: ${searchFilter}`);
+    }
+    
+    // ===== MANIPULAÇÃO DO FORMULÁRIO =====
+    
+    // Enviar formulário
+    function submitActivityForm(event) {
+        event.preventDefault();
+        
+        // Validar que pelo menos uma turma foi selecionada
+        const selectedTurmas = document.querySelectorAll('input[name="turmas[]"]:checked');
+        if (selectedTurmas.length === 0) {
+            alert("Selecione pelo menos uma turma para a atividade.");
+            return;
+        }
+        
+        // Validar datas
+        const startDate = new Date(startDateInput.value);
+        const dueDate = new Date(dueDateInput.value);
+        
+        if (dueDate < startDate) {
+            alert("A data de entrega não pode ser anterior à data de início.");
+            return;
+        }
+        
+        // Aqui você enviaria os dados para o servidor
+        // Simularemos uma resposta bem-sucedida
+        
+        // Fechar o modal
+        activityModal.style.display = "none";
+        
+        // Mostrar mensagem de sucesso
+        showNotification("Atividade publicada com sucesso!");
+        
+        // Atualizar a lista de atividades (simulado)
+        // Em uma aplicação real, você buscaria a lista atualizada do servidor
+        setTimeout(() => {
+            window.location.reload();
+        }, 500);
+    }
+    
+    // Salvar como rascunho
+    function saveAsDraft() {
+        // Aqui você enviaria os dados para o servidor como rascunho
+        
+        // Fechar o modal
+        activityModal.style.display = "none";
+        
+        // Mostrar mensagem de sucesso
+        showNotification("Rascunho salvo com sucesso!");
+    }
+    
+    // Mostrar notificação
+    function showNotification(message) {
+        const notification = document.createElement("div");
+        notification.className = "notification-toast";
+        notification.textContent = message;
+        
+        document.body.appendChild(notification);
+        
+        setTimeout(() => {
+            notification.classList.add("show");
+        }, 100);
+        
+        setTimeout(() => {
+            notification.classList.remove("show");
+            setTimeout(() => {
+                notification.remove();
+            }, 300);
+        }, 3000);
+    }
+    
+    // ===== REDIRECIONAMENTOS =====
+    
+    // Redirecionar para a página de calendário
+    function redirectToCalendar() {
+        // Em uma aplicação real, você redirecionaria para a página de calendário
+        showNotification("Redirecionando para o calendário...");
+    }
+    
+    // Redirecionar para a página de relatórios
+    function redirectToReports() {
+        // Em uma aplicação real, você redirecionaria para a página de relatórios
+        showNotification("Redirecionando para os relatórios...");
+    }
+    
+    // ===== EVENT LISTENERS =====
+    
+    // Modais
+    newActivityBtn.addEventListener("click", () => openActivityModal(false));
+    
+    editButtons.forEach(button => {
+        button.addEventListener("click", function() {
+            const activityCard = this.closest('.activity-card');
+            const activityId = activityCard ? activityCard.dataset.id : null;
+            openActivityModal(true, activityId);
+        });
+    });
+    
+    viewDeliveriesButtons.forEach(button => {
+        button.addEventListener("click", function() {
+            const activityCard = this.closest('.activity-card');
+            const activityId = activityCard ? activityCard.dataset.id : null;
+            openDeliveriesModal(activityId);
+        });
+    });
+    
+    closeModalButtons.forEach(button => {
+        button.addEventListener("click", closeModals);
+    });
+    
+    window.addEventListener("click", closeModalOnClickOutside);
+    
+    // Filtros
+    turmaSelect.addEventListener("change", filterActivities);
+    materiaSelect.addEventListener("change", filterActivities);
+    statusSelect.addEventListener("change", filterActivities);
+    periodoSelect.addEventListener("change", filterActivities);
+    
+    // Pesquisa com debounce
+    let searchTimeout;
+    searchInput.addEventListener("input", function() {
+        clearTimeout(searchTimeout);
+        searchTimeout = setTimeout(filterActivities, 300);
+    });
+    
+    // Abas
+    tabButtons.forEach(button => {
+        button.addEventListener("click", function() {
+            tabButtons.forEach(btn => btn.classList.remove("active"));
+            this.classList.add("active");
+            filterByTab(this.dataset.tab);
+        });
+    });
+    
+    // Abas no modal de entregas
+    deliveryTabs.forEach(tab => {
+        tab.addEventListener("click", function() {
+            const tabName = this.dataset.tab;
+            
+            // Desativar todas as abas
+            deliveryTabs.forEach(t => t.classList.remove("active"));
+            tabContents.forEach(c => c.classList.remove("active"));
+            
+            // Ativar a aba clicada
+            this.classList.add("active");
+            document.getElementById(`${tabName}-tab`).classList.add("active");
+        });
+    });
+    
+    // Filtros de entregas
+    deliveryStatusFilter.addEventListener("change", filterDeliveries);
+    
+    // Pesquisa de entregas com debounce
+    let deliverySearchTimeout;
+    deliverySearchInput.addEventListener("input", function() {
+        clearTimeout(deliverySearchTimeout);
+        deliverySearchTimeout = setTimeout(filterDeliveries, 300);
+    });
+    
+    // Upload de arquivos
+    fileUploadArea.addEventListener("click", function() {
+        fileInput.click();
+    });
+    
+    fileInput.addEventListener("change", handleFileUpload);
+    
+    // Permitir arrastar e soltar arquivos
+    fileUploadArea.addEventListener("dragover", function(e) {
+        e.preventDefault();
+        this.classList.add("dragover");
+    });
+    
+    fileUploadArea.addEventListener("dragleave", function() {
+        this.classList.remove("dragover");
+    });
+    
+    fileUploadArea.addEventListener("drop", function(e) {
+        e.preventDefault();
+        this.classList.remove("dragover");
+        
+        const files = e.dataTransfer.files;
+        if (files.length > 0) {
+            const fileNames = Array.from(files).map(file => file.name);
+            updateFileList(fileNames);
+        }
+    });
+    
+    // Formulário
+    activityForm.addEventListener("submit", submitActivityForm);
+    
+    const saveDraftBtn = document.querySelector(".btn-save-draft");
+    if (saveDraftBtn) {
+        saveDraftBtn.addEventListener("click", saveAsDraft);
+    }
+    
+    // Redirecionamentos
+    calendarBtn.addEventListener("click", redirectToCalendar);
+    reportsBtn.addEventListener("click", redirectToReports);
+    
+    // ===== INICIALIZAÇÃO =====
+    
+    // Definir IDs para os cartões de atividade para edição/visualização
+    activityCards.forEach((card, index) => {
+        card.dataset.id = index + 1;
+    });
+    
+    // Adicionar estilo personalizado para toast de notificação
+    const style = document.createElement('style');
+    style.textContent = `
+        .notification-toast {
+            position: fixed;
+            bottom: -60px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: #0048a5;
+            color: white;
+            padding: 12px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            z-index: 2000;
+            transition: bottom 0.3s ease;
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 14px;
+        }
+        
+        .notification-toast.show {
+            bottom: 30px;
+        }
+        
+        .dark-theme .notification-toast {
+            background-color: #3b82f6;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        }
+        
+        .file-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 12px;
+            background-color: #f8fafc;
+            border-radius: 6px;
+            margin-bottom: 8px;
+        }
+        
+        .dark-theme .file-item {
+            background-color: #1e293b;
+        }
+        
+        .file-name {
+            flex: 1;
+            font-size: 14px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        
+        .btn-remove-file {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: #94a3b8;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2px;
+            border-radius: 4px;
+        }
+        
+        .btn-remove-file:hover {
+            background-color: #f1f5f9;
+            color: #475569;
+        }
+        
+        .dark-theme .btn-remove-file:hover {
+            background-color: #334155;
+            color: #cbd5e1;
+        }
+        
+        .file-upload-area.dragover {
+            border-color: #0048a5;
+            background-color: #eef6ff;
+        }
+        
+        .dark-theme .file-upload-area.dragover {
+            border-color: #3b82f6;
+            background-color: #0f172a;
+        }
+    `;
+    document.head.appendChild(style);
 });

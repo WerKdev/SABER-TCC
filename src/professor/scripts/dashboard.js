@@ -1,50 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
     
-    // Inicialização do sidebar e menus
-    const sidebar = document.getElementById("sidebar");
-    const menuIconSidebar = document.getElementById("menu-icon");
-    const menuIconMobile = document.getElementById("menu-icon-mobile");
-    
-    menuIconSidebar.addEventListener("click", function() {
-        sidebar.classList.toggle("active");
-    });
-    
-    menuIconMobile.addEventListener("click", function() {
-        sidebar.classList.toggle("active"); 
-    });
-    
-    // Configuração do menu de notificações
-    const notificationsIcon = document.getElementById("notifications-icon");
-    const notificationsPopup = document.getElementById("notifications-popup");
-    
-    notificationsIcon.addEventListener("click", function(event) {
-        notificationsPopup.style.display = 
-            (notificationsPopup.style.display === "none" || notificationsPopup.style.display === "") ? "block" : "none";
-        event.stopPropagation();
-    });
-    
-    document.addEventListener("click", function(event) {
-        if (!notificationsPopup.contains(event.target) && event.target !== notificationsIcon) {
-            notificationsPopup.style.display = "none";
-        }
-    });
-    
-    // Configuração do menu de usuário
-    const userIcon = document.getElementById("user-icon");
-    const userIconPopup = document.getElementById("user-icon-popup");
-    
-    userIcon.addEventListener("click", function(event) {
-        userIconPopup.style.display = 
-            (userIconPopup.style.display === "none" || userIconPopup.style.display === "") ? "block" : "none";
-        event.stopPropagation();
-    });
-    
-    document.addEventListener("click", function(event) {
-        if (!userIconPopup.contains(event.target) && event.target !== userIcon) {
-            userIconPopup.style.display = "none";
-        }
-    });
-    
     // Dados para os gráficos - modificado para 3 trimestres
     const performanceDataByClass = {
         'all': {
