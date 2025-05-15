@@ -2,18 +2,28 @@
 
 /* =========== VARIÁVEIS =========== */
 :root {
-    --azul-padrao: #0048a5; /* Azul mais intenso */
-    --azul-hover: #0056c7;
+    --azul-padrao: #222e52;
+    --azul-hover: rgb(59, 77, 119);
     --azul-escuro: #0c142b;
     --background-claro: #f5f7fa;
-    --texto-claro: #030e20;
+    --texto-claro: #0c142b;
     --texto-secundario: #64748b;
     --texto-terciario: #94a3b8;
     --background-escuro: #121212;
     --background-elemento-escuro: #202020;
     --texto-escuro: #e1e1e1;
-    --borda-clara: rgba(0, 0, 0, 0.3);
+    --borda-clara: rgba(0, 0, 0, 0.1);
     --borda-escura: rgba(255, 255, 255, 0.1);
+    --vermelho: #e34040;
+    --vermelho-claro: #fee2e2;
+    --verde: #16a34a;
+    --verde-claro: #dcfce7;
+    --laranja: #f79009;
+    --laranja-claro: #ffedd5;
+    --azul-info: #3b82f6;
+    --azul-info-claro: #dbeafe;
+    --roxo: #8b5cf6;
+    --roxo-claro: #ede9fe;
 }
 
 /* =========== CONFIGURAÇÕES GERAIS =========== */

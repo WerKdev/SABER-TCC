@@ -13,10 +13,8 @@ document.addEventListener("DOMContentLoaded", function() {
     // Encontrar o botão "Ver Calendário"
     const verCalendarioBtn = document.querySelector('.btn-secondary');
     if (verCalendarioBtn) {
-        // Adicionar evento de clique para redirecionamento
         verCalendarioBtn.addEventListener('click', function(e) {
             e.preventDefault();
-            // Redirecionar para a página de calendário
             window.location.href = 'calendario-atividades.html';
         });
     }
@@ -24,10 +22,8 @@ document.addEventListener("DOMContentLoaded", function() {
     // Encontrar o botão "Lista de atividades"
     const listaAtividadesBtn = document.querySelector('.btn-primary');
     if (listaAtividadesBtn) {
-        // Adicionar evento de clique para redirecionamento
         listaAtividadesBtn.addEventListener('click', function(e) {
             e.preventDefault();
-            // Redirecionar para a página de lista de atividades
             window.location.href = 'lista-atividades.html';
         });
     }
@@ -72,11 +68,8 @@ document.addEventListener("DOMContentLoaded", function() {
     // Event listeners para as abas
     tabButtons.forEach(button => {
         button.addEventListener('click', () => {
-            // Remove a classe active de todos os botões
             tabButtons.forEach(btn => btn.classList.remove('active'));
-            // Adiciona a classe active ao botão clicado
             button.classList.add('active');
-            // Filtra as atividades pela aba selecionada
             filterByTab(button.dataset.tab);
         });
     });
@@ -92,17 +85,7 @@ document.addEventListener("DOMContentLoaded", function() {
         clearTimeout(searchTimeout);
         searchTimeout = setTimeout(filterActivities, 300);
     });
-    
-    // Ações rápidas nos cards
-    const quickActionButtons = document.querySelectorAll('.btn-quick-action');
-    quickActionButtons.forEach(button => {
-        button.addEventListener('click', function() {
-            const activityCard = this.closest('.activity-card');
-            const activityId = activityCard.dataset.id;
-            window.location.href = `atividade-status.html?id=${activityId}&action=submit`;
-        });
-    });
-    
+            
     // Configurar dados dinâmicos no popup de feedback
     function updateFeedbackPopup(activityData) {
         const feedbackInfo = feedbackPopup.querySelector('.feedback-info');
@@ -232,52 +215,109 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
 
-    // Função para ajustar altura dos cards
-    function adjustCardHeights() {
+    function preserveCardLayout() {
         const cards = document.querySelectorAll('.activity-card');
-        if (cards.length === 0) return;
         
-        // Reset heights
         cards.forEach(card => {
-            card.style.height = '';
-        });
-        
-        // Encontrar a altura máxima
-        let maxHeight = 0;
-        cards.forEach(card => {
-            const height = card.getBoundingClientRect().height;
-            if (height > maxHeight) {
-                maxHeight = height;
+            // Garante que o card mantenha sua estrutura
+            card.style.minHeight = '280px';
+            card.style.height = '280px';
+            
+            // Garante que as actions fiquem no final
+            const actions = card.querySelector('.activity-actions');
+            if (actions) {
+                actions.style.gridRow = '5';
             }
         });
+    }
+
+    // Chame esta função após aplicar filtros
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('tab-button') || 
+            e.target.closest('.tab-button')) {
+            setTimeout(preserveCardLayout, 10);
+        }
+    });
+
+    function fixCardLayout() {
+        const cards = document.querySelectorAll('.activity-card');
         
-        // Aplicar a altura máxima
         cards.forEach(card => {
-            card.style.height = maxHeight + 'px';
+            // Garante estrutura correta
+            let body = card.querySelector('.activity-body');
+            if (!body) {
+                // Cria o container body se não existir
+                body = document.createElement('div');
+                body.className = 'activity-body';
+                
+                // Move o conteúdo para dentro do body
+                const content = card.querySelector('.activity-content');
+                if (content && content.parentNode === card) {
+                    body.appendChild(content);
+                    // Insere o body após o header
+                    const header = card.querySelector('.activity-header');
+                    if (header) {
+                        header.insertAdjacentElement('afterend', body);
+                    }
+                }
+            }
+            
+            // Força posições absolutas
+            const meta = card.querySelector('.activity-meta');
+            const actions = card.querySelector('.activity-actions');
+            
+            if (meta) {
+                meta.style.position = 'absolute';
+                meta.style.bottom = '75px';
+                meta.style.left = '0';
+                meta.style.right = '0';
+                meta.style.height = '60px';
+            }
+            
+            if (actions) {
+                actions.style.position = 'absolute';
+                actions.style.bottom = '0';
+                actions.style.left = '0';
+                actions.style.right = '0';
+                actions.style.height = '75px';
+                actions.style.backgroundColor = card.closest('body').classList.contains('dark-theme') 
+                    ? 'var(--background-elemento-escuro)' 
+                    : 'white';
+            }
         });
     }
 
-    // Executar ao carregar a página
-    setTimeout(adjustCardHeights, 100);
+    // Executa quando a página carrega
+    document.addEventListener('DOMContentLoaded', fixCardLayout);
 
-    // Executar ao redimensionar
-    let resizeTimer;
-    window.addEventListener('resize', () => {
-        clearTimeout(resizeTimer);
-        resizeTimer = setTimeout(adjustCardHeights, 250);
+    // Executa após mudanças nos filtros
+    document.addEventListener('click', function(e) {
+        if (e.target.classList.contains('tab-button') || 
+            e.target.classList.contains('select-field') ||
+            e.target.closest('.tab-button') ||
+            e.target.closest('.select-field')) {
+            setTimeout(fixCardLayout, 10);
+        }
     });
 
-    // Ajustar após mudanças de filtro
-    const originalFilterActivities = window.filterActivities || filterActivities;
-    window.filterActivities = function() {
-        originalFilterActivities.apply(this, arguments);
-        setTimeout(adjustCardHeights, 100);
+    // Observa mudanças no DOM
+    if (document.querySelector('.activities-list')) {
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                if (mutation.type === 'childList') {
+                    fixCardLayout();
+                }
+            });
+        });
+        
+        const config = { childList: true, subtree: true };
+        observer.observe(document.querySelector('.activities-list'), config);
     }
 
-    // Ajustar após mudanças de aba
-    const originalFilterByTab = window.filterByTab || filterByTab;
-    window.filterByTab = function(tabType) {
-        originalFilterByTab.apply(this, arguments);
-        setTimeout(adjustCardHeights, 100);
-    }
+    // Executa também quando muda o tema
+    document.addEventListener('click', function(e) {
+        if (e.target.id === 'theme-toggle' || e.target.closest('#theme-toggle')) {
+            setTimeout(fixCardLayout, 100);
+        }
+    });
 });

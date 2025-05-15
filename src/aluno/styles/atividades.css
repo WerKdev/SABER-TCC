@@ -1,31 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap');
 
-/* =========== VARIÁVEIS =========== */
-:root {
-    --azul-padrao: #0c142b;
-    --azul-hover: #1a2235;
-    --azul-escuro: #0c142b;
-    --background-claro: #f5f7fa;
-    --texto-claro: #0c142b;
-    --texto-secundario: #64748b;
-    --texto-terciario: #94a3b8;
-    --background-escuro: #121212;
-    --background-elemento-escuro: #202020;
-    --texto-escuro: #e1e1e1;
-    --borda-clara: rgba(0, 0, 0, 0.1);
-    --borda-escura: rgba(255, 255, 255, 0.1);
-    --vermelho: #e34040;
-    --vermelho-claro: #fee2e2;
-    --verde: #16a34a;
-    --verde-claro: #dcfce7;
-    --laranja: #f79009;
-    --laranja-claro: #ffedd5;
-    --azul-info: #3b82f6;
-    --azul-info-claro: #dbeafe;
-    --roxo: #8b5cf6;
-    --roxo-claro: #ede9fe;
-}
-
 /* =========== CONFIGURAÇÕES GERAIS =========== */
 * {
     margin: 0;
@@ -439,9 +413,9 @@ body.dark-theme .tab-button:hover {
     gap: 20px;
     margin-top: 10px;
     margin-bottom: 30px;
-    align-items: stretch;
 }
 
+/* Card com posicionamento absoluto para precisão máxima */
 .activity-card {
     background-color: white;
     border-radius: 8px;
@@ -449,9 +423,8 @@ body.dark-theme .tab-button:hover {
     overflow: hidden;
     position: relative;
     transition: transform 0.2s, box-shadow 0.2s;
-    display: flex;
-    flex-direction: column;
-    min-height: 300px;
+    display: block;
+    height: 280px; /* Altura fixa */
 }
 
 body.dark-theme .activity-card {
@@ -477,6 +450,7 @@ body.dark-theme .activity-card:hover {
     border-radius: 15px;
     font-size: 12px;
     font-weight: 600;
+    z-index: 1;
 }
 
 .activity-status.pendente {
@@ -500,6 +474,8 @@ body.dark-theme .activity-card:hover {
     align-items: center;
     gap: 10px;
     padding: 20px 20px 5px 20px;
+    position: relative;
+    height: 50px;
 }
 
 .activity-icon {
@@ -514,12 +490,21 @@ body.dark-theme .activity-card:hover {
     margin: 0;
 }
 
+/* Container principal do conteúdo */
+.activity-body {
+    position: absolute;
+    top: 50px; /* Após o header */
+    left: 0;
+    right: 0;
+    bottom: 135px; /* Espaço para meta (60px) e actions (75px) */
+    display: flex;
+    flex-direction: column;
+}
+
 /* Conteúdo da atividade */
 .activity-content {
     padding: 0 20px 15px 20px;
     flex: 1;
-    display: flex;
-    flex-direction: column;
 }
 
 .activity-title {
@@ -557,7 +542,11 @@ body.dark-theme .activity-description {
     background-color: #f8fafc;
     font-size: 13px;
     color: var(--texto-secundario);
-    margin-top: auto;
+    position: absolute;
+    bottom: 75px; /* Altura exata dos actions */
+    left: 0;
+    right: 0;
+    height: 60px; /* Altura fixa */
 }
 
 body.dark-theme .activity-meta {
@@ -575,20 +564,26 @@ body.dark-theme .activity-meta {
     font-size: 16px;
 }
 
-/* Ações da atividade */
+/* Ações da atividade - Sempre no final */
 .activity-actions {
     display: flex;
-    justify-content: space-between;
+    justify-content: center;
     padding: 15px 20px;
     border-top: 1px solid #f0f0f0;
-    margin-top: auto;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    height: 75px; /* Altura fixa para manter o tamanho original */
+    background-color: white; /* Garante que não seja transparente */
 }
 
 body.dark-theme .activity-actions {
     border-top: 1px solid #333;
+    background-color: var(--background-elemento-escuro);
 }
 
-.btn-view, .btn-quick-action, .btn-feedback {
+.btn-view, .btn-feedback {
     display: flex;
     align-items: center;
     gap: 5px;
@@ -601,41 +596,41 @@ body.dark-theme .activity-actions {
 }
 
 .btn-view {
-    background-color: transparent;
-    color: var(--texto-secundario);
-    border: 1px solid #ddd;
+    width: 100%;
+    justify-content: center;
+    background-color: var(--azul-padrao);
+    color: white;
+    border: none;
     text-decoration: none;
-}
-
-body.dark-theme .btn-view {
-    color: var(--texto-terciario);
-    border: 1px solid #444;
+    padding: 10px;
 }
 
 .btn-view:hover {
-    background-color: #f8fafc;
-    color: var(--texto-claro);
+    background-color: var(--azul-hover);
+    color: white;
 }
 
-body.dark-theme .btn-view:hover {
-    background-color: rgba(255, 255, 255, 0.05);
-    color: var(--texto-escuro);
-}
-
-.btn-quick-action {
+body.dark-theme .btn-view {
     background-color: var(--azul-padrao);
     color: white;
     border: none;
 }
 
-.btn-quick-action:hover {
+body.dark-theme .btn-view:hover {
     background-color: var(--azul-hover);
+    color: white;
+}
+
+/* Remove botão de envio */
+.btn-quick-action {
+    display: none;
 }
 
 .btn-feedback {
     background-color: var(--azul-info-claro);
     color: var(--azul-info);
     border: none;
+    margin-left: 10px;
 }
 
 .btn-feedback:hover {

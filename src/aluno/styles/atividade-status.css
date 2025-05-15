@@ -46,6 +46,13 @@ body.dark-theme .page-title p {
     transition: all 0.2s ease;
 }
 
+.enviar-btn{
+    background-color: var(--azul-padrao);
+}
+
+.enviar-btn:hover{
+    background-color: var(--azul-hover);
+}
 .btn-primary {
     background-color: var(--azul-padrao);
     color: white;
@@ -279,7 +286,7 @@ body.dark-theme .btn-secondary:hover {
 .send-question-btn {
     width: 100%;
     padding: 12px;
-    background: #3b82f6;
+    background: var(--azul-padrao);
     color: white;
     border: none;
     border-radius: 6px;
@@ -290,7 +297,7 @@ body.dark-theme .btn-secondary:hover {
 }
 
 .send-question-btn:hover {
-    background: #2563eb;
+    background: var(--azul-hover)
 }
 
 /* =========== ACTIVITY CARD HEADER COM BOTÃO DE OPÇÕES =========== */
@@ -672,11 +679,11 @@ body.dark-theme .mark-complete-btn:hover {
 }
 
 body.dark-theme .send-question-btn {
-    background: #2563eb;
+    background: var(--azul-padrao)
 }
 
 body.dark-theme .send-question-btn:hover {
-    background: #1d4ed8;
+    background: var(--azul-padrao)
 }
 
 /* Textareas e inputs */
@@ -699,11 +706,11 @@ body.dark-theme .comment-form-turma {
 }
 
 body.dark-theme .enviar-btn {
-    background: #2563eb;
+    background: var(--azul-padrao);
 }
 
 body.dark-theme .enviar-btn:hover {
-    background: #1d4ed8;
+    background: var(--azul-hover)
 }
 
 /* Título dos comentários */
