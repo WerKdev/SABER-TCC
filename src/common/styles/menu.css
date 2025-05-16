@@ -65,7 +65,7 @@ body.dark-theme {
     z-index: 1;
     margin-left: 70px;
     border-bottom: 1px solid var(--borda-clara);
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.3);
+    box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 body.dark-theme .header {
