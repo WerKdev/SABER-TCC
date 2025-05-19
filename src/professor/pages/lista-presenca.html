@@ -3,519 +3,690 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Presença</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Lista de Chamada - Portal do Professor</title>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-    <link rel="stylesheet" href="../styles/lista-presenca.css">
-    <link rel="stylesheet" href="../../common/styles/menu.css">
-    <link rel="stylesheet" href="../../common/styles/changepass.css">
-    <link rel="stylesheet" href="../../common/styles/exitpopup.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --azul-padrao: #3b82f6;
+            --azul-escuro: #1d4ed8;
+            --azul-secundario: #0ea5e9;
+            --azul-secundario-escuro: #0284c7;
+            --verde: #10b981;
+            --verde-escuro: #059669;
+            --vermelho: #ef4444;
+            --vermelho-escuro: #dc2626;
+            --amarelo: #f59e0b;
+            --roxo: #8b5cf6;
+            --texto-claro: #1e293b;
+            --texto-secundario: #64748b;
+            --texto-terciario: #94a3b8;
+            --texto-escuro: #e2e8f0;
+            --background-claro: #f1f5f9;
+            --background-escuro: #111827;
+            --background-elemento-escuro: #1e293b;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Space Grotesk', sans-serif;
+        }
+
+        body {
+            background-color: var(--background-claro);
+            color: var(--texto-claro);
+        }
+
+        .attendance-container {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            margin: 20px auto;
+            max-width: 1200px;
+        }
+
+        .quick-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 20px;
+            background-color: #f8fafc;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .control-group {
+            display: flex;
+            gap: 10px;
+        }
+
+        .btn-success {
+            background-color: var(--verde);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .btn-danger {
+            background-color: var(--vermelho);
+            color: white;
+            border: none;
+            padding: 8px 16px;
+            border-radius: 6px;
+            font-size: 14px;
+            font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .attendance-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .attendance-table th,
+        .attendance-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .attendance-table th {
+            background-color: #f8fafc;
+            color: var(--texto-secundario);
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .attendance-table tr:hover {
+            background-color: #f8fafc;
+        }
+
+        .attendance-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .checkbox-group {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .checkbox-container {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            position: relative;
+        }
+
+        .checkbox-container input {
+            opacity: 0;
+            position: absolute;
+        }
+
+        .custom-checkbox {
+            height: 20px;
+            width: 20px;
+            background-color: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            display: block;
+            position: relative;
+        }
+
+        .checkbox-container input:checked ~ .custom-checkbox {
+            background-color: var(--verde);
+            border-color: var(--verde);
+        }
+
+        .custom-checkbox:after {
+            content: "";
+            position: absolute;
+            display: none;
+            left: 7px;
+            top: 3px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        .checkbox-container input:checked ~ .custom-checkbox:after {
+            display: block;
+        }
+
+        .actions-column {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+        }
+
+        .btn-icon {
+            width: 32px;
+            height: 32px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+            background-color: transparent;
+            color: var(--texto-secundario);
+            transition: all 0.2s ease;
+        }
+
+        .btn-icon:hover {
+            background-color: #f1f5f9;
+            color: var(--azul-padrao);
+        }
+
+        .attendance-summary {
+            background-color: #f8fafc;
+            padding: 15px 20px;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            border-top: 1px solid #e5e7eb;
+        }
+
+        .summary-item {
+            display: flex;
+            flex-direction: column;
+            min-width: 100px;
+        }
+
+        .summary-label {
+            font-size: 12px;
+            color: var(--texto-secundario);
+        }
+
+        .summary-value {
+            font-size: 18px;
+            font-weight: 600;
+            color: var(--texto-claro);
+        }
+    </style>
 </head>
 <body>
-<!-- HEADER -->
-    <header class="header">
-        <div class="menu-icon-mobile">
-            <span id="menu-icon-mobile" class="material-symbols-outlined">menu</span>
-        </div>  
-        <div class="menuheader"> 
-            <ul class="menuheader-list">
-                <li class="notification-item">
-                    <span id="notifications-icon" class="material-symbols-outlined">notifications</span>
-                    <span class="notification-badge">3</span>
-                    <div id="notifications-popup" class="notifications-popup">
-                        <div class="popup-header">
-                            <p>Notificações</p>
-                            <span class="material-symbols-outlined close-popup">close</span>
-                        </div>
-                        <div class="notifications-content">
-                            <ul>
-                                <li class="notification unread">
-                                    <div class="notification-icon"><span class="material-symbols-outlined">campaign</span></div>
-                                    <div class="notification-text">
-                                        <p class="notification-title">Comunicado importante</p>
-                                        <p class="notification-desc">Alteração no calendário de provas</p>
-                                        <p class="notification-time">há 5 minutos</p>
-                                    </div>
-                                </li>
-                                <li class="notification unread">
-                                    <div class="notification-icon"><span class="material-symbols-outlined">assignment</span></div>
-                                    <div class="notification-text">
-                                        <p class="notification-title">Nova atividade disponível</p>
-                                        <p class="notification-desc">Exercícios de Álgebra - Matemática</p>
-                                        <p class="notification-time">há 10 minutos</p>
-                                    </div>
-                                </li>
-                                <li class="notification unread">
-                                    <div class="notification-icon"><span class="material-symbols-outlined">quiz</span></div>
-                                    <div class="notification-text">
-                                        <p class="notification-title">Prova agendada</p>
-                                        <p class="notification-desc">Física Quântica - 25/05 às 14:00</p>
-                                        <p class="notification-time">há 2 horas</p>
-                                    </div>
-                                </li>
-                                <li class="notification">
-                                    <div class="notification-icon"><span class="material-symbols-outlined">grade</span></div>
-                                    <div class="notification-text">
-                                        <p class="notification-title">Atividade avaliada</p>
-                                        <p class="notification-desc">Revolução Industrial - História</p>
-                                        <p class="notification-time">há 1 dia</p>
-                                    </div>
-                                </li>
-                                <li class="notification">
-                                    <div class="notification-icon"><span class="material-symbols-outlined">calendar_today</span></div>
-                                    <div class="notification-text">
-                                        <p class="notification-title">Prazo de entrega próximo</p>
-                                        <p class="notification-desc">Análise Combinatória vence em 2 dias</p>
-                                        <p class="notification-time">há 2 dias</p>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                        <div class="popup-footer">
-                            <a href="#todas-notificacoes">Ver todas as notificações</a>
-                        </div>
-                    </div>
-                </li>
-                <li>
-                    <p id="user-name-header">Kenai Almeida</p>
-                </li>
-                <li class="user-settings-item">
-                    <span id="user-icon" class="material-symbols-outlined">account_circle</span>
-                    <div id="user-icon-popup" class="user-icon-popup">
-                        <div class="popup-header">
-                            <div class="user-info">
-                                <div class="user-avatar">
-                                    <span class="material-symbols-outlined">person</span>
-                                </div>
-                                <div class="user-details">
-                                    <p class="user-name">Kenai Almeida</p>
-                                    <p class="user-email">kenai.almeida@email.com</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="settings-content">
-                            <div class="settings-group">
-                                <p class="settings-group-title">Conta</p>
-                                <ul>
-                                    <li>
-                                        <a href="#perfil">
-                                            <span class="material-symbols-outlined">manage_accounts</span>
-                                            <span>Meu Perfil</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#" class="alterar-senha-link">
-                                            <span class="material-symbols-outlined">key</span>
-                                            <span>Alterar senha</span>
-                                        </a>
-                                    </li>   
-                                </ul>
-                            </div>
-                            <div class="settings-group">
-                                <p class="settings-group-title">Sistema</p>
-                                <ul>
-                                    <li>
-                                        <a href="#tema" class="theme-toggle-container">
-                                            <span class="material-symbols-outlined">dark_mode</span>
-                                            <span>Tema Escuro</span>
-                                            <label class="switch">
-                                                <input type="checkbox" id="theme-toggle">
-                                                <span class="slider round"></span>
-                                            </label>
-                                        </a>
-                                    </li>
-                                    <li class="settings-item language-selector-container">
-                                        <a href="#idioma" class="language-selector">
-                                            <span class="material-symbols-outlined">translate</span>
-                                            <span>Idioma</span>
-                                            <span class="selected-language">Português</span>
-                                            <span class="material-symbols-outlined toggle-arrow">expand_more</span>
-                                        </a>
-                                        <div class="language-options">
-                                            <ul>
-                                                <li data-lang="pt-BR" class="active">
-                                                    <span class="language-flag">🇧🇷</span>
-                                                    <span class="language-name">Português</span>
-                                                </li>
-                                                <li data-lang="en-US">
-                                                    <span class="language-flag">🇺🇸</span>
-                                                    <span class="language-name">English</span>
-                                                </li>
-                                                <li data-lang="es-ES">
-                                                    <span class="language-flag">🇪🇸</span>
-                                                    <span class="language-name">Español</span>
-                                                </li>
-                                                <li data-lang="fr-FR">
-                                                    <span class="language-flag">🇫🇷</span>
-                                                    <span class="language-name">Français</span>
-                                                </li>
-                                            </ul>
-                                        </div>
-                                    </li>
-                                </ul>
-                            </div>
-                            <div class="settings-group">
-                                <ul>
-                                    <li>
-                                        <a href="#ajuda">
-                                            <span class="material-symbols-outlined">help</span>
-                                            <span>Ajuda</span>
-                                        </a>
-                                    </li>
-                                    <li>
-                                        <a href="#sair" class="logout-button">
-                                            <span class="material-symbols-outlined">logout</span>
-                                            <span>Sair</span>
-                                        </a>
-                                    </li>
-                                </ul>
-                            </div>
-                        </div>
-                    </div>
-                </li>
-            </ul>
-        </div>
-    </header>
-
-    <!-- SIDEBAR -->
-    <div id="sidebar">
-        <div class="topmenu">
-            <span id="menu-icon" class="material-symbols-outlined">menu</span>
-            <h3 id="menu-tittle">Menu</h3>
-            <img id="logomenu" src="../../../assets/images/logo-saber.png" alt="Logo menu">
-        </div>
-        <nav id="menu-hidden">
-            <div class="navbar">
-                <ul>
-                    <li>
-                        <a href="dashboard.html">
-                            <span class="material-symbols-outlined">dashboard</span>
-                            <p>Dashboard</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="turmas.html" class="active">
-                            <span class="material-symbols-outlined">groups</span>
-                            <p>Turmas</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="atividades.html" class="active">
-                            <span class="material-symbols-outlined">assignment</span>
-                            <p>Atividades</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="redacoes.html">
-                            <span class="material-symbols-outlined">history_edu</span>
-                            <p>Redações</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="calendario-aulas.html">
-                            <span class="material-symbols-outlined">event_note</span>
-                            <p>Plano de Aulas</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span class="material-symbols-outlined">book</span>
-                            <p>Materiais</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span class="material-symbols-outlined">chat</span>
-                            <p>Comunicação</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <span class="material-symbols-outlined">insert_chart</span>
-                            <p>Relatórios</p>
-                        </a>
-                    </li>
-                </ul>
+    <div class="attendance-container">
+        <div class="quick-controls">
+            <div class="control-group">
+                <button id="mark-all-present" class="btn-success">
+                    <span class="material-symbols-outlined">done_all</span>
+                    Marcar todos presentes
+                </button>
+                <button id="mark-all-absent" class="btn-danger">
+                    <span class="material-symbols-outlined">close</span>
+                    Marcar todos ausentes
+                </button>
             </div>
-        </nav>
+        </div>
+        
+        <table class="attendance-table">
+            <thead>
+                <tr>
+                    <th>Nome</th>
+                    <th>Matrícula</th>
+                    <th>Presença</th>
+                </tr>
+            </thead>
+            <tbody id="students-list">
+                <tr data-student-id="20250001">
+                    <td>Ana Carolina Silva</td>
+                    <td>00000005662</td>
+                    <td>
+                        <div class="checkbox-group">
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="1">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="2">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="3">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="4">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr data-student-id="20250002">
+                    <td>Bruno Oliveira Santos</td>
+                    <td>00000005662</td>
+                    <td>
+                        <div class="checkbox-group">
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="1">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="2">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="3">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="4">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr data-student-id="20250003">
+                    <td>Camila Mendes Ferreira</td>
+                    <td>00000005662</td>
+                    <td>
+                        <div class="checkbox-group">
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="1">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="2">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="3">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="4">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr data-student-id="20250004">
+                    <td>Daniel Costa Lima</td>
+                    <td>00000005662</td>
+                    <td>
+                        <div class="checkbox-group">
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="1">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="2">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="3">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="4">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr data-student-id="20250005">
+                    <td>Eduardo Pereira Santos</td>
+                    <td>00000005662</td>
+                    <td>
+                        <div class="checkbox-group">
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="1">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="2">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="3">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="4">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr data-student-id="20250006">
+                    <td>Fernanda Alves Ribeiro</td>
+                    <td>00000005662</td>
+                    <td>
+                        <div class="checkbox-group">
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="1">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="2">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="3">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="4">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr data-student-id="20250007">
+                    <td>Gabriel Martins Sousa</td>
+                    <td>00000005662</td>
+                    <td>
+                        <div class="checkbox-group">
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="1">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="2">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="3">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="4">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr data-student-id="20250008">
+                    <td>Helena Cardoso Dias</td>
+                    <td>00000005662</td>
+                    <td>
+                        <div class="checkbox-group">
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="1">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="2">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="3">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="4">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr data-student-id="20250009">
+                    <td>Igor Teixeira Lima</td>
+                    <td>00000005662</td>
+                    <td>
+                        <div class="checkbox-group">
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="1">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="2">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="3">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="4">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr data-student-id="20250010">
+                    <td>Juliana Rocha Gomes</td>
+                    <td>00000005662</td>
+                    <td>
+                        <div class="checkbox-group">
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="1">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="2">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="3">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="4">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr data-student-id="20250011">
+                    <td>Lucas Menezes Oliveira</td>
+                    <td>00000005662</td>
+                    <td>
+                        <div class="checkbox-group">
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="1">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="2">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="3">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="4">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr data-student-id="20250012">
+                    <td>Mariana Souza Carvalho</td>
+                    <td>00000005662</td>
+                    <td>
+                        <div class="checkbox-group">
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="1">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="2">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="3">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="4">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr data-student-id="20250013">
+                    <td>Nathalia Fernandes Costa</td>
+                    <td>00000005662</td>
+                    <td>
+                        <div class="checkbox-group">
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="1">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="2">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="3">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="4">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr data-student-id="20250014">
+                    <td>Pedro Henrique Almeida</td>
+                    <td>00000005662</td>
+                    <td>
+                        <div class="checkbox-group">
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="1">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="2">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="3">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="4">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+                <tr data-student-id="20250015">
+                    <td>Rafael Lima Santos</td>
+                    <td>00000005662</td>
+                    <td>
+                        <div class="checkbox-group">
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="1">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="2">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="3">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                            <label class="checkbox-container">
+                                <input type="checkbox" class="class-checkbox" data-class="4">
+                                <span class="custom-checkbox"></span>
+                            </label>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div class="attendance-summary">
+            <div class="summary-item">
+                <span class="summary-label">Total de alunos:</span>
+                <span class="summary-value">15</span>
+            </div>
+            <div class="summary-item">
+                <span class="summary-label">Presentes:</span>
+                <span id="present-count" class="summary-value">0</span>
+            </div>
+            <div class="summary-item">
+                <span class="summary-label">Ausentes:</span>
+                <span id="absent-count" class="summary-value">15</span>
+            </div>
+        </div>
     </div>
 
-    <div id="password-popup" class="popup-overlay" style="display: none;">
-        <div class="popup">
-            <div class="popup-header">
-                <h2>Alterar senha</h2>
-                <span class="material-symbols-outlined close-popup">close</span>
-            </div>
-            <div class="popup-content">
-                <p class="popup-description">Informe a senha atual e a nova senha</p>
-                <form id="change-password-form">
-                    <div class="form-group">
-                        <label for="current-password">Senha atual <span class="required">*</span></label>
-                        <div class="password-input">
-                            <input type="password" id="current-password" name="current-password" required>
-                            <span class="material-symbols-outlined toggle-password">visibility_off</span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="new-password">Nova senha <span class="required">*</span></label>
-                        <div class="password-input">
-                            <input type="password" id="new-password" name="new-password" required>
-                            <span class="material-symbols-outlined toggle-password">visibility_off</span>
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        <label for="confirm-password">Confirmação de senha <span class="required">*</span></label>
-                        <div class="password-input">
-                            <input type="password" id="confirm-password" name="confirm-password" required>
-                            <span class="material-symbols-outlined toggle-password">visibility_off</span>
-                        </div>
-                    </div>
-                    <div class="forgot-password">
-                        <a href="#" id="forgot-password-link">Esqueceu a senha?</a>
-                    </div>
-                    <div class="form-actions">
-                        <button type="button" class="btn-cancel">Cancelar</button>
-                        <button type="submit" class="btn-confirm">Alterar senha</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <!-- Popup de Redefinição de Senha -->
-    <div id="reset-password-popup" class="popup-overlay" style="display: none;">
-        <div class="popup">
-            <div class="popup-header">
-                <h2>Redefinição de senha!</h2>
-                <span class="material-symbols-outlined close-popup">close</span>
-            </div>
-            <div class="popup-feedback-content">
-                <p class="popup-description">Informe um email e enviaremos um link para recuperação da sua senha.</p>
-                <form id="reset-password-form">
-                    <div class="form-group">
-                        <label for="recovery-email">Email <span class="required">*</span></label>
-                        <input type="email" id="recovery-email" name="recovery-email" required placeholder="seu@email.com">
-                    </div>
-                    <div class="form-actions">
-                        <button type="button" class="btn-back">
-                            <span class="material-symbols-outlined">arrow_back</span>
-                            Voltar
-                        </button>
-                        <button type="submit" class="btn-send">Enviar link de recuperação</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <div id="logout-popup" class="popup-overlay" style="display: none;">
-        <div class="popup logout-popup">
-            <div class="logout-content">
-                <div class="logout-icon">
-                    <span class="material-symbols-outlined">logout</span>
-                </div>
-                <h2 class="logout-title">Sair da conta?</h2>
-                <p class="logout-description">Você poderá entrar novamente a qualquer momento. Se quiser trocar de conta, faça isso adicionando uma conta existente.</p>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elementos DOM
+            const markAllPresentBtn = document.getElementById('mark-all-present');
+            const markAllAbsentBtn = document.getElementById('mark-all-absent');
+            const classCheckboxes = document.querySelectorAll('.class-checkbox');
+            const presentCountElement = document.getElementById('present-count');
+            const absentCountElement = document.getElementById('absent-count');
+            
+            // Função para atualizar o resumo de presença
+            function updateAttendanceSummary() {
+                const totalStudents = document.querySelectorAll('tbody tr').length;
+                let presentStudents = 0;
                 
-                <div class="logout-actions">
-                    <button type="button" class="btn-logout">Sair</button>
-                    <button type="button" class="btn-cancel-logout">Cancelar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="main-content" id="mainContent">
-        <section class="content">
-            <h1>Lista de Aluno → Turma 3º Presença</h1>
-            <div class="filters">
-                <select id="serieSelect">
-                    <option value="1">Série: 1°</option>
-                    <option value="2">Série: 2°</option>
-                    <option value="3">Série: 3°</option>
-                </select>
-                <select id="turmaSelect">
-                    <option value="A">Turma: A</option>
-                    <option value="B">Turma: B</option>
-                    <option value="C">Turma: C</option>
-                </select>
-                <select id="disciplineSelect">
-                    <option value="matematica">Disciplina: Matemática - 3 aulas</option>
-                    <option value="portugues">Disciplina: Português - 2 aulas</option>
-                    <option value="historia">Disciplina: História - 2 aulas</option>
-                    <option value="geografia">Disciplina: Geografia - 1 aula</option>
-                    <option value="ciencias">Disciplina: Ciências - 3 aulas</option>
-                </select>
-                <select id="dateSelect">
-                    <option value="31-03-25">Data: 31/03/25, segunda-feira</option>
-                    <option value="01-04-25">Data: 01/04/25, terça-feira</option>
-                    <option value="02-04-25">Data: 02/04/25, quarta-feira</option>
-                    <option value="03-04-25">Data: 03/04/25, quinta-feira</option>
-                    <option value="04-04-25">Data: 04/04/25, sexta-feira</option>
-                    <option value="05-04-25">Data: 05/04/25, sábado</option>
-                    <option value="06-04-25">Data: 06/04/25, domingo</option>
-                </select>
-            </div>
-            <table>
-                <thead>
-                    <tr>
-                        <th>Nome</th>
-                        <th>Matrícula</th>
-                        <th>Presença</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td>Ian de Paula</td>
-                        <td>00000005662</td>
-                        <td>
-                            <input type="checkbox">
-                            <input type="checkbox">
-                            <input type="checkbox">
-                            <input type="checkbox">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Guilherme Moura Nobre</td>
-                        <td>00000005662</td>
-                        <td>
-                            <input type="checkbox">
-                            <input type="checkbox">
-                            <input type="checkbox">
-                            <input type="checkbox">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Ruan Reiler</td>
-                        <td>00000005662</td>
-                        <td>
-                            <input type="checkbox">
-                            <input type="checkbox">
-                            <input type="checkbox">
-                            <input type="checkbox">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Kenai Almeida Nascimento</td>
-                        <td>00000005662</td>
-                        <td>
-                            <input type="checkbox">
-                            <input type="checkbox">
-                            <input type="checkbox">
-                            <input type="checkbox">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Lucas Borges</td>
-                        <td>00000005662</td>
-                        <td>
-                            <input type="checkbox">
-                            <input type="checkbox">
-                            <input type="checkbox">
-                            <input type="checkbox">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Ramon Pires Mendonça</td>
-                        <td>00000005662</td>
-                        <td>
-                            <input type="checkbox">
-                            <input type="checkbox">
-                            <input type="checkbox">
-                            <input type="checkbox">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Luis Otávio</td>
-                        <td>00000005662</td>
-                        <td>
-                            <input type="checkbox">
-                            <input type="checkbox">
-                            <input type="checkbox">
-                            <input type="checkbox">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Ian de Paula</td>
-                        <td>00000005662</td>
-                        <td>
-                            <input type="checkbox">
-                            <input type="checkbox">
-                            <input type="checkbox">
-                            <input type="checkbox">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Guilherme Moura Nobre</td>
-                        <td>00000005662</td>
-                        <td>
-                            <input type="checkbox">
-                            <input type="checkbox">
-                            <input type="checkbox">
-                            <input type="checkbox">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Ruan Reiler</td>
-                        <td>00000005662</td>
-                        <td>
-                            <input type="checkbox">
-                            <input type="checkbox">
-                            <input type="checkbox">
-                            <input type="checkbox">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Kenai Almeida Nascimento</td>
-                        <td>00000005662</td>
-                        <td>
-                            <input type="checkbox">
-                            <input type="checkbox">
-                            <input type="checkbox">
-                            <input type="checkbox">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Lucas Borges</td>
-                        <td>00000005662</td>
-                        <td>
-                            <input type="checkbox">
-                            <input type="checkbox">
-                            <input type="checkbox">
-                            <input type="checkbox">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Ramon Pires Mendonça</td>
-                        <td>00000005662</td>
-                        <td>
-                            <input type="checkbox">
-                            <input type="checkbox">
-                            <input type="checkbox">
-                            <input type="checkbox">
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>Luis Otávio</td>
-                        <td>00000005662</td>
-                        <td>
-                            <input type="checkbox">
-                            <input type="checkbox">
-                            <input type="checkbox">
-                            <input type="checkbox">
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="button-container">
-                <button class="submit-btn">Enviar</button>
-            </div>
-        </section>
-    </div>
-
-    <script src="../scripts/lista-presenca.js"></script>
-    <script src="../../common/scripts/changepass.js"></script>
-    <script src="../../common/scripts/exitpopup.js"></script>
-    <script src="../../common/scripts/menu.js"></script>    
+                // Verificar cada aluno
+                document.querySelectorAll('tbody tr').forEach(row => {
+                    const checkboxes = row.querySelectorAll('.class-checkbox');
+                    let checkedCount = 0;
+                    
+                    checkboxes.forEach(checkbox => {
+                        if (checkbox.checked) {
+                            checkedCount++;
+                        }
+                    });
+                    
+                    // Se pelo menos metade das aulas estão marcadas, o aluno é considerado presente
+                    if (checkedCount >= checkboxes.length / 2) {
+                        presentStudents++;
+                    }
+                });
+                
+                // Atualizar os contadores
+                presentCountElement.textContent = presentStudents;
+                absentCountElement.textContent = totalStudents - presentStudents;
+            }
+            
+            // Botão para marcar todos presentes
+            markAllPresentBtn.addEventListener('click', function() {
+                classCheckboxes.forEach(checkbox => {
+                    checkbox.checked = true;
+                });
+                updateAttendanceSummary();
+            });
+            
+            // Botão para marcar todos ausentes
+            markAllAbsentBtn.addEventListener('click', function() {
+                classCheckboxes.forEach(checkbox => {
+                    checkbox.checked = false;
+                });
+                updateAttendanceSummary();
+            });
+            
+            // Atualizar o resumo quando qualquer checkbox for alterado
+            classCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', updateAttendanceSummary);
+            });
+            
+            // Inicializar o resumo
+            updateAttendanceSummary();
+        });
+    </script>
 </body>
 </html>

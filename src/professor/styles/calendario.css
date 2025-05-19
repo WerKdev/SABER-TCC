@@ -1,0 +1,1106 @@
+/* Importação de estilos base */
+@import url('./atividades.css');
+
+/* Estilos de abas */
+.tabs-navigation {
+    margin-bottom: 20px;
+}
+
+.tabs-list {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    border-bottom: 2px solid #e5e7eb;
+}
+
+.tab-item {
+    margin-right: 30px;
+}
+
+.tab-item a {
+    display: block;
+    padding: 10px 5px;
+    color: var(--texto-secundario);
+    text-decoration: none;
+    font-weight: 500;
+    position: relative;
+}
+
+.tab-item.active a {
+    color: var(--azul-padrao);
+    font-weight: 600;
+}
+
+.tab-item.active a::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 100%;
+    height: 3px;
+    background-color: var(--azul-padrao);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.ver-mais-btn {
+    margin-top: 4px;
+    text-align: center;
+}
+
+.ver-mais-btn button {
+    font-size: 11px;
+    padding: 2px 6px;
+    border: none;
+    background-color: #f0f4f8;
+    color: var(--azul-padrao);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+body.dark-theme .ver-mais-btn button {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: white;
+}
+
+.ver-mais-btn button:hover {
+    background-color: var(--azul-padrao);
+    color: white;
+}
+
+/* =========== CALENDÁRIO =========== */
+.calendar-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+body.dark-theme .calendar-container {
+    background-color: var(--background-elemento-escuro);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+#c{
+    width: 160px;
+}
+
+#turno-cronograma{
+    width: 100px;
+}
+
+/* Controles do Calendário */
+.calendar-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 25px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.month-navigation {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.nav-btn {
+    width: 40px;
+    height: 40px;
+    border: none;
+    background-color: #f8fafc;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.2s ease;
+}
+
+body.dark-theme .nav-btn {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--texto-escuro);
+}
+
+.nav-btn:hover {
+    background-color: var(--azul-padrao);
+    color: white;
+}
+
+#current-month-year {
+    font-size: 22px;
+    font-weight: 600;
+    min-width: 200px;
+    text-align: center;
+    color: var(--texto-claro);
+}
+
+body.dark-theme #current-month-year {
+    color: var(--texto-escuro);
+}
+
+/* Grid do Calendário */
+.calendar-grid {
+    margin-bottom: 30px;
+}
+
+.calendar-header {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1px;
+    background-color: #e5e7eb;
+    padding: 1px;
+    border-radius: 8px 8px 0 0;
+}
+
+body.dark-theme .calendar-header {
+    background-color: #444;
+}
+
+.day-header {
+    padding: 12px;
+    text-align: center;
+    font-weight: 600;
+    color: var(--texto-secundario);
+    background-color: #f8fafc;
+}
+
+body.dark-theme .day-header {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--texto-terciario);
+}
+
+.calendar-days {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1px;
+    background-color: #e5e7eb;
+    padding: 1px;
+    border-radius: 0 0 8px 8px;
+}
+
+body.dark-theme .calendar-days {
+    background-color: #444;
+}
+
+/* Células do Calendário */
+.calendar-day {
+    background-color: white;
+    min-height: 100px;
+    padding: 8px;
+    cursor: pointer;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+body.dark-theme .calendar-day {
+    background-color: var(--background-elemento-escuro);
+}
+
+.calendar-day:hover {
+    background-color: #f8fafc;
+}
+
+body.dark-theme .calendar-day:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.calendar-day.other-month {
+    opacity: 0.4;
+}
+
+.calendar-day.today {
+    background-color: #e8f3ff;
+    border: 2px solid var(--azul-padrao);
+}
+
+body.dark-theme .calendar-day.today {
+    background-color: rgba(12, 20, 43, 0.2);
+}
+
+.calendar-day.selected {
+    background-color: #f0f9ff;
+    border: 2px solid var(--azul-info);
+}
+
+body.dark-theme .calendar-day.selected {
+    background-color: rgba(59, 130, 246, 0.2);
+}
+
+.day-number {
+    font-weight: 600;
+    font-size: 14px;
+    color: var(--texto-claro);
+}
+
+body.dark-theme .day-number {
+    color: var(--texto-escuro);
+}
+
+/* Indicadores de Aulas */
+.class-indicators {
+    display: flex;
+    gap: 2px;
+    margin-top: 5px;
+    flex-wrap: wrap;
+}
+
+.class-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+}
+
+.class-dot.manha {
+    background-color: var(--verde);
+}
+
+.class-dot.tarde {
+    background-color: var(--azul-info);
+}
+
+.class-dot.especial {
+    background-color: var(--roxo);
+}
+
+/* Mini cards de aulas */
+.class-mini-card {
+    background-color: #f8fafc;
+    padding: 4px 6px;
+    margin-top: 4px;
+    border-radius: 4px;
+    font-size: 11px;
+    border-left: 3px solid;
+    cursor: pointer;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+body.dark-theme .class-mini-card {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.class-mini-card.manha {
+    border-left-color: var(--verde);
+}
+
+.class-mini-card.tarde {
+    border-left-color: var(--azul-info);
+}
+
+.class-mini-card.especial {
+    border-left-color: var(--roxo);
+}
+
+/* Legenda */
+.calendar-legend {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    padding: 15px;
+    background-color: #f8fafc;
+    border-radius: 8px;
+    flex-wrap: wrap;
+}
+
+body.dark-theme .calendar-legend {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 13px;
+    color: var(--texto-secundario);
+}
+
+body.dark-theme .legend-item {
+    color: var(--texto-terciario);
+}
+
+.legend-indicator {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+}
+
+.legend-indicator.manha {
+    background-color: var(--verde);
+}
+
+.legend-indicator.tarde {
+    background-color: var(--azul-info);
+}
+
+.legend-indicator.especial {
+    background-color: var(--roxo);
+}
+
+.legend-indicator.hoje {
+    background-color: var(--azul-padrao);
+}
+
+/* Aulas do dia selecionado */
+.selected-day-classes {
+    margin-top: 30px;
+    padding: 20px;
+    background-color: #f8fafc;
+    border-radius: 8px;
+}
+
+body.dark-theme .selected-day-classes {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+#selected-date-title {
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: var(--texto-claro);
+}
+
+body.dark-theme #selected-date-title {
+    color: var(--texto-escuro);
+}
+
+.day-classes-list {
+    display: grid;
+    gap: 15px;
+}
+
+.day-class-card {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 4px solid;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+body.dark-theme .day-class-card {
+    background-color: var(--background-elemento-escuro);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+}
+
+.day-class-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.day-class-card.manha {
+    border-left-color: var(--verde);
+}
+
+.day-class-card.tarde {
+    border-left-color: var(--azul-info);
+}
+
+.day-class-card.especial {
+    border-left-color: var(--roxo);
+}
+
+.day-class-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 8px;
+}
+
+.day-class-title {
+    font-weight: 600;
+    color: var(--texto-claro);
+}
+
+body.dark-theme .day-class-title {
+    color: var(--texto-escuro);
+}
+
+.day-class-subject {
+    font-size: 13px;
+    color: var(--azul-padrao);
+}
+
+.day-class-time {
+    font-size: 12px;
+    color: var(--texto-secundario);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+body.dark-theme .day-class-time {
+    color: var(--texto-terciario);
+}
+
+.day-class-professor {
+    font-size: 12px;
+    color: var(--texto-secundario);
+    margin-top: 4px;
+}
+
+.class-actions {
+    margin-top: 12px;
+    display: flex;
+    gap: 10px;
+}
+
+.class-actions button {
+    padding: 6px 12px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-view-plan {
+    background-color: var(--azul-info-claro);
+    color: var(--azul-info);
+    border: 1px solid var(--azul-info);
+}
+
+.btn-view-plan:hover {
+    background-color: var(--azul-info);
+    color: white;
+}
+
+.btn-view-materials {
+    background-color: var(--verde-claro);
+    color: var(--verde);
+    border: 1px solid var(--verde);
+}
+
+.btn-view-materials:hover {
+    background-color: var(--verde);
+    color: white;
+}
+/* Estilo refinado para o popup de cronograma diário */
+
+/* Estrutura principal do popup */
+.lesson-plan-popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.7);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(4px);
+    -webkit-backdrop-filter: blur(4px);
+}
+
+/* Container do popup */
+.lesson-plan-popup .popup {
+    background-color: #fff;
+    border-radius: 16px;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.2), 0 2px 4px rgba(0, 0, 0, 0.1), 0 0 0 1px rgba(0, 0, 0, 0.05);
+    max-width: 600px;
+    width: 92%;
+    max-height: 90vh;
+    overflow-y: auto;
+    animation: popup-appear 0.3s ease-out;
+    position: relative;
+}
+
+@keyframes popup-appear {
+    0% { 
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    100% { 
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* Tema escuro */
+body.dark-theme .lesson-plan-popup .popup {
+    background-color: #1a1f2e;
+    box-shadow: 0 12px 28px rgba(0, 0, 0, 0.4), 0 2px 4px rgba(0, 0, 0, 0.3), 0 0 0 1px rgba(255, 255, 255, 0.05);
+}
+
+/* Cabeçalho do popup */
+.day-schedule-popup {
+    padding: 0;
+}
+
+/* Título e botão de fechar */
+.day-schedule-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 24px 24px 18px;
+    position: relative;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.day-schedule-header h3 {
+    font-size: 20px;
+    font-weight: 600;
+    margin: 0 0 12px 0;
+    color: #1a202c;
+}
+
+.lesson-plan-popup .close-popup {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background-color: #f2f5f9;
+    color: #64748b;
+    border-radius: 50%;
+    width: 32px;
+    height: 32px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    font-size: 18px;
+}
+
+.lesson-plan-popup .close-popup:hover {
+    background-color: #e2e8f0;
+    color: #334155;
+}
+
+body.dark-theme .day-schedule-header {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-theme .day-schedule-header h3 {
+    color: #e2e8f0;
+}
+
+body.dark-theme .lesson-plan-popup .close-popup {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: #94a3b8;
+}
+
+body.dark-theme .lesson-plan-popup .close-popup:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+    color: #e2e8f0;
+}
+
+/* Indicador de turno */
+.day-schedule-header .day-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 4px;
+}
+
+.day-schedule-header .day-date {
+    font-size: 14px;
+    color: #64748b;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+body.dark-theme .day-schedule-header .day-date {
+    color: #94a3b8;
+}
+
+.day-schedule-header .day-date .material-symbols-outlined {
+    font-size: 18px;
+}
+
+.day-turno {
+    padding: 6px 12px;
+    border-radius: 30px;
+    font-size: 14px;
+    font-weight: 500;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.day-turno::before {
+    content: '';
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+}
+
+.day-turno.manha {
+    background-color: #ecfdf5;
+    color: #065f46;
+}
+
+.day-turno.manha::before {
+    background-color: #10b981;
+}
+
+.day-turno.tarde {
+    background-color: #eff6ff;
+    color: #1e40af;
+}
+
+.day-turno.tarde::before {
+    background-color: #3b82f6;
+}
+
+body.dark-theme .day-turno.manha {
+    background-color: rgba(16, 185, 129, 0.2);
+    color: #34d399;
+}
+
+body.dark-theme .day-turno.tarde {
+    background-color: rgba(59, 130, 246, 0.2);
+    color: #60a5fa;
+}
+
+/* Conteúdo do cronograma */
+.day-schedule-content {
+    padding: 20px 24px;
+}
+
+/* Tabela de cronograma */
+.day-schedule-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+body.dark-theme .day-schedule-table {
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.day-schedule-table th,
+.day-schedule-table td {
+    padding: 14px 16px;
+    text-align: left;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.day-schedule-table th {
+    background-color: #f8fafc;
+    font-weight: 600;
+    color: #475569;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.day-schedule-table th:first-child {
+    width: 120px;
+}
+
+.day-schedule-table tr:last-child td {
+    border-bottom: none;
+}
+
+.day-schedule-table td {
+    font-size: 15px;
+    color: #334155;
+}
+
+/* Estilização para matérias diferentes */
+.day-schedule-table td:nth-child(2) {
+    font-weight: 500;
+    color: #1e293b;
+}
+    
+/* Nome do professor */
+.day-schedule-table td:nth-child(3) {
+    color: #64748b;
+    font-size: 14px;
+}
+
+/* Intervalo */
+.day-schedule-table tr.intervalo td {
+    background-color: #f1f5f9;
+    color: #64748b;
+    text-align: center;
+    font-style: italic;
+    font-size: 14px;
+    padding: 8px;
+}
+
+/* Tema escuro - tabela */
+body.dark-theme .day-schedule-table th {
+    background-color: #1e293b;
+    color: #94a3b8;
+    border-bottom-color: #334155;
+}
+
+body.dark-theme .day-schedule-table td {
+    color: #cbd5e1;
+    border-bottom-color: #334155;
+}
+
+body.dark-theme .day-schedule-table td:nth-child(2) {
+    color: #e2e8f0;
+}
+
+body.dark-theme .day-schedule-table td:nth-child(3) {
+    color: #94a3b8;
+}
+
+body.dark-theme .day-schedule-table tr.intervalo td {
+    background-color: rgba(241, 245, 249, 0.05);
+    color: #94a3b8;
+}
+
+/* Botão "Ver Cronograma Completo" */
+.day-schedule-actions {
+    display: flex;
+    justify-content: center;
+    padding: 24px;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+body.dark-theme .day-schedule-actions {
+    border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+.btn-ver-todas {
+    background-color: #3b82f6;
+    color: white;
+    border: none;
+    padding: 12px 24px;
+    border-radius: 50px;
+    font-weight: 500;
+    font-size: 15px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.3);
+}
+
+.btn-ver-todas::before {
+    content: 'calendar_month';
+    font-family: 'Material Symbols Outlined';
+}
+
+.btn-ver-todas:hover {
+    background-color: #2563eb;
+    box-shadow: 0 4px 8px rgba(59, 130, 246, 0.4);
+    transform: translateY(-1px);
+}
+
+.btn-ver-todas:active {
+    transform: translateY(0);
+    box-shadow: 0 1px 2px rgba(59, 130, 246, 0.4);
+}
+
+body.dark-theme .btn-ver-todas {
+    background-color: #3b82f6;
+    box-shadow: 0 2px 4px rgba(59, 130, 246, 0.5);
+}
+
+body.dark-theme .btn-ver-todas:hover {
+    background-color: #60a5fa;
+    box-shadow: 0 4px 8px rgba(59, 130, 246, 0.6);
+}
+
+/* Mensagem quando não há aulas */
+.no-classes {
+    text-align: center;
+    padding: 30px;
+    color: #64748b;
+    font-style: italic;
+}
+
+body.dark-theme .no-classes {
+    color: #94a3b8;
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+    .day-schedule-header h3 {
+        font-size: 18px;
+    }
+    
+    .day-schedule-table th,
+    .day-schedule-table td {
+        padding: 10px 12px;
+        font-size: 14px;
+    }
+    
+    .day-schedule-table th:first-child {
+        width: 90px;
+    }
+    
+    .btn-ver-todas {
+        padding: 10px 20px;
+        font-size: 14px;
+    }
+}
+
+/* Cronograma */
+.cronograma-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    margin-bottom: 30px;
+}
+
+body.dark-theme .cronograma-container {
+    background-color: var(--background-elemento-escuro);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.cronograma-filters {
+    margin-bottom: 20px;
+}
+
+.cronograma-table-container {
+    overflow-x: auto;
+}
+
+.cronograma-table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+.cronograma-table th,
+.cronograma-table td {
+    padding: 12px;
+    text-align: center;
+    border: 1px solid #e5e7eb;
+}
+
+body.dark-theme .cronograma-table th,
+body.dark-theme .cronograma-table td {
+    border-color: #444;
+}
+
+.cronograma-table th {
+    background-color: #f8fafc;
+    color: var(--texto-secundario);
+    font-weight: 600;
+}
+
+body.dark-theme .cronograma-table th {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--texto-terciario);
+}
+
+.cronograma-table td {
+    position: relative;
+    vertical-align: middle;
+    min-height: 60px;
+}
+
+.cronograma-table td.has-class {
+    background-color: rgba(59, 130, 246, 0.05);
+}
+
+.cronograma-table td.has-class:hover {
+    background-color: rgba(59, 130, 246, 0.1);
+}
+
+.cronograma-table td.horario {
+    font-weight: 500;
+    background-color: #f8fafc;
+    color: var(--texto-secundario);
+}
+
+body.dark-theme .cronograma-table td.horario {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--texto-terciario);
+}
+
+.class-cell {
+    padding: 8px;
+    border-radius: 6px;
+    margin: 2px 0;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.class-cell:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.class-cell.manha {
+    background-color: var(--verde-claro);
+}
+
+.class-cell.tarde {
+    background-color: var(--azul-info-claro);
+}
+
+.class-cell-title {
+    font-weight: 600;
+    font-size: 14px;
+    margin-bottom: 4px;
+}
+
+.class-cell-professor {
+    font-size: 12px;
+    color: var(--texto-secundario);
+}
+
+body.dark-theme .class-cell-professor {
+    color: var(--texto-terciario);
+}
+
+/* Plano de aula */
+.lesson-plan-details,
+.class-plan-table {
+    margin-top: 15px;
+    margin-bottom: 20px;
+}
+
+.lesson-plan-details h4,
+.class-plan-table h4 {
+    margin-top: 0;
+    margin-bottom: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--texto-claro);
+}
+
+body.dark-theme .lesson-plan-details h4,
+body.dark-theme .class-plan-table h4 {
+    color: var(--texto-escuro);
+}
+
+.lesson-plan-details ul {
+    padding-left: 20px;
+    margin: 10px 0;
+}
+
+.lesson-plan-details ul li {
+    margin-bottom: 5px;
+}
+
+.class-plan-table table {
+    width: 100%;
+    border-collapse: collapse;
+    border-spacing: 0;
+    margin-bottom: 15px;
+}
+
+.class-plan-table table th,
+.class-plan-table table td {
+    padding: 10px;
+    text-align: left;
+    border: 1px solid #e5e7eb;
+}
+
+body.dark-theme .class-plan-table table th,
+body.dark-theme .class-plan-table table td {
+    border-color: #444;
+}
+
+.class-plan-table table th {
+    background-color: #f8fafc;
+    color: var(--texto-secundario);
+    font-weight: 600;
+}
+
+body.dark-theme .class-plan-table table th {
+    background-color: rgba(255, 255, 255, 0.05);
+    color: var(--texto-terciario);
+}
+
+.class-plan-table table tr:nth-child(even) td {
+    background-color: #f8fafc;
+}
+
+body.dark-theme .class-plan-table table tr:nth-child(even) td {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+/* Responsividade */
+@media (max-width: 768px) {
+    .calendar-day {
+        min-height: 80px;
+        padding: 4px;
+    }
+    
+    .day-number {
+        font-size: 12px;
+    }
+    
+    .class-mini-card {
+        font-size: 10px;
+        padding: 2px 4px;
+    }
+    
+    .calendar-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .month-navigation {
+        justify-content: center;
+    }
+    
+    .view-options {
+        width: 100%;
+    }
+    
+    #turno-filter, #turno-cronograma {
+        width: 100%;
+    }
+    
+    .cronograma-table th,
+    .cronograma-table td {
+        padding: 8px;
+        font-size: 12px;
+    }
+}
+
+/* Elementos especiais */
+.intervalo {
+    background-color: #f1f5f9;
+    font-style: italic;
+    color: #64748b;
+    text-align: center;
+}
+
+body.dark-theme .intervalo {
+    background-color: rgba(255, 255, 255, 0.03);
+    color: #94a3b8;
+}
+
+/* Botão de fechar */
+.popup-header .close-popup {
+    transition: all 0.2s ease;
+    border-radius: 4px;
+    padding: 4px;
+    cursor: pointer;
+}
+
+.popup-header .close-popup:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: var(--vermelho);
+}
+
+body.dark-theme .popup-header .close-popup:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}

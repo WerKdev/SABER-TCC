@@ -47,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function() {
             console.log("Realizando logout...");
             
             // Redirecionar para a página de login definida
-            window.location.href = '../../../project-saber-web/src/pages/login/index.html';
+            window.location.href = '../../main/pages/login.html';
         });
     }
     
