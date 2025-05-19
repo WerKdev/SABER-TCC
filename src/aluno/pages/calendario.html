@@ -3,13 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Lista de Atividades - Portal do Aluno</title>
+    <title>Calendário de Aulas - Portal do Aluno</title>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../styles/lista-atividades.css">
+    <link rel="stylesheet" href="../styles/calendario.css">
     <link rel="stylesheet" href="../../common/styles/menu.css">
-    <link rel="stylesheet" href="../../common/styles/changepass.css">
-    <link rel="stylesheet" href="../../common/styles/exitpopup.css">
 </head>
 <body>
     <!-- HEADER -->
@@ -40,8 +38,8 @@
                                 <li class="notification unread">
                                     <div class="notification-icon"><span class="material-symbols-outlined">assignment</span></div>
                                     <div class="notification-text">
-                                        <p class="notification-title">Nova atividade disponível</p>
-                                        <p class="notification-desc">Exercícios de Álgebra - Matemática</p>
+                                        <p class="notification-title">Nova aula disponível</p>
+                                        <p class="notification-desc">Matemática - Álgebra Linear</p>
                                         <p class="notification-time">há 10 minutos</p>
                                     </div>
                                 </li>
@@ -51,22 +49,6 @@
                                         <p class="notification-title">Prova agendada</p>
                                         <p class="notification-desc">Física Quântica - 25/05 às 14:00</p>
                                         <p class="notification-time">há 2 horas</p>
-                                    </div>
-                                </li>
-                                <li class="notification">
-                                    <div class="notification-icon"><span class="material-symbols-outlined">grade</span></div>
-                                    <div class="notification-text">
-                                        <p class="notification-title">Atividade avaliada</p>
-                                        <p class="notification-desc">Revolução Industrial - História</p>
-                                        <p class="notification-time">há 1 dia</p>
-                                    </div>
-                                </li>
-                                <li class="notification">
-                                    <div class="notification-icon"><span class="material-symbols-outlined">calendar_today</span></div>
-                                    <div class="notification-text">
-                                        <p class="notification-title">Prazo de entrega próximo</p>
-                                        <p class="notification-desc">Análise Combinatória vence em 2 dias</p>
-                                        <p class="notification-time">há 2 dias</p>
                                     </div>
                                 </li>
                             </ul>
@@ -200,13 +182,13 @@
                         </a>
                     </li>
                     <li>
-                        <a href="atividades.html" class="active">
+                        <a href="atividades.html">
                             <span class="material-symbols-outlined">assignment</span>
                             <p>Atividades</p>
                         </a>
                     </li>
                     <li>
-                        <a href="calendario.html">
+                        <a href="calendario.html" class="active">
                             <span class="material-symbols-outlined">event_note</span>
                             <p>Calendário</p>
                         </a>
@@ -252,7 +234,157 @@
         </nav>
     </div>
 
-            <div id="password-popup" class="popup-overlay" style="display: none;">
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main>
+        <div class="page-header">
+            <div class="page-title">
+                <h1>Calendário</h1>
+                <p>Visualize o calendário e o cronograma de aulas da sua turma</p>
+            </div>
+            <div class="page-actions">
+                <button class="btn-primary" id="today-btn">
+                    <span class="material-symbols-outlined">calendar_today</span>
+                    Hoje
+                </button>
+            </div>
+        </div>
+
+        <!-- Abas de navegação -->
+        <div class="tabs-navigation">
+            <ul class="tabs-list">
+                <li class="tab-item active" data-tab="plano-aulas">
+                    <a href="#plano-aulas">Plano de Aulas</a>
+                </li>
+                <li class="tab-item" data-tab="cronograma">
+                    <a href="#cronograma">Cronograma Semanal</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- ABA DE PLANO DE AULAS -->
+        <div id="plano-aulas-content" class="tab-content active">
+            <div class="calendar-container">
+                <!-- Controles do Calendário -->
+                <div class="calendar-controls">
+                    <div class="month-navigation">
+                        <button id="prev-month" class="nav-btn">
+                            <span class="material-symbols-outlined">chevron_left</span>
+                        </button>
+                        <h2 id="current-month-year">Maio 2025</h2>
+                        <button id="next-month" class="nav-btn">
+                            <span class="material-symbols-outlined">chevron_right</span>
+                        </button>
+                    </div>
+                    <div class="view-options">
+                        <select id="c" class="select-field">
+                            <option value="todos">Todos os turnos</option>
+                            <option value="manha">Manhã</option>
+                            <option value="tarde">Tarde</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Calendário -->
+                <div class="calendar-grid">
+                    <div class="calendar-header">
+                        <div class="day-header">Dom</div>
+                        <div class="day-header">Seg</div>
+                        <div class="day-header">Ter</div>
+                        <div class="day-header">Qua</div>
+                        <div class="day-header">Qui</div>
+                        <div class="day-header">Sex</div>
+                        <div class="day-header">Sáb</div>
+                    </div>
+                    <div class="calendar-days" id="calendar-days">
+                        <!-- Dias serão inseridos via JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Legenda -->
+                <div class="calendar-legend">
+                    <div class="legend-item">
+                        <span class="legend-indicator manha"></span>
+                        <span>Manhã</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-indicator tarde"></span>
+                        <span>Tarde</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-indicator especial"></span>
+                        <span>Aula Especial</span>
+                    </div>
+                    <div class="legend-item">
+                        <span class="legend-indicator hoje"></span>
+                        <span>Hoje</span>
+                    </div>
+                </div>
+
+                <!-- Aulas do Dia Selecionado -->
+                <div class="selected-day-classes">
+                    <h3 id="selected-date-title">Aulas</h3>
+                    <div id="day-classes-list" class="day-classes-list">
+                        <!-- Aulas serão inseridas via JavaScript -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ABA DE CRONOGRAMA SEMANAL -->
+        <div id="cronograma-content" class="tab-content">
+            <div class="cronograma-container">
+                <div class="cronograma-filters">
+                    <select id="turno-cronograma" class="select-field">
+                        <option value="manha">Manhã</option>
+                        <option value="tarde">Tarde</option>
+                    </select>
+                </div>
+                
+                <div class="cronograma-table-container">
+                    <table class="cronograma-table" id="cronograma-table">
+                        <thead>
+                            <tr>
+                                <th>Horário</th>
+                                <th>Segunda</th>
+                                <th>Terça</th>
+                                <th>Quarta</th>
+                                <th>Quinta</th>
+                                <th>Sexta</th>
+                                <th>Sábado</th>
+                            </tr>
+                        </thead>
+                        <tbody id="cronograma-tbody">
+                            <!-- Conteúdo será inserido via JavaScript -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Popup de Detalhes da Aula -->
+    <div id="class-detail-popup" class="class-detail-popup" style="display: none;">
+        <div class="popup">
+            <div class="popup-header">
+                <h2>Detalhes da Aula</h2>
+                <span class="material-symbols-outlined close-popup">close</span>
+            </div>
+            <div class="popup-content" id="class-detail-content">
+                <!-- Conteúdo será inserido via JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup de Plano de Aula -->
+    <div id="lesson-plan-popup" class="lesson-plan-popup" style="display: none;">
+        <div class="popup">
+            <div class="popup-content" id="lesson-plan-content">
+                <!-- Conteúdo será inserido via JavaScript -->
+            </div>
+        </div>
+    </div>
+
+    <div id="password-popup" class="popup-overlay" style="display: none;">
         <div class="popup">
             <div class="popup-header">
                 <h2>Alterar senha</h2>
@@ -294,173 +426,9 @@
         </div>
     </div>
 
-    <!-- Popup de Redefinição de Senha -->
-    <div id="reset-password-popup" class="popup-overlay" style="display: none;">
-        <div class="popup">
-            <div class="popup-header">
-                <h2>Redefinição de senha!</h2>
-                <span class="material-symbols-outlined close-popup">close</span>
-            </div>
-            <div class="popup-content">
-                <p class="popup-description">Informe um email e enviaremos um link para recuperação da sua senha.</p>
-                <form id="reset-password-form">
-                    <div class="form-group">
-                        <label for="recovery-email">Email <span class="required">*</span></label>
-                        <input type="email" id="recovery-email" name="recovery-email" required placeholder="seu@email.com">
-                    </div>
-                    <div class="form-actions">
-                        <button type="button" class="btn-back">
-                            <span class="material-symbols-outlined">arrow_back</span>
-                            Voltar
-                        </button>
-                        <button type="submit" class="btn-send">Enviar link de recuperação</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
-
-    <div id="logout-popup" class="popup-overlay" style="display: none;">
-        <div class="popup logout-popup">
-            <div class="logout-content">
-                <div class="logout-icon">
-                    <span class="material-symbols-outlined">logout</span>
-                </div>
-                <h2 class="logout-title">Sair da conta?</h2>
-                <p class="logout-description">Você poderá entrar novamente a qualquer momento. Se quiser trocar de conta, faça isso adicionando uma conta existente.</p>
-                
-                <div class="logout-actions">
-                    <button type="button" class="btn-logout">Sair</button>
-                    <button type="button" class="btn-cancel-logout">Cancelar</button>
-                </div>
-            </div>
-        </div>
-    </div>
-
-    <!-- CONTEÚDO PRINCIPAL -->
-    <main>
-        <div class="page-header">
-            <div class="page-title">
-                <h1>Atividades > Lista de Atividades</h1>
-                <p>Todas as atividades atribuídas</p>
-            </div>
-            <div class="page-actions">
-                <button onclick="window.location.href='atividades.html'" class="btn-secondary">
-                    <span class="material-symbols-outlined">arrow_back</span>
-                    Voltar
-                </button>
-            </div>
-        </div>
-
-        <div class="content-container">
-            <div class="activity-list-container">
-                <div class="activities-section">
-                    <div class="filter-bar">
-
-                        <div class="search-container">
-                            <input type="text" placeholder="Buscar atividade..." class="activity-search">
-                            <span class="material-symbols-outlined">search</span>
-                        </div>
-                    </div>
-                    
-                    <div class="activities-list-wrapper">
-                        <div class="activity-item">
-                            <span class="material-symbols-outlined activity-type-icon pending">description</span>
-                            <div class="activity-details">
-                                <h4>Revisão AV2 - Testes de Front-End</h4>
-                                <span class="activity-deadline">Sem data de entrega</span>
-                            </div>
-                            <span class="activity-status waiting">Aguardando envio</span>
-                            <span class="material-symbols-outlined more-options">more_vert</span>
-                        </div>
-                        
-                        <div class="activity-item">
-                            <span class="material-symbols-outlined activity-type-icon pending">description</span>
-                            <div class="activity-details">
-                                <h4>Envio de Slides</h4>
-                                <span class="activity-deadline">Sem data de entrega</span>
-                            </div>
-                            <span class="activity-status waiting">Aguardando envio</span>
-                            <span class="material-symbols-outlined more-options">more_vert</span>
-                        </div>
-                        
-                        <div class="activity-item">
-                            <span class="material-symbols-outlined activity-type-icon pending">description</span>
-                            <div class="activity-details">
-                                <h4>Atividade de Automação com Ghost Inspector</h4>
-                                <span class="activity-deadline">Data de entrega: 14 de mai., 23:59</span>
-                            </div>
-                            <span class="activity-status late">Atrasado</span>
-                            <span class="material-symbols-outlined more-options">more_vert</span>
-                        </div>
-                        
-                        <div class="activity-item">
-                            <span class="material-symbols-outlined activity-type-icon submitted">assignment</span>
-                            <div class="activity-details">
-                                <h4>AULA 07 - Introdução à automação de testes</h4>
-                                <span class="activity-deadline">Item postado: 16 de abr.</span>
-                            </div>
-                            <span class="activity-status completed">Entregue</span>
-                            <span class="material-symbols-outlined more-options">more_vert</span>
-                        </div>
-                        
-                        <div class="activity-item">
-                            <span class="material-symbols-outlined activity-type-icon submitted">assignment</span>
-                            <div class="activity-details">
-                                <h4>INSTRUÇÕES PARA O SEMINÁRIO 30/04</h4>
-                                <span class="activity-deadline">Item postado: 9 de abr.</span>
-                            </div>
-                            <span class="activity-status completed">Entregue</span>
-                            <span class="material-symbols-outlined more-options">more_vert</span>
-                        </div>
-                        
-                        <div class="activity-item">
-                            <span class="material-symbols-outlined activity-type-icon pending">description</span>
-                            <div class="activity-details">
-                                <h4>PROVA AV1 - Testes de Front-End</h4>
-                                <span class="activity-deadline">Sem data de entrega</span>
-                            </div>
-                            <span class="activity-status waiting">Aguardando envio</span>
-                            <span class="material-symbols-outlined more-options">more_vert</span>
-                        </div>
-                        
-                        <div class="activity-item">
-                            <span class="material-symbols-outlined activity-type-icon pending">description</span>
-                            <div class="activity-details">
-                                <h4>ATIVIDADE DE REVISÃO PARA A PROVA <span class="badge">1</span></h4>
-                                <span class="activity-deadline">Sem data de entrega</span>
-                            </div>
-                            <span class="activity-status waiting">Aguardando envio</span>
-                            <span class="material-symbols-outlined more-options">more_vert</span>
-                        </div>
-                        
-                        <button class="load-more-btn">Ver mais</button>
-                    </div>
-                </div>
-                
-                <div class="stats-section">
-                    <div class="stats-card">
-                        <h3>Total de Entregas</h3>
-                        <div class="stats-number">16</div>
-                        <p>de 20 permitidas</p>
-                        
-                        <div class="chart-container">
-                            <canvas id="activities-chart"></canvas>
-                        </div>
-                        
-                        <div class="progress-info">
-                            <p>80% concluído</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </main>
-
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-    <script src="../scripts/lista-atividades.js"></script>
+    <script src="../scripts/calendario.js"></script>
+    <script src="../../common/scripts/menu.js"></script>
     <script src="../../common/scripts/changepass.js"></script>
     <script src="../../common/scripts/exitpopup.js"></script>
-    <script src="../../common/scripts/menu.js"></script>
 </body>
 </html>
