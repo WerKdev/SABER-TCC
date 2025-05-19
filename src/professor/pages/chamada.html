@@ -1,0 +1,1471 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chamada - Portal do Professor</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/chamada.css">
+    <link rel="stylesheet" href="../../common/styles/menu.css">
+    <style>
+        /* Estilos específicos para o novo formato da lista */
+        .attendance-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .attendance-table th,
+        .attendance-table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #e5e7eb;
+        }
+
+        .attendance-table th {
+            background-color: #f8fafc;
+            color: var(--texto-secundario);
+            font-weight: 600;
+            position: sticky;
+            top: 0;
+            z-index: 10;
+        }
+
+        .attendance-table tr:hover {
+            background-color: #f8fafc;
+        }
+
+        body.dark-theme .attendance-table tr:hover {
+            background-color: rgba(255, 255, 255, 0.02);
+        }
+
+        .attendance-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .header-row th {
+            text-align: center;
+        }
+
+        .class-time {
+            display: block;
+            font-size: 12px;
+            font-weight: normal;
+            color: var(--texto-secundario);
+        }
+
+        /* Checkbox estilizado */
+        .checkbox-container {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+        }
+
+        .custom-checkbox {
+            height: 20px;
+            width: 20px;
+            background-color: #f1f5f9;
+            border: 1px solid #cbd5e1;
+            border-radius: 4px;
+            display: inline-block;
+            position: relative;
+            cursor: pointer;
+        }
+
+        input[type="checkbox"] {
+            opacity: 0;
+            position: absolute;
+        }
+
+        input[type="checkbox"]:checked + .custom-checkbox {
+            background-color: var(--verde);
+            border-color: var(--verde);
+        }
+
+        .custom-checkbox::after {
+            content: "";
+            position: absolute;
+            display: none;
+            left: 7px;
+            top: 3px;
+            width: 5px;
+            height: 10px;
+            border: solid white;
+            border-width: 0 2px 2px 0;
+            transform: rotate(45deg);
+        }
+
+        input[type="checkbox"]:checked + .custom-checkbox::after {
+            display: block;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .status-badge.present {
+            background-color: rgba(16, 185, 129, 0.1);
+            color: var(--verde);
+        }
+
+        .status-badge.late {
+            background-color: rgba(245, 158, 11, 0.1);
+            color: var(--amarelo);
+        }
+
+        .status-badge.absent {
+            background-color: rgba(239, 68, 68, 0.1);
+            color: var(--vermelho);
+        }
+
+        .status-badge.justified {
+            background-color: rgba(139, 92, 246, 0.1);
+            color: var(--roxo);
+        }
+
+        .actions-column {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        /* Legenda */
+        .attendance-legend {
+            display: flex;
+            gap: 15px;
+            margin-left: auto;
+        }
+
+        .legend-item {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .legend-color {
+            width: 16px;
+            height: 16px;
+            border-radius: 4px;
+        }
+
+        .legend-color.present {
+            background-color: var(--verde);
+        }
+
+        .legend-color.late {
+            background-color: var(--amarelo);
+        }
+
+        .legend-color.absent {
+            background-color: var(--vermelho);
+        }
+
+        .legend-color.justified {
+            background-color: var(--roxo);
+        }
+
+        .legend-text {
+            font-size: 13px;
+            color: var(--texto-secundario);
+        }
+    </style>
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="menu-icon-mobile">
+            <span id="menu-icon-mobile" class="material-symbols-outlined">menu</span>
+        </div>  
+        <div class="menuheader"> 
+            <ul class="menuheader-list">
+                <li class="notification-item">
+                    <span id="notifications-icon" class="material-symbols-outlined">notifications</span>
+                    <span class="notification-badge">3</span>
+                    <!-- Notification popup content would go here -->
+                </li>
+                <li>
+                    <p id="user-name-header">Carlos Silva</p>
+                </li>
+                <li class="user-settings-item">
+                    <span id="user-icon" class="material-symbols-outlined">account_circle</span>
+                    <!-- User settings popup content would go here -->
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- SIDEBAR -->
+    <div id="sidebar">
+        <div class="topmenu">
+            <span id="menu-icon" class="material-symbols-outlined">menu</span>
+            <h3 id="menu-tittle">Menu</h3>
+            <img id="logomenu" src="../../../assets/images/logo-saber.png" alt="Logo menu">
+        </div>
+        <nav id="menu-hidden">
+            <div class="navbar">
+                <ul>
+                    <li>
+                        <a href="dashboard.html">
+                            <span class="material-symbols-outlined">dashboard</span>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="turmas.html">
+                            <span class="material-symbols-outlined">groups</span>
+                            <p>Turmas</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="chamada.html" class="active">
+                            <span class="material-symbols-outlined">fact_check</span>
+                            <p>Chamada</p>
+                        </a>
+                    </li>
+                    <!-- Other menu items would go here -->
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main>
+        <div class="page-header">
+            <div class="page-title">
+                <h1>Chamada</h1>
+                <p>Registre a presença dos alunos</p>
+            </div>
+            <div class="page-actions">
+                <button class="btn-primary" id="save-attendance-btn">
+                    <span class="material-symbols-outlined">save</span>
+                    Salvar Chamada
+                </button>
+            </div>
+        </div>
+
+        <!-- Seleção de Aula -->
+        <div class="attendance-selector">
+            <div class="selector-container">
+                <div class="selector-group">
+                    <label for="turma-select">Turma:</label>
+                    <select id="turma-select" class="select-field">
+                        <option value="">Selecione uma turma</option>
+                        <option value="turma1" selected>1º Ano A - Matutino</option>
+                        <option value="turma2">2º Ano B - Matutino</option>
+                        <option value="turma3">3º Ano C - Matutino</option>
+                    </select>
+                </div>
+                <div class="selector-group">
+                    <label for="data-select">Data:</label>
+                    <input type="date" id="data-select" class="select-field" value="2025-05-19">
+                </div>
+                <div class="selector-group">
+                    <label for="disciplina-select">Disciplina:</label>
+                    <select id="disciplina-select" class="select-field">
+                        <option value="">Selecione uma disciplina</option>
+                        <option value="matematica" selected>Matemática</option>
+                        <option value="portugues">Português</option>
+                        <option value="fisica">Física</option>
+                    </select>
+                </div>
+                <div class="selector-actions">
+                    <button id="load-attendance-btn" class="btn-secondary">
+                        <span class="material-symbols-outlined">search</span>
+                        Carregar Alunos
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Informações da Aula -->
+        <div class="attendance-info">
+            <div class="info-card">
+                <div class="info-item">
+                    <span class="info-label">Turma:</span>
+                    <span class="info-value">1º Ano A - Matutino</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Data:</span>
+                    <span class="info-value">Segunda-feira, 19 de Maio de 2025</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Disciplina:</span>
+                    <span class="info-value">Matemática</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Professor:</span>
+                    <span class="info-value">Carlos Silva</span>
+                </div>
+                <div class="info-item">
+                    <span class="info-label">Aulas:</span>
+                    <span class="info-value">3 aulas (7:00 - 9:30)</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Controles rápidos -->
+        <div class="quick-controls">
+            <div class="control-group">
+                <button id="mark-all-present" class="btn-success">
+                    <span class="material-symbols-outlined">done_all</span>
+                    Marcar todos presentes
+                </button>
+                <button id="mark-all-absent" class="btn-danger">
+                    <span class="material-symbols-outlined">close</span>
+                    Marcar todos ausentes
+                </button>
+            </div>
+            <div class="attendance-legend">
+                <div class="legend-item">
+                    <span class="legend-color present"></span>
+                    <span class="legend-text">Presente</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color late"></span>
+                    <span class="legend-text">Atrasado</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color absent"></span>
+                    <span class="legend-text">Ausente</span>
+                </div>
+                <div class="legend-item">
+                    <span class="legend-color justified"></span>
+                    <span class="legend-text">Falta Justificada</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lista de Alunos - NOVO FORMATO DE TABELA -->
+        <div class="attendance-container">
+            <table class="attendance-table">
+                <thead>
+                    <tr>
+                        <th>Nome</th>
+                        <th>Matrícula</th>
+                        <th colspan="4">Presença</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                    <tr class="header-row">
+                        <th></th>
+                        <th></th>
+                        <th>
+                            <div class="checkbox-container">
+                                <span>Todas as aulas</span>
+                            </div>
+                        </th>
+                        <th>
+                            <span>1ª Aula</span>
+                            <span class="class-time">(7:00 - 7:50)</span>
+                        </th>
+                        <th>
+                            <span>2ª Aula</span>
+                            <span class="class-time">(7:50 - 8:40)</span>
+                        </th>
+                        <th>
+                            <span>3ª Aula</span>
+                            <span class="class-time">(8:40 - 9:30)</span>
+                        </th>
+                        <th></th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="students-list">
+                    <tr data-student-id="20250001">
+                        <td>Ana Carolina Silva</td>
+                        <td>00000005662</td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="select-all-student">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="1">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="2">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="3">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="status-badge absent">Ausente</span>
+                        </td>
+                        <td>
+                            <div class="actions-column">
+                                <button class="btn-icon note-btn" title="Adicionar observação">
+                                    <span class="material-symbols-outlined">note_add</span>
+                                </button>
+                                <button class="btn-icon justify-btn" title="Justificar falta">
+                                    <span class="material-symbols-outlined">assignment_turned_in</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr data-student-id="20250002">
+                        <td>Bruno Oliveira Santos</td>
+                        <td>00000005662</td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="select-all-student">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="1">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="2">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="3">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="status-badge absent">Ausente</span>
+                        </td>
+                        <td>
+                            <div class="actions-column">
+                                <button class="btn-icon note-btn" title="Adicionar observação">
+                                    <span class="material-symbols-outlined">note_add</span>
+                                </button>
+                                <button class="btn-icon justify-btn" title="Justificar falta">
+                                    <span class="material-symbols-outlined">assignment_turned_in</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr data-student-id="20250003">
+                        <td>Camila Mendes Ferreira</td>
+                        <td>00000005662</td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="select-all-student">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="1">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="2">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="3">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="status-badge absent">Ausente</span>
+                        </td>
+                        <td>
+                            <div class="actions-column">
+                                <button class="btn-icon note-btn" title="Adicionar observação">
+                                    <span class="material-symbols-outlined">note_add</span>
+                                </button>
+                                <button class="btn-icon justify-btn" title="Justificar falta">
+                                    <span class="material-symbols-outlined">assignment_turned_in</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr data-student-id="20250004">
+                        <td>Daniel Costa Lima</td>
+                        <td>00000005662</td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="select-all-student">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="1">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="2">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="3">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="status-badge absent">Ausente</span>
+                        </td>
+                        <td>
+                            <div class="actions-column">
+                                <button class="btn-icon note-btn" title="Adicionar observação">
+                                    <span class="material-symbols-outlined">note_add</span>
+                                </button>
+                                <button class="btn-icon justify-btn" title="Justificar falta">
+                                    <span class="material-symbols-outlined">assignment_turned_in</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr data-student-id="20250005">
+                        <td>Eduardo Pereira Santos</td>
+                        <td>00000005662</td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="select-all-student">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="1">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="2">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="3">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="status-badge absent">Ausente</span>
+                        </td>
+                        <td>
+                            <div class="actions-column">
+                                <button class="btn-icon note-btn" title="Adicionar observação">
+                                    <span class="material-symbols-outlined">note_add</span>
+                                </button>
+                                <button class="btn-icon justify-btn" title="Justificar falta">
+                                    <span class="material-symbols-outlined">assignment_turned_in</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr data-student-id="20250006">
+                        <td>Fernanda Alves Ribeiro</td>
+                        <td>00000005662</td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="select-all-student">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="1">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="2">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="3">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="status-badge absent">Ausente</span>
+                        </td>
+                        <td>
+                            <div class="actions-column">
+                                <button class="btn-icon note-btn" title="Adicionar observação">
+                                    <span class="material-symbols-outlined">note_add</span>
+                                </button>
+                                <button class="btn-icon justify-btn" title="Justificar falta">
+                                    <span class="material-symbols-outlined">assignment_turned_in</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr data-student-id="20250007">
+                        <td>Gabriel Martins Sousa</td>
+                        <td>00000005662</td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="select-all-student">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="1">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="2">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="3">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="status-badge absent">Ausente</span>
+                        </td>
+                        <td>
+                            <div class="actions-column">
+                                <button class="btn-icon note-btn" title="Adicionar observação">
+                                    <span class="material-symbols-outlined">note_add</span>
+                                </button>
+                                <button class="btn-icon justify-btn" title="Justificar falta">
+                                    <span class="material-symbols-outlined">assignment_turned_in</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr data-student-id="20250008">
+                        <td>Helena Cardoso Dias</td>
+                        <td>00000005662</td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="select-all-student">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="1">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="2">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="3">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="status-badge absent">Ausente</span>
+                        </td>
+                        <td>
+                            <div class="actions-column">
+                                <button class="btn-icon note-btn" title="Adicionar observação">
+                                    <span class="material-symbols-outlined">note_add</span>
+                                </button>
+                                <button class="btn-icon justify-btn" title="Justificar falta">
+                                    <span class="material-symbols-outlined">assignment_turned_in</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr data-student-id="20250009">
+                        <td>Igor Teixeira Lima</td>
+                        <td>00000005662</td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="select-all-student">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="1">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="2">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="3">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="status-badge absent">Ausente</span>
+                        </td>
+                        <td>
+                            <div class="actions-column">
+                                <button class="btn-icon note-btn" title="Adicionar observação">
+                                    <span class="material-symbols-outlined">note_add</span>
+                                </button>
+                                <button class="btn-icon justify-btn" title="Justificar falta">
+                                    <span class="material-symbols-outlined">assignment_turned_in</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr data-student-id="20250010">
+                        <td>Juliana Rocha Gomes</td>
+                        <td>00000005662</td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="select-all-student">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="1">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="2">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="3">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="status-badge absent">Ausente</span>
+                        </td>
+                        <td>
+                            <div class="actions-column">
+                                <button class="btn-icon note-btn" title="Adicionar observação">
+                                    <span class="material-symbols-outlined">note_add</span>
+                                </button>
+                                <button class="btn-icon justify-btn" title="Justificar falta">
+                                    <span class="material-symbols-outlined">assignment_turned_in</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr data-student-id="20250011">
+                        <td>Lucas Menezes Oliveira</td>
+                        <td>00000005662</td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="select-all-student">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="1">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="2">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="3">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="status-badge absent">Ausente</span>
+                        </td>
+                        <td>
+                            <div class="actions-column">
+                                <button class="btn-icon note-btn" title="Adicionar observação">
+                                    <span class="material-symbols-outlined">note_add</span>
+                                </button>
+                                <button class="btn-icon justify-btn" title="Justificar falta">
+                                    <span class="material-symbols-outlined">assignment_turned_in</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr data-student-id="20250012">
+                        <td>Mariana Souza Carvalho</td>
+                        <td>00000005662</td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="select-all-student">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="1">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="2">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="3">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="status-badge absent">Ausente</span>
+                        </td>
+                        <td>
+                            <div class="actions-column">
+                                <button class="btn-icon note-btn" title="Adicionar observação">
+                                    <span class="material-symbols-outlined">note_add</span>
+                                </button>
+                                <button class="btn-icon justify-btn" title="Justificar falta">
+                                    <span class="material-symbols-outlined">assignment_turned_in</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr data-student-id="20250013">
+                        <td>Nathalia Fernandes Costa</td>
+                        <td>00000005662</td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="select-all-student">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="1">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="2">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="3">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="status-badge absent">Ausente</span>
+                        </td>
+                        <td>
+                            <div class="actions-column">
+                                <button class="btn-icon note-btn" title="Adicionar observação">
+                                    <span class="material-symbols-outlined">note_add</span>
+                                </button>
+                                <button class="btn-icon justify-btn" title="Justificar falta">
+                                    <span class="material-symbols-outlined">assignment_turned_in</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr data-student-id="20250014">
+                        <td>Pedro Henrique Almeida</td>
+                        <td>00000005662</td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="select-all-student">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="1">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="2">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="3">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="status-badge absent">Ausente</span>
+                        </td>
+                        <td>
+                            <div class="actions-column">
+                                <button class="btn-icon note-btn" title="Adicionar observação">
+                                    <span class="material-symbols-outlined">note_add</span>
+                                </button>
+                                <button class="btn-icon justify-btn" title="Justificar falta">
+                                    <span class="material-symbols-outlined">assignment_turned_in</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                    <tr data-student-id="20250015">
+                        <td>Rafael Lima Santos</td>
+                        <td>00000005662</td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="select-all-student">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="1">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="2">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="checkbox-container">
+                                <label>
+                                    <input type="checkbox" class="class-checkbox" data-class="3">
+                                    <span class="custom-checkbox"></span>
+                                </label>
+                            </div>
+                        </td>
+                        <td>
+                            <span class="status-badge absent">Ausente</span>
+                        </td>
+                        <td>
+                            <div class="actions-column">
+                                <button class="btn-icon note-btn" title="Adicionar observação">
+                                    <span class="material-symbols-outlined">note_add</span>
+                                </button>
+                                <button class="btn-icon justify-btn" title="Justificar falta">
+                                    <span class="material-symbols-outlined">assignment_turned_in</span>
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- Resumo da chamada -->
+        <div class="attendance-summary">
+            <div class="summary-card">
+                <div class="summary-title">Resumo da Chamada</div>
+                <div class="summary-content">
+                    <div class="summary-item">
+                        <span class="summary-label">Total de alunos:</span>
+                        <span class="summary-value">15</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Presentes:</span>
+                        <span class="summary-value">0</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Ausentes:</span>
+                        <span class="summary-value">15</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Atrasados:</span>
+                        <span class="summary-value">0</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Faltas justificadas:</span>
+                        <span class="summary-value">0</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Popup de Observação -->
+    <div id="note-popup" class="popup-overlay" style="display: none;">
+        <div class="popup">
+            <div class="popup-header">
+                <h2>Adicionar Observação</h2>
+                <span class="material-symbols-outlined close-popup">close</span>
+            </div>
+            <div class="popup-content">
+                <div class="student-info-mini">
+                    <p class="student-name-mini">Ana Carolina Silva</p>
+                    <p class="student-id-mini">Matrícula: 20250001</p>
+                </div>
+                <div class="form-group">
+                    <label for="note-content">Observação:</label>
+                    <textarea id="note-content" rows="5" placeholder="Digite sua observação aqui..."></textarea>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-cancel">Cancelar</button>
+                    <button type="button" class="btn-confirm">Salvar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup de Justificativa -->
+    <div id="justify-popup" class="popup-overlay" style="display: none;">
+        <div class="popup">
+            <div class="popup-header">
+                <h2>Justificar Falta</h2>
+                <span class="material-symbols-outlined close-popup">close</span>
+            </div>
+            <div class="popup-content">
+                <div class="student-info-mini">
+                    <p class="student-name-mini">Camila Mendes Ferreira</p>
+                    <p class="student-id-mini">Matrícula: 20250003</p>
+                </div>
+                <div class="form-group">
+                    <label for="justify-type">Tipo de justificativa:</label>
+                    <select id="justify-type">
+                        <option value="">Selecione o tipo</option>
+                        <option value="medical">Atestado médico</option>
+                        <option value="family">Problema familiar</option>
+                        <option value="sports">Atividade esportiva</option>
+                        <option value="other">Outro</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="justify-date">Data do documento:</label>
+                    <input type="date" id="justify-date">
+                </div>
+                <div class="form-group">
+                    <label for="justify-content">Detalhes da justificativa:</label>
+                    <textarea id="justify-content" rows="3" placeholder="Descreva o motivo da falta..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="justify-file">Anexar documento:</label>
+                    <input type="file" id="justify-file">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-cancel">Cancelar</button>
+                    <button type="button" class="btn-confirm">Confirmar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Elementos DOM
+            const selectAllCheckbox = document.getElementById('select-all-checkbox');
+            const selectAllStudentCheckboxes = document.querySelectorAll('.select-all-student');
+            const classCheckboxes = document.querySelectorAll('.class-checkbox');
+            const markAllPresentBtn = document.getElementById('mark-all-present');
+            const markAllAbsentBtn = document.getElementById('mark-all-absent');
+            
+            // Função para atualizar o status de um aluno
+            function updateStudentStatus(studentRow) {
+                const checkboxes = studentRow.querySelectorAll('.class-checkbox');
+                const statusBadge = studentRow.querySelector('.status-badge');
+                const selectAllCheckbox = studentRow.querySelector('.select-all-student');
+                
+                // Contar checkboxes marcados
+                let checkedCount = 0;
+                let justifiedCount = 0;
+                
+                checkboxes.forEach(checkbox => {
+                    if (checkbox.checked) {
+                        checkedCount++;
+                        if (checkbox.classList.contains('justified')) {
+                            justifiedCount++;
+                        }
+                    }
+                });
+                
+                // Atualizar o checkbox "selecionar todos" do aluno
+                selectAllCheckbox.checked = (checkedCount === checkboxes.length);
+                selectAllCheckbox.indeterminate = (checkedCount > 0 && checkedCount < checkboxes.length);
+                
+                // Atualizar o status
+                statusBadge.className = 'status-badge';
+                
+                if (justifiedCount > 0) {
+                    // Se pelo menos uma aula está justificada
+                    statusBadge.classList.add('justified');
+                    statusBadge.textContent = 'Justificado';
+                } else if (checkedCount === 0) {
+                    // Se nenhuma aula está marcada
+                    statusBadge.classList.add('absent');
+                    statusBadge.textContent = 'Ausente';
+                } else if (checkedCount === checkboxes.length) {
+                    // Se todas as aulas estão marcadas
+                    statusBadge.classList.add('present');
+                    statusBadge.textContent = 'Presente';
+                } else {
+                    // Se algumas aulas estão marcadas (pelo menos 1, mas não todas)
+                    statusBadge.classList.add('late');
+                    statusBadge.textContent = 'Atrasado';
+                }
+                
+                // Atualizar o resumo geral
+                updateAttendanceSummary();
+            }
+            
+            // Função para atualizar o resumo da chamada
+            function updateAttendanceSummary() {
+                const totalStudents = document.querySelectorAll('tbody tr').length;
+                let presentCount = 0;
+                let absentCount = 0;
+                let lateCount = 0;
+                let justifiedCount = 0;
+                
+                // Contar por status
+                document.querySelectorAll('.status-badge').forEach(badge => {
+                    if (badge.classList.contains('present')) {
+                        presentCount++;
+                    } else if (badge.classList.contains('absent')) {
+                        absentCount++;
+                    } else if (badge.classList.contains('late')) {
+                        lateCount++;
+                    } else if (badge.classList.contains('justified')) {
+                        justifiedCount++;
+                    }
+                });
+                
+                // Atualizar o resumo
+                document.querySelector('.summary-content').innerHTML = `
+                    <div class="summary-item">
+                        <span class="summary-label">Total de alunos:</span>
+                        <span class="summary-value">${totalStudents}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Presentes:</span>
+                        <span class="summary-value">${presentCount}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Ausentes:</span>
+                        <span class="summary-value">${absentCount}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Atrasados:</span>
+                        <span class="summary-value">${lateCount}</span>
+                    </div>
+                    <div class="summary-item">
+                        <span class="summary-label">Faltas justificadas:</span>
+                        <span class="summary-value">${justifiedCount}</span>
+                    </div>
+                `;
+            }
+            
+            // Checkbox principal para selecionar todos os alunos em todas as aulas
+            if (selectAllCheckbox) {
+                selectAllCheckbox.addEventListener('change', function() {
+                    const isChecked = this.checked;
+                    
+                    // Selecionar todos os checkboxes de alunos
+                    document.querySelectorAll('.select-all-student').forEach(checkbox => {
+                        checkbox.checked = isChecked;
+                        
+                        // Propagar o evento para os checkboxes individuais
+                        const studentRow = checkbox.closest('tr');
+                        studentRow.querySelectorAll('.class-checkbox').forEach(classCheckbox => {
+                            classCheckbox.checked = isChecked;
+                        });
+                        
+                        // Atualizar o status do aluno
+                        updateStudentStatus(studentRow);
+                    });
+                });
+            }
+            
+            // Checkboxes para selecionar todas as aulas de um aluno
+            selectAllStudentCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const isChecked = this.checked;
+                    const studentRow = this.closest('tr');
+                    
+                    // Selecionar todos os checkboxes das aulas do aluno
+                    studentRow.querySelectorAll('.class-checkbox').forEach(classCheckbox => {
+                        classCheckbox.checked = isChecked;
+                    });
+                    
+                    // Atualizar o status do aluno
+                    updateStudentStatus(studentRow);
+                });
+            });
+            
+            // Checkboxes individuais das aulas
+            classCheckboxes.forEach(checkbox => {
+                checkbox.addEventListener('change', function() {
+                    const studentRow = this.closest('tr');
+                    
+                    // Atualizar o status do aluno
+                    updateStudentStatus(studentRow);
+                });
+            });
+            
+            // Botão para marcar todos presentes
+            if (markAllPresentBtn) {
+                markAllPresentBtn.addEventListener('click', function() {
+                    document.querySelectorAll('tbody tr').forEach(studentRow => {
+                        // Marcar todos os checkboxes
+                        studentRow.querySelectorAll('.class-checkbox').forEach(checkbox => {
+                            checkbox.checked = true;
+                        });
+                        
+                        // Marcar o checkbox "selecionar todos"
+                        const selectAllCheckbox = studentRow.querySelector('.select-all-student');
+                        if (selectAllCheckbox) {
+                            selectAllCheckbox.checked = true;
+                        }
+                        
+                        // Atualizar o status
+                        updateStudentStatus(studentRow);
+                    });
+                    
+                    // Atualizar o checkbox principal
+                    if (selectAllCheckbox) {
+                        selectAllCheckbox.checked = true;
+                    }
+                });
+            }
+            
+            // Botão para marcar todos ausentes
+            if (markAllAbsentBtn) {
+                markAllAbsentBtn.addEventListener('click', function() {
+                    document.querySelectorAll('tbody tr').forEach(studentRow => {
+                        // Desmarcar todos os checkboxes
+                        studentRow.querySelectorAll('.class-checkbox').forEach(checkbox => {
+                            checkbox.checked = false;
+                        });
+                        
+                        // Desmarcar o checkbox "selecionar todos"
+                        const selectAllCheckbox = studentRow.querySelector('.select-all-student');
+                        if (selectAllCheckbox) {
+                            selectAllCheckbox.checked = false;
+                        }
+                        
+                        // Atualizar o status
+                        updateStudentStatus(studentRow);
+                    });
+                    
+                    // Atualizar o checkbox principal
+                    if (selectAllCheckbox) {
+                        selectAllCheckbox.checked = false;
+                    }
+                });
+            }
+            
+            // Botões para adicionar observação
+            document.querySelectorAll('.note-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const studentRow = this.closest('tr');
+                    const studentName = studentRow.querySelector('td').textContent;
+                    const studentId = studentRow.querySelector('td:nth-child(2)').textContent;
+                    
+                    // Atualizar os dados no popup
+                    const nameElement = document.querySelector('#note-popup .student-name-mini');
+                    const idElement = document.querySelector('#note-popup .student-id-mini');
+                    
+                    nameElement.textContent = studentName;
+                    idElement.textContent = `Matrícula: ${studentId}`;
+                    
+                    // Mostrar o popup
+                    document.getElementById('note-popup').style.display = 'flex';
+                });
+            });
+            
+            // Botões para justificar falta
+            document.querySelectorAll('.justify-btn').forEach(button => {
+                button.addEventListener('click', function() {
+                    const studentRow = this.closest('tr');
+                    const studentName = studentRow.querySelector('td').textContent;
+                    const studentId = studentRow.querySelector('td:nth-child(2)').textContent;
+                    
+                    // Atualizar os dados no popup
+                    const nameElement = document.querySelector('#justify-popup .student-name-mini');
+                    const idElement = document.querySelector('#justify-popup .student-id-mini');
+                    
+                    nameElement.textContent = studentName;
+                    idElement.textContent = `Matrícula: ${studentId}`;
+                    
+                    // Mostrar o popup
+                    document.getElementById('justify-popup').style.display = 'flex';
+                });
+            });
+            
+            // Botões para fechar popups
+            document.querySelectorAll('.close-popup, .btn-cancel').forEach(button => {
+                button.addEventListener('click', function() {
+                    // Encontrar o popup pai
+                    const popup = this.closest('.popup-overlay');
+                    popup.style.display = 'none';
+                });
+            });
+            
+            // Inicializar status
+            document.querySelectorAll('tbody tr').forEach(studentRow => {
+                updateStudentStatus(studentRow);
+            });
+        });
+    </script>
+</body>
+</html>

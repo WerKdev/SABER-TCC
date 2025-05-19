@@ -1,0 +1,781 @@
+/* Importação de estilos base */
+@import url('../../common/styles/base.css');
+
+/* Estilos específicos para a página de chamada */
+.attendance-selector {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+body.dark-theme .attendance-selector {
+    background-color: var(--background-elemento-escuro);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+.selector-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    align-items: flex-end;
+}
+
+.selector-group {
+    flex: 1;
+    min-width: 200px;
+}
+
+.selector-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: var(--texto-secundario);
+}
+
+.selector-actions {
+    display: flex;
+    align-items: flex-end;
+}
+
+.select-field, input[type="date"] {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: white;
+    color: var(--texto-claro);
+}
+
+body.dark-theme .select-field,
+body.dark-theme input[type="date"] {
+    background-color: var(--background-elemento-escuro);
+    border-color: #444;
+    color: var(--texto-escuro);
+}
+
+.select-field:focus, input[type="date"]:focus {
+    border-color: var(--azul-padrao);
+    outline: none;
+    box-shadow: 0 0 0 2px rgba(59, 130, 246, 0.25);
+}
+
+/* Informações da aula */
+.attendance-info {
+    margin-bottom: 20px;
+}
+
+.info-card {
+    background-color: #f8fafc;
+    border-radius: 8px;
+    padding: 15px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 25px;
+}
+
+body.dark-theme .info-card {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.info-item {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.info-label {
+    font-size: 12px;
+    color: var(--texto-secundario);
+    font-weight: 500;
+}
+
+.info-value {
+    font-size: 15px;
+    color: var(--texto-claro);
+    font-weight: 600;
+}
+
+body.dark-theme .info-value {
+    color: var(--texto-escuro);
+}
+
+/* Controles rápidos */
+.quick-controls {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.control-group {
+    display: flex;
+    gap: 10px;
+}
+
+.btn-success {
+    background-color: var(--verde);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-success:hover {
+    background-color: var(--verde-escuro);
+}
+
+.btn-danger {
+    background-color: var(--vermelho);
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-danger:hover {
+    background-color: var(--vermelho-escuro);
+}
+
+.btn-secondary {
+    background-color: var(--azul-secundario);
+    color: white;
+    border: none;
+    padding: 10px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-secondary:hover {
+    background-color: var(--azul-secundario-escuro);
+}
+
+/* Legenda */
+.attendance-legend {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.legend-color {
+    width: 16px;
+    height: 16px;
+    border-radius: 4px;
+}
+
+.legend-color.present {
+    background-color: var(--verde);
+}
+
+.legend-color.late {
+    background-color: var(--amarelo);
+}
+
+.legend-color.absent {
+    background-color: var(--vermelho);
+}
+
+.legend-color.justified {
+    background-color: var(--roxo);
+}
+
+.legend-text {
+    font-size: 13px;
+    color: var(--texto-secundario);
+}
+
+/* Container principal da chamada */
+.attendance-container {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+    overflow: hidden;
+    margin-bottom: 20px;
+}
+
+body.dark-theme .attendance-container {
+    background-color: var(--background-elemento-escuro);
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Cabeçalho da tabela */
+.attendance-header {
+    display: flex;
+    padding: 15px;
+    background-color: #f8fafc;
+    border-bottom: 1px solid #e5e7eb;
+    font-weight: 600;
+    color: var(--texto-secundario);
+}
+
+body.dark-theme .attendance-header {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-color: #444;
+    color: var(--texto-terciario);
+}
+
+.student-info-header {
+    width: 300px;
+    padding-left: 10px;
+}
+
+.attendance-controls-header {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+.select-all-container {
+    width: 120px;
+    padding: 0 10px;
+    display: flex;
+    align-items: center;
+}
+
+.individual-classes {
+    flex: 1;
+    display: flex;
+    justify-content: space-around;
+    gap: 10px;
+    padding: 0 10px;
+}
+
+.class-header {
+    flex: 1;
+    text-align: center;
+    font-size: 14px;
+}
+
+.class-time {
+    font-size: 12px;
+    font-weight: normal;
+    color: var(--texto-secundario);
+    display: block;
+    margin-top: 3px;
+}
+
+body.dark-theme .class-time {
+    color: var(--texto-terciario);
+}
+
+.attendance-status-header {
+    width: 100px;
+    text-align: center;
+}
+
+.attendance-actions-header {
+    width: 100px;
+    text-align: center;
+}
+
+/* Lista de alunos */
+.attendance-list {
+    max-height: 600px;
+    overflow-y: auto;
+}
+
+.student-row {
+    display: flex;
+    padding: 12px 15px;
+    border-bottom: 1px solid #e5e7eb;
+    align-items: center;
+    transition: all 0.2s ease;
+}
+
+body.dark-theme .student-row {
+    border-color: #444;
+}
+
+.student-row:last-child {
+    border-bottom: none;
+}
+
+.student-row:hover {
+    background-color: #f8fafc;
+}
+
+body.dark-theme .student-row:hover {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+.student-info {
+    width: 300px;
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.student-photo {
+    width: 42px;
+    height: 42px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: #e5e7eb;
+}
+
+.student-photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.student-details {
+    flex: 1;
+}
+
+.student-name {
+    font-weight: 600;
+    color: var(--texto-claro);
+    margin: 0 0 3px 0;
+}
+
+body.dark-theme .student-name {
+    color: var(--texto-escuro);
+}
+
+.student-id {
+    font-size: 12px;
+    color: var(--texto-secundario);
+    margin: 0;
+}
+
+.attendance-controls {
+    flex: 1;
+    display: flex;
+    align-items: center;
+}
+
+/* Checkbox personalizado */
+.checkbox-container {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    user-select: none;
+    position: relative;
+}
+
+.checkbox-container input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    height: 0;
+    width: 0;
+}
+
+.custom-checkbox {
+    height: 22px;
+    width: 22px;
+    background-color: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    border-radius: 4px;
+    position: relative;
+}
+
+body.dark-theme .custom-checkbox {
+    background-color: rgba(255, 255, 255, 0.05);
+    border-color: #4b5563;
+}
+
+.checkbox-container input:checked ~ .custom-checkbox {
+    background-color: var(--verde);
+    border-color: var(--verde);
+}
+
+.checkbox-container input.justified ~ .custom-checkbox.justified {
+    background-color: var(--roxo);
+    border-color: var(--roxo);
+}
+
+.custom-checkbox:after {
+    content: "";
+    position: absolute;
+    display: none;
+    left: 8px;
+    top: 4px;
+    width: 5px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+}
+
+.checkbox-container input:checked ~ .custom-checkbox:after {
+    display: block;
+}
+
+.checkbox-label {
+    margin-left: 8px;
+    font-size: 14px;
+    color: var(--texto-secundario);
+}
+
+.attendance-status {
+    width: 100px;
+    text-align: center;
+}
+
+.status-badge {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+.status-badge.present {
+    background-color: rgba(16, 185, 129, 0.1);
+    color: var(--verde);
+}
+
+.status-badge.late {
+    background-color: rgba(245, 158, 11, 0.1);
+    color: var(--amarelo);
+}
+
+.status-badge.absent {
+    background-color: rgba(239, 68, 68, 0.1);
+    color: var(--vermelho);
+}
+
+.status-badge.justified {
+    background-color: rgba(139, 92, 246, 0.1);
+    color: var(--roxo);
+}
+
+.attendance-actions {
+    width: 100px;
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+}
+
+.btn-icon {
+    width: 32px;
+    height: 32px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+    background-color: transparent;
+    color: var(--texto-secundario);
+    transition: all 0.2s ease;
+}
+
+.btn-icon:hover {
+    background-color: #f1f5f9;
+    color: var(--azul-padrao);
+}
+
+body.dark-theme .btn-icon:hover {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+/* Resumo da chamada */
+.attendance-summary {
+    margin-bottom: 30px;
+}
+
+.summary-card {
+    background-color: #f8fafc;
+    border-radius: 8px;
+    padding: 15px;
+}
+
+body.dark-theme .summary-card {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.summary-title {
+    font-weight: 600;
+    color: var(--texto-claro);
+    margin-bottom: 15px;
+}
+
+body.dark-theme .summary-title {
+    color: var(--texto-escuro);
+}
+
+.summary-content {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+}
+
+.summary-item {
+    display: flex;
+    flex-direction: column;
+    min-width: 120px;
+}
+
+.summary-label {
+    font-size: 12px;
+    color: var(--texto-secundario);
+}
+
+.summary-value {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--texto-claro);
+}
+
+body.dark-theme .summary-value {
+    color: var(--texto-escuro);
+}
+
+/* Popups */
+.popup-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    backdrop-filter: blur(3px);
+}
+
+.popup {
+    background-color: white;
+    border-radius: 8px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    width: 500px;
+    max-width: 95%;
+}
+
+body.dark-theme .popup {
+    background-color: var(--background-elemento-escuro);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+}
+
+.popup-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px 20px;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+body.dark-theme .popup-header {
+    border-color: #444;
+}
+
+.popup-header h2 {
+    font-size: 18px;
+    margin: 0;
+    color: var(--texto-claro);
+}
+
+body.dark-theme .popup-header h2 {
+    color: var(--texto-escuro);
+}
+
+.popup-content {
+    padding: 20px;
+}
+
+.student-info-mini {
+    margin-bottom: 15px;
+    padding: 10px;
+    background-color: #f8fafc;
+    border-radius: 6px;
+}
+
+body.dark-theme .student-info-mini {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+.student-name-mini {
+    font-weight: 600;
+    margin: 0 0 3px 0;
+    color: var(--texto-claro);
+}
+
+body.dark-theme .student-name-mini {
+    color: var(--texto-escuro);
+}
+
+.student-id-mini {
+    font-size: 12px;
+    margin: 0;
+    color: var(--texto-secundario);
+}
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 500;
+    color: var(--texto-secundario);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: white;
+    color: var(--texto-claro);
+}
+
+body.dark-theme .form-group input,
+body.dark-theme .form-group select,
+body.dark-theme .form-group textarea {
+    background-color: var(--background-elemento-escuro);
+    border-color: #444;
+    color: var(--texto-escuro);
+}
+
+.form-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    margin-top: 20px;
+}
+
+.btn-cancel {
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    background-color: #f1f5f9;
+    color: var(--texto-secundario);
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-cancel:hover {
+    background-color: #e2e8f0;
+}
+
+body.dark-theme .btn-cancel {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+body.dark-theme .btn-cancel:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.btn-confirm {
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 500;
+    background-color: var(--azul-padrao);
+    color: white;
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.btn-confirm:hover {
+    background-color: var(--azul-escuro);
+}
+
+/* Responsividade */
+@media (max-width: 1200px) {
+    .selector-container {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .selector-group {
+        width: 100%;
+    }
+    
+    .student-info {
+        width: 250px;
+    }
+}
+
+@media (max-width: 992px) {
+    .attendance-controls-header,
+    .attendance-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .select-all-container {
+        width: 100%;
+        padding: 8px 0;
+    }
+    
+    .individual-classes {
+        padding: 8px 0;
+    }
+    
+    .attendance-status-header,
+    .attendance-status,
+    .attendance-actions-header,
+    .attendance-actions {
+        width: 100%;
+        text-align: left;
+        padding: 8px 0;
+    }
+    
+    .student-row {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 15px;
+    }
+    
+    .student-info {
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    .quick-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .control-group {
+        flex-direction: column;
+    }
+    
+    .attendance-legend {
+        justify-content: space-between;
+    }
+}
