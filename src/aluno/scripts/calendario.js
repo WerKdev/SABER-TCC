@@ -228,10 +228,11 @@ document.addEventListener('DOMContentLoaded', function() {
     };
 
     // Variáveis globais
-    let currentDate = new Date(2025, 4, 18); // 18 de maio de 2025
-    const today = new Date(2025, 4, 18);
+    let currentDate = new Date(); // Data atual do sistema
+    const today = new Date(); // Data atual do sistema
     let selectedDate = null;
     let currentFilter = 'todos';
+
     
     // Recupera o turno salvo do localStorage ou usa 'manha' como padrão
     let currentTurno = localStorage.getItem('selectedTurno') || 'manha';
