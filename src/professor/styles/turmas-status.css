@@ -334,7 +334,11 @@ body {
 .view-report-button:hover {
     background-color: #2563eb;
 }
-
+#voltarButton
+{
+    text-decoration: none;
+    color: #030e20;
+}
 @media (max-width: 768px) {
     .main {
         margin-left: 0;

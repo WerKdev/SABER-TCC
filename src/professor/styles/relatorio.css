@@ -510,7 +510,11 @@ html, body {
 .negative {
     color: var(--danger);
 }
-
+#voltarButton
+{
+    text-decoration: none;
+    color: #030e20;
+}
 /* Responsividade */
 @media (max-width: 768px) {
     .main {
