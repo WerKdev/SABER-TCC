@@ -22,16 +22,16 @@ const dadosCompletos = {
     "2025": {
         "Ano Todo": {
             "Matemática": { faltas: 19, limite: 24, percentual: 79 },
-            "Ciências da Natureza": { faltas: 9, limite: 17, percentual: 53 },
+            "Ciências da Natureza": { faltas: 9, limite: 18, percentual: 50 },
             "Ciências Humanas": { faltas: 3, limite: 15, percentual: 20 },
-            "Linguagens": { faltas: 6, limite: 20, percentual: 30 },
+            "Linguagens": { faltas: 6, limite: 21, percentual: 28 },
             "Banco de dados": { faltas: 0, limite: 15, percentual: 0 }
         },
         "Trimestre 1": {
-            "Matemática": { faltas: 7, limite: 8, percentual: 88 },
+            "Matemática": { faltas: 7, limite: 8, percentual: 87 },
             "Ciências da Natureza": { faltas: 3, limite: 6, percentual: 50 },
             "Ciências Humanas": { faltas: 1, limite: 5, percentual: 20 },
-            "Linguagens": { faltas: 2, limite: 7, percentual: 29 },
+            "Linguagens": { faltas: 2, limite: 7, percentual: 28 },
             "Banco de dados": { faltas: 0, limite: 5, percentual: 0 }
         },
         "Trimestre 2": {
