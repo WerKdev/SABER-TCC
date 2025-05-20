@@ -204,6 +204,15 @@ body.dark-theme .user-icon-popup li {
     justify-content: space-between;
 }
 
+#logomenu {
+    width: 60px; 
+    height: 60px; 
+    background-image: url('../../../assets/images/logo-saber.png');
+    background-size: contain; 
+    background-repeat: no-repeat;
+    background-position: center;    
+}
+
 #menu-icon {
     color: #F1F5F9;
     padding: 23px;
