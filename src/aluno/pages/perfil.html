@@ -1,0 +1,808 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meu Perfil - Portal do Aluno</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="../styles/perfil.css">
+    <link rel="stylesheet" href="../../common/styles/menu.css">
+    <link rel="stylesheet" href="../../common/styles/changepass.css">
+    <link rel="stylesheet" href="../../common/styles/exitpopup.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="menu-icon-mobile">
+            <span id="menu-icon-mobile" class="material-symbols-outlined">menu</span>
+        </div>  
+        <div class="menuheader"> 
+            <ul class="menuheader-list">
+                <li class="notification-item">
+                    <span id="notifications-icon" class="material-symbols-outlined">notifications</span>
+                    <span class="notification-badge">3</span>
+                    <div id="notifications-popup" class="notifications-popup">
+                        <div class="popup-header">
+                            <p>Notificações</p>
+                            <span class="material-symbols-outlined close-popup">close</span>
+                        </div>
+                        <div class="notifications-content">
+                            <ul>
+                                <li class="notification unread">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">campaign</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Comunicado importante</p>
+                                        <p class="notification-desc">Alteração no calendário de provas</p>
+                                        <p class="notification-time">há 5 minutos</p>
+                                    </div>
+                                </li>
+                                <li class="notification unread">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">assignment</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Nova atividade disponível</p>
+                                        <p class="notification-desc">Exercícios de Álgebra - Matemática</p>
+                                        <p class="notification-time">há 10 minutos</p>
+                                    </div>
+                                </li>
+                                <li class="notification unread">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">quiz</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Prova agendada</p>
+                                        <p class="notification-desc">Física Quântica - 25/05 às 14:00</p>
+                                        <p class="notification-time">há 2 horas</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="popup-footer">
+                            <a href="#todas-notificacoes">Ver todas as notificações</a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <p id="user-name-header">Kenai Almeida</p>
+                </li>
+                <li class="user-settings-item">
+                    <span id="user-icon" class="material-symbols-outlined">account_circle</span>
+                    <div id="user-icon-popup" class="user-icon-popup">
+                        <div class="popup-header">
+                            <div class="user-info">
+                                <div class="user-avatar">
+                                    <span class="material-symbols-outlined">person</span>
+                                </div>
+                                <div class="user-details">
+                                    <p class="user-name">Kenai Almeida</p>
+                                    <p class="user-email">kenai.almeida@email.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="settings-content">
+                            <div class="settings-group">
+                                <p class="settings-group-title">Conta</p>
+                                <ul>
+                                    <li>
+                                        <a href="#perfil">
+                                            <span class="material-symbols-outlined">manage_accounts</span>
+                                            <span>Meu Perfil</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="alterar-senha-link">
+                                            <span class="material-symbols-outlined">key</span>
+                                            <span>Alterar senha</span>
+                                        </a>
+                                    </li>   
+                                </ul>
+                            </div>
+                            <div class="settings-group">
+                                <p class="settings-group-title">Sistema</p>
+                                <ul>
+                                    <li>
+                                        <a href="#tema" class="theme-toggle-container">
+                                            <span class="material-symbols-outlined">dark_mode</span>
+                                            <span>Tema Escuro</span>
+                                            <label class="switch">
+                                                <input type="checkbox" id="theme-toggle">
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </a>
+                                    </li>
+                                    <li class="settings-item language-selector-container">
+                                        <a href="#idioma" class="language-selector">
+                                            <span class="material-symbols-outlined">translate</span>
+                                            <span>Idioma</span>
+                                            <span class="selected-language">Português</span>
+                                            <span class="material-symbols-outlined toggle-arrow">expand_more</span>
+                                        </a>
+                                        <div class="language-options">
+                                            <ul>
+                                                <li data-lang="pt-BR" class="active">
+                                                    <span class="language-flag">🇧🇷</span>
+                                                    <span class="language-name">Português</span>
+                                                </li>
+                                                <li data-lang="en-US">
+                                                    <span class="language-flag">🇺🇸</span>
+                                                    <span class="language-name">English</span>
+                                                </li>
+                                                <li data-lang="es-ES">
+                                                    <span class="language-flag">🇪🇸</span>
+                                                    <span class="language-name">Español</span>
+                                                </li>
+                                                <li data-lang="fr-FR">
+                                                    <span class="language-flag">🇫🇷</span>
+                                                    <span class="language-name">Français</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="settings-group">
+                                <ul>
+                                    <li>
+                                        <a href="#ajuda">
+                                            <span class="material-symbols-outlined">help</span>
+                                            <span>Ajuda</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#sair" class="logout-button">
+                                            <span class="material-symbols-outlined">logout</span>
+                                            <span>Sair</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- SIDEBAR -->
+    <div id="sidebar">
+        <div class="topmenu">
+            <span id="menu-icon" class="material-symbols-outlined">menu</span>
+            <h3 id="menu-tittle">Menu</h3>
+            <img id="logomenu" src="../../../assets/images/logo-saber.png" alt="Logo menu">
+        </div>
+        <nav id="menu-hidden">
+            <div class="navbar">
+                <ul>
+                    <li>
+                        <a href="dashboard.html">
+                            <span class="material-symbols-outlined">dashboard</span>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="desempenho.html">
+                            <span class="material-symbols-outlined">analytics</span>
+                            <p>Desempenho</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="atividades.html">
+                            <span class="material-symbols-outlined">assignment</span>
+                            <p>Atividades</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="calendario.html">
+                            <span class="material-symbols-outlined">event_note</span>
+                            <p>Calendário</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="redacoes.html">
+                            <span class="material-symbols-outlined">history_edu</span>
+                            <p>Redações</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="documentos.html">
+                            <span class="material-symbols-outlined">folder</span>
+                            <p>Documentos</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="materiais.html">
+                            <span class="material-symbols-outlined">menu_book</span>
+                            <p>Materiais</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mensagens.html">
+                            <span class="material-symbols-outlined">chat</span>
+                            <p>Comunicados</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="eventos.html">
+                            <span class="material-symbols-outlined">event</span>
+                            <p>Eventos</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="suporte.html">
+                            <span class="material-symbols-outlined">help</span>
+                            <p>Suporte</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <!-- Popups de senha -->
+    <div id="password-popup" class="popup-overlay" style="display: none;">
+        <div class="popup">
+            <div class="popup-header">
+                <h2>Alterar senha</h2>
+                <span class="material-symbols-outlined close-popup">close</span>
+            </div>
+            <div class="popup-content">
+                <p class="popup-description">Informe a senha atual e a nova senha</p>
+                <form id="change-password-form">
+                    <div class="form-group">
+                        <label for="current-password">Senha atual <span class="required">*</span></label>
+                        <div class="password-input">
+                            <input type="password" id="current-password" name="current-password" required>
+                            <span class="material-symbols-outlined toggle-password">visibility_off</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-password">Nova senha <span class="required">*</span></label>
+                        <div class="password-input">
+                            <input type="password" id="new-password" name="new-password" required>
+                            <span class="material-symbols-outlined toggle-password">visibility_off</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Confirmação de senha <span class="required">*</span></label>
+                        <div class="password-input">
+                            <input type="password" id="confirm-password" name="confirm-password" required>
+                            <span class="material-symbols-outlined toggle-password">visibility_off</span>
+                        </div>
+                    </div>
+                    <div class="forgot-password">
+                        <a href="#" id="forgot-password-link">Esqueceu a senha?</a>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel">Cancelar</button>
+                        <button type="submit" class="btn-confirm">Alterar senha</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="reset-password-popup" class="popup-overlay" style="display: none;">
+        <div class="popup">
+            <div class="popup-header">
+                <h2>Redefinição de senha!</h2>
+                <span class="material-symbols-outlined close-popup">close</span>
+            </div>
+            <div class="popup-content">
+                <p class="popup-description">Informe um email e enviaremos um link para recuperação da sua senha.</p>
+                <form id="reset-password-form">
+                    <div class="form-group">
+                        <label for="recovery-email">Email <span class="required">*</span></label>
+                        <input type="email" id="recovery-email" name="recovery-email" required placeholder="seu@email.com">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-back">
+                            <span class="material-symbols-outlined">arrow_back</span>
+                            Voltar
+                        </button>
+                        <button type="submit" class="btn-send">Enviar link de recuperação</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="logout-popup" class="popup-overlay" style="display: none;">
+        <div class="popup logout-popup">
+            <div class="logout-content">
+                <div class="logout-icon">
+                    <span class="material-symbols-outlined">logout</span>
+                </div>
+                <h2 class="logout-title">Sair da conta?</h2>
+                <p class="logout-description">Você poderá entrar novamente a qualquer momento. Se quiser trocar de conta, faça isso adicionando uma conta existente.</p>
+                
+                <div class="logout-actions">
+                    <button type="button" class="btn-logout">Sair</button>
+                    <button type="button" class="btn-cancel-logout">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- CONTEÚDO PRINCIPAL -->
+    <main>
+        <div class="page-header">
+            <div class="page-title">
+                <h1>Meu Perfil</h1>
+                <p>Gerencie suas informações pessoais e acadêmicas</p>
+            </div>
+            <div class="page-actions">
+                <button class="btn-secondary" id="edit-profile-btn">
+                    <span class="material-symbols-outlined">edit</span>
+                    Editar Perfil
+                </button>
+            </div>
+        </div>
+
+        <!-- Cabeçalho do Perfil -->
+        <div class="profile-header">
+            <div class="profile-avatar">
+                <div class="avatar-container">
+                    <span class="material-symbols-outlined">person</span>
+                    <div class="avatar-upload">
+                        <span class="material-symbols-outlined">camera_alt</span>
+                    </div>
+                </div>
+            </div>
+            <div class="profile-basic-info">
+                <h2>Kenai Almeida</h2>
+                <p class="profile-email">kenai.almeida@aluno.edu.br</p>
+                <div class="profile-status">
+                    <span class="status-badge active">Ativo</span>
+                    <span class="academic-info">Engenharia de Software - 4º Semestre</span>
+                </div>
+            </div>
+            <div class="profile-quick-stats">
+                <div class="quick-stat">
+                    <span class="stat-value">8.4</span>
+                    <span class="stat-label">Média Geral</span>
+                </div>
+                <div class="quick-stat">
+                    <span class="stat-value">3º</span>
+                    <span class="stat-label">Posição</span>
+                </div>
+                <div class="quick-stat">
+                    <span class="stat-value">92%</span>
+                    <span class="stat-label">Frequência</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Navegação por Abas -->
+        <div class="tabs-navigation">
+            <ul class="tabs-list">
+                <li class="tab-item active" data-tab="dados-pessoais">
+                    <a href="#dados-pessoais">Dados Pessoais</a>
+                </li>
+                <li class="tab-item" data-tab="vida-academica">
+                    <a href="#vida-academica">Vida Acadêmica</a>
+                </li>
+                <li class="tab-item" data-tab="documentos">
+                    <a href="#documentos">Documentos</a>
+                </li>
+                <li class="tab-item" data-tab="acesso-rapido">
+                    <a href="#acesso-rapido">Acesso Rápido</a>
+                </li>
+            </ul>
+        </div>
+
+        <!-- Conteúdo das Abas -->
+        <div class="tab-content active" id="dados-pessoais-content">
+            <div class="content-grid">
+                <div class="info-card">
+                    <h3>
+                        <span class="material-symbols-outlined">person</span>
+                        Informações Pessoais
+                    </h3>
+                    <div class="info-list">
+                        <div class="info-item">
+                            <label>Nome Completo:</label>
+                            <span>Kenai Silva Almeida</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Data de Nascimento:</label>
+                            <span>15/03/2006 (19 anos)</span>
+                        </div>
+                        <div class="info-item">
+                            <label>CPF:</label>
+                            <span>***.***.***-**</span>
+                        </div>
+                        <div class="info-item">
+                            <label>RG:</label>
+                            <span>**.***.***-*</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Estado Civil:</label>
+                            <span>Solteiro(a)</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <h3>
+                        <span class="material-symbols-outlined">contact_mail</span>
+                        Contato
+                    </h3>
+                    <div class="info-list">
+                        <div class="info-item">
+                            <label>E-mail Pessoal:</label>
+                            <span>kenai.almeida@gmail.com</span>
+                        </div>
+                        <div class="info-item">
+                            <label>E-mail Institucional:</label>
+                            <span>kenai.almeida@aluno.edu.br</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Telefone:</label>
+                            <span>(71) 98765-4321</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Responsável:</label>
+                            <span>Ana Maria Silva</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Tel. Responsável:</label>
+                            <span>(71) 99876-5432</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card full-width">
+                    <h3>
+                        <span class="material-symbols-outlined">location_on</span>
+                        Endereço
+                    </h3>
+                    <div class="info-list">
+                        <div class="info-item">
+                            <label>Logradouro:</label>
+                            <span>Rua das Flores, 123 - Jardim Primavera</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Cidade/Estado:</label>
+                            <span>Salvador - Bahia</span>
+                        </div>
+                        <div class="info-item">
+                            <label>CEP:</label>
+                            <span>40.000-000</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="vida-academica-content">
+            <div class="content-grid">
+                <div class="info-card">
+                    <h3>
+                        <span class="material-symbols-outlined">school</span>
+                        Dados Acadêmicos
+                    </h3>
+                    <div class="info-list">
+                        <div class="info-item">
+                            <label>Matrícula:</label>
+                            <span>2025-0042</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Curso:</label>
+                            <span>Engenharia de Software</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Semestre Atual:</label>
+                            <span>4º Semestre</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Situação:</label>
+                            <span class="status-badge active">Matriculado</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Data de Ingresso:</label>
+                            <span>01/02/2023</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <h3>
+                        <span class="material-symbols-outlined">analytics</span>
+                        Desempenho Atual
+                    </h3>
+                    <div class="info-list">
+                        <div class="info-item">
+                            <label>Média Geral:</label>
+                            <span class="highlight">8.4</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Posição na Turma:</label>
+                            <span class="highlight">3º de 35</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Frequência:</label>
+                            <span class="highlight">92%</span>
+                        </div>
+                        <div class="info-item">
+                            <label>Créditos Cursados:</label>
+                            <span>84 de 180</span>
+                        </div>
+                        <div class="info-item">
+                            <label>% Conclusão:</label>
+                            <span>47%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card full-width">
+                    <h3>
+                        <span class="material-symbols-outlined">history</span>
+                        Histórico Acadêmico
+                    </h3>
+                    <div class="historic-table">
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>Período</th>
+                                    <th>Disciplinas</th>
+                                    <th>Média</th>
+                                    <th>Frequência</th>
+                                    <th>Status</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>2025.1</td>
+                                    <td>6</td>
+                                    <td>8.4</td>
+                                    <td>92%</td>
+                                    <td><span class="status-badge active">Em Curso</span></td>
+                                </tr>
+                                <tr>
+                                    <td>2024.2</td>
+                                    <td>7</td>
+                                    <td>8.1</td>
+                                    <td>95%</td>
+                                    <td><span class="status-badge approved">Aprovado</span></td>
+                                </tr>
+                                <tr>
+                                    <td>2024.1</td>
+                                    <td>6</td>
+                                    <td>7.8</td>
+                                    <td>89%</td>
+                                    <td><span class="status-badge approved">Aprovado</span></td>
+                                </tr>
+                                <tr>
+                                    <td>2023.2</td>
+                                    <td>5</td>
+                                    <td>8.5</td>
+                                    <td>96%</td>
+                                    <td><span class="status-badge approved">Aprovado</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="documentos-content">
+            <div class="content-grid">
+                <div class="info-card">
+                    <h3>
+                        <span class="material-symbols-outlined">badge</span>
+                        Documentos Pessoais
+                    </h3>
+                    <div class="document-list">
+                        <div class="document-item">
+                            <span class="material-symbols-outlined">credit_card</span>
+                            <div class="document-info">
+                                <span class="document-name">RG - Carteira de Identidade</span>
+                                <span class="document-status verified">Verificado</span>
+                            </div>
+                            <button class="btn-download">
+                                <span class="material-symbols-outlined">download</span>
+                            </button>
+                        </div>
+                        <div class="document-item">
+                            <span class="material-symbols-outlined">account_box</span>
+                            <div class="document-info">
+                                <span class="document-name">CPF</span>
+                                <span class="document-status verified">Verificado</span>
+                            </div>
+                            <button class="btn-download">
+                                <span class="material-symbols-outlined">download</span>
+                            </button>
+                        </div>
+                        <div class="document-item">
+                            <span class="material-symbols-outlined">location_on</span>
+                            <div class="document-info">
+                                <span class="document-name">Comprovante de Residência</span>
+                                <span class="document-status pending">Pendente</span>
+                            </div>
+                            <button class="btn-upload">
+                                <span class="material-symbols-outlined">upload</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="info-card">
+                    <h3>
+                        <span class="material-symbols-outlined">school</span>
+                        Documentos Acadêmicos
+                    </h3>
+                    <div class="document-list">
+                        <div class="document-item">
+                            <span class="material-symbols-outlined">article</span>
+                            <div class="document-info">
+                                <span class="document-name">Declaração de Matrícula</span>
+                                <span class="document-status verified">Disponível</span>
+                            </div>
+                            <button class="btn-download">
+                                <span class="material-symbols-outlined">download</span>
+                            </button>
+                        </div>
+                        <div class="document-item">
+                            <span class="material-symbols-outlined">description</span>
+                            <div class="document-info">
+                                <span class="document-name">Histórico Escolar</span>
+                                <span class="document-status verified">Disponível</span>
+                            </div>
+                            <button class="btn-download">
+                                <span class="material-symbols-outlined">download</span>
+                            </button>
+                        </div>
+                        <div class="document-item">
+                            <span class="material-symbols-outlined">assessment</span>
+                            <div class="document-info">
+                                <span class="document-name">Boletim Atual</span>
+                                <span class="document-status verified">Disponível</span>
+                            </div>
+                            <button class="btn-download">
+                                <span class="material-symbols-outlined">download</span>
+                            </button>
+                        </div>
+                        <div class="document-item">
+                            <span class="material-symbols-outlined">workspace_premium</span>
+                            <div class="document-info">
+                                <span class="document-name">Certificado de Conclusão</span>
+                                <span class="document-status unavailable">Indisponível</span>
+                            </div>
+                            <button class="btn-download" disabled>
+                                <span class="material-symbols-outlined">download</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="tab-content" id="acesso-rapido-content">
+            <div class="quick-access-grid">
+                <div class="quick-access-card">
+                    <a href="atividades.html">
+                        <span class="material-symbols-outlined">assignment</span>
+                        <div class="card-content">
+                            <h4>Atividades Pendentes</h4>
+                            <p>4 atividades aguardando entrega</p>
+                            <span class="card-badge urgent">Urgente</span>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="quick-access-card">
+                    <a href="desempenho.html">
+                        <span class="material-symbols-outlined">analytics</span>
+                        <div class="card-content">
+                            <h4>Boletim</h4>
+                            <p>Visualizar notas e frequência</p>
+                            <span class="card-badge info">Atualizado</span>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="quick-access-card">
+                    <a href="calendario.html">
+                        <span class="material-symbols-outlined">event</span>
+                        <div class="card-content">
+                            <h4>Calendário Acadêmico</h4>
+                            <p>Eventos e datas importantes</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="quick-access-card">
+                    <a href="suporte.html">
+                        <span class="material-symbols-outlined">support_agent</span>
+                        <div class="card-content">
+                            <h4>Suporte</h4>
+                            <p>Tire suas dúvidas conosco</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="quick-access-card">
+                    <a href="mensagens.html">
+                        <span class="material-symbols-outlined">mail</span>
+                        <div class="card-content">
+                            <h4>Comunicados</h4>
+                            <p>3 novas mensagens</p>
+                            <span class="card-badge new">Novo</span>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="quick-access-card">
+                    <a href="materiais.html">
+                        <span class="material-symbols-outlined">menu_book</span>
+                        <div class="card-content">
+                            <h4>Materiais de Estudo</h4>
+                            <p>Acesse livros e recursos</p>
+                        </div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- Seção de Notificações Recentes -->
+            <div class="recent-notifications">
+                <h3>
+                    <span class="material-symbols-outlined">notifications</span>
+                    Notificações Recentes
+                </h3>
+                <div class="notification-list">
+                    <div class="notification-card">
+                        <span class="material-symbols-outlined notification-icon">assignment</span>
+                        <div class="notification-content">
+                            <h4>Nova atividade disponível</h4>
+                            <p>Exercícios de Álgebra - Matemática</p>
+                            <span class="notification-time">há 10 minutos</span>
+                        </div>
+                    </div>
+                    <div class="notification-card">
+                        <span class="material-symbols-outlined notification-icon">quiz</span>
+                        <div class="notification-content">
+                            <h4>Prova agendada</h4>
+                            <p>Física Quântica - 25/05 às 14:00</p>
+                            <span class="notification-time">há 2 horas</span>
+                        </div>
+                    </div>
+                    <div class="notification-card">
+                        <span class="material-symbols-outlined notification-icon">grade</span>
+                        <div class="notification-content">
+                            <h4>Atividade avaliada</h4>
+                            <p>Revolução Industrial - História (Nota: 9.5)</p>
+                            <span class="notification-time">há 1 dia</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Popup para Upload de Arquivo -->
+    <div id="upload-popup" class="popup-overlay" style="display: none;">
+        <div class="popup">
+            <div class="popup-header">
+                <h2>Upload de Documento</h2>
+                <span class="material-symbols-outlined close-popup">close</span>
+            </div>
+            <div class="popup-content">
+                <p class="popup-description">Selecione o arquivo para fazer upload</p>
+                <div class="upload-area">
+                    <span class="material-symbols-outlined">cloud_upload</span>
+                    <p>Arraste o arquivo aqui ou clique para selecionar</p>
+                    <input type="file" id="file-upload" accept=".pdf,.jpg,.png,.jpeg">
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-cancel">Cancelar</button>
+                    <button type="button" class="btn-confirm">Fazer Upload</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../scripts/perfil.js"></script>
+    <script src="../../common/scripts/changepass.js"></script>
+    <script src="../../common/scripts/exitpopup.js"></script>
+    <script src="../../common/scripts/menu.js"></script>
+</body>
+</html>
