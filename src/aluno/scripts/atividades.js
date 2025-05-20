@@ -50,7 +50,18 @@ document.addEventListener("DOMContentLoaded", function() {
         const searchFilter = searchInput.value.toLowerCase();
         
         activityCards.forEach(card => {
-            const statusMatch = statusFilter === 'todas' || card.dataset.status === statusFilter;
+            // Corrigido: mapeamento correto dos valores do select para os valores do dataset
+            let statusMatch = false;
+            if (statusFilter === 'todas') {
+                statusMatch = true;
+            } else if (statusFilter === 'pendentes' && card.dataset.status === 'pendente') {
+                statusMatch = true;
+            } else if (statusFilter === 'concluidas' && card.dataset.status === 'concluida') {
+                statusMatch = true;
+            } else if (statusFilter === 'avaliadas' && card.dataset.status === 'avaliada') {
+                statusMatch = true;
+            }
+            
             const materiaMatch = materiaFilter === 'todas' || card.dataset.subject === materiaFilter;
             const prazoMatch = prazoFilter === 'todos' || card.dataset.due === prazoFilter;
             const title = card.querySelector('.activity-title').textContent.toLowerCase();
@@ -288,16 +299,22 @@ document.addEventListener("DOMContentLoaded", function() {
     }
 
     // Executa quando a página carrega
-    document.addEventListener('DOMContentLoaded', fixCardLayout);
+    fixCardLayout();
 
     // Executa após mudanças nos filtros
-    document.addEventListener('click', function(e) {
-        if (e.target.classList.contains('tab-button') || 
-            e.target.classList.contains('select-field') ||
-            e.target.closest('.tab-button') ||
-            e.target.closest('.select-field')) {
-            setTimeout(fixCardLayout, 10);
-        }
+    statusSelect.addEventListener('change', function() {
+        setTimeout(fixCardLayout, 10);
+        setTimeout(preserveCardLayout, 10);
+    });
+    
+    materiaSelect.addEventListener('change', function() {
+        setTimeout(fixCardLayout, 10);
+        setTimeout(preserveCardLayout, 10);
+    });
+    
+    prazoSelect.addEventListener('change', function() {
+        setTimeout(fixCardLayout, 10);
+        setTimeout(preserveCardLayout, 10);
     });
 
     // Observa mudanças no DOM
