@@ -1,313 +1,539 @@
 document.addEventListener('DOMContentLoaded', function() {
-    // Elementos DOM
-    const selectAllCheckbox = document.getElementById('select-all-checkbox');
-    const selectAllStudentCheckboxes = document.querySelectorAll('.select-all-student');
-    const classCheckboxes = document.querySelectorAll('.class-checkbox');
-    const markAllPresentBtn = document.getElementById('mark-all-present');
-    const markAllAbsentBtn = document.getElementById('mark-all-absent');
-    const noteButtons = document.querySelectorAll('.note-btn');
-    const justifyButtons = document.querySelectorAll('.justify-btn');
-    const notePopup = document.getElementById('note-popup');
-    const justifyPopup = document.getElementById('justify-popup');
-    const closePopupButtons = document.querySelectorAll('.close-popup');
-    const cancelButtons = document.querySelectorAll('.btn-cancel');
-    const saveAttendanceBtn = document.getElementById('save-attendance-btn');
-    const loadAttendanceBtn = document.getElementById('load-attendance-btn');
-    const turmaSelect = document.getElementById('turma-select');
-    const disciplinaSelect = document.getElementById('disciplina-select');
-    const dataSelect = document.getElementById('data-select');
-
-    // Integração com o calendário
-    const calendarioIntegration = {
-        // Faz a integração com o sistema de calendário para obter informações de aulas
-        getClassesInfo: function(turmaId, disciplinaId, data) {
-            // Em uma aplicação real, esta função faria uma chamada à API 
-            // para obter as informações do cronograma de aulas
-            
-            // Podemos usar o formato de dados similar ao do calendario.js
-            return new Promise(function(resolve) {
-                // Simulação de chamada de API
-                setTimeout(function() {
-                    // Determinar o dia da semana
-                    const date = new Date(data);
-                    const dayOfWeek = date.getDay(); // 0-6 (Domingo-Sábado)
-                    const daysMap = ['domingo', 'segunda', 'terca', 'quarta', 'quinta', 'sexta', 'sabado'];
-                    const nomeDiaSemana = daysMap[dayOfWeek];
-                    
-                    // Verificar a matéria selecionada
-                    let selectedSubject = '';
-                    let selectedTeacher = '';
-                    let sequentialClasses = 0;
-                    
-                    // Simular verificação no cronograma com base no dia da semana
-                    if (disciplinaId === 'matematica') {
-                        if (nomeDiaSemana === 'segunda' || nomeDiaSemana === 'quinta') {
-                            // Matemática tem 3 aulas sequenciais às segundas e quintas
-                            selectedSubject = 'Matemática';
-                            selectedTeacher = 'Prof. Carlos Silva';
-                            sequentialClasses = 3;
-                        } else if (nomeDiaSemana === 'terca') {
-                            // Matemática tem 1 aula às terças
-                            selectedSubject = 'Matemática';
-                            selectedTeacher = 'Prof. Carlos Silva';
-                            sequentialClasses = 1;
-                        } else {
-                            // Não há aulas de matemática nos outros dias
-                            sequentialClasses = 0;
-                        }
-                    } else if (disciplinaId === 'portugues') {
-                        if (nomeDiaSemana === 'terca') {
-                            // Português tem 2 aulas sequenciais às terças
-                            selectedSubject = 'Português';
-                            selectedTeacher = 'Prof. André Santos';
-                            sequentialClasses = 2;
-                        } else if (nomeDiaSemana === 'quinta' || nomeDiaSemana === 'sexta') {
-                            // Português tem 1 aula às quintas e sextas
-                            selectedSubject = 'Português';
-                            selectedTeacher = 'Prof. André Santos';
-                            sequentialClasses = 1;
-                        } else {
-                            // Não há aulas de português nos outros dias
-                            sequentialClasses = 0;
-                        }
-                    } else if (disciplinaId === 'fisica') {
-                        if (nomeDiaSemana === 'quarta') {
-                            // Física tem 2 aulas sequenciais às quartas
-                            selectedSubject = 'Física';
-                            selectedTeacher = 'Prof. Ricardo Alves';
-                            sequentialClasses = 2;
-                        } else if (nomeDiaSemana === 'segunda') {
-                            // Física tem 1 aula às segundas
-                            selectedSubject = 'Física';
-                            selectedTeacher = 'Prof. Ricardo Alves';
-                            sequentialClasses = 1;
-                        } else {
-                            // Não há aulas de física nos outros dias
-                            sequentialClasses = 0;
-                        }
-                    }
-                    
-                    // Se não houver aulas, retorna um objeto vazio
-                    if (sequentialClasses === 0) {
-                        resolve({
-                            hasClasses: false,
-                            message: `Não há aulas de ${disciplinaId} para esta turma neste dia.`
-                        });
-                        return;
-                    }
-                    
-                    // Determinar os horários das aulas com base no número de aulas sequenciais
-                    const horarios = [
-                        '7:00 - 7:50',
-                        '7:50 - 8:40',
-                        '8:40 - 9:30',
-                        'Intervalo',
-                        '9:50 - 10:40',
-                        '10:40 - 11:30',
-                        '11:30 - 12:20'
-                    ];
-                    
-                    // Obter os horários para as aulas sequenciais
-                    const classHorarios = [];
-                    for (let i = 0; i < sequentialClasses; i++) {
-                        classHorarios.push(horarios[i]);
-                    }
-                    
-                    // Criar um objeto com as informações das aulas
-                    const result = {
-                        hasClasses: true,
-                        turma: turmaSelect.options[turmaSelect.selectedIndex].text,
-                        data: data,
-                        diaSemana: nomeDiaSemana,
-                        disciplina: selectedSubject,
-                        professor: selectedTeacher,
-                        numAulas: sequentialClasses,
-                        horarios: classHorarios,
-                        horariosCompletos: horarios
-                    };
-                    
-                    resolve(result);
-                }, 500); // Simula um pequeno atraso de rede
-            });
-        },
-        
-        // Carrega os alunos da turma (simulado)
-        getStudents: function(turmaId) {
-            return new Promise(function(resolve) {
-                setTimeout(function() {
-                    // Dados simulados dos alunos
-                    const students = [
-                        { id: 20250001, nome: 'Ana Carolina Silva', foto: '../../../assets/images/student-placeholder.png' },
-                        { id: 20250002, nome: 'Bruno Oliveira Santos', foto: '../../../assets/images/student-placeholder.png' },
-                        { id: 20250003, nome: 'Camila Mendes Ferreira', foto: '../../../assets/images/student-placeholder.png' },
-                        { id: 20250004, nome: 'Daniel Costa Lima', foto: '../../../assets/images/student-placeholder.png' },
-                        { id: 20250005, nome: 'Eduardo Pereira Santos', foto: '../../../assets/images/student-placeholder.png' },
-                        { id: 20250006, nome: 'Fernanda Alves Ribeiro', foto: '../../../assets/images/student-placeholder.png' },
-                        { id: 20250007, nome: 'Gabriel Martins Sousa', foto: '../../../assets/images/student-placeholder.png' },
-                        { id: 20250008, nome: 'Helena Cardoso Dias', foto: '../../../assets/images/student-placeholder.png' },
-                        { id: 20250009, nome: 'Igor Teixeira Lima', foto: '../../../assets/images/student-placeholder.png' },
-                        { id: 20250010, nome: 'Juliana Rocha Gomes', foto: '../../../assets/images/student-placeholder.png' }
-                    ];
-                    
-                    resolve(students);
-                }, 300);
-            });
+    // Cronograma das aulas (integrado do calendario.js)
+    const cronogramaAulas = {
+        manha: {
+            'domingo': [],
+            'segunda': [
+                { id: 101, title: 'Matemática', professor: 'Prof. Carlos Silva' },
+                { id: 101, title: 'Matemática', professor: 'Prof. Carlos Silva' },
+                { id: 101, title: 'Matemática', professor: 'Prof. Carlos Silva' },
+                'Intervalo',
+                { id: 104, title: 'Física', professor: 'Prof. Ricardo Alves' },
+                { id: 105, title: 'História', professor: 'Profa. Clara Mendes' },
+                { id: 106, title: 'Filosofia', professor: 'Profa. Amanda Dias' }
+            ],
+            'terca': [
+                { id: 107, title: 'Português', professor: 'Prof. André Santos' },
+                { id: 107, title: 'Português', professor: 'Prof. André Santos' },
+                { id: 109, title: 'Matemática', professor: 'Prof. Carlos Silva' },
+                'Intervalo',
+                { id: 110, title: 'Biologia', professor: 'Prof. Marcelo Costa' },
+                { id: 110, title: 'Biologia', professor: 'Prof. Marcelo Costa' },
+                { id: 112, title: 'Sociologia', professor: 'Prof. Renato Lopes' }
+            ],
+            'quarta': [
+                { id: 113, title: 'Física', professor: 'Prof. Ricardo Alves' },
+                { id: 113, title: 'Física', professor: 'Prof. Ricardo Alves' },
+                { id: 115, title: 'Educação Física', professor: 'Prof. Fernando Gomes' },
+                'Intervalo',
+                { id: 116, title: 'Inglês', professor: 'Prof. Daniel Costa' },
+                { id: 117, title: 'Arte', professor: 'Profa. Sofia Oliveira' },
+                { id: 118, title: 'Literatura', professor: 'Prof. André Santos' }
+            ],
+            'quinta': [
+                { id: 119, title: 'Matemática', professor: 'Prof. Carlos Silva' },
+                { id: 119, title: 'Matemática', professor: 'Prof. Carlos Silva' },
+                { id: 119, title: 'Matemática', professor: 'Prof. Carlos Silva' },
+                'Intervalo',
+                { id: 122, title: 'Português', professor: 'Prof. André Santos' },
+                { id: 123, title: 'Sociologia', professor: 'Prof. Renato Lopes' },
+                { id: 124, title: 'Redação', professor: 'Profa. Mariana Costa' }
+            ],
+            'sexta': [
+                { id: 125, title: 'Geografia', professor: 'Prof. Rodrigo Matos' },
+                { id: 125, title: 'Geografia', professor: 'Prof. Rodrigo Matos' },
+                { id: 127, title: 'História', professor: 'Profa. Clara Mendes' },
+                'Intervalo',
+                { id: 128, title: 'Filosofia', professor: 'Profa. Amanda Dias' },
+                { id: 129, title: 'Português', professor: 'Prof. André Santos' },
+                { id: 130, title: 'Inteligência Artificial', professor: 'Prof. Marcos Oliveira' }
+            ],
+            'sabado': []
         }
     };
-
-    // Função para formatar a data para exibição
-    function formatDate(dateString) {
+    
+    // Horários das aulas
+    const horarios = {
+        manha: [
+            '7:00 - 7:50',
+            '7:50 - 8:40', 
+            '8:40 - 9:30',
+            'Intervalo',
+            '9:50 - 10:40',
+            '10:40 - 11:30',
+            '11:30 - 12:20'
+        ]
+    };
+    
+    // Dados dos alunos (simulado)
+    const estudantes = [
+        { id: 20250001, nome: 'Ana Carolina Silva', matricula: '00000005662' },
+        { id: 20250002, nome: 'Bruno Oliveira Santos', matricula: '00000005663' },
+        { id: 20250003, nome: 'Camila Mendes Ferreira', matricula: '00000005664' },
+        { id: 20250004, nome: 'Daniel Costa Lima', matricula: '00000005665' },
+        { id: 20250005, nome: 'Eduardo Pereira Santos', matricula: '00000005666' },
+        { id: 20250006, nome: 'Fernanda Alves Ribeiro', matricula: '00000005667' },
+        { id: 20250007, nome: 'Gabriel Martins Sousa', matricula: '00000005668' },
+        { id: 20250008, nome: 'Helena Cardoso Dias', matricula: '00000005669' },
+        { id: 20250009, nome: 'Igor Teixeira Lima', matricula: '00000005670' },
+        { id: 20250010, nome: 'Juliana Rocha Gomes', matricula: '00000005671' },
+        { id: 20250011, nome: 'Lucas Menezes Oliveira', matricula: '00000005672' },
+        { id: 20250012, nome: 'Mariana Souza Carvalho', matricula: '00000005673' },
+        { id: 20250013, nome: 'Nathalia Fernandes Costa', matricula: '00000005674' },
+        { id: 20250014, nome: 'Pedro Henrique Almeida', matricula: '00000005675' },
+        { id: 20250015, nome: 'Rafael Lima Santos', matricula: '00000005676' }
+    ];
+    
+    // Elementos DOM
+    const dataSelect = document.getElementById('data-select');
+    const disciplinaSelect = document.getElementById('disciplina-select');
+    const turmaSelect = document.getElementById('turma-select');
+    const loadAttendanceBtn = document.getElementById('load-attendance-btn');
+    const markAllPresentBtn = document.getElementById('mark-all-present');
+    const markAllAbsentBtn = document.getElementById('mark-all-absent');
+    const submitAttendanceBtn = document.getElementById('submit-attendance-btn');
+    const saveAttendanceBtn = document.getElementById('save-attendance-btn');
+    const studentsList = document.getElementById('students-list');
+    const summaryContent = document.getElementById('summary-content');
+    const notePopup = document.getElementById('note-popup');
+    const justifyPopup = document.getElementById('justify-popup');
+    
+    // Elementos para mostrar/esconder
+    const attendanceInfo = document.getElementById('attendance-info');
+    const quickControls = document.getElementById('quick-controls');
+    const attendanceContainer = document.getElementById('attendance-container');
+    const attendanceSummary = document.getElementById('attendance-summary');
+    const submitSection = document.getElementById('submit-section');
+    
+    // Elementos dos cabeçalhos das colunas
+    const selectAllHeader = document.getElementById('select-all-header');
+    const selectAllSubheader = document.getElementById('select-all-subheader');
+    const class1Header = document.getElementById('class1-header');
+    const class2Header = document.getElementById('class2-header');
+    const class3Header = document.getElementById('class3-header');
+    const class1Subheader = document.getElementById('class1-subheader');
+    const class2Subheader = document.getElementById('class2-subheader');
+    const class3Subheader = document.getElementById('class3-subheader');
+    
+    // Variáveis de estado
+    let disciplinasDisponiveis = [];
+    let currentClassData = null;
+    
+    // Inicialização
+    initializePage();
+    
+    function initializePage() {
+        // Definir data atual
+        const hoje = new Date();
+        dataSelect.value = formatDateInput(hoje);
+        
+        // Event listeners
+        dataSelect.addEventListener('change', updateDisciplinasDisponiveis);
+        disciplinaSelect.addEventListener('change', loadStudents); // Adicionar este listener
+        loadAttendanceBtn.addEventListener('click', loadStudents);
+        markAllPresentBtn.addEventListener('click', markAllPresent);
+        markAllAbsentBtn.addEventListener('click', markAllAbsent);
+        submitAttendanceBtn.addEventListener('click', submitAttendance);
+        saveAttendanceBtn.addEventListener('click', saveAttendance);
+        
+        // Fechar popups
+        document.querySelectorAll('.close-popup, .btn-cancel').forEach(btn => {
+            btn.addEventListener('click', closePopups);
+        });
+        
+        // Carregar disciplinas para hoje e auto-selecionar primeira
+        updateDisciplinasDisponiveis(true);
+    }
+    
+    function formatDateInput(date) {
+        const year = date.getFullYear();
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        return `${year}-${month}-${day}`;
+    }
+    
+    function getDayOfWeek(dateString) {
+        const date = new Date(dateString);
+        const days = ['domingo', 'segunda', 'terca', 'quarta', 'quinta', 'sexta', 'sabado'];
+        return days[date.getDay()];
+    }
+    
+    function formatDateDisplay(dateString) {
         const date = new Date(dateString);
         const days = ['Domingo', 'Segunda-feira', 'Terça-feira', 'Quarta-feira', 'Quinta-feira', 'Sexta-feira', 'Sábado'];
         const months = ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'];
         
         return `${days[date.getDay()]}, ${date.getDate()} de ${months[date.getMonth()]} de ${date.getFullYear()}`;
     }
-
-    // Função para carregar os alunos da turma
-    function loadStudents(students, numClasses) {
-        const studentsList = document.getElementById('students-list');
-        studentsList.innerHTML = ''; // Limpa a lista
+    
+    function updateDisciplinasDisponiveis(autoLoad = false) {
+        const selectedDate = dataSelect.value;
+        if (!selectedDate) return;
         
-        students.forEach(student => {
-            // Criar a linha do aluno
-            const studentRow = document.createElement('div');
-            studentRow.className = 'student-row';
-            studentRow.dataset.studentId = student.id;
-            
-            // Informações do aluno
-            const studentInfo = document.createElement('div');
-            studentInfo.className = 'student-info';
-            studentInfo.innerHTML = `
-                <div class="student-photo">
-                    <img src="${student.foto}" alt="Foto do aluno">
-                </div>
-                <div class="student-details">
-                    <p class="student-name">${student.nome}</p>
-                    <p class="student-id">Matrícula: ${student.id}</p>
-                </div>
-            `;
-            
-            // Controles de presença
-            const attendanceControls = document.createElement('div');
-            attendanceControls.className = 'attendance-controls';
-            
-            // Checkbox para selecionar todas as aulas do aluno
-            const selectAllContainer = document.createElement('div');
-            selectAllContainer.className = 'select-all-container';
-            selectAllContainer.innerHTML = `
-                <label class="checkbox-container">
-                    <input type="checkbox" class="select-all-student">
-                    <span class="custom-checkbox"></span>
-                </label>
-            `;
-            
-            // Checkboxes para cada aula
-            const individualClasses = document.createElement('div');
-            individualClasses.className = 'individual-classes';
-            
-            let checkboxesHtml = '';
-            for (let i = 1; i <= numClasses; i++) {
-                checkboxesHtml += `
-                    <label class="checkbox-container">
-                        <input type="checkbox" class="class-checkbox" data-class="${i}">
-                        <span class="custom-checkbox"></span>
-                    </label>
-                `;
+        const dayOfWeek = getDayOfWeek(selectedDate);
+        const aulasDay = cronogramaAulas.manha[dayOfWeek] || [];
+        
+        // Agrupar aulas por disciplina
+        const disciplinasMap = new Map();
+        
+        aulasDay.forEach((aula, index) => {
+            if (aula !== 'Intervalo' && typeof aula === 'object') {
+                const key = `${aula.title}-${aula.professor}`;
+                if (!disciplinasMap.has(key)) {
+                    disciplinasMap.set(key, {
+                        titulo: aula.title,
+                        professor: aula.professor,
+                        aulas: [],
+                        sequenciais: 0,
+                        indices: [] // Guardar os índices originais
+                    });
+                }
+                
+                const disciplina = disciplinasMap.get(key);
+                disciplina.aulas.push({
+                    numero: disciplina.aulas.length + 1,
+                    horario: horarios.manha[index],
+                    index: index,
+                    posicaoOriginal: index // Guardar posição original no cronograma
+                });
+                disciplina.indices.push(index);
             }
-            individualClasses.innerHTML = checkboxesHtml;
+        });
+        
+        // Calcular aulas sequenciais
+        disciplinasMap.forEach((disciplina) => {
+            disciplina.sequenciais = disciplina.aulas.length;
+        });
+        
+        // Atualizar select de disciplinas
+        disciplinaSelect.innerHTML = '';
+        
+        if (disciplinasMap.size === 0) {
+            const option = document.createElement('option');
+            option.value = '';
+            option.textContent = 'Nenhuma aula programada para este dia';
+            option.disabled = true;
+            disciplinaSelect.appendChild(option);
+        } else {
+            let firstOption = null;
+            disciplinasMap.forEach((disciplina, key) => {
+                const option = document.createElement('option');
+                option.value = key;
+                option.textContent = `${disciplina.titulo} (${disciplina.sequenciais} aula${disciplina.sequenciais > 1 ? 's' : ''}) - ${disciplina.professor}`;
+                disciplinaSelect.appendChild(option);
+                
+                // Guardar a primeira opção
+                if (!firstOption) {
+                    firstOption = option;
+                }
+            });
             
-            // Status de presença e ações
-            const attendanceStatus = document.createElement('div');
-            attendanceStatus.className = 'attendance-status';
-            attendanceStatus.innerHTML = `<span class="status-badge absent">Ausente</span>`;
+            // Auto-selecionar primeira disciplina e carregar automaticamente
+            if (autoLoad && firstOption) {
+                disciplinaSelect.value = firstOption.value;
+                // Aguardar um momento para garantir que o DOM foi atualizado
+                setTimeout(() => {
+                    loadStudents();
+                }, 100);
+            }
+        }
+        
+        disciplinasDisponiveis = disciplinasMap;
+    }
+    
+    function updateTableHeaders(numAulas) {
+        // Resetar todas as colunas
+        selectAllHeader.style.display = 'none';
+        selectAllSubheader.style.display = 'none';
+        class1Header.style.display = 'table-cell';
+        class2Header.style.display = 'none';
+        class3Header.style.display = 'none';
+        class1Subheader.style.display = 'table-cell';
+        class2Subheader.style.display = 'none';
+        class3Subheader.style.display = 'none';
+        
+        // Mostrar "selecionar todas" apenas se houver mais de 1 aula
+        if (numAulas > 1) {
+            selectAllHeader.style.display = 'table-cell';
+            selectAllSubheader.style.display = 'table-cell';
+        }
+        
+        // Mostrar colunas baseado no número de aulas
+        if (numAulas >= 2) {
+            class2Header.style.display = 'table-cell';
+            class2Subheader.style.display = 'table-cell';
+        }
+        
+        if (numAulas >= 3) {
+            class3Header.style.display = 'table-cell';
+            class3Subheader.style.display = 'table-cell';
+        }
+        
+        // Atualizar os horários com base nos dados reais da disciplina
+        if (currentClassData && currentClassData.aulas) {
+            // Limpar todos os horários primeiro
+            const allSubheaders = [class1Subheader, class2Subheader, class3Subheader];
+            allSubheaders.forEach(subheader => {
+                if (subheader) {
+                    const timeElement = subheader.querySelector('.class-time');
+                    if (timeElement) {
+                        timeElement.textContent = '(-)';
+                    }
+                }
+            });
             
-            const attendanceActions = document.createElement('div');
-            attendanceActions.className = 'attendance-actions';
-            attendanceActions.innerHTML = `
+            // Definir horários corretos baseado na disciplina
+            currentClassData.aulas.forEach((aula, index) => {
+                const subheaderElement = [class1Subheader, class2Subheader, class3Subheader][index];
+                if (subheaderElement) {
+                    const timeElement = subheaderElement.querySelector('.class-time');
+                    if (timeElement) {
+                        timeElement.textContent = `(${aula.horario})`;
+                    }
+                }
+            });
+        }
+    }
+    
+    function loadStudents() {
+        const turma = turmaSelect.value;
+        const data = dataSelect.value;
+        const disciplinaKey = disciplinaSelect.value;
+        
+        if (!turma || !data || !disciplinaKey) {
+            // Se não houver disciplina selecionada, esconder as seções
+            if (!disciplinaKey) {
+                hideSections();
+            }
+            return;
+        }
+        
+        const disciplina = disciplinasDisponiveis.get(disciplinaKey);
+        if (!disciplina) {
+            hideSections();
+            return;
+        }
+        
+        currentClassData = {
+            turma: turmaSelect.options[turmaSelect.selectedIndex].text,
+            data: data,
+            disciplina: disciplina.titulo,
+            professor: disciplina.professor,
+            aulas: disciplina.aulas,
+            totalAulas: disciplina.sequenciais
+        };
+        
+        // Atualizar cabeçalhos da tabela
+        updateTableHeaders(currentClassData.totalAulas);
+        
+        // Mostrar informações da aula
+        updateClassInfo();
+        
+        // Carregar lista de estudantes
+        loadStudentsList();
+        
+        // Mostrar seções
+        showSections();
+        
+        // Inicializar event listeners
+        initializeEventListeners();
+    }
+    
+    function updateClassInfo() {
+        document.getElementById('info-turma').textContent = currentClassData.turma;
+        document.getElementById('info-data').textContent = formatDateDisplay(currentClassData.data);
+        document.getElementById('info-disciplina').textContent = currentClassData.disciplina;
+        document.getElementById('info-professor').textContent = currentClassData.professor;
+        
+        const primeiraAula = currentClassData.aulas[0].horario;
+        const ultimaAula = currentClassData.aulas[currentClassData.aulas.length - 1].horario;
+        document.getElementById('info-aulas').textContent = `${currentClassData.totalAulas} aula${currentClassData.totalAulas > 1 ? 's' : ''} (${primeiraAula.split(' - ')[0]} - ${ultimaAula.split(' - ')[1]})`;
+    }
+    
+    function loadStudentsList() {
+        // Limpar lista anterior
+        studentsList.innerHTML = '';
+        
+        // Adicionar estudantes
+        estudantes.forEach(estudante => {
+            const row = createStudentRow(estudante);
+            studentsList.appendChild(row);
+        });
+        
+        updateAttendanceSummary();
+    }
+    
+    function createStudentRow(estudante) {
+        const row = document.createElement('tr');
+        row.dataset.studentId = estudante.id;
+        
+        // Criar células para as aulas baseado no número de aulas
+        let aulasHtml = '';
+        
+        // Checkbox "selecionar todas" só aparece se houver mais de 1 aula
+        let selectAllCell = '';
+        if (currentClassData.totalAulas > 1) {
+            selectAllCell = `
+                <td style="display: table-cell;">
+                    <div class="checkbox-container">
+                        <input type="checkbox" class="select-all-student">
+                    </div>
+                </td>
+            `;
+        }
+        
+        // Criar células individuais para cada aula
+        for (let i = 1; i <= 3; i++) {
+            const display = i <= currentClassData.totalAulas ? 'table-cell' : 'none';
+            aulasHtml += `
+                <td style="display: ${display};">
+                    <div class="checkbox-container">
+                        <input type="checkbox" class="class-checkbox" data-class="${i}">
+                    </div>
+                </td>
+            `;
+        }
+        
+        row.innerHTML = `
+            <td>${estudante.nome}</td>
+            <td>${estudante.matricula}</td>
+            ${selectAllCell}
+            ${aulasHtml}
+            <td>
+                <span class="status-badge absent">Ausente</span>
+            </td>
+            <td class="actions-column">
                 <button class="btn-icon note-btn" title="Adicionar observação">
                     <span class="material-symbols-outlined">note_add</span>
                 </button>
                 <button class="btn-icon justify-btn" title="Justificar falta">
                     <span class="material-symbols-outlined">assignment_turned_in</span>
                 </button>
-            `;
-            
-            // Adicionar os elementos à linha
-            attendanceControls.appendChild(selectAllContainer);
-            attendanceControls.appendChild(individualClasses);
-            attendanceControls.appendChild(attendanceStatus);
-            attendanceControls.appendChild(attendanceActions);
-            
-            studentRow.appendChild(studentInfo);
-            studentRow.appendChild(attendanceControls);
-            
-            // Adicionar a linha à lista
-            studentsList.appendChild(studentRow);
+            </td>
+        `;
+        
+        return row;
+    }
+    
+    function showSections() {
+        attendanceInfo.style.display = 'block';
+        quickControls.style.display = 'flex';
+        attendanceContainer.style.display = 'block';
+        attendanceSummary.style.display = 'block';
+        submitSection.style.display = 'block';
+    }
+    
+    function hideSections() {
+        attendanceInfo.style.display = 'none';
+        quickControls.style.display = 'none';
+        attendanceContainer.style.display = 'none';
+        attendanceSummary.style.display = 'none';
+        submitSection.style.display = 'none';
+    }
+    
+    function initializeEventListeners() {
+        // Checkboxes "selecionar todos" do estudante
+        document.querySelectorAll('.select-all-student').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const row = this.closest('tr');
+                const classCheckboxes = row.querySelectorAll('.class-checkbox:not([style*="display: none"])');
+                const isChecked = this.checked;
+                
+                classCheckboxes.forEach(cb => {
+                    cb.checked = isChecked;
+                });
+                
+                updateStudentStatus(row);
+            });
         });
         
-        // Reinicializar os event listeners
-        initEventListeners();
-    }
-
-    // Função para atualizar o cabeçalho das aulas
-    function updateClassHeaders(classInfo) {
-        const individualClasses = document.querySelector('.individual-classes');
-        const horarios = classInfo.horarios;
+        // Checkboxes individuais das aulas
+        document.querySelectorAll('.class-checkbox').forEach(checkbox => {
+            checkbox.addEventListener('change', function() {
+                const row = this.closest('tr');
+                updateStudentStatus(row);
+            });
+        });
         
-        let headerHtml = '';
-        for (let i = 0; i < horarios.length; i++) {
-            headerHtml += `
-                <div class="class-header">${i+1}ª Aula <span class="class-time">(${horarios[i]})</span></div>
-            `;
+        // Botões de observação
+        document.querySelectorAll('.note-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const row = this.closest('tr');
+                const studentName = row.querySelector('td').textContent;
+                const studentId = row.querySelector('td:nth-child(2)').textContent;
+                
+                document.querySelector('#note-popup .student-name-mini').textContent = studentName;
+                document.querySelector('#note-popup .student-id-mini').textContent = `Matrícula: ${studentId}`;
+                
+                notePopup.style.display = 'flex';
+            });
+        });
+        
+        // Botões de justificativa
+        document.querySelectorAll('.justify-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const row = this.closest('tr');
+                const studentName = row.querySelector('td').textContent;
+                const studentId = row.querySelector('td:nth-child(2)').textContent;
+                
+                document.querySelector('#justify-popup .student-name-mini').textContent = studentName;
+                document.querySelector('#justify-popup .student-id-mini').textContent = `Matrícula: ${studentId}`;
+                
+                justifyPopup.style.display = 'flex';
+            });
+        });
+    }
+    
+    function updateStudentStatus(row) {
+        const visibleCheckboxes = row.querySelectorAll('.class-checkbox:not([style*="display: none"])');
+        const statusBadge = row.querySelector('.status-badge');
+        const selectAllCheckbox = row.querySelector('.select-all-student');
+        
+        let checkedCount = 0;
+        let justifiedCount = 0;
+        
+        visibleCheckboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                checkedCount++;
+                if (checkbox.classList.contains('justified')) {
+                    justifiedCount++;
+                }
+            }
+        });
+        
+        // Atualizar checkbox "selecionar todos" se existir
+        if (selectAllCheckbox) {
+            selectAllCheckbox.checked = (checkedCount === visibleCheckboxes.length);
+            selectAllCheckbox.indeterminate = (checkedCount > 0 && checkedCount < visibleCheckboxes.length);
         }
         
-        // Atualizar o cabeçalho
-        individualClasses.innerHTML = headerHtml;
-    }
-
-    // Função para atualizar as informações da aula
-    function updateClassInfo(classInfo) {
-        // Selecionar os elementos de informação
-        const infoCard = document.querySelector('.info-card');
+        // Atualizar status
+        statusBadge.className = 'status-badge';
         
-        // Formatar a data
-        const formattedDate = formatDate(classInfo.data);
+        if (justifiedCount > 0) {
+            statusBadge.classList.add('justified');
+            statusBadge.textContent = 'Justificado';
+        } else if (checkedCount === 0) {
+            statusBadge.classList.add('absent');
+            statusBadge.textContent = 'Ausente';
+        } else if (checkedCount === visibleCheckboxes.length) {
+            statusBadge.classList.add('present');
+            statusBadge.textContent = 'Presente';
+        } else {
+            statusBadge.classList.add('late');
+            statusBadge.textContent = 'Atrasado';
+        }
         
-        // Atualizar o conteúdo
-        infoCard.innerHTML = `
-            <div class="info-item">
-                <span class="info-label">Turma:</span>
-                <span class="info-value">${classInfo.turma}</span>
-            </div>
-            <div class="info-item">
-                <span class="info-label">Data:</span>
-                <span class="info-value">${formattedDate}</span>
-            </div>
-            <div class="info-item">
-                <span class="info-label">Disciplina:</span>
-                <span class="info-value">${classInfo.disciplina}</span>
-            </div>
-            <div class="info-item">
-                <span class="info-label">Professor:</span>
-                <span class="info-value">${classInfo.professor}</span>
-            </div>
-            <div class="info-item">
-                <span class="info-label">Aulas:</span>
-                <span class="info-value">${classInfo.numAulas} aulas (${classInfo.horarios[0]} - ${classInfo.horarios[classInfo.horarios.length - 1]})</span>
-            </div>
-        `;
+        updateAttendanceSummary();
     }
-
-    // Função para atualizar o resumo da chamada
+    
     function updateAttendanceSummary() {
-        const totalStudents = document.querySelectorAll('.student-row').length;
+        const totalStudents = document.querySelectorAll('#students-list tr').length;
         let presentCount = 0;
         let absentCount = 0;
         let lateCount = 0;
         let justifiedCount = 0;
         
-        // Percorre os status dos alunos
         document.querySelectorAll('.status-badge').forEach(badge => {
             if (badge.classList.contains('present')) {
                 presentCount++;
@@ -320,8 +546,7 @@ document.addEventListener('DOMContentLoaded', function() {
             }
         });
         
-        // Atualiza o resumo
-        document.querySelector('.summary-content').innerHTML = `
+        summaryContent.innerHTML = `
             <div class="summary-item">
                 <span class="summary-label">Total de alunos:</span>
                 <span class="summary-value">${totalStudents}</span>
@@ -344,265 +569,158 @@ document.addEventListener('DOMContentLoaded', function() {
             </div>
         `;
     }
-
-    // Função para atualizar o status de presença de um aluno
-    function updateStudentStatus(studentRow) {
-        const checkboxes = studentRow.querySelectorAll('.class-checkbox');
-        const statusBadge = studentRow.querySelector('.status-badge');
-        const selectAllCheckbox = studentRow.querySelector('.select-all-student');
-        
-        // Contar checkboxes marcados
-        let checkedCount = 0;
-        let justifiedCount = 0;
-        
-        checkboxes.forEach(checkbox => {
-            if (checkbox.checked) {
-                checkedCount++;
-                if (checkbox.classList.contains('justified')) {
-                    justifiedCount++;
-                }
+    
+    function markAllPresent() {
+        document.querySelectorAll('#students-list tr').forEach(row => {
+            row.querySelectorAll('.class-checkbox:not([style*="display: none"])').forEach(cb => {
+                cb.checked = true;
+            });
+            
+            const selectAllCheckbox = row.querySelector('.select-all-student');
+            if (selectAllCheckbox) {
+                selectAllCheckbox.checked = true;
             }
+            
+            updateStudentStatus(row);
+        });
+    }
+    
+    function markAllAbsent() {
+        document.querySelectorAll('#students-list tr').forEach(row => {
+            row.querySelectorAll('.class-checkbox:not([style*="display: none"])').forEach(cb => {
+                cb.checked = false;
+            });
+            
+            const selectAllCheckbox = row.querySelector('.select-all-student');
+            if (selectAllCheckbox) {
+                selectAllCheckbox.checked = false;
+            }
+            
+            updateStudentStatus(row);
+        });
+    }
+    
+    function saveAttendance() {
+        if (!currentClassData) {
+            alert('Nenhuma aula carregada.');
+            return;
+        }
+        
+        // Simular salvamento
+        const attendanceData = collectAttendanceData();
+        console.log('Dados da chamada salvos:', attendanceData);
+        
+        // Feedback visual
+        const originalText = saveAttendanceBtn.innerHTML;
+        saveAttendanceBtn.innerHTML = '<span class="material-symbols-outlined">check</span> Salvo!';
+        saveAttendanceBtn.style.backgroundColor = '#16a34a';
+        
+        setTimeout(() => {
+            saveAttendanceBtn.innerHTML = originalText;
+            saveAttendanceBtn.style.backgroundColor = '';
+        }, 2000);
+    }
+    
+    function submitAttendance() {
+        if (!currentClassData) {
+            alert('Nenhuma aula carregada.');
+            return;
+        }
+        
+        if (confirm('Deseja enviar a lista de chamada? Esta ação não pode ser desfeita.')) {
+            // Simular envio
+            const attendanceData = collectAttendanceData();
+            console.log('Lista de chamada enviada:', attendanceData);
+            
+            // Feedback visual
+            const originalText = submitAttendanceBtn.innerHTML;
+            submitAttendanceBtn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> Enviado com Sucesso!';
+            submitAttendanceBtn.style.backgroundColor = '#16a34a';
+            submitAttendanceBtn.disabled = true;
+            
+            // Desabilitar edição
+            document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
+                cb.disabled = true;
+            });
+            
+            setTimeout(() => {
+                alert('Lista de chamada enviada com sucesso!\nVocê pode visualizar o relatório na seção de relatórios.');
+            }, 1000);
+        }
+    }
+    
+    function collectAttendanceData() {
+        const attendanceData = {
+            classInfo: currentClassData,
+            students: []
+        };
+        
+        document.querySelectorAll('#students-list tr').forEach(row => {
+            const studentId = row.dataset.studentId;
+            const studentName = row.querySelector('td').textContent;
+            const studentMatricula = row.querySelector('td:nth-child(2)').textContent;
+            const status = row.querySelector('.status-badge').textContent;
+            
+            const classes = [];
+            row.querySelectorAll('.class-checkbox:not([style*="display: none"])').forEach((cb, index) => {
+                classes.push({
+                    classNumber: index + 1,
+                    present: cb.checked,
+                    justified: cb.classList.contains('justified')
+                });
+            });
+            
+            attendanceData.students.push({
+                id: studentId,
+                name: studentName,
+                matricula: studentMatricula,
+                status: status,
+                classes: classes
+            });
         });
         
-        // Atualizar o checkbox "selecionar todos" do aluno
-        selectAllCheckbox.checked = (checkedCount === checkboxes.length);
-        selectAllCheckbox.indeterminate = (checkedCount > 0 && checkedCount < checkboxes.length);
-        
-        // Atualizar o status
-        statusBadge.className = 'status-badge';
-        
-        if (justifiedCount > 0) {
-            // Se pelo menos uma aula está justificada
-            statusBadge.classList.add('justified');
-            statusBadge.textContent = 'Justificado';
-        } else if (checkedCount === 0) {
-            // Se nenhuma aula está marcada
-            statusBadge.classList.add('absent');
-            statusBadge.textContent = 'Ausente';
-        } else if (checkedCount === checkboxes.length) {
-            // Se todas as aulas estão marcadas
-            statusBadge.classList.add('present');
-            statusBadge.textContent = 'Presente';
+        return attendanceData;
+    }
+    
+    function closePopups() {
+        notePopup.style.display = 'none';
+        justifyPopup.style.display = 'none';
+    }
+    
+    // Fechar popups clicando fora
+    [notePopup, justifyPopup].forEach(popup => {
+        popup.addEventListener('click', function(e) {
+            if (e.target === popup) {
+                popup.style.display = 'none';
+            }
+        });
+    });
+    
+    // Event listeners para confirmar ações dos popups
+    document.querySelector('#note-popup .btn-confirm').addEventListener('click', function() {
+        const noteContent = document.getElementById('note-content').value;
+        if (noteContent.trim()) {
+            alert('Observação salva com sucesso!');
+            document.getElementById('note-content').value = '';
+            closePopups();
         } else {
-            // Se algumas aulas estão marcadas
-            statusBadge.classList.add('late');
-            statusBadge.textContent = 'Atrasado';
+            alert('Por favor, digite uma observação.');
         }
+    });
+    
+    document.querySelector('#justify-popup .btn-confirm').addEventListener('click', function() {
+        const justifyType = document.getElementById('justify-type').value;
+        const justifyContent = document.getElementById('justify-content').value;
         
-        // Atualizar o resumo geral
-        updateAttendanceSummary();
-    }
-
-    // Função para inicializar os event listeners
-    function initEventListeners() {
-        // Checkbox principal para selecionar todos os alunos em todas as aulas
-        if (selectAllCheckbox) {
-            selectAllCheckbox.addEventListener('change', function() {
-                const isChecked = this.checked;
-                
-                // Selecionar todos os checkboxes de alunos
-                document.querySelectorAll('.select-all-student').forEach(checkbox => {
-                    checkbox.checked = isChecked;
-                    
-                    // Propagar o evento para os checkboxes individuais
-                    const studentRow = checkbox.closest('.student-row');
-                    studentRow.querySelectorAll('.class-checkbox').forEach(classCheckbox => {
-                        classCheckbox.checked = isChecked;
-                    });
-                    
-                    // Atualizar o status do aluno
-                    updateStudentStatus(studentRow);
-                });
-            });
+        if (justifyType && justifyContent.trim()) {
+            alert('Justificativa registrada com sucesso!');
+            // Aqui você poderia marcar o checkbox como justificado
+            document.getElementById('justify-type').value = '';
+            document.getElementById('justify-content').value = '';
+            document.getElementById('justify-date').value = '';
+            closePopups();
+        } else {
+            alert('Por favor, preencha todos os campos obrigatórios.');
         }
-        
-        // Checkboxes para selecionar todas as aulas de um aluno
-        document.querySelectorAll('.select-all-student').forEach(checkbox => {
-            checkbox.addEventListener('change', function() {
-                const isChecked = this.checked;
-                const studentRow = this.closest('.student-row');
-                
-                // Selecionar todos os checkboxes das aulas do aluno
-                studentRow.querySelectorAll('.class-checkbox').forEach(classCheckbox => {
-                    classCheckbox.checked = isChecked;
-                });
-                
-                // Atualizar o status do aluno
-                updateStudentStatus(studentRow);
-            });
-        });
-        
-        // Checkboxes individuais das aulas
-        document.querySelectorAll('.class-checkbox').forEach(checkbox => {
-            checkbox.addEventListener('change', function() {
-                const studentRow = this.closest('.student-row');
-                
-                // Atualizar o status do aluno
-                updateStudentStatus(studentRow);
-            });
-        });
-        
-        // Botão para marcar todos presentes
-        if (markAllPresentBtn) {
-            markAllPresentBtn.addEventListener('click', function() {
-                document.querySelectorAll('.student-row').forEach(studentRow => {
-                    // Marcar todos os checkboxes
-                    studentRow.querySelectorAll('.class-checkbox').forEach(checkbox => {
-                        checkbox.checked = true;
-                    });
-                    
-                    // Marcar o checkbox "selecionar todos"
-                    const selectAllCheckbox = studentRow.querySelector('.select-all-student');
-                    if (selectAllCheckbox) {
-                        selectAllCheckbox.checked = true;
-                    }
-                    
-                    // Atualizar o status
-                    updateStudentStatus(studentRow);
-                });
-                
-                // Atualizar o checkbox principal
-                if (selectAllCheckbox) {
-                    selectAllCheckbox.checked = true;
-                }
-            });
-        }
-        
-        // Botão para marcar todos ausentes
-        if (markAllAbsentBtn) {
-            markAllAbsentBtn.addEventListener('click', function() {
-                document.querySelectorAll('.student-row').forEach(studentRow => {
-                    // Desmarcar todos os checkboxes
-                    studentRow.querySelectorAll('.class-checkbox').forEach(checkbox => {
-                        checkbox.checked = false;
-                    });
-                    
-                    // Desmarcar o checkbox "selecionar todos"
-                    const selectAllCheckbox = studentRow.querySelector('.select-all-student');
-                    if (selectAllCheckbox) {
-                        selectAllCheckbox.checked = false;
-                    }
-                    
-                    // Atualizar o status
-                    updateStudentStatus(studentRow);
-                });
-                
-                // Atualizar o checkbox principal
-                if (selectAllCheckbox) {
-                    selectAllCheckbox.checked = false;
-                }
-            });
-        }
-        
-        // Botões para adicionar observação
-        document.querySelectorAll('.note-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const studentRow = this.closest('.student-row');
-                const studentName = studentRow.querySelector('.student-name').textContent;
-                const studentId = studentRow.querySelector('.student-id').textContent;
-                
-                // Atualizar os dados no popup
-                const nameElement = notePopup.querySelector('.student-name-mini');
-                const idElement = notePopup.querySelector('.student-id-mini');
-                
-                nameElement.textContent = studentName;
-                idElement.textContent = studentId;
-                
-                // Mostrar o popup
-                notePopup.style.display = 'flex';
-            });
-        });
-        
-        // Botões para justificar falta
-        document.querySelectorAll('.justify-btn').forEach(button => {
-            button.addEventListener('click', function() {
-                const studentRow = this.closest('.student-row');
-                const studentName = studentRow.querySelector('.student-name').textContent;
-                const studentId = studentRow.querySelector('.student-id').textContent;
-                
-                // Atualizar os dados no popup
-                const nameElement = justifyPopup.querySelector('.student-name-mini');
-                const idElement = justifyPopup.querySelector('.student-id-mini');
-                
-                nameElement.textContent = studentName;
-                idElement.textContent = studentId;
-                
-                // Mostrar o popup
-                justifyPopup.style.display = 'flex';
-            });
-        });
-        
-        // Botões para fechar popups
-        closePopupButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                // Encontrar o popup pai
-                const popup = this.closest('.popup-overlay');
-                popup.style.display = 'none';
-            });
-        });
-        
-        // Botões de cancelar
-        cancelButtons.forEach(button => {
-            button.addEventListener('click', function() {
-                // Encontrar o popup pai
-                const popup = this.closest('.popup-overlay');
-                popup.style.display = 'none';
-            });
-        });
-    }
-
-    // Inicializar a integração com o calendário
-    if (loadAttendanceBtn) {
-        loadAttendanceBtn.addEventListener('click', function() {
-            const turmaId = turmaSelect.value;
-            const disciplinaId = disciplinaSelect.value;
-            const data = dataSelect.value;
-            
-            if (!turmaId || !disciplinaId || !data) {
-                alert('Por favor, selecione todas as informações necessárias.');
-                return;
-            }
-            
-            // Carregar informações das aulas
-            calendarioIntegration.getClassesInfo(turmaId, disciplinaId, data)
-                .then(classInfo => {
-                    if (!classInfo.hasClasses) {
-                        alert(classInfo.message);
-                        return;
-                    }
-                    
-                    // Atualizar as informações da aula
-                    updateClassInfo(classInfo);
-                    
-                    // Atualizar o cabeçalho das aulas
-                    updateClassHeaders(classInfo);
-                    
-                    // Carregar os alunos
-                    return calendarioIntegration.getStudents(turmaId)
-                        .then(students => {
-                            // Atualizar a lista de alunos
-                            loadStudents(students, classInfo.numAulas);
-                            
-                            // Atualizar o resumo
-                            updateAttendanceSummary();
-                        });
-                })
-                .catch(error => {
-                    console.error('Erro ao carregar informações:', error);
-                    alert('Ocorreu um erro ao carregar as informações. Tente novamente.');
-                });
-        });
-    }
-
-    // Salvar chamada
-    if (saveAttendanceBtn) {
-        saveAttendanceBtn.addEventListener('click', function() {
-            // Em uma aplicação real, aqui seria enviado um POST para o servidor
-            // Para este exemplo, apenas mostramos um alerta
-            alert('Chamada salva com sucesso!');
-        });
-    }
-
-    // Inicializar os event listeners
-    initEventListeners();
+    });
 });

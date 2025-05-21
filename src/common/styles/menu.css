@@ -189,7 +189,7 @@ body.dark-theme .user-icon-popup li {
     height: 100vh;
     background-color: var(--azul-escuro);
     transition: width 0.3s ease;
-    z-index: 2;
+    z-index: 1000;
     display: flex;
     flex-direction: column;
 }
