@@ -571,3 +571,79 @@ select {
         padding: 8px;
     }
 }
+
+/* Adicione estes estilos ao seu arquivo CSS para melhorar a aparência da captura de tela */
+
+/* Estilo para modo de captura */
+.capture-mode {
+    background-color: #ffffff !important;
+    padding: 20px !important;
+    border-radius: 8px !important;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1) !important;
+    position: relative;
+    z-index: 1;
+}
+
+/* Estilo para as informações dos filtros adicionados à captura */
+.filter-info-capture {
+    background-color: #f8f9fb;
+    padding: 12px 15px;
+    margin-bottom: 20px;
+    border-radius: 6px;
+    border-left: 4px solid #0c142b;
+}
+
+.filter-info-header h3 {
+    font-size: 16px;
+    margin: 0 0 5px 0;
+    color: #0c142b;
+}
+
+.filter-info-header p {
+    margin: 4px 0;
+    font-size: 14px;
+    color: #4b5563;
+}
+
+/* Garantir que toda a tabela seja visível na captura */
+.capture-mode .stats-table {
+    border-collapse: collapse;
+    width: 100%;
+    margin-bottom: 15px;
+    background: white;
+}
+
+.capture-mode .stats-table th,
+.capture-mode .stats-table td {
+    border: 1px solid #e5e7eb;
+    padding: 12px;
+}
+
+.capture-mode .stats-table th {
+    background-color: #f3f4f6;
+}
+
+/* Melhorar a visualização das barras de progresso na captura */
+.capture-mode .progress-bar {
+    background-color: #e5e7eb;
+    height: 12px;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.capture-mode .progress-fill {
+    height: 100%;
+    border-radius: 6px;
+}
+
+.capture-mode .status-good {
+    background-color: #22c55e;
+}
+
+.capture-mode .status-warning {
+    background-color: #f59e0b;
+}
+
+.capture-mode .status-danger {
+    background-color: #ef4444;
+}
