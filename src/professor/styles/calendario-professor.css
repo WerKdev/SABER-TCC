@@ -1,0 +1,324 @@
+/* ========== ESTILOS ESPECÍFICOS PARA PROFESSOR ========== */
+/* Importa o CSS base do calendário original */
+@import url('./calendario.css');
+
+/* Cores específicas para matérias do professor */
+.legend-indicator.matematica,
+.class-mini-card.matematica,
+.day-class-card.matematica {
+    border-left-color: #3b82f6;
+}
+
+.class-mini-card.matematica {
+    background-color: rgba(59, 130, 246, 0.1);
+}
+
+.legend-indicator.fisica,
+.class-mini-card.fisica,
+.day-class-card.fisica {
+    border-left-color: #06b6d4;
+}
+
+.class-mini-card.fisica {
+    background-color: rgba(6, 182, 212, 0.1);
+}
+
+.legend-indicator.matematica {
+    background-color: #3b82f6;
+}
+
+.legend-indicator.fisica {
+    background-color: #06b6d4;
+}
+
+/* ========== PLANEJAMENTO CURRICULAR ========== */
+
+.planning-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.planning-header h2 {
+    font-size: 24px;
+    font-weight: 600;
+    color: var(--texto-claro);
+    margin: 0;
+}
+
+.planning-actions {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+}
+
+.curriculum-content {
+    display: grid;
+    gap: 25px;
+}
+
+.subject-section {
+    background-color: #f8fafc;
+    border-radius: 12px;
+    padding: 20px;
+    border-left: 4px solid;
+    transition: all 0.2s ease;
+}
+
+.subject-section:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.subject-section.matematica {
+    border-left-color: #3b82f6;
+}
+
+.subject-section.fisica {
+    border-left-color: #06b6d4;
+}
+
+.subject-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.subject-title {
+    font-size: 20px;
+    font-weight: 600;
+    color: var(--texto-claro);
+}
+
+.subject-info {
+    font-size: 13px;
+    color: var(--texto-secundario);
+    margin-top: 4px;
+}
+
+.content-timeline {
+    display: grid;
+    gap: 12px;
+}
+
+.timeline-item {
+    background-color: white;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 3px solid #e5e7eb;
+    transition: all 0.2s ease;
+    cursor: pointer;
+}
+
+.timeline-item:hover {
+    transform: translateX(2px);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.timeline-item.completed {
+    border-left-color: var(--verde);
+    background-color: rgba(16, 185, 129, 0.05);
+}
+
+.timeline-item.current {
+    border-left-color: #3b82f6;
+    background-color: rgba(59, 130, 246, 0.05);
+}
+
+.timeline-item.pending {
+    border-left-color: #d1d5db;
+}
+
+.timeline-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 8px;
+}
+
+.timeline-title {
+    font-weight: 600;
+    font-size: 16px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--texto-claro);
+}
+
+.timeline-status {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    display: inline-block;
+    flex-shrink: 0;
+}
+
+.timeline-status.completed {
+    background-color: var(--verde);
+}
+
+.timeline-status.current {
+    background-color: #3b82f6;
+}
+
+.timeline-status.pending {
+    background-color: #d1d5db;
+}
+
+.timeline-period {
+    font-size: 12px;
+    color: var(--texto-secundario);
+    background-color: #f1f5f9;
+    padding: 4px 8px;
+    border-radius: 12px;
+    white-space: nowrap;
+}
+
+.timeline-description {
+    font-size: 14px;
+    color: var(--texto-secundario);
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.timeline-objectives {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.objective-tag {
+    background-color: #e5e7eb;
+    color: var(--texto-claro);
+    font-size: 11px;
+    padding: 3px 8px;
+    border-radius: 12px;
+    transition: all 0.2s ease;
+}
+
+.objective-tag:hover {
+    background-color: #d1d5db;
+}
+
+/* ========== BOTÕES E CONTROLES ========== */
+
+.btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    border: none;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+.btn-primary {
+    background-color: var(--azul-padrao);
+    color: white;
+}
+
+.btn-primary:hover {
+    background-color: #2563eb;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
+}
+
+.btn-outline {
+    background-color: transparent;
+    color: var(--azul-padrao);
+    border: 1px solid var(--azul-padrao);
+}
+
+.btn-outline:hover {
+    background-color: var(--azul-padrao);
+    color: white;
+}
+
+/* ========== TEMA ESCURO ========== */
+
+body.dark-theme .subject-section {
+    background-color: rgba(255, 255, 255, 0.05);
+}
+
+body.dark-theme .timeline-item {
+    background-color: var(--background-elemento-escuro);
+}
+
+body.dark-theme .subject-title {
+    color: var(--texto-escuro);
+}
+
+body.dark-theme .planning-header h2 {
+    color: var(--texto-escuro);
+}
+
+body.dark-theme .timeline-title {
+    color: var(--texto-escuro);
+}
+
+body.dark-theme .timeline-period {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--texto-terciario);
+}
+
+body.dark-theme .objective-tag {
+    background-color: rgba(255, 255, 255, 0.1);
+    color: var(--texto-escuro);
+}
+
+/* ========== RESPONSIVIDADE ========== */
+
+@media (max-width: 768px) {
+    .planning-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 15px;
+    }
+
+    .planning-actions {
+        justify-content: space-between;
+    }
+
+    .subject-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 10px;
+    }
+
+    .timeline-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 5px;
+    }
+
+    .timeline-period {
+        align-self: flex-start;
+    }
+
+    .objective-tag {
+        font-size: 10px;
+        padding: 2px 6px;
+    }
+}
+
+@media (max-width: 480px) {
+    .timeline-objectives {
+        gap: 4px;
+    }
+
+    .subject-section {
+        padding: 15px;
+    }
+
+    .timeline-item {
+        padding: 12px;
+    }
+}
