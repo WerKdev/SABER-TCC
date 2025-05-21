@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contato - SABER</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <style>
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Space Grotesk', sans-serif;
+            transition: all 0.2s ease;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(to right, #f7f7f7, #3056ff3a);
+            padding-top: 70px;
+            overflow-x: hidden;
+        }
+
+        body.dark-mode {
+            background: linear-gradient(to right, #000000, #0d1746);
+            color: #ffffff;
+        }
+
+        
+        .site-header {
+            display: flex;
+            height: 70px;
+            background-color: #0c142b;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 10px;
+            width: 100%;
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: 10000000;
+        }
+
+        body.dark-mode header {
+            background-color: #0a0a14;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        }
+
+        .logo {
+            font-size: 32px;
+            font-weight: bold;
+            margin-left: 35px;
+            transition: 0.3s;
+            letter-spacing: 1px;
+            color: white;
+            text-decoration: none;
+        }
+
+        .menu {
+            display: flex;
+            margin-right: 17px;
+            align-items: center;
+            height: 100%;
+            padding: 0;
+            margin: 0 17px 0 0;
+        }
+
+        .menu > li {
+            margin-left: 50px;
+            display: flex;
+            align-items: center;
+            height: 100%;
+            padding: 0;
+            margin: 0 0 0 50px;
+        }
+
+        .menu a {
+            font-size: 16px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            color: #fff;
+            text-decoration: none;
+            transition: 0.3s;
+            padding: 15px;
+        }
+
+        .menu a:hover, .logo:hover {
+            opacity: 0.7;
+        }
+
+        #menu-icon {
+            display: none;
+            color: #F1F5F9;
+            padding: 23px;
+            cursor: pointer;
+            font-size: 28px;
+        }
+
+        #menu-icon:hover {
+            background-color: rgba(255, 255, 255, 0.05);
+        }
+
+       
+        #sidebar {
+            display: flex;
+            flex-direction: column;
+            width: 200px;
+            height: 100%;
+            background-color: #0c142b;
+            position: fixed;
+            top: 70px;
+            left: -200px;
+            z-index: 1000;
+        }
+
+        body.dark-mode #sidebar {
+            background-color: #0a0a14;
+        }
+
+        #sidebar.active {
+            left: 0;
+        }
+
+        .sidebar a {
+            color: #F1F5F9;
+            text-decoration: none;
+            padding: 20px;
+            display: block;
+            font-size: 18px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+
+        .sidebar ul {
+            padding: 0;
+            margin: 0;
+            width: 100%;
+        }
+
+        .sidebar ul li {
+            width: 100%;
+        }
+
+        .sidebar ul li a:hover {
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+
+        
+        .button-switch {
+            margin: 10px 15px;
+        }
+
+        .switch {
+            display: inline-block;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .switch__input {
+            position: absolute;
+            opacity: 0;
+        }
+
+        .switch__track {
+            display: block;
+            width: 50px;
+            height: 24px;
+            background: #f0f0f0;
+            border-radius: 12px;
+            position: relative;
+            transition: background 0.3s;
+        }
+
+        .switch__handle {
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 20px;
+            height: 20px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s;
+        }
+
+        .switch__icon {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 16px;
+            height: 16px;
+        }
+
+        .switch__icon--light {
+            left: 5px;
+            color: #FFD700;
+        }
+
+        .switch__icon--dark {
+            right: 5px;
+            color: #2F3E59;
+        }
+
+        .switch__input:checked ~ .switch__track {
+            background: #2F3E59;
+        }
+
+        .switch__input:checked ~ .switch__track .switch__handle {
+            transform: translateX(26px);
+        }
+
+        body.dark-mode .switch__track {
+            background: #2F3E59;
+        }
+
+        body.dark-mode .switch__handle {
+            background: #f0f0f0;
+        }
+
+        body.dark-mode .switch__icon--light {
+            color: #f0f0f0;
+        }
+
+        body.dark-mode .switch__icon--dark {
+            color: #4fd1c5;
+        }
+
+       
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 60px 20px;
+        }
+
+        .section-header {
+            position: relative;
+            background-color: transparent;
+            height: auto;
+            text-align: center;
+            margin-bottom: 50px;
+            display: block;
+            padding: 0;
+            top: auto;
+        }
+
+        .section-header p {
+            color: #1d47cc;
+            font-weight: 600;
+            font-size: 16px;
+            margin-bottom: 10px;
+            letter-spacing: 1px;
+        }
+
+        body.dark-mode .section-header p {
+            color: #6a9bff;
+        }
+
+        h1, h2 {
+            font-size: 48px;
+            margin-bottom: 10px;
+            background: linear-gradient(90deg, #003380 0%, #0047AB 50%, #1d47cc 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        body.dark-mode h1,
+        body.dark-mode h2 {
+            background: linear-gradient(90deg, #4d88ff 0%, #6a9bff 50%, #87aeff 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        h2 {
+            font-size: 36px;
+        }
+
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+
+        .contact-card {
+            border: 1px solid #eaeaea;
+            border-radius: 12px;
+            padding: 35px;
+            display: flex;
+            flex-direction: column;
+            height: 100%;
+            background-color: white;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            position: relative;
+            z-index: 1;
+            overflow: hidden;
+            text-align: center;
+        }
+
+        body.dark-mode .contact-card {
+            background-color: #333;
+            border-color: #444;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .contact-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            border-color: rgba(48, 86, 255, 0.3);
+        }
+
+        body.dark-mode .contact-card:hover {
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+            border-color: rgba(77, 136, 255, 0.5);
+        }
+
+        .contact-icon {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background-color: rgba(48, 86, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            color: #3056FF;
+            margin: 0 auto 20px;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .contact-icon {
+            background-color: rgba(77, 136, 255, 0.1);
+            color: #6a9bff;
+        }
+
+        .contact-card:hover .contact-icon {
+            transform: scale(1.1);
+            background-color: rgba(48, 86, 255, 0.2);
+        }
+
+        .contact-title {
+            font-size: 20px;
+            font-weight: bold;
+            margin-bottom: 15px;
+            color: #3056FF;
+        }
+
+        body.dark-mode .contact-title {
+            color: #6a9bff;
+        }
+
+        .contact-text {
+            color: #666;
+            margin-bottom: 10px;
+            font-size: 16px;
+        }
+
+        body.dark-mode .contact-text {
+            color: #aaa;
+        }
+
+       
+        .contact-form-section {
+            padding: 60px 0;
+        }
+
+        .form-control {
+            border-radius: 8px;
+            padding: 12px 15px;
+            border: 1px solid #ced4da;
+            background-color: white;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .form-control {
+            background-color: #444;
+            border-color: #555;
+            color: white;
+        }
+
+        .form-control:focus {
+            border-color: #3056FF;
+            box-shadow: 0 0 0 0.25rem rgba(48, 86, 255, 0.25);
+        }
+
+        body.dark-mode .form-control:focus {
+            border-color: #6a9bff;
+            box-shadow: 0 0 0 0.25rem rgba(106, 155, 255, 0.25);
+        }
+
+        .form-label {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        body.dark-mode .form-label {
+            color: #fff;
+        }
+
+        .btn-primary {
+            background-color: #3056FF;
+            border-color: #3056FF;
+            padding: 12px 24px;
+            font-weight: 600;
+            border-radius: 8px;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary:hover {
+            background-color: #1d47cc;
+            border-color: #1d47cc;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(48, 86, 255, 0.3);
+        }
+
+        
+        .map-container {
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            margin-bottom: 30px;
+        }
+
+        body.dark-mode .map-container {
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        }
+
+       
+        .social-links {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .social-link {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background-color: rgba(48, 86, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #3056FF;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+
+        body.dark-mode .social-link {
+            background-color: rgba(106, 155, 255, 0.1);
+            color: #6a9bff;
+        }
+
+        .social-link:hover {
+            background-color: #3056FF;
+            color: white;
+            transform: translateY(-5px);
+        }
+
+        body.dark-mode .social-link:hover {
+            background-color: #6a9bff;
+        }
+
+       
+        .accordion-button {
+            font-weight: 600;
+            padding: 15px 20px;
+            background-color: white;
+            color: #333;
+        }
+
+        body.dark-mode .accordion-button {
+            background-color: #333;
+            color: white;
+        }
+
+        .accordion-button:not(.collapsed) {
+            background-color: rgba(48, 86, 255, 0.1);
+            color: #3056FF;
+        }
+
+        body.dark-mode .accordion-button:not(.collapsed) {
+            background-color: rgba(106, 155, 255, 0.1);
+            color: #6a9bff;
+        }
+
+        .accordion-button:focus {
+            box-shadow: 0 0 0 0.25rem rgba(48, 86, 255, 0.25);
+            border-color: #3056FF;
+        }
+
+        .accordion-body {
+            padding: 20px;
+            background-color: white;
+            color: #666;
+        }
+
+        body.dark-mode .accordion-body {
+            background-color: #333;
+            color: #aaa;
+        }
+
+       
+        .site-footer {
+            background-color: #0c142b;
+            color: white;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        body.dark-mode .site-footer {
+            background-color: #0a0a14;
+        }
+
+        .footer-logo {
+            font-size: 28px;
+            font-weight: bold;
+            margin-bottom: 20px;
+            display: inline-block;
+        }
+
+        .footer-links {
+            margin: 20px 0;
+        }
+
+        .footer-links a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        .footer-links a:hover {
+            opacity: 0.7;
+        }
+
+        .footer-social {
+            margin: 20px 0;
+        }
+
+        .footer-social a {
+            color: white;
+            margin: 0 10px;
+            font-size: 1.2rem;
+            transition: opacity 0.3s;
+        }
+
+        .footer-social a:hover {
+            opacity: 0.7;
+        }
+
+        .copyright {
+            font-size: 14px;
+            opacity: 0.8;
+            margin-top: 20px;
+        }
+
+       
+        @media (max-width: 1290px) {
+            .site-header {
+                justify-content: center;
+                align-items: center;
+                position: fixed;
+                z-index: 100000000;
+                padding: 0 20px;
+            }
+
+            .menu {
+                display: none;
+            }
+
+            .logo {
+                position: absolute;
+                left: 50%;
+                transform: translateX(-50%);
+                margin: 0;
+            }
+
+            #menu-icon {
+                display: block;
+                position: absolute;
+                left: 0;
+                top: 50%;
+                transform: translateY(-50%);
+            }
+        }
+
+        @media (max-width: 992px) {
+            .contact-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            h1 {
+                font-size: 36px;
+            }
+
+            h2 {
+                font-size: 28px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .site-header {
+                height: 60px;
+                padding: 0 20px;
+            }
+
+            #sidebar {
+                top: 60px;
+            }
+
+            #menu-icon {
+                padding: 15px;
+            }
+
+            body {
+                padding-top: 60px;
+            }
+
+            .logo {
+                font-size: 22px;
+            }
+
+            .container {
+                padding: 40px 15px;
+            }
+        }
+
+        @media (max-width: 576px) {
+            h1 {
+                font-size: 28px;
+            }
+
+            h2 {
+                font-size: 24px;
+            }
+
+            .contact-icon {
+                width: 60px;
+                height: 60px;
+                font-size: 1.5rem;
+            }
+
+            .section-header {
+                margin-bottom: 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+    
+    <header class="site-header">
+        <span id="menu-icon" class="material-symbols-outlined" onclick="abrirMenu()">menu</span>
+        <a class="logo" href="index.html">SABER</a>
+        <ul class="menu">
+            <li><a href="#">Assinaturas</a></li>
+            <li><a href="suporte.html">Suporte</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li class="button-switch">
+                <svg display="none">
+                    <symbol id="light" viewBox="0 0 24 24">
+                        <g stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                            <line x1="12" y1="17" x2="12" y2="20" transform="rotate(0,12,12)" />
+                            <line x1="12" y1="17" x2="12" y2="20" transform="rotate(45,12,12)" />
+                            <line x1="12" y1="17" x2="12" y2="20" transform="rotate(90,12,12)" />
+                            <line x1="12" y1="17" x2="12" y2="20" transform="rotate(135,12,12)" />
+                            <line x1="12" y1="17" x2="12" y2="20" transform="rotate(180,12,12)" />
+                            <line x1="12" y1="17" x2="12" y2="20" transform="rotate(225,12,12)" />
+                            <line x1="12" y1="17" x2="12" y2="20" transform="rotate(270,12,12)" />
+                            <line x1="12" y1="17" x2="12" y2="20" transform="rotate(315,12,12)" />
+                        </g>
+                        <circle fill="currentColor" cx="12" cy="12" r="5" />
+                    </symbol>
+                    <symbol id="dark" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M15.1,14.9c-3-0.5-5.5-3-6-6C8.8,7.1,9.1,5.4,9.9,4c0.4-0.8-0.4-1.7-1.2-1.4C4.6,4,1.8,7.9,2,12.5c0.2,5.1,4.4,9.3,9.5,9.5c4.5,0.2,8.5-2.6,9.9-6.6c0.3-0.8-0.6-1.7-1.4-1.2C18.6,14.9,16.9,15.2,15.1,14.9z" />
+                    </symbol>
+                </svg>
+                
+                <label class="switch">
+                    <input class="switch__input" type="checkbox" id="theme-toggle" aria-label="Alternar tema claro/escuro">
+                    <span class="switch__track">
+                        <svg class="switch__icon switch__icon--light" aria-hidden="true">
+                            <use href="#light" />
+                        </svg>
+                        <svg class="switch__icon switch__icon--dark" aria-hidden="true">
+                            <use href="#dark" />
+                        </svg>
+                        <span class="switch__handle"></span>
+                    </span>
+                </label>
+            </li>
+        </ul>
+    </header>
+
+   
+    <aside class="sidebar" id="sidebar">
+        <ul>
+            <li><a href="#">Assinaturas</a></li>
+            <li><a href="suporte.html">Suporte</a></li>
+            <li><a href="login.html">Login</a></li>
+            <li class="button-switch">
+                <svg display="none">
+                    <symbol id="light-sidebar" viewBox="0 0 24 24">
+                        <g stroke="currentColor" stroke-width="2" stroke-linecap="round">
+                            <line x1="12" y1="17" x2="12" y2="20" transform="rotate(0,12,12)" />
+                            <line x1="12" y1="17" x2="12" y2="20" transform="rotate(45,12,12)" />
+                            <line x1="12" y1="17" x2="12" y2="20" transform="rotate(90,12,12)" />
+                            <line x1="12" y1="17" x2="12" y2="20" transform="rotate(135,12,12)" />
+                            <line x1="12" y1="17" x2="12" y2="20" transform="rotate(180,12,12)" />
+                            <line x1="12" y1="17" x2="12" y2="20" transform="rotate(225,12,12)" />
+                            <line x1="12" y1="17" x2="12" y2="20" transform="rotate(270,12,12)" />
+                            <line x1="12" y1="17" x2="12" y2="20" transform="rotate(315,12,12)" />
+                        </g>
+                        <circle fill="currentColor" cx="12" cy="12" r="5" />
+                    </symbol>
+                    <symbol id="dark-sidebar" viewBox="0 0 24 24">
+                        <path fill="currentColor" d="M15.1,14.9c-3-0.5-5.5-3-6-6C8.8,7.1,9.1,5.4,9.9,4c0.4-0.8-0.4-1.7-1.2-1.4C4.6,4,1.8,7.9,2,12.5c0.2,5.1,4.4,9.3,9.5,9.5c4.5,0.2,8.5-2.6,9.9-6.6c0.3-0.8-0.6-1.7-1.4-1.2C18.6,14.9,16.9,15.2,15.1,14.9z" />
+                    </symbol>
+                </svg>
+                
+                <label class="switch">
+                    <input class="switch__input" type="checkbox" id="theme-toggle-2" aria-label="Alternar tema claro/escuro">
+                    <span class="switch__track">
+                        <svg class="switch__icon switch__icon--light" aria-hidden="true">
+                            <use href="#light-sidebar" />
+                        </svg>
+                        <svg class="switch__icon switch__icon--dark" aria-hidden="true">
+                            <use href="#dark-sidebar" />
+                        </svg>
+                        <span class="switch__handle"></span>
+                    </span>
+                </label>
+            </li>
+        </ul>
+    </aside>
+
+    
+    <div class="container">
+        <div class="section-header">
+            <p>ENTRE EM CONTATO</p>
+            <h1>Fale conosco</h1>
+        </div>
+
+        
+        <div class="contact-grid">
+            <div class="contact-card">
+                <div class="contact-icon">
+                    <i class="fas fa-map-marker-alt"></i>
+                </div>
+                <h3 class="contact-title">Endereço</h3>
+                <p class="contact-text">Av. Tancredo Neves, 2227</p>
+                <p class="contact-text">Caminho das Árvores</p>
+                <p class="contact-text">Salvador - BA, 41820-021</p>
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-icon">
+                    <i class="fas fa-phone-alt"></i>
+                </div>
+                <h3 class="contact-title">Telefone</h3>
+                <p class="contact-text">Geral: (71) 3333-2222</p>
+                <p class="contact-text">Suporte: (71) 99999-8888</p>
+                <p class="contact-text">Seg - Sex: 09:00 - 18:00</p>
+            </div>
+
+            <div class="contact-card">
+                <div class="contact-icon">
+                    <i class="fas fa-envelope"></i>
+                </div>
+                <h3 class="contact-title">Email</h3>
+                <p class="contact-text">contato@saber.com.br</p>
+                <p class="contact-text">suporte@saber.com.br</p>
+                <p class="contact-text">comercial@saber.com.br</p>
+            </div>
+        </div>
+
+        
+        <div class="contact-form-section">
+            <div class="row">
+                <div class="col-lg-6 mb-5 mb-lg-0">
+                    <h2>Envie sua mensagem</h2>
+                    <form id="contactForm">
+                        <div class="row">
+                            <div class="col-md-6 mb-3">
+                                <label for="name" class="form-label">Nome completo</label>
+                                <input type="text" class="form-control" id="name" placeholder="Seu nome" required>
+                            </div>
+                            <div class="col-md-6 mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" placeholder="seu.email@exemplo.com" required>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="phone" class="form-label">Telefone</label>
+                            <input type="tel" class="form-control" id="phone" placeholder="(DDD) 99999-9999">
+                        </div>
+                        <div class="mb-3">
+                            <label for="subject" class="form-label">Assunto</label>
+                            <select class="form-select" id="subject" required>
+                                <option value="" selected disabled>Selecione um assunto</option>
+                                <option value="informacoes">Informações sobre o produto</option>
+                                <option value="suporte">Suporte técnico</option>
+                                <option value="parcerias">Parcerias</option>
+                                <option value="feedbacks">Feedbacks</option>
+                                <option value="outros">Outros</option>
+                            </select>
+                        </div>
+                        <div class="mb-4">
+                            <label for="message" class="form-label">Mensagem</label>
+                            <textarea class="form-control" id="message" rows="5" placeholder="Sua mensagem" required></textarea>
+                        </div>
+                        <div class="form-check mb-4">
+                            <input class="form-check-input" type="checkbox" id="newsletter" checked>
+                            <label class="form-check-label" for="newsletter">
+                                Desejo receber a newsletter com novidades e conteúdos gratuitos
+                            </label>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Enviar mensagem</button>
+                    </form>
+                </div>
+                <div class="col-lg-6">
+                    <h2>Onde estamos</h2>
+                    <div class="map-container">
+                        <img src="images/mapa.jpg" alt="Mapa" class="img-fluid">
+                    </div>
+                    <div class="social-links">
+                        <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-linkedin-in"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                        <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+       
+        <div class="faq-section mt-5">
+            <h2 class="text-center mb-5">Perguntas Frequentes</h2>
+            <div class="accordion" id="faqAccordion">
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                            Qual é o prazo de resposta para mensagens?
+                        </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Respondemos a todas as mensagens em até 24 horas úteis. Em casos de urgência, recomendamos entrar em contato pelo telefone para atendimento mais rápido.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                            Como posso agendar uma demonstração do produto?
+                        </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Você pode agendar uma demonstração preenchendo o formulário de contato e selecionando o assunto "Informações sobre o produto" ou ligando para o nosso telefone comercial. Atendemos com hora marcada de segunda a sexta, das 9h às 18h.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree" aria-expanded="false" aria-controls="collapseThree">
+                            Oferecem suporte técnico para clientes?
+                        </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" aria-labelledby="headingThree" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Sim, oferecemos suporte técnico para todos os clientes através do e-mail suporte@saber.com.br ou pelo telefone (71) 99999-8888. O horário de atendimento é de segunda a sexta, das 9h às 18h.
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingFour">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFour" aria-expanded="false" aria-controls="collapseFour">
+                            Como posso propor uma parceria com a SABER?
+                        </button>
+                    </h2>
+                    <div id="collapseFour" class="accordion-collapse collapse" aria-labelledby="headingFour" data-bs-parent="#faqAccordion">
+                        <div class="accordion-body">
+                            Para propostas de parcerias, por favor, envie um e-mail para comercial@saber.com.br com os detalhes da proposta ou preencha o formulário de contato selecionando o assunto "Parcerias". Nossa equipe analisará e retornará o contato em até 3 dias úteis.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+    <footer class="site-footer">
+        <div class="container">
+            <a href="index.html" class="footer-logo">SABER</a>
+            <div class="footer-links">
+                <a href="#">Assinaturas</a>
+                <a href="suporte.html">Suporte</a>
+                <a href="login.html">Login</a>
+                <a href="#">Política de Privacidade</a>
+                <a href="#">Termos de Uso</a>
+            </div>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+            </div>
+            <div class="copyright">
+                © 2025 SABER - Sistema de Análise e Benefício Educacional em Relatório. Todos os direitos reservados.
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
