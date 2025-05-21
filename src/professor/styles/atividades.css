@@ -411,7 +411,6 @@ body.dark-theme .activity-card {
     border-radius: 20px;
     font-size: 12px;
     font-weight: 600;
-    z-index: 1;
 }
 
 .activity-status.ativa {
