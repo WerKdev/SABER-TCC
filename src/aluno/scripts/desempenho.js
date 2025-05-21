@@ -955,3 +955,405 @@ function initTooltips() {
         }
     });
 }
+// Funções para os botões da seção de faltas
+document.addEventListener('DOMContentLoaded', function() {
+    // Botão de justificar faltas
+    const btnJustify = document.querySelector('.btn-justify');
+    if (btnJustify) {
+        btnJustify.addEventListener('click', abrirJustificarFalta);
+    }
+    
+    // Botão de gerar relatório
+    const btnReport = document.querySelector('.btn-report');
+    if (btnReport) {
+        btnReport.addEventListener('click', abrirGerarRelatorio);
+    }
+    
+    // Configurar eventos para os novos popups
+    configurarEventosPopups();
+});
+
+// Função para abrir o popup de justificar falta
+function abrirJustificarFalta() {
+    const justifyPopup = document.getElementById('justify-popup');
+    if (justifyPopup) {
+        // Preencher o formulário com a data atual
+        const dataInput = document.getElementById('falta-data');
+        const hoje = new Date();
+        const dataFormatada = hoje.toISOString().split('T')[0]; // Formato YYYY-MM-DD
+        if (dataInput) dataInput.value = dataFormatada;
+        
+        // Pré-selecionar a disciplina crítica, se houver
+        const disciplinaCritica = document.querySelector('.critica-nome');
+        const disciplinaSelect = document.getElementById('falta-disciplina');
+        
+        if (disciplinaCritica && disciplinaSelect) {
+            const nomeDisciplina = disciplinaCritica.textContent;
+            
+            // Verificar se a disciplina crítica existe nas opções
+            for (let i = 0; i < disciplinaSelect.options.length; i++) {
+                if (disciplinaSelect.options[i].value === nomeDisciplina) {
+                    disciplinaSelect.selectedIndex = i;
+                    break;
+                }
+            }
+        }
+        
+        // Mostrar o popup
+        justifyPopup.style.display = 'flex';
+    }
+}
+
+// Função para abrir o popup de gerar relatório
+function abrirGerarRelatorio() {
+    const reportPopup = document.getElementById('report-popup');
+    if (reportPopup) {
+        // Pré-selecionar o período atual
+        const periodoAtual = document.getElementById('trimestre').value;
+        const periodSelect = document.getElementById('report-periodo');
+        
+        if (periodSelect) {
+            for (let i = 0; i < periodSelect.options.length; i++) {
+                if (periodSelect.options[i].value === periodoAtual) {
+                    periodSelect.selectedIndex = i;
+                    break;
+                }
+            }
+        }
+        
+        // Mostrar o popup
+        reportPopup.style.display = 'flex';
+    }
+}
+
+// Configurar eventos para os novos popups
+function configurarEventosPopups() {
+    // Formulário de justificar falta
+    const justifyForm = document.getElementById('justify-form');
+    if (justifyForm) {
+        justifyForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Fechar o popup atual
+            document.getElementById('justify-popup').style.display = 'none';
+            
+            // Mostrar mensagem de sucesso
+            document.getElementById('justify-success-popup').style.display = 'flex';
+        });
+    }
+    
+    // Formulário de gerar relatório
+    const reportForm = document.getElementById('report-form');
+    if (reportForm) {
+        reportForm.addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Obter os valores do formulário
+            const periodo = document.getElementById('report-periodo').value;
+            const tipo = document.getElementById('report-tipo').value;
+            const formato = document.getElementById('report-formato').value;
+            const incluirJustificativas = document.getElementById('include-justificativas').checked;
+            const incluirGraficos = document.getElementById('include-graficos').checked;
+            const incluirComparativo = document.getElementById('include-comparativo').checked;
+            
+            // Fechar o popup atual
+            document.getElementById('report-popup').style.display = 'none';
+            
+            if (formato === 'png') {
+                // Gerar imagem do relatório
+                gerarRelatorioImagem(periodo, tipo, incluirJustificativas, incluirGraficos, incluirComparativo);
+            } else {
+                // Para o formato PDF, apenas mostrar o popup de sucesso
+                document.getElementById('report-success-popup').style.display = 'flex';
+            }
+        });
+    }
+    
+    // Botões de fechar popups
+    const closeButtons = document.querySelectorAll('.close-popup, .btn-cancel, .popup-overlay .btn-confirm');
+    closeButtons.forEach(button => {
+        button.addEventListener('click', function() {
+            // Encontrar o popup pai
+            const popup = this.closest('.popup-overlay');
+            if (popup) {
+                popup.style.display = 'none';
+            }
+        });
+    });
+    
+    // Botão de download no popup de relatório gerado
+    const btnDownload = document.querySelector('.btn-download');
+    if (btnDownload) {
+        btnDownload.addEventListener('click', function() {
+            // Simular download de arquivo
+            alert('Download iniciado!');
+            document.getElementById('report-success-popup').style.display = 'none';
+        });
+    }
+    
+    // Botão de enviar por email no popup de relatório gerado
+    const btnEmail = document.querySelector('.btn-email');
+    if (btnEmail) {
+        btnEmail.addEventListener('click', function() {
+            // Simular envio de email
+            alert('Relatório enviado para seu email cadastrado!');
+            document.getElementById('report-success-popup').style.display = 'none';
+        });
+    }
+}
+
+// Função aprimorada para gerar relatório em formato de imagem ou PDF
+function gerarRelatorioImagem(periodo, tipo, incluirJustificativas, incluirGraficos, incluirComparativo) {
+    // Obter o container de faltas
+    const faltasContainer = document.querySelector('.faltas-container');
+    
+    // Adicionar classe temporária para melhorar a visualização da captura
+    faltasContainer.classList.add('capture-mode');
+    
+    // Obter o formato selecionado
+    const formato = document.getElementById('report-formato').value;
+    
+    // Criar elemento para mostrar que é um relatório especial
+    const reportHeader = document.createElement('div');
+    reportHeader.className = 'report-header';
+    reportHeader.innerHTML = `
+        <div class="report-title">
+            <h2>Relatório ${tipo === 'detalhado' ? 'Detalhado' : tipo === 'completo' ? 'Completo' : 'Resumido'} de Faltas</h2>
+            <p>Período: ${periodo} | Data de emissão: ${new Date().toLocaleDateString('pt-BR')}</p>
+            <p>Aluno: ${document.getElementById('user-name-header').textContent}</p>
+        </div>
+    `;
+    
+    // Inserir no início do container
+    faltasContainer.insertBefore(reportHeader, faltasContainer.firstChild);
+    
+    // Configurações para html2canvas
+    const html2canvasOptions = {
+        backgroundColor: "#ffffff",
+        scale: 2,
+        useCORS: true,
+        logging: false,
+        height: faltasContainer.scrollHeight,
+        windowHeight: document.documentElement.offsetHeight
+    };
+
+    // Gerar a imagem do relatório
+    html2canvas(faltasContainer, html2canvasOptions).then(canvas => {
+        // Nome do arquivo
+        const nomeArquivo = `Relatorio_Faltas_${periodo.replace(/\s+/g, '')}_${new Date().toLocaleDateString('pt-BR').replace(/\//g, '-')}`;
+        
+        if (formato === 'png') {
+            // Converter para imagem PNG
+            const image = canvas.toDataURL('image/png', 1.0);
+            
+            // Criar link para download
+            const downloadLink = document.createElement('a');
+            downloadLink.href = image;
+            downloadLink.download = `${nomeArquivo}.png`;
+            downloadLink.id = 'temp-download-link';
+            downloadLink.style.display = 'none';
+            document.body.appendChild(downloadLink);
+            
+            // Armazenar o link para uso posterior
+            window.tempDownloadLink = downloadLink;
+        } else if (formato === 'pdf') {
+            // Gerar PDF com jsPDF
+            gerarPDF(canvas, nomeArquivo, faltasContainer.offsetWidth, faltasContainer.scrollHeight);
+        }
+        
+        // Remover elementos temporários da visualização
+        faltasContainer.removeChild(reportHeader);
+        faltasContainer.classList.remove('capture-mode');
+        
+        // Mostrar popup de sucesso
+        document.getElementById('report-success-popup').style.display = 'flex';
+        
+        // Configurar o botão de download para usar o formato correto
+        configurarBotoesRelatorio(formato, nomeArquivo);
+        
+    }).catch(error => {
+        console.error("Erro ao gerar relatório:", error);
+        alert("Ocorreu um erro ao gerar o relatório. Por favor, tente novamente.");
+        
+        // Garantir limpeza mesmo em caso de erro
+        if (faltasContainer.contains(reportHeader)) {
+            faltasContainer.removeChild(reportHeader);
+        }
+        faltasContainer.classList.remove('capture-mode');
+    });
+}
+
+// Função para gerar PDF a partir de um canvas
+function gerarPDF(canvas, nomeArquivo, largura, altura) {
+    // Converter canvas para imagem
+    const imgData = canvas.toDataURL('image/jpeg', 1.0);
+    
+    // Calcular a orientação do PDF baseado nas dimensões
+    const orientacao = largura > altura ? 'l' : 'p'; // landscape ou portrait
+    
+    // Inicializar jsPDF
+    const { jsPDF } = window.jspdf;
+    const pdf = new jsPDF({
+        orientation: orientacao,
+        unit: 'mm',
+    });
+    
+    // Calcular as dimensões da página e escalar a imagem
+    const pdfWidth = orientacao === 'p' ? 210 : 297;  // A4 width in mm
+    const pdfHeight = orientacao === 'p' ? 297 : 210; // A4 height in mm
+    
+    const imgWidth = largura;
+    const imgHeight = altura;
+    
+    // Calcular ratio para manter as proporções
+    const ratio = Math.min(pdfWidth / imgWidth, pdfHeight / imgHeight);
+    const imgWidthScaled = imgWidth * ratio;
+    const imgHeightScaled = imgHeight * ratio;
+    
+    // Centralizar a imagem na página
+    const x = (pdfWidth - imgWidthScaled) / 2;
+    const y = (pdfHeight - imgHeightScaled) / 2;
+    
+    // Adicionar a imagem ao PDF
+    pdf.addImage(imgData, 'JPEG', x, y, imgWidthScaled, imgHeightScaled);
+    
+    // Salvar o PDF como blob
+    const pdfBlob = pdf.output('blob');
+    
+    // Criar URL para o blob
+    const pdfUrl = URL.createObjectURL(pdfBlob);
+    
+    // Armazenar URL para uso posterior
+    window.tempPdfUrl = pdfUrl;
+    window.tempPdfFilename = `${nomeArquivo}.pdf`;
+}
+
+// Função para configurar os botões do popup de relatório gerado
+function configurarBotoesRelatorio(formato, nomeArquivo) {
+    // Configurar o botão de download
+    const btnDownload = document.querySelector('.btn-download');
+    if (btnDownload) {
+        // Remover qualquer evento anterior
+        const newBtn = btnDownload.cloneNode(true);
+        btnDownload.parentNode.replaceChild(newBtn, btnDownload);
+        
+        // Adicionar novo evento
+        newBtn.addEventListener('click', function() {
+            if (formato === 'png' && window.tempDownloadLink) {
+                // Fazer o download da imagem PNG
+                window.tempDownloadLink.click();
+                
+                // Limpar recursos temporários
+                setTimeout(() => {
+                    document.body.removeChild(window.tempDownloadLink);
+                    window.tempDownloadLink = null;
+                }, 100);
+                
+            } else if (formato === 'pdf' && window.tempPdfUrl) {
+                // Criar link para download do PDF
+                const downloadPdfLink = document.createElement('a');
+                downloadPdfLink.href = window.tempPdfUrl;
+                downloadPdfLink.download = window.tempPdfFilename;
+                downloadPdfLink.style.display = 'none';
+                document.body.appendChild(downloadPdfLink);
+                
+                // Fazer o download
+                downloadPdfLink.click();
+                
+                // Limpar recursos temporários
+                setTimeout(() => {
+                    document.body.removeChild(downloadPdfLink);
+                    URL.revokeObjectURL(window.tempPdfUrl);
+                    window.tempPdfUrl = null;
+                    window.tempPdfFilename = null;
+                }, 100);
+            }
+            
+            // Fechar o popup
+            document.getElementById('report-success-popup').style.display = 'none';
+        });
+    }
+    
+    // Configurar o botão de enviar por email
+    const btnEmail = document.querySelector('.btn-email');
+    if (btnEmail) {
+        // Remover qualquer evento anterior
+        const newEmailBtn = btnEmail.cloneNode(true);
+        btnEmail.parentNode.replaceChild(newEmailBtn, btnEmail);
+        
+        // Adicionar novo evento
+        newEmailBtn.addEventListener('click', function() {
+            // Aqui poderia implementar a real integração com sistema de email
+            // Mas por hora, vamos apenas mostrar uma mensagem e baixar o arquivo
+            
+            const email = prompt('Digite o email para envio:', document.querySelector('.user-email')?.textContent || 'kenai.almeida@email.com');
+            
+            if (email) {
+                alert(`Relatório enviado para ${email} com sucesso!`);
+                
+                // Também faz o download como backup
+                if (formato === 'png' && window.tempDownloadLink) {
+                    window.tempDownloadLink.click();
+                } else if (formato === 'pdf' && window.tempPdfUrl) {
+                    // Criar link para download do PDF
+                    const downloadPdfLink = document.createElement('a');
+                    downloadPdfLink.href = window.tempPdfUrl;
+                    downloadPdfLink.download = window.tempPdfFilename;
+                    downloadPdfLink.style.display = 'none';
+                    document.body.appendChild(downloadPdfLink);
+                    
+                    // Fazer o download
+                    downloadPdfLink.click();
+                    
+                    // Limpar
+                    setTimeout(() => {
+                        document.body.removeChild(downloadPdfLink);
+                    }, 100);
+                }
+            }
+            
+            // Fechar o popup
+            document.getElementById('report-success-popup').style.display = 'none';
+        });
+    }
+}
+// Função para imprimir o relatório diretamente
+function imprimirRelatorio() {
+    // Obter o container de faltas
+    const faltasContainer = document.querySelector('.faltas-container');
+    
+    // Adicionar classe temporária para melhorar a visualização da impressão
+    faltasContainer.classList.add('capture-mode');
+    
+    // Obter os valores do formulário
+    const periodo = document.getElementById('report-periodo').value;
+    const tipo = document.getElementById('report-tipo').value;
+    
+    // Criar elemento para mostrar que é um relatório especial
+    const reportHeader = document.createElement('div');
+    reportHeader.className = 'report-header';
+    reportHeader.innerHTML = `
+        <div class="report-title">
+            <h2>Relatório ${tipo === 'detalhado' ? 'Detalhado' : tipo === 'completo' ? 'Completo' : 'Resumido'} de Faltas</h2>
+            <p>Período: ${periodo} | Data de emissão: ${new Date().toLocaleDateString('pt-BR')}</p>
+            <p>Aluno: ${document.getElementById('user-name-header').textContent}</p>
+        </div>
+    `;
+    
+    // Inserir no início do container
+    faltasContainer.insertBefore(reportHeader, faltasContainer.firstChild);
+    
+    // Fechar o popup atual
+    document.getElementById('report-popup').style.display = 'none';
+    
+    // Agendar a impressão para permitir renderização completa
+    setTimeout(() => {
+        window.print();
+        
+        // Remover elementos temporários após a impressão
+        setTimeout(() => {
+            faltasContainer.removeChild(reportHeader);
+            faltasContainer.classList.remove('capture-mode');
+        }, 1000);
+    }, 500);
+}
