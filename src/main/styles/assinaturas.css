@@ -296,6 +296,8 @@ button:active {
   background-color: #3056FF;
   color: white;
   border: none;
+  width: 350px;
+  align-items: center;
 }
 
 .primary-btn:hover {
