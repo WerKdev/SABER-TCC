@@ -6,6 +6,9 @@
     <title>Desempenho - Aluno</title>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Bibliotecas para geração de PDF -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <link rel="stylesheet" href="../styles/desempenho.css">
     <link rel="stylesheet" href="../../common/styles/menu.css">
     <link rel="stylesheet" href="../../common/styles/changepass.css">
@@ -72,7 +75,7 @@
                             </ul>
                         </div>
                         <div class="popup-footer">
-                            <a href="#todas-notificacoes">Ver todas as notificações</a>
+                        
                         </div>
                     </div>
                 </li>
@@ -502,7 +505,155 @@
             </div>
         </div>
     </div>
+<!-- Popup de Justificativa de Falta -->
+<div id="justify-popup" class="popup-overlay" style="display: none;">
+    <div class="popup">
+        <div class="popup-header">
+            <h2>Justificar Falta</h2>
+            <span class="material-symbols-outlined close-popup">close</span>
+        </div>
+        <div class="popup-content">
+            <p class="popup-description">Informe os detalhes da justificativa</p>
+            <form id="justify-form">
+                <div class="form-group">
+                    <label for="falta-data">Data da falta <span class="required">*</span></label>
+                    <input type="date" id="falta-data" name="falta-data" required>
+                </div>
+                <div class="form-group">
+                    <label for="falta-disciplina">Disciplina <span class="required">*</span></label>
+                    <select id="falta-disciplina" name="falta-disciplina" required>
+                        <option value="">Selecione a disciplina</option>
+                        <option value="Matemática">Matemática</option>
+                        <option value="Ciências da Natureza">Ciências da Natureza</option>
+                        <option value="Ciências Humanas">Ciências Humanas</option>
+                        <option value="Linguagens">Linguagens</option>
+                        <option value="Banco de dados">Banco de dados</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="falta-motivo">Motivo da justificativa <span class="required">*</span></label>
+                    <textarea id="falta-motivo" name="falta-motivo" rows="4" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label for="falta-arquivo">Anexar documento comprobatório</label>
+                    <input type="file" id="falta-arquivo" name="falta-arquivo">
+                    <p class="file-help">Formatos aceitos: PDF, JPG, PNG (máx. 5MB)</p>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-cancel">Cancelar</button>
+                    <button type="submit" class="btn-confirm">Enviar justificativa</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
 
+<!-- Popup de Confirmação de Justificativa -->
+<div id="justify-success-popup" class="popup-overlay" style="display: none;">
+    <div class="popup">
+        <div class="popup-header">
+            <h2>Justificativa Enviada</h2>
+            <span class="material-symbols-outlined close-popup">close</span>
+        </div>
+        <div class="popup-content">
+            <div class="success-icon">
+                <span class="material-symbols-outlined">check_circle</span>
+            </div>
+            <p class="popup-description">Sua justificativa foi enviada com sucesso e está em análise.</p>
+            <p class="popup-info">Você receberá uma notificação assim que for avaliada.</p>
+            <div class="form-actions">
+                <button type="button" class="btn-confirm">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Popup de Geração de Relatório -->
+<div id="report-popup" class="popup-overlay" style="display: none;">
+    <div class="popup">
+        <div class="popup-header">
+            <h2>Gerar Relatório de Faltas</h2>
+            <span class="material-symbols-outlined close-popup">close</span>
+        </div>
+        <div class="popup-content">
+            <p class="popup-description">Selecione as opções para o seu relatório</p>
+            <form id="report-form">
+                <div class="form-group">
+                    <label for="report-periodo">Período <span class="required">*</span></label>
+                    <select id="report-periodo" name="report-periodo" required>
+                        <option value="Ano Todo">Ano Todo</option>
+                        <option value="Trimestre 1">1° Trimestre</option>
+                        <option value="Trimestre 2">2° Trimestre</option>
+                        <option value="Trimestre 3">3° Trimestre</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="report-tipo">Tipo de relatório <span class="required">*</span></label>
+                    <select id="report-tipo" name="report-tipo" required>
+                        <option value="resumido">Resumido</option>
+                        <option value="detalhado">Detalhado</option>
+                        <option value="completo">Completo com gráficos</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Incluir no relatório:</label>
+                    <div class="checkbox-group">
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="include-justificativas" name="include-justificativas" checked>
+                            <label for="include-justificativas">Justificativas</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="include-graficos" name="include-graficos" checked>
+                            <label for="include-graficos">Gráficos estatísticos</label>
+                        </div>
+                        <div class="checkbox-item">
+                            <input type="checkbox" id="include-comparativo" name="include-comparativo">
+                            <label for="include-comparativo">Comparativo com média da turma</label>
+                        </div>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="report-formato">Formato do relatório <span class="required">*</span></label>
+                    <select id="report-formato" name="report-formato" required>
+                        <option value="pdf">PDF</option>
+                        <option value="png">Imagem (PNG)</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-cancel">Cancelar</button>
+                    <button type="submit" class="btn-confirm">Gerar relatório</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Popup de Relatório Gerado -->
+<div id="report-success-popup" class="popup-overlay" style="display: none;">
+    <div class="popup">
+        <div class="popup-header">
+            <h2>Relatório Gerado</h2>
+            <span class="material-symbols-outlined close-popup">close</span>
+        </div>
+        <div class="popup-content">
+            <div class="success-icon">
+                <span class="material-symbols-outlined">description</span>
+            </div>
+            <p class="popup-description">Seu relatório foi gerado com sucesso!</p>
+            <div class="form-actions double-button">
+                <button type="button" class="btn-download">Baixar relatório</button>
+                <button type="button" class="btn-email">Enviar por email</button>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- No form id="report-form", antes de </form> -->
+<div class="form-actions extra-actions">
+    <button type="button" class="btn-print" onclick="imprimirRelatorio()">
+        <span class="material-symbols-outlined">print</span>
+        Imprimir diretamente
+    </button>
+</div>
     <!-- SCRIPTS -->
     <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/3.9.1/chart.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>

@@ -1,19 +1,18 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documentos - Aluno</title>
+    <title>SABER - Assistente IA</title>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../../common/styles/menu.css">
-    <link rel="stylesheet" href="../../common/styles/changepass.css">
-    <link rel="stylesheet" href="../../common/styles/exitpopup.css">
-    <link rel="stylesheet" href="../../aluno/styles/documentos.css">
-    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles/changepass.css">
+    <link rel="stylesheet" href="styles/exitpopup.css">
+    <link rel="stylesheet" href="styles/menu.css">
 </head>
 <body>
-<!-- HEADER -->
+       <!-- HEADER -->
     <header class="header">
         <div class="menu-icon-mobile">
             <span id="menu-icon-mobile" class="material-symbols-outlined">menu</span>
@@ -73,7 +72,7 @@
                             </ul>
                         </div>
                         <div class="popup-footer">
-                       
+                            <a href="#todas-notificacoes">Ver todas as notificações</a>
                         </div>
                     </div>
                 </li>
@@ -101,7 +100,7 @@
                                     <li>
                                         <a href="#perfil">
                                             <span class="material-symbols-outlined">manage_accounts</span>
-                                            <span>Meu Perfil</span>
+                                           <a href="perfil.html">Meu Perfil</a>
                                         </a>
                                     </li>
                                     <li>
@@ -177,12 +176,13 @@
             </ul>
         </div>
     </header>
-     <!-- SIDEBAR PORTAL DO ALUNO -->
+
+    <!-- SIDEBAR -->
     <div id="sidebar">
         <div class="topmenu">
             <span id="menu-icon" class="material-symbols-outlined">menu</span>
             <h3 id="menu-tittle">Menu</h3>
-            <img id="logomenu" src="../../../assets/images/logo-saber.png" alt="Logo menu">
+            <div id="logomenu"></div>
         </div>
         <nav id="menu-hidden">
             <div class="navbar">
@@ -218,6 +218,12 @@
                         </a>
                     </li>
                     <li>
+                        <a href="index.html">
+                            <span class="material-symbols-outlined">chat</span>
+                            <p>Chat SABER</p>
+                        </a>
+                    </li>
+                    <li>
                         <a href="documentos.html">
                             <span class="material-symbols-outlined">folder</span>
                             <p>Documentos</p>
@@ -231,7 +237,7 @@
                     </li>
                     <li>
                         <a href="mensagens.html">
-                            <span class="material-symbols-outlined">chat</span>
+                            <span class="material-symbols-outlined">campaign</span>
                             <p>Comunicados</p>
                         </a>
                     </li>
@@ -252,7 +258,7 @@
         </nav>
     </div>
 
-    <div id="password-popup" class="popup-overlay" style="display: none;">
+        <div id="password-popup" class="popup-overlay" style="display: none;">
         <div class="popup">
             <div class="popup-header">
                 <h2>Alterar senha</h2>
@@ -301,7 +307,7 @@
                 <h2>Redefinição de senha!</h2>
                 <span class="material-symbols-outlined close-popup">close</span>
             </div>
-            <div class="popup-feedback-content">
+            <div class="popup-content">
                 <p class="popup-description">Informe um email e enviaremos um link para recuperação da sua senha.</p>
                 <form id="reset-password-form">
                     <div class="form-group">
@@ -336,146 +342,73 @@
             </div>
         </div>
     </div>
- <!-- Main Content -->
+
+    <!-- Conteúdo principal do SABER -->
     <main class="main">
-        <div class="page-header">
-            <div class="page-title">
-                <h1>Documentos do Aluno</h1>
-            </div>
-
-           <div class="container">
-        <!-- Seção 1: Informações do Aluno -->
-        <div class="info-section">
-            <div class="section-header">Informações do Aluno</div>
-            <div class="section-content">
-                <div class="info-row">
-                    <div class="info-col">
-                        <div class="info-label">Nome Completo</div>
-                        <div class="info-value">Guilherme Moura</div>
-                    </div>
-                    <div class="info-col">
-                        <div class="info-label">Série/Turma</div>
-                        <div class="info-value">3º O</div>
+        <div class="welcome-screen" id="welcomeScreen">
+            <div class="welcome-container">
+                <div class="welcome-logo">
+                    <div class="logo-circle">
+                        <div class="logo-img"><img src="logo.png" alt="Logo"></div>
                     </div>
                 </div>
-                <div class="info-row">
-                    <div class="info-col">
-                        <div class="info-label">Matrícula</div>
-                        <div class="info-value">0002931822</div>
-                    </div>
-                    <div class="info-col">
-                        <div class="info-label">Curso</div>
-                        <div class="info-value">Ensino Médio</div>
-                    </div>
+                <h1 class="welcome-title">Bem-vindo ao SABER</h1>
+                
+                <div class="welcome-input-container">
+                    <form id="welcome-form">
+                        <input type="text" id="welcome-input" placeholder="Como posso ajudar você hoje?" autofocus>
+                        <button type="submit" id="welcome-submit">
+                            <i class="fas fa-arrow-up"></i>
+                        </button>
+                    </form>
                 </div>
-                <div class="info-row">
-                    <div class="info-col">
-                        <div class="info-label">Email Institucional</div>
-                        <div class="info-value">Guilherme.nobre@saber.br</div>
-                    </div>
-                    <div class="info-col">
-                        <div class="info-label">Turno</div>
-                        <div class="info-value">Matutino</div>
-                    </div>
+                
+                <div class="powered-by">
+                    <span>SABER • Desenvolvido por Ramon Pires</span>
                 </div>
             </div>
         </div>
-        
-        <!-- Seção 2: Situação Acadêmica -->
-        <div class="info-section">
-            <div class="section-header">
-                Situação Acadêmica
-                <button class="btn-download" id="btnBaixarComprovante">↓ Baixar Comprovante</button>
-            </div>
-            <div class="section-content">
-                <div class="info-row">
-                    <div class="info-col">
-                        <div class="info-label">Ano Letivo</div>
-                        <div class="info-value">2025</div>
-                    </div>
-                    <div class="info-col">
-                        <div class="info-label">Data de Matrícula</div>
-                        <div class="info-value">15/01/2025</div>
+
+        <div class="app-container" id="appContainer">
+            <div class="chat-container">
+                <div class="chat-header">
+                    <div class="header-logo">
+                        <h1 class="header-title">SABER</h1>
                     </div>
                 </div>
-                <div class="info-row">
-                    <div class="info-col">
-                        <div class="info-label">Situação</div>
-                        <div class="info-value" style="color: #3498db;">Ativa</div>
+                
+                <div class="chat-messages" id="chat-messages">
+                </div>
+                
+                <div class="thinking-indicator" id="thinking">
+                    <div class="thinking-dots">
+                        <div class="dot"></div>
+                        <div class="dot"></div>
+                        <div class="dot"></div>
                     </div>
-                    <div class="info-col">
-                        <div class="info-label">Mensalidade</div>
-                        <div class="info-value">R$ 750,00 <span class="small-text">(Vencimento dia 10 de cada mês)</span></div>
-                    </div>
+                    <span>Processando...</span>
+                </div>
+                
+                <div class="chat-input-container">
+                    <form id="message-form">
+                        <div class="input-wrapper">
+                            <textarea id="message-input" placeholder="Digite sua mensagem..." rows="1"></textarea>
+                            <button type="submit" id="send-button">
+                                <i class="fas fa-paper-plane"></i>
+                            </button>
+                        </div>
+                        <div class="input-footer">
+                            <span class="disclaimer">SABER pode cometer erros. Verifique informações importantes.</span>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>
-        
-        <!-- Seção 3: Boletim Escolar -->
-        <div class="info-section">
-            <div class="section-header">
-                Boletim Escolar
-                <button class="btn-download" id="btnBaixarBoletim">↓ Baixar Boletim</button>
-            </div>
-            <div class="section-content">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Disciplina</th>
-                            <th>Média Final</th>
-                            <th>Situação</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Matemática</td>
-                            <td>8.5</td>
-                            <td class="status-approved">Aprovado</td>
-                        </tr>
-                        <tr>
-                            <td>Português</td>
-                            <td>8.5</td>
-                            <td class="status-approved">Aprovado</td>
-                        </tr>
-                        <tr>
-                            <td>História</td>
-                            <td>8.5</td>
-                            <td class="status-approved">Aprovado</td>
-                        </tr>
-                        <tr>
-                            <td>Geografia</td>
-                            <td>8.5</td>
-                            <td class="status-approved">Aprovado</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <a href="#" class="link-blue" id="btnVerBoletimCompleto">Ver boletim completo</a>
-            </div>
-        </div>
-    </div>
+    </main>
 
-
-            
-            
-         
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-       <script src="../../common/scripts/changepass.js"></script>
-       <script src="../scripts/documentos.js"></script>
-    <script src="../../common/scripts/exitpopup.js"></script>
-    <script src="../../common/scripts/menu.js"></script>   
+    <script src="script.js"></script>
+    <script src="scripts/changepass.js"></script>
+    <script src="scripts/exitpopup.js"></script>
+    <script src="scripts/menu.js"></script>
 </body>
 </html>

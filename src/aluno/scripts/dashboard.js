@@ -31,7 +31,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         beginAtZero: true,
                         max: 10,
                         grid: {
-                            color: 'rgba(226, 232, 240, 0.5)'
+                            color: 'rgba(226, 232, 240, 0.8)'
                         }
                     },
                     x: {
@@ -120,7 +120,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         min: 5,
                         max: 10,
                         grid: {
-                            color: 'rgba(226, 232, 240, 0.5)'
+                            color: 'rgba(226, 232, 240, 0.86)'
                         }
                     },
                     x: {
@@ -206,7 +206,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         stacked: true,
                         beginAtZero: true,
                         grid: {
-                            color: 'rgba(226, 232, 240, 0.5)'
+                            color: 'rgba(226, 232, 240, 0.83)'
                         }
                     }
                 },
@@ -231,7 +231,7 @@ document.addEventListener("DOMContentLoaded", function() {
                     <span>Presenças Tardias</span>
                 </div>
                 <div class="legend-item">
-                    <div class="legend-color" style="background-color: rgba(191, 219, 254, 0.8)"></div>
+                    <div class="legend-color" style="background-color: rgba(191, 219, 254, 0.9)"></div>
                     <span>Faltas</span>
                 </div>
             `;
@@ -252,7 +252,7 @@ document.addEventListener("DOMContentLoaded", function() {
                         'rgba(30, 64, 175, 0.8)',
                         'rgba(59, 130, 246, 0.8)',
                         'rgba(96, 165, 250, 0.8)',
-                        'rgba(219, 234, 254, 0.8)'
+                        'rgba(219, 234, 254, 0.93)'
                     ],
                     borderWidth: 0,
                     borderRadius: 3
@@ -339,7 +339,7 @@ document.addEventListener("DOMContentLoaded", function() {
                             text: 'Horas'
                         },
                         grid: {
-                            color: 'rgba(226, 232, 240, 0.5)'
+                            color: 'rgba(226, 232, 240, 0.9)'
                         }
                     }
                 },
@@ -380,3 +380,88 @@ document.addEventListener("DOMContentLoaded", function() {
     window.addEventListener('resize', checkWindowSize);
     checkWindowSize();
 });
+const themeToggle = document.getElementById('theme-toggle');
+    
+// Função para aplicar o tema
+function applyTheme(isDark) {
+    if (isDark) {
+        document.body.classList.add('dark-mode');
+        if (themeToggle) themeToggle.checked = true;
+    } else {
+        document.body.classList.remove('dark-mode');
+        if (themeToggle) themeToggle.checked = false;
+    }
+}
+
+// Carregar tema salvo
+function loadSavedTheme() {
+    const savedTheme = localStorage.getItem('darkMode');
+    if (savedTheme) {
+        applyTheme(savedTheme === 'true');
+    } else {
+        // Verificar se o usuário prefere tema escuro por padrão
+        const prefersDarkScheme = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        applyTheme(prefersDarkScheme);
+        localStorage.setItem('darkMode', prefersDarkScheme);
+    }
+}
+
+// Salvar tema
+function saveTheme(isDark) {
+    localStorage.setItem('darkMode', isDark);
+    applyTheme(isDark);
+}
+
+// Event listener para o toggle
+if (themeToggle) {
+    themeToggle.addEventListener('change', function() {
+        saveTheme(this.checked);
+        
+        // Atualizar gráficos para melhor visibilidade no modo escuro
+        updateChartsForDarkMode(this.checked);
+    });
+}
+
+// Atualizar opções de gráficos para o modo escuro
+function updateChartsForDarkMode(isDark) {
+    // Obter todos os gráficos
+    const charts = Chart.instances;
+    if (!charts || charts.length === 0) return;
+    
+    charts.forEach(chart => {
+        // Definir cores de texto para eixos e legendas
+        const textColor = isDark ? '#e0e0e0' : '#64748b';
+        const gridColor = isDark ? 'hsla(0, 0.00%, 98.00%, 0.96)' : 'rgba(225, 228, 231, 0.9)';
+        
+        if (chart.options.scales && chart.options.scales.y) {
+            chart.options.scales.y.ticks = {
+                ...chart.options.scales.y.ticks,
+                color: textColor
+            };
+            
+            chart.options.scales.y.grid = {
+                ...chart.options.scales.y.grid,
+                color: gridColor
+            };
+        }
+        
+        if (chart.options.scales && chart.options.scales.x) {
+            chart.options.scales.x.ticks = {
+                ...chart.options.scales.x.ticks,
+                color: textColor
+            };
+        }
+        
+        if (chart.options.plugins && chart.options.plugins.legend) {
+            chart.options.plugins.legend.labels = {
+                ...chart.options.plugins.legend.labels,
+                color: textColor
+            };
+        }
+        
+        chart.update();
+    });
+}
+
+// Carregar tema ao iniciar
+loadSavedTheme();
