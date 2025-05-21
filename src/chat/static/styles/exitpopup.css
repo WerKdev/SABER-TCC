@@ -1,0 +1,112 @@
+/* Estilos para o popup de confirmação de saída */
+.logout-popup {
+    max-width: 360px;
+    border-radius: 16px;
+    background-color: white;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    overflow: hidden;
+}
+
+body.dark-theme .logout-popup {
+    background-color: #16181c;
+    border: 1px solid #333;
+    color: #e1e1e1;
+}
+
+.logout-content {
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+}
+
+.logout-icon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 56px;
+    height: 56px;
+    margin-bottom: 16px;
+}
+
+.logout-icon .material-symbols-outlined {
+    font-size: 32px;
+    color: var(--azul-escuro);
+}
+
+body.dark-theme .logout-icon .material-symbols-outlined {
+    color: #e1e1e1;
+}
+
+.logout-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0 0 12px 0;
+    color: var(--texto-claro);
+}
+
+body.dark-theme .logout-title {
+    color: #e1e1e1;
+}
+
+.logout-description {
+    font-size: 15px;
+    line-height: 1.5;
+    margin: 0 0 24px 0;
+    color: var(--texto-secundario);
+}
+
+body.dark-theme .logout-description {
+    color: #a0a0a0;
+}
+
+.logout-actions {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    gap: 12px;
+}
+
+.btn-logout {
+    background-color: var(--azul-escuro);
+    color: white;
+    border: none;
+    border-radius: 9999px;
+    padding: 12px 0;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    width: 100%;
+}
+
+.btn-logout:hover {
+    background-color: #1a2642;
+}
+
+.btn-cancel-logout {
+    background-color: transparent;
+    color: var(--texto-claro);
+    border: 1px solid #ddd;
+    border-radius: 9999px;
+    padding: 12px 0;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.2s;
+    width: 100%;
+}
+
+.btn-cancel-logout:hover {
+    background-color: rgba(0, 0, 0, 0.05);
+}
+
+body.dark-theme .btn-cancel-logout {
+    color: #e1e1e1;
+    border-color: #333;
+}
+
+body.dark-theme .btn-cancel-logout:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
