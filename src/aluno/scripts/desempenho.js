@@ -644,24 +644,266 @@ function mostrarDetalhesDisciplina(disciplina) {
 
 // Função para salvar a tabela de faltas como imagem
 function salvarTabelaFaltas() {
+    // Adicionar classe temporária para melhorar a visualização da captura
+    const faltasContainer = document.querySelector('.faltas-container');
+    faltasContainer.classList.add('capture-mode');
+    
+    // Obter informações dos filtros selecionados para o nome do arquivo
+    const ano = document.getElementById('ano').value;
+    const trimestre = document.getElementById('trimestre').value;
+    const disciplina = document.getElementById('disciplina').value;
+    
+    // Mapeamento de valores do select para nomes mais amigáveis
+    const disciplinaMap = {
+        'todas': 'Todas',
+        'matematica': 'Matematica',
+        'ciencias': 'Ciencias',
+        'humanas': 'Humanas',
+        'linguagens': 'Linguagens',
+        'banco': 'BancoDeDados'
+    };
+    
+    // Formatar nome do arquivo
+    const fileName = `faltas_${ano}_${trimestre.replace(/\s+/g, '')}_${disciplinaMap[disciplina] || disciplina}`;
+    
+    // Criar um elemento que contém os filtros selecionados para incluir na captura
+    const filterInfo = document.createElement('div');
+    filterInfo.className = 'filter-info-capture';
+    filterInfo.innerHTML = `
+        <div class="filter-info-header">
+            <h3>Informações do Relatório</h3>
+            <p>Ano: ${ano} | Trimestre: ${trimestre} | Disciplina: ${disciplinaMap[disciplina] || disciplina}</p>
+            <p>Exportado em: ${new Date().toLocaleString()}</p>
+        </div>
+    `;
+    
+    // Inserir informações dos filtros antes da tabela
+    faltasContainer.insertBefore(filterInfo, faltasContainer.firstChild);
+    
+    // Configurações para html2canvas para melhorar a qualidade da imagem
+    const html2canvasOptions = {
+        backgroundColor: "#ffffff", // Fundo branco garantido
+        scale: 2, // Melhor resolução (2x)
+        useCORS: true, // Permitir carregamento de recursos externos
+        logging: false, // Desativar logs para melhor performance
+        // Capturar a área da tabela e seu contexto
+        ignoreElements: (element) => {
+            // Ignorar elementos que não fazem parte da visualização
+            return element.classList && 
+                (element.classList.contains('btn-justify') || 
+                element.classList.contains('btn-report'));
+        }
+    };
+
     // Utilizando html2canvas para converter a tabela em uma imagem
-    html2canvas(document.querySelector('.faltas-container')).then(canvas => {
-        const image = canvas.toDataURL('image/png');
+    html2canvas(faltasContainer, html2canvasOptions).then(canvas => {
+        // Converter para imagem PNG com boa qualidade
+        const image = canvas.toDataURL('image/png', 1.0);
+        
+        // Criar link para download
         const link = document.createElement('a');
         link.href = image;
-        link.download = 'faltas.png';
+        link.download = `${fileName}.png`;
         link.click();
+        
+        // Remover elementos temporários após o download
+        faltasContainer.removeChild(filterInfo);
+        faltasContainer.classList.remove('capture-mode');
+    }).catch(error => {
+        console.error("Erro ao gerar imagem:", error);
+        alert("Ocorreu um erro ao gerar a imagem. Por favor, tente novamente.");
+        
+        // Garantir limpeza mesmo em caso de erro
+        if (faltasContainer.contains(filterInfo)) {
+            faltasContainer.removeChild(filterInfo);
+        }
+        faltasContainer.classList.remove('capture-mode');
+    });
+}
+// Função para salvar o gráfico de notas como imagem - Corrigida
+function saveAsImage() {
+    // Obter o container do gráfico
+    const container = document.querySelector('.container');
+    
+    // Adicionar classe temporária para melhorar a visualização da captura
+    container.classList.add('capture-mode');
+    
+    // Obter informações dos filtros selecionados para o nome do arquivo
+    const etapa = document.getElementById('etapa').value;
+    const comparar = document.getElementById('comparar').value;
+    
+    // Formatar nome do arquivo
+    const fileName = `desempenho_${etapa.replace(/[°\s+]/g, '')}_${comparar !== 'Nenhum' ? 'Comparando_' + comparar.replace(/[°\s+]/g, '') : 'Sem_Comparacao'}`;
+    
+    // Criar um elemento que contém os filtros selecionados para incluir na captura
+    const filterInfo = document.createElement('div');
+    filterInfo.className = 'filter-info-capture';
+    filterInfo.innerHTML = `
+        <div class="filter-info-header">
+            <h3>Informações do Relatório de Notas</h3>
+            <p>Etapa: ${etapa} ${comparar !== 'Nenhum' ? '| Comparando com: ' + comparar : ''}</p>
+            <p>Exportado em: ${new Date().toLocaleString()}</p>
+        </div>
+    `;
+    
+    // Inserir informações dos filtros antes do gráfico
+    container.insertBefore(filterInfo, container.firstChild);
+    
+    // Guardar altura original
+    const originalHeight = container.style.height;
+    
+    // Temporariamente ajustar o container para garantir que todo conteúdo seja visível
+    container.style.height = 'auto';
+    container.style.overflow = 'visible';
+    
+    // Configurações para html2canvas para melhorar a qualidade da imagem
+    const html2canvasOptions = {
+        backgroundColor: "#ffffff", // Fundo branco garantido
+        scale: 2, // Melhor resolução (2x)
+        useCORS: true, // Permitir carregamento de recursos externos
+        logging: false, // Desativar logs para melhor performance
+        scrollY: -window.scrollY, // Corrige problemas com posicionamento de scroll
+        windowHeight: document.documentElement.offsetHeight, // Altura total do documento
+        // Capturar o contêiner inteiro, incluindo partes que podem estar fora da visualização
+        height: container.scrollHeight, // Captura altura total incluindo overflow
+        // Ignorar elementos que não fazem parte da visualização
+        ignoreElements: (element) => {
+            return element.classList && 
+                (element.classList.contains('save-button'));
+        }
+    };
+
+    // Utilizando html2canvas para converter o container em uma imagem
+    html2canvas(container, html2canvasOptions).then(canvas => {
+        // Converter para imagem PNG com boa qualidade
+        const image = canvas.toDataURL('image/png', 1.0);
+        
+        // Criar link para download
+        const link = document.createElement('a');
+        link.href = image;
+        link.download = `${fileName}.png`;
+        link.click();
+        
+        // Remover elementos temporários após o download
+        container.removeChild(filterInfo);
+        container.classList.remove('capture-mode');
+        
+        // Restaurar altura original
+        container.style.height = originalHeight;
+        container.style.overflow = '';
+        
+    }).catch(error => {
+        console.error("Erro ao gerar imagem:", error);
+        alert("Ocorreu um erro ao gerar a imagem. Por favor, tente novamente.");
+        
+        // Garantir limpeza mesmo em caso de erro
+        if (container.contains(filterInfo)) {
+            container.removeChild(filterInfo);
+        }
+        container.classList.remove('capture-mode');
+        container.style.height = originalHeight;
+        container.style.overflow = '';
     });
 }
 
-// Função para salvar o gráfico como imagem
-function saveAsImage() {
-    const canvas = document.getElementById('performanceChart');
-    const image = canvas.toDataURL('image/png');
-    const link = document.createElement('a');
-    link.href = image;
-    link.download = 'desempenho.png';
-    link.click();
+// Função para salvar a tabela de faltas como imagem - Corrigida
+function salvarTabelaFaltas() {
+    // Obter o container de faltas
+    const faltasContainer = document.querySelector('.faltas-container');
+    
+    // Adicionar classe temporária para melhorar a visualização da captura
+    faltasContainer.classList.add('capture-mode');
+    
+    // Obter informações dos filtros selecionados para o nome do arquivo
+    const ano = document.getElementById('ano').value;
+    const trimestre = document.getElementById('trimestre').value;
+    const disciplina = document.getElementById('disciplina').value;
+    
+    // Mapeamento de valores do select para nomes mais amigáveis
+    const disciplinaMap = {
+        'todas': 'Todas',
+        'matematica': 'Matematica',
+        'ciencias': 'Ciencias',
+        'humanas': 'Humanas',
+        'linguagens': 'Linguagens',
+        'banco': 'BancoDeDados'
+    };
+    
+    // Formatar nome do arquivo
+    const fileName = `faltas_${ano}_${trimestre.replace(/\s+/g, '')}_${disciplinaMap[disciplina] || disciplina}`;
+    
+    // Criar um elemento que contém os filtros selecionados para incluir na captura
+    const filterInfo = document.createElement('div');
+    filterInfo.className = 'filter-info-capture';
+    filterInfo.innerHTML = `
+        <div class="filter-info-header">
+            <h3>Informações do Relatório</h3>
+            <p>Ano: ${ano} | Trimestre: ${trimestre} | Disciplina: ${disciplinaMap[disciplina] || disciplina}</p>
+            <p>Exportado em: ${new Date().toLocaleString()}</p>
+        </div>
+    `;
+    
+    // Inserir informações dos filtros antes da tabela
+    faltasContainer.insertBefore(filterInfo, faltasContainer.firstChild);
+    
+    // Guardar altura original
+    const originalHeight = faltasContainer.style.height;
+    const originalOverflow = faltasContainer.style.overflow;
+    
+    // Temporariamente ajustar o container para garantir que todo conteúdo seja visível
+    faltasContainer.style.height = 'auto';
+    faltasContainer.style.overflow = 'visible';
+    
+    // Configurações para html2canvas para melhorar a qualidade da imagem
+    const html2canvasOptions = {
+        backgroundColor: "#ffffff", // Fundo branco garantido
+        scale: 2, // Melhor resolução (2x)
+        useCORS: true, // Permitir carregamento de recursos externos
+        logging: false, // Desativar logs para melhor performance
+        scrollY: -window.scrollY, // Corrige problemas com posicionamento de scroll
+        windowHeight: document.documentElement.offsetHeight, // Altura total do documento
+        // Capturar o contêiner inteiro, incluindo partes que podem estar fora da visualização
+        height: faltasContainer.scrollHeight, // Captura altura total incluindo overflow
+        // Ignorar elementos que não fazem parte da visualização
+        ignoreElements: (element) => {
+            return element.classList && 
+                (element.classList.contains('btn-justify') || 
+                element.classList.contains('btn-report') ||
+                element.classList.contains('save-faltas-button'));
+        }
+    };
+
+    // Utilizando html2canvas para converter a tabela em uma imagem
+    html2canvas(faltasContainer, html2canvasOptions).then(canvas => {
+        // Converter para imagem PNG com boa qualidade
+        const image = canvas.toDataURL('image/png', 1.0);
+        
+        // Criar link para download
+        const link = document.createElement('a');
+        link.href = image;
+        link.download = `${fileName}.png`;
+        link.click();
+        
+        // Remover elementos temporários após o download
+        faltasContainer.removeChild(filterInfo);
+        faltasContainer.classList.remove('capture-mode');
+        
+        // Restaurar altura e overflow originais
+        faltasContainer.style.height = originalHeight;
+        faltasContainer.style.overflow = originalOverflow;
+        
+    }).catch(error => {
+        console.error("Erro ao gerar imagem:", error);
+        alert("Ocorreu um erro ao gerar a imagem. Por favor, tente novamente.");
+        
+        // Garantir limpeza mesmo em caso de erro
+        if (faltasContainer.contains(filterInfo)) {
+            faltasContainer.removeChild(filterInfo);
+        }
+        faltasContainer.classList.remove('capture-mode');
+        faltasContainer.style.height = originalHeight;
+        faltasContainer.style.overflow = originalOverflow;
+    });
 }
 
 // Função para inicializar tooltips personalizados
