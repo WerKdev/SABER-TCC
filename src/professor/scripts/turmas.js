@@ -28,13 +28,45 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Função para navegar para o dashboard da turma
-    const verDashboard = function(sala) {
-        // Por enquanto, apenas alertamos que o link seria acessado
-        console.log(`Navegando para o dashboard da sala ${sala}`);
-        // Aqui você adicionaria o redirecionamento real no futuro
-        alert(`Redirecionando para o Dashboard da Sala ${sala}`);
-        // window.location.href = `dashboard-turma.html?sala=${sala}`;
+    const verDashboard = function(card) {
+        const sala = card.getAttribute('data-sala');
+        const ano = card.getAttribute('data-ano');
+        const turma = card.getAttribute('data-turma');
+        
+        // Criar parâmetros para passar para a página do dashboard
+        const params = new URLSearchParams( {
+            sala: sala,
+            ano: ano,
+            turma: turma
+        });
+        
+        console.log(`Navegando para o dashboard da sala ${sala} - ${ano}º ${turma}`);
+        
+        // Redirecionar para o dashboard da turma com os parâmetros
+        window.location.href = `dashboard-turma.html?${params.toString()}`;
     };
+
+    // Adicionar evento de clique aos botões de ver dashboard
+    document.querySelectorAll('.btn-primary').forEach((btn, index) => {
+        btn.addEventListener('click', function(e) {
+            e.stopPropagation(); // Evitar propagação para o card
+            const card = turmaCards[index];
+            verDashboard(card);
+        });
+    });
+
+    // Adicionar evento de clique aos cards para navegar para o dashboard
+    turmaCards.forEach(card => {
+        card.addEventListener('click', function(e) {
+            // Garantir que o clique não foi em um botão ou no dropdown
+            if (!e.target.closest('button') && !e.target.closest('.dropdown') && !e.target.closest('.dropdown-menu')) {
+                verDashboard(card);
+            }
+        });
+        
+        // Adicionar cursor pointer para indicar que é clicável
+        card.style.cursor = 'pointer';
+    });
     
     // Adicionar evento de clique aos botões de ver dashboard
     document.querySelectorAll('.btn-primary').forEach((btn, index) => {
@@ -269,4 +301,6 @@ document.addEventListener('DOMContentLoaded', function() {
             this.textContent = type === 'password' ? 'visibility_off' : 'visibility';
         });
     });
+
+    
 });

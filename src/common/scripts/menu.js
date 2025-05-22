@@ -18,6 +18,23 @@ document.addEventListener("DOMContentLoaded", function() {
         if (themeToggle) themeToggle.checked = true;
     }
     
+    // NOVA FUNCIONALIDADE: Restaurar estado do menu ao carregar a página (sem animação)
+    const savedMenuState = localStorage.getItem("menuState");
+    if (savedMenuState === "active" && sidebar) {
+        // Adicionar classe para desabilitar transições
+        sidebar.classList.add("no-transition");
+        
+        // Aplicar o estado ativo
+        sidebar.classList.add("active");
+        
+        // Remover a classe após o DOM estar pronto e reabilitar transições
+        requestAnimationFrame(() => {
+            setTimeout(() => {
+                sidebar.classList.remove("no-transition");
+            }, 20);
+        });
+    }
+    
     // Event listener para o toggle de tema
     if (themeToggle) {
         themeToggle.addEventListener("change", function() {
@@ -44,13 +61,22 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
     
+    // NOVA FUNCIONALIDADE: Função para salvar o estado do menu
+    function saveMenuState() {
+        if (sidebar) {
+            const isActive = sidebar.classList.contains("active");
+            localStorage.setItem("menuState", isActive ? "active" : "inactive");
+        }
+    }
+    
     // Verificar estado inicial do menu
     checkMenuState();
     
-    // Toggle para sidebar (desktop e mobile)
+    // MODIFICADO: Toggle para sidebar (desktop e mobile) com persistência
     if (menuIconSidebar && sidebar) {
         menuIconSidebar.addEventListener("click", function() {
             sidebar.classList.toggle("active");
+            saveMenuState(); // Salvar o novo estado
             setTimeout(checkMenuState, 50);
         });
     }
@@ -58,6 +84,7 @@ document.addEventListener("DOMContentLoaded", function() {
     if (menuIconMobile && sidebar) {
         menuIconMobile.addEventListener("click", function() {
             sidebar.classList.toggle("active");
+            saveMenuState(); // Salvar o novo estado
             setTimeout(checkMenuState, 50);
         });
     }
@@ -121,10 +148,16 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     });
     
-    // Verificar tamanho da janela para ajustes responsivos
+    // MODIFICADO: Verificar tamanho da janela para ajustes responsivos
     function checkWindowSize() {
         if (window.innerWidth <= 768) {
             checkMenuState();
+            // Em dispositivos móveis, não manter o estado ativo para economizar espaço
+            if (sidebar && sidebar.classList.contains("active")) {
+                // Opcional: você pode comentar essas linhas se quiser manter o estado mesmo no mobile
+                // sidebar.classList.remove("active");
+                // saveMenuState();
+            }
         }
     }
     
@@ -187,6 +220,10 @@ document.addEventListener("DOMContentLoaded", function() {
             if (toggleArrow) toggleArrow.classList.remove('active');
         }
     });
+    
+    // NOVA FUNCIONALIDADE: Log para debug (pode ser removido em produção)
+    console.log("Estado do menu restaurado:", savedMenuState);
+    console.log("Menu está ativo:", sidebar?.classList.contains("active"));
     
     // Verificar se o sistema i18n está disponível
     // O restante do sistema de idiomas foi movido para o arquivo i18n.js

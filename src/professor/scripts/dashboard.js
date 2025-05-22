@@ -228,6 +228,57 @@ document.addEventListener("DOMContentLoaded", function() {
         '3001': '3º EM - Turma 01'
     };
     
+    // Função para obter configurações responsivas dos gráficos
+    function getResponsiveChartOptions(type = 'line') {
+        const isMobile = window.innerWidth <= 768;
+        const isSmallMobile = window.innerWidth <= 480;
+        
+        const baseOptions = {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: {
+                    display: !isSmallMobile,
+                    position: 'top',
+                    labels: {
+                        boxWidth: isMobile ? 8 : 12,
+                        font: {
+                            size: isSmallMobile ? 10 : isMobile ? 11 : 12
+                        },
+                        padding: isMobile ? 10 : 20
+                    }
+                }
+            },
+            scales: {
+                x: {
+                    ticks: {
+                        font: {
+                            size: isSmallMobile ? 9 : isMobile ? 10 : 12
+                        },
+                        maxRotation: isMobile ? 45 : 0
+                    }
+                },
+                y: {
+                    ticks: {
+                        font: {
+                            size: isSmallMobile ? 9 : isMobile ? 10 : 12
+                        }
+                    }
+                }
+            }
+        };
+        
+        if (type === 'line') {
+            baseOptions.scales.y.beginAtZero = false;
+            baseOptions.scales.y.min = 5;
+            baseOptions.scales.y.max = 10;
+        } else if (type === 'bar') {
+            baseOptions.scales.y.beginAtZero = true;
+        }
+        
+        return baseOptions;
+    }
+    
     // Inicialização dos gráficos
     let performanceChart;
     let gradesDistributionChart;
@@ -243,24 +294,16 @@ document.addEventListener("DOMContentLoaded", function() {
                 datasets: [{
                     label: 'Média da Turma',
                     data: performanceDataByClass['all'].data,
-                    backgroundColor: 'rgba(59, 130, 246, 0.1)',
-                    borderColor: 'rgba(59, 130, 246, 1)',
+                    backgroundColor: 'rgba(0, 72, 165, 0.1)',
+                    borderColor: 'rgba(0, 72, 165, 1)',
                     borderWidth: 2,
                     tension: 0.4,
-                    fill: true
+                    fill: true,
+                    pointRadius: window.innerWidth <= 480 ? 3 : 4,
+                    pointHoverRadius: window.innerWidth <= 480 ? 5 : 6
                 }]
             },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                scales: {
-                    y: {
-                        beginAtZero: false,
-                        min: 5,
-                        max: 10
-                    }
-                }
-            }
+            options: getResponsiveChartOptions('line')
         });
     }
     
@@ -273,48 +316,17 @@ document.addEventListener("DOMContentLoaded", function() {
                     label: 'Número de Alunos',
                     data: distributionDataByClass['all'].data,
                     backgroundColor: [
-                        'rgba(239, 68, 68, 0.7)',
-                        'rgba(245, 158, 11, 0.7)',
-                        'rgba(249, 115, 22, 0.7)',
-                        'rgba(59, 130, 246, 0.7)',
-                        'rgba(16, 185, 129, 0.7)'
+                        'rgba(220, 38, 38, 0.8)',
+                        'rgba(245, 158, 11, 0.8)',
+                        'rgba(249, 115, 22, 0.8)',
+                        'rgba(59, 130, 246, 0.8)',
+                        'rgba(22, 163, 74, 0.8)'
                     ],
-                    borderWidth: 0
+                    borderWidth: 0,
+                    borderRadius: window.innerWidth <= 480 ? 2 : 4
                 }]
             },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: {
-                    legend: {
-                        display: window.innerWidth > 480,
-                        position: 'top',
-                        labels: {
-                            boxWidth: 10,
-                            font: {
-                                size: window.innerWidth < 768 ? 10 : 12
-                            }
-                        }
-                    }
-                },
-                scales: {
-                    x: {
-                        ticks: {
-                            font: {
-                                size: window.innerWidth < 768 ? 10 : 12
-                            }
-                        }
-                    },
-                    y: {
-                        beginAtZero: true,
-                        ticks: {
-                            font: {
-                                size: window.innerWidth < 768 ? 10 : 12
-                            }
-                        }
-                    }
-                }
-            }
+            options: getResponsiveChartOptions('bar')
         });
     }
     
@@ -387,6 +399,22 @@ document.addEventListener("DOMContentLoaded", function() {
         }
     }
     
+    // Função para atualizar gráficos no redimensionamento
+    function updateChartsOnResize() {
+        if (performanceChart) {
+            performanceChart.options = getResponsiveChartOptions('line');
+            performanceChart.data.datasets[0].pointRadius = window.innerWidth <= 480 ? 3 : 4;
+            performanceChart.data.datasets[0].pointHoverRadius = window.innerWidth <= 480 ? 5 : 6;
+            performanceChart.update();
+        }
+        
+        if (gradesDistributionChart) {
+            gradesDistributionChart.options = getResponsiveChartOptions('bar');
+            gradesDistributionChart.data.datasets[0].borderRadius = window.innerWidth <= 480 ? 2 : 4;
+            gradesDistributionChart.update();
+        }
+    }
+    
     // Adicionar event listeners para os selects
     const performanceClassSelect = document.getElementById('performance-class-select');
     const performanceGradeSelect = document.getElementById('performance-grade-select');
@@ -426,13 +454,15 @@ document.addEventListener("DOMContentLoaded", function() {
         updateClassSelector(distributionGradeSelect, distributionClassSelect);
     }
     
-    // Função para verificar o tamanho da janela
-    function checkWindowSize() {
-        if (window.innerWidth > 768) {
-            sidebar.classList.remove("active");
-        }
+    // Função para verificar o tamanho da janela e atualizar gráficos
+    let resizeTimeout;
+    function handleResize() {
+        clearTimeout(resizeTimeout);
+        resizeTimeout = setTimeout(() => {
+            updateChartsOnResize();
+        }, 250);
     }
     
-    window.addEventListener("resize", checkWindowSize);
-    checkWindowSize();
+    // Event listener para redimensionamento
+    window.addEventListener("resize", handleResize);
 });

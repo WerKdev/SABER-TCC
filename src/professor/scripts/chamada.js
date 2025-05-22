@@ -84,7 +84,7 @@ document.addEventListener('DOMContentLoaded', function() {
         { id: 20250015, nome: 'Rafael Lima Santos', matricula: '00000005676' }
     ];
     
-    // Elementos DOM
+    // Elementos DOM - VERIFICAÇÃO SEGURA
     const dataSelect = document.getElementById('data-select');
     const disciplinaSelect = document.getElementById('disciplina-select');
     const turmaSelect = document.getElementById('turma-select');
@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function() {
     const markAllPresentBtn = document.getElementById('mark-all-present');
     const markAllAbsentBtn = document.getElementById('mark-all-absent');
     const submitAttendanceBtn = document.getElementById('submit-attendance-btn');
-    const saveAttendanceBtn = document.getElementById('save-attendance-btn');
+    const saveAttendanceBtn = document.getElementById('save-attendance-btn'); // PODE SER NULL
     const studentsList = document.getElementById('students-list');
     const summaryContent = document.getElementById('summary-content');
     const notePopup = document.getElementById('note-popup');
@@ -125,16 +125,39 @@ document.addEventListener('DOMContentLoaded', function() {
     function initializePage() {
         // Definir data atual
         const hoje = new Date();
-        dataSelect.value = formatDateInput(hoje);
+        if (dataSelect) {
+            dataSelect.value = formatDateInput(hoje);
+        }
         
-        // Event listeners
-        dataSelect.addEventListener('change', updateDisciplinasDisponiveis);
-        disciplinaSelect.addEventListener('change', loadStudents); // Adicionar este listener
-        loadAttendanceBtn.addEventListener('click', loadStudents);
-        markAllPresentBtn.addEventListener('click', markAllPresent);
-        markAllAbsentBtn.addEventListener('click', markAllAbsent);
-        submitAttendanceBtn.addEventListener('click', submitAttendance);
-        saveAttendanceBtn.addEventListener('click', saveAttendance);
+        // Event listeners - COM VERIFICAÇÃO
+        if (dataSelect) {
+            dataSelect.addEventListener('change', updateDisciplinasDisponiveis);
+        }
+        
+        if (disciplinaSelect) {
+            disciplinaSelect.addEventListener('change', loadStudents);
+        }
+        
+        if (loadAttendanceBtn) {
+            loadAttendanceBtn.addEventListener('click', loadStudents);
+        }
+        
+        if (markAllPresentBtn) {
+            markAllPresentBtn.addEventListener('click', markAllPresent);
+        }
+        
+        if (markAllAbsentBtn) {
+            markAllAbsentBtn.addEventListener('click', markAllAbsent);
+        }
+        
+        if (submitAttendanceBtn) {
+            submitAttendanceBtn.addEventListener('click', submitAttendance);
+        }
+        
+        // VERIFICAÇÃO SEGURA PARA O BOTÃO SALVAR
+        if (saveAttendanceBtn) {
+            saveAttendanceBtn.addEventListener('click', saveAttendance);
+        }
         
         // Fechar popups
         document.querySelectorAll('.close-popup, .btn-cancel').forEach(btn => {
@@ -167,6 +190,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function updateDisciplinasDisponiveis(autoLoad = false) {
+        if (!dataSelect) return;
+        
         const selectedDate = dataSelect.value;
         if (!selectedDate) return;
         
@@ -206,6 +231,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
         
         // Atualizar select de disciplinas
+        if (!disciplinaSelect) return;
+        
         disciplinaSelect.innerHTML = '';
         
         if (disciplinasMap.size === 0) {
@@ -242,29 +269,31 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function updateTableHeaders(numAulas) {
+        if (!selectAllHeader || !class1Header) return;
+        
         // Resetar todas as colunas
         selectAllHeader.style.display = 'none';
-        selectAllSubheader.style.display = 'none';
+        if (selectAllSubheader) selectAllSubheader.style.display = 'none';
         class1Header.style.display = 'table-cell';
-        class2Header.style.display = 'none';
-        class3Header.style.display = 'none';
-        class1Subheader.style.display = 'table-cell';
-        class2Subheader.style.display = 'none';
-        class3Subheader.style.display = 'none';
+        if (class2Header) class2Header.style.display = 'none';
+        if (class3Header) class3Header.style.display = 'none';
+        if (class1Subheader) class1Subheader.style.display = 'table-cell';
+        if (class2Subheader) class2Subheader.style.display = 'none';
+        if (class3Subheader) class3Subheader.style.display = 'none';
         
         // Mostrar "selecionar todas" apenas se houver mais de 1 aula
         if (numAulas > 1) {
             selectAllHeader.style.display = 'table-cell';
-            selectAllSubheader.style.display = 'table-cell';
+            if (selectAllSubheader) selectAllSubheader.style.display = 'table-cell';
         }
         
         // Mostrar colunas baseado no número de aulas
-        if (numAulas >= 2) {
+        if (numAulas >= 2 && class2Header && class2Subheader) {
             class2Header.style.display = 'table-cell';
             class2Subheader.style.display = 'table-cell';
         }
         
-        if (numAulas >= 3) {
+        if (numAulas >= 3 && class3Header && class3Subheader) {
             class3Header.style.display = 'table-cell';
             class3Subheader.style.display = 'table-cell';
         }
@@ -296,6 +325,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function loadStudents() {
+        if (!turmaSelect || !dataSelect || !disciplinaSelect) return;
+        
         const turma = turmaSelect.value;
         const data = dataSelect.value;
         const disciplinaKey = disciplinaSelect.value;
@@ -340,17 +371,27 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function updateClassInfo() {
-        document.getElementById('info-turma').textContent = currentClassData.turma;
-        document.getElementById('info-data').textContent = formatDateDisplay(currentClassData.data);
-        document.getElementById('info-disciplina').textContent = currentClassData.disciplina;
-        document.getElementById('info-professor').textContent = currentClassData.professor;
+        const infoTurma = document.getElementById('info-turma');
+        const infoData = document.getElementById('info-data');
+        const infoDisciplina = document.getElementById('info-disciplina');
+        const infoProfessor = document.getElementById('info-professor');
+        const infoAulas = document.getElementById('info-aulas');
         
-        const primeiraAula = currentClassData.aulas[0].horario;
-        const ultimaAula = currentClassData.aulas[currentClassData.aulas.length - 1].horario;
-        document.getElementById('info-aulas').textContent = `${currentClassData.totalAulas} aula${currentClassData.totalAulas > 1 ? 's' : ''} (${primeiraAula.split(' - ')[0]} - ${ultimaAula.split(' - ')[1]})`;
+        if (infoTurma) infoTurma.textContent = currentClassData.turma;
+        if (infoData) infoData.textContent = formatDateDisplay(currentClassData.data);
+        if (infoDisciplina) infoDisciplina.textContent = currentClassData.disciplina;
+        if (infoProfessor) infoProfessor.textContent = currentClassData.professor;
+        
+        if (infoAulas) {
+            const primeiraAula = currentClassData.aulas[0].horario;
+            const ultimaAula = currentClassData.aulas[currentClassData.aulas.length - 1].horario;
+            infoAulas.textContent = `${currentClassData.totalAulas} aula${currentClassData.totalAulas > 1 ? 's' : ''} (${primeiraAula.split(' - ')[0]} - ${ultimaAula.split(' - ')[1]})`;
+        }
     }
     
     function loadStudentsList() {
+        if (!studentsList) return;
+        
         // Limpar lista anterior
         studentsList.innerHTML = '';
         
@@ -416,19 +457,19 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function showSections() {
-        attendanceInfo.style.display = 'block';
-        quickControls.style.display = 'flex';
-        attendanceContainer.style.display = 'block';
-        attendanceSummary.style.display = 'block';
-        submitSection.style.display = 'block';
+        if (attendanceInfo) attendanceInfo.style.display = 'block';
+        if (quickControls) quickControls.style.display = 'flex';
+        if (attendanceContainer) attendanceContainer.style.display = 'block';
+        if (attendanceSummary) attendanceSummary.style.display = 'block';
+        if (submitSection) submitSection.style.display = 'block';
     }
     
     function hideSections() {
-        attendanceInfo.style.display = 'none';
-        quickControls.style.display = 'none';
-        attendanceContainer.style.display = 'none';
-        attendanceSummary.style.display = 'none';
-        submitSection.style.display = 'none';
+        if (attendanceInfo) attendanceInfo.style.display = 'none';
+        if (quickControls) quickControls.style.display = 'none';
+        if (attendanceContainer) attendanceContainer.style.display = 'none';
+        if (attendanceSummary) attendanceSummary.style.display = 'none';
+        if (submitSection) submitSection.style.display = 'none';
     }
     
     function initializeEventListeners() {
@@ -462,10 +503,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 const studentName = row.querySelector('td').textContent;
                 const studentId = row.querySelector('td:nth-child(2)').textContent;
                 
-                document.querySelector('#note-popup .student-name-mini').textContent = studentName;
-                document.querySelector('#note-popup .student-id-mini').textContent = `Matrícula: ${studentId}`;
+                const studentNameElement = document.querySelector('#note-popup .student-name-mini');
+                const studentIdElement = document.querySelector('#note-popup .student-id-mini');
                 
-                notePopup.style.display = 'flex';
+                if (studentNameElement) studentNameElement.textContent = studentName;
+                if (studentIdElement) studentIdElement.textContent = `Matrícula: ${studentId}`;
+                
+                if (notePopup) notePopup.style.display = 'flex';
             });
         });
         
@@ -476,10 +520,13 @@ document.addEventListener('DOMContentLoaded', function() {
                 const studentName = row.querySelector('td').textContent;
                 const studentId = row.querySelector('td:nth-child(2)').textContent;
                 
-                document.querySelector('#justify-popup .student-name-mini').textContent = studentName;
-                document.querySelector('#justify-popup .student-id-mini').textContent = `Matrícula: ${studentId}`;
+                const studentNameElement = document.querySelector('#justify-popup .student-name-mini');
+                const studentIdElement = document.querySelector('#justify-popup .student-id-mini');
                 
-                justifyPopup.style.display = 'flex';
+                if (studentNameElement) studentNameElement.textContent = studentName;
+                if (studentIdElement) studentIdElement.textContent = `Matrícula: ${studentId}`;
+                
+                if (justifyPopup) justifyPopup.style.display = 'flex';
             });
         });
     }
@@ -508,26 +555,30 @@ document.addEventListener('DOMContentLoaded', function() {
         }
         
         // Atualizar status
-        statusBadge.className = 'status-badge';
-        
-        if (justifiedCount > 0) {
-            statusBadge.classList.add('justified');
-            statusBadge.textContent = 'Justificado';
-        } else if (checkedCount === 0) {
-            statusBadge.classList.add('absent');
-            statusBadge.textContent = 'Ausente';
-        } else if (checkedCount === visibleCheckboxes.length) {
-            statusBadge.classList.add('present');
-            statusBadge.textContent = 'Presente';
-        } else {
-            statusBadge.classList.add('late');
-            statusBadge.textContent = 'Atrasado';
+        if (statusBadge) {
+            statusBadge.className = 'status-badge';
+            
+            if (justifiedCount > 0) {
+                statusBadge.classList.add('justified');
+                statusBadge.textContent = 'Justificado';
+            } else if (checkedCount === 0) {
+                statusBadge.classList.add('absent');
+                statusBadge.textContent = 'Ausente';
+            } else if (checkedCount === visibleCheckboxes.length) {
+                statusBadge.classList.add('present');
+                statusBadge.textContent = 'Presente';
+            } else {
+                statusBadge.classList.add('late');
+                statusBadge.textContent = 'Atrasado';
+            }
         }
         
         updateAttendanceSummary();
     }
     
     function updateAttendanceSummary() {
+        if (!summaryContent) return;
+        
         const totalStudents = document.querySelectorAll('#students-list tr').length;
         let presentCount = 0;
         let absentCount = 0;
@@ -610,15 +661,17 @@ document.addEventListener('DOMContentLoaded', function() {
         const attendanceData = collectAttendanceData();
         console.log('Dados da chamada salvos:', attendanceData);
         
-        // Feedback visual
-        const originalText = saveAttendanceBtn.innerHTML;
-        saveAttendanceBtn.innerHTML = '<span class="material-symbols-outlined">check</span> Salvo!';
-        saveAttendanceBtn.style.backgroundColor = '#16a34a';
-        
-        setTimeout(() => {
-            saveAttendanceBtn.innerHTML = originalText;
-            saveAttendanceBtn.style.backgroundColor = '';
-        }, 2000);
+        // Feedback visual - VERIFICAÇÃO SEGURA
+        if (saveAttendanceBtn) {
+            const originalText = saveAttendanceBtn.innerHTML;
+            saveAttendanceBtn.innerHTML = '<span class="material-symbols-outlined">check</span> Salvo!';
+            saveAttendanceBtn.style.backgroundColor = '#16a34a';
+            
+            setTimeout(() => {
+                saveAttendanceBtn.innerHTML = originalText;
+                saveAttendanceBtn.style.backgroundColor = '';
+            }, 2000);
+        }
     }
     
     function submitAttendance() {
@@ -633,10 +686,12 @@ document.addEventListener('DOMContentLoaded', function() {
             console.log('Lista de chamada enviada:', attendanceData);
             
             // Feedback visual
-            const originalText = submitAttendanceBtn.innerHTML;
-            submitAttendanceBtn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> Enviado com Sucesso!';
-            submitAttendanceBtn.style.backgroundColor = '#16a34a';
-            submitAttendanceBtn.disabled = true;
+            if (submitAttendanceBtn) {
+                const originalText = submitAttendanceBtn.innerHTML;
+                submitAttendanceBtn.innerHTML = '<span class="material-symbols-outlined">check_circle</span> Enviado com Sucesso!';
+                submitAttendanceBtn.style.backgroundColor = '#16a34a';
+                submitAttendanceBtn.disabled = true;
+            }
             
             // Desabilitar edição
             document.querySelectorAll('input[type="checkbox"]').forEach(cb => {
@@ -659,7 +714,8 @@ document.addEventListener('DOMContentLoaded', function() {
             const studentId = row.dataset.studentId;
             const studentName = row.querySelector('td').textContent;
             const studentMatricula = row.querySelector('td:nth-child(2)').textContent;
-            const status = row.querySelector('.status-badge').textContent;
+            const statusElement = row.querySelector('.status-badge');
+            const status = statusElement ? statusElement.textContent : 'Ausente';
             
             const classes = [];
             row.querySelectorAll('.class-checkbox:not([style*="display: none"])').forEach((cb, index) => {
@@ -683,44 +739,57 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     function closePopups() {
-        notePopup.style.display = 'none';
-        justifyPopup.style.display = 'none';
+        if (notePopup) notePopup.style.display = 'none';
+        if (justifyPopup) justifyPopup.style.display = 'none';
     }
     
     // Fechar popups clicando fora
     [notePopup, justifyPopup].forEach(popup => {
-        popup.addEventListener('click', function(e) {
-            if (e.target === popup) {
-                popup.style.display = 'none';
-            }
-        });
+        if (popup) {
+            popup.addEventListener('click', function(e) {
+                if (e.target === popup) {
+                    popup.style.display = 'none';
+                }
+            });
+        }
     });
     
     // Event listeners para confirmar ações dos popups
-    document.querySelector('#note-popup .btn-confirm').addEventListener('click', function() {
-        const noteContent = document.getElementById('note-content').value;
-        if (noteContent.trim()) {
-            alert('Observação salva com sucesso!');
-            document.getElementById('note-content').value = '';
-            closePopups();
-        } else {
-            alert('Por favor, digite uma observação.');
-        }
-    });
+    const noteConfirmBtn = document.querySelector('#note-popup .btn-confirm');
+    if (noteConfirmBtn) {
+        noteConfirmBtn.addEventListener('click', function() {
+            const noteContentElement = document.getElementById('note-content');
+            const noteContent = noteContentElement ? noteContentElement.value : '';
+            
+            if (noteContent.trim()) {
+                alert('Observação salva com sucesso!');
+                if (noteContentElement) noteContentElement.value = '';
+                closePopups();
+            } else {
+                alert('Por favor, digite uma observação.');
+            }
+        });
+    }
     
-    document.querySelector('#justify-popup .btn-confirm').addEventListener('click', function() {
-        const justifyType = document.getElementById('justify-type').value;
-        const justifyContent = document.getElementById('justify-content').value;
-        
-        if (justifyType && justifyContent.trim()) {
-            alert('Justificativa registrada com sucesso!');
-            // Aqui você poderia marcar o checkbox como justificado
-            document.getElementById('justify-type').value = '';
-            document.getElementById('justify-content').value = '';
-            document.getElementById('justify-date').value = '';
-            closePopups();
-        } else {
-            alert('Por favor, preencha todos os campos obrigatórios.');
-        }
-    });
+    const justifyConfirmBtn = document.querySelector('#justify-popup .btn-confirm');
+    if (justifyConfirmBtn) {
+        justifyConfirmBtn.addEventListener('click', function() {
+            const justifyTypeElement = document.getElementById('justify-type');
+            const justifyContentElement = document.getElementById('justify-content');
+            const justifyDateElement = document.getElementById('justify-date');
+            
+            const justifyType = justifyTypeElement ? justifyTypeElement.value : '';
+            const justifyContent = justifyContentElement ? justifyContentElement.value : '';
+            
+            if (justifyType && justifyContent.trim()) {
+                alert('Justificativa registrada com sucesso!');
+                if (justifyTypeElement) justifyTypeElement.value = '';
+                if (justifyContentElement) justifyContentElement.value = '';
+                if (justifyDateElement) justifyDateElement.value = '';
+                closePopups();
+            } else {
+                alert('Por favor, preencha todos os campos obrigatórios.');
+            }
+        });
+    }
 });
