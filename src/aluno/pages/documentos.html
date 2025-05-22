@@ -73,7 +73,7 @@
                             </ul>
                         </div>
                         <div class="popup-footer">
-                            
+                       
                         </div>
                     </div>
                 </li>
@@ -101,7 +101,7 @@
                                     <li>
                                         <a href="perfil-aluno.html">
                                             <span class="material-symbols-outlined">manage_accounts</span>
-                                         <a href="perfil.html">Meu Perfil</a>
+                                            <span>Meu Perfil</span>
                                         </a>
                                     </li>
                                     <li>
@@ -177,7 +177,8 @@
             </ul>
         </div>
     </header>
-     <!-- SIDEBAR PORTAL DO ALUNO -->
+    
+<!-- SIDEBAR PORTAL DO ALUNO -->
     <div id="sidebar">
         <div class="topmenu">
             <span id="menu-icon" class="material-symbols-outlined">menu</span>
@@ -200,7 +201,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="atividades.html" >
+                        <a href="atividades.html" class="active">
                             <span class="material-symbols-outlined">assignment</span>
                             <p>Atividades</p>
                         </a>
@@ -224,7 +225,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="documentos.html">
+                        <a href="documentos.html" class="active">
                             <span class="material-symbols-outlined">folder</span>
                             <p>Documentos</p>
                         </a>
@@ -246,7 +247,7 @@
         </nav>
     </div>
 
-            <div id="password-popup" class="popup-overlay" style="display: none;">
+    <div id="password-popup" class="popup-overlay" style="display: none;">
         <div class="popup">
             <div class="popup-header">
                 <h2>Alterar senha</h2>
@@ -295,7 +296,7 @@
                 <h2>Redefinição de senha!</h2>
                 <span class="material-symbols-outlined close-popup">close</span>
             </div>
-            <div class="popup-content">
+            <div class="popup-feedback-content">
                 <p class="popup-description">Informe um email e enviaremos um link para recuperação da sua senha.</p>
                 <form id="reset-password-form">
                     <div class="form-group">
@@ -330,314 +331,120 @@
             </div>
         </div>
     </div>
-
-
-    
-  <!-- Main Content -->
+ <!-- Main Content -->
     <main class="main">
         <div class="page-header">
             <div class="page-title">
                 <h1>Documentos do Aluno</h1>
             </div>
+
+           <div class="container">
+        <!-- Seção 1: Informações do Aluno -->
+        <div class="info-section">
+            <div class="section-header">Informações do Aluno</div>
+            <div class="section-content">
+                <div class="info-row">
+                    <div class="info-col">
+                        <div class="info-label">Nome Completo</div>
+                        <div class="info-value">Guilherme Moura</div>
+                    </div>
+                    <div class="info-col">
+                        <div class="info-label">Série/Turma</div>
+                        <div class="info-value">3º O</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-col">
+                        <div class="info-label">Matrícula</div>
+                        <div class="info-value">0002931822</div>
+                    </div>
+                    <div class="info-col">
+                        <div class="info-label">Curso</div>
+                        <div class="info-value">Ensino Médio</div>
+                    </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-col">
+                        <div class="info-label">Email Institucional</div>
+                        <div class="info-value">Guilherme.nobre@saber.br</div>
+                    </div>
+                    <div class="info-col">
+                        <div class="info-label">Turno</div>
+                        <div class="info-value">Matutino</div>
+                    </div>
+                </div>
+            </div>
         </div>
-
-        <div class="container">
-            <!-- Seção 1: Informações do Aluno -->
-            <div class="info-section" id="studentInfo">
-                <div class="section-header">Informações do Aluno</div>
-                <div class="section-content">
-                    <div class="info-row">
-                        <div class="info-col">
-                            <div class="info-label">Nome Completo</div>
-                            <div class="info-value">Kenai Almeida</div>
-                        </div>
-                        <div class="info-col">
-                            <div class="info-label">Série/Turma</div>
-                            <div class="info-value">3º O</div>
-                        </div>
+        
+        <!-- Seção 2: Situação Acadêmica -->
+        <div class="info-section">
+            <div class="section-header">
+                Situação Acadêmica
+                <button class="btn-download" id="btnBaixarComprovante">↓ Baixar Comprovante</button>
+            </div>
+            <div class="section-content">
+                <div class="info-row">
+                    <div class="info-col">
+                        <div class="info-label">Ano Letivo</div>
+                        <div class="info-value">2025</div>
                     </div>
-                    <div class="info-row">
-                        <div class="info-col">
-                            <div class="info-label">Matrícula</div>
-                            <div class="info-value">0002931822</div>
-                        </div>
-                        <div class="info-col">
-                            <div class="info-label">Curso</div>
-                            <div class="info-value">Ensino Médio</div>
-                        </div>
+                    <div class="info-col">
+                        <div class="info-label">Data de Matrícula</div>
+                        <div class="info-value">15/01/2025</div>
                     </div>
-                    <div class="info-row">
-                        <div class="info-col">
-                            <div class="info-label">Email Institucional</div>
-                            <div class="info-value">kenai.almeida@saber.br</div>
-                        </div>
-                        <div class="info-col">
-                            <div class="info-label">Turno</div>
-                            <div class="info-value">Matutino</div>
-                        </div>
+                </div>
+                <div class="info-row">
+                    <div class="info-col">
+                        <div class="info-label">Situação</div>
+                        <div class="info-value" style="color: #3498db;">Ativa</div>
+                    </div>
+                    <div class="info-col">
+                        <div class="info-label">Mensalidade</div>
+                        <div class="info-value">R$ 750,00 <span class="small-text">(Vencimento dia 10 de cada mês)</span></div>
                     </div>
                 </div>
             </div>
-            
-            <!-- Seção 2: Situação Acadêmica -->
-            <div class="info-section" id="academicStatus">
-                <div class="section-header">
-                    Situação Acadêmica
-                    <button class="btn-download" id="btnBaixarComprovante">↓ Baixar Comprovante</button>
-                </div>
-                <div class="section-content">
-                    <div class="info-row">
-                        <div class="info-col">
-                            <div class="info-label">Ano Letivo</div>
-                            <div class="info-value">2025</div>
-                        </div>
-                        <div class="info-col">
-                            <div class="info-label">Data de Matrícula</div>
-                            <div class="info-value">15/01/2025</div>
-                        </div>
-                    </div>
-                    <div class="info-row">
-                        <div class="info-col">
-                            <div class="info-label">Situação</div>
-                            <div class="info-value" style="color: #3498db;">Ativa</div>
-                        </div>
-                        <div class="info-col">
-                            <div class="info-label">Mensalidade</div>
-                            <div class="info-value">R$ 750,00 <span class="small-text">(Vencimento dia 10 de cada mês)</span></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            
-           <!-- Seção 3: Boletim Escolar -->
-            <div id="boletimNotas">
-<div class="info-section" id="gradeReport">
-    <div class="section-header">
-        Boletim Escolar
-        <button class="btn-download" id="btnBaixarBoletim">↓ Baixar Boletim</button>
-    </div>
-    <div class="section-content">
-        <table>
-            <thead>
-                <tr>
-                    <th>Área do Conhecimento</th>
-                    <th>1º Tri</th>
-                    <th>2º Tri</th>
-                    <th>3º Tri</th>
-                    <th>Média Final</th>
-                    <th>Situação</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td><strong>Matemática</strong></td>
-                    <td>8.0</td>
-                    <td>7.5</td>
-                    <td>8.8</td>
-                    <td><strong>8.1</strong></td>
-                    <td class="status-approved">Aprovado</td>
-                </tr>
-                <tr>
-                    <td><strong>Linguagens</strong></td>
-                    <td>8.2</td>
-                    <td>8.0</td>
-                    <td>8.5</td>
-                    <td><strong>8.2</strong></td>
-                    <td class="status-approved">Aprovado</td>
-                </tr>
-                <tr>
-                    <td><strong>Ciências da Natureza</strong></td>
-                    <td>7.4</td>
-                    <td>7.1</td>
-                    <td>8.1</td>
-                    <td><strong>7.5</strong></td>
-                    <td class="status-approved">Aprovado</td>
-                </tr>
-                <tr>
-                    <td><strong>Ciências Humanas</strong></td>
-                    <td>7.9</td>
-                    <td>8.3</td>
-                    <td>8.5</td>
-                    <td><strong>8.2</strong></td>
-                    <td class="status-approved">Aprovado</td>
-                </tr>
-            </tbody>
-        </table>
-        <a href="#" class="link-blue" id="btnVerBoletimCompleto">Ver boletim completo</a>
-    </div>
-</div>
-</div>
-    </main>
-
-    <!-- Loading Modal -->
-    <div class="loading" id="loadingDiv">
-        <div class="loading-content">
-            <div class="spinner"></div>
-            <p>Gerando PDF do documento...</p>
         </div>
-    </div>
-
-    <!-- Modal para Boletim Completo -->
-    <div id="modalBoletimCompleto" class="modal">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2>Boletim Escolar Completo - 2025</h2>
-                <button class="close" id="closeModal">&times;</button>
+        
+        <!-- Seção 3: Boletim Escolar -->
+        <div class="info-section">
+            <div class="section-header">
+                Boletim Escolar
+                <button class="btn-download" id="btnBaixarBoletim">↓ Baixar Boletim</button>
             </div>
-            <div class="modal-body">
-                <!-- Resumo do Desempenho -->
-                <div class="summary-stats">
-                    <h3 style="text-align: center; margin-bottom: 20px; color: #1a2138;">Resumo do Desempenho</h3>
-                    <div class="stats-grid">
-                        <div class="stat-item">
-                            <div class="stat-number">7.8</div>
-                            <div class="stat-label">Média Geral</div>
-                        </div>
-                        <div class="stat-item">
-                            <div class="stat-number">94%</div>
-                            <div class="stat-label">Frequência Média</div>
-                        </div>                                       
-                    </div>
-                </div>
-
-                <!-- Detalhamento por Disciplina -->
-                <div class="detailed-grades">
-                    <h3 style="margin-bottom: 25px; color: #1a2138;">Detalhamento por Disciplina</h3>
-                    
-                    <div class="subject-card">
-                        <div class="subject-header">
-                            <div class="subject-name">Humanas</div>
-                            <div class="subject-teacher">Prof. Carlos Eduardo Silva</div>
-                        </div>
-                        <div class="subject-details">
-                            <div class="quarters-grid">
-                                <div class="quarter-info">
-                                    <div class="quarter-label">1º Trismestres</div>
-                                    <div class="quarter-grade grade-good">8.0</div>
-                                </div>
-                                <div class="quarter-info">
-                                    <div class="quarter-label">2º Trismestres</div>
-                                    <div class="quarter-grade grade-good">7.5</div>
-                                </div>
-                                <div class="quarter-info">
-                                    <div class="quarter-label">3º Trismestres</div>
-                                    <div class="quarter-grade grade-good">8.8</div>
-                                </div>
-                                <div class="quarter-info">
-                                    <div class="quarter-label">Frequência</div>
-                                    <div class="quarter-grade">96%</div>
-                                </div>
-                            </div>
-                            <div class="subject-observations">
-                                <h4>Observações do Saber:</h4>
-                                <p>Excelente evolução durante o ano letivo, continuar mantendo o ritmo de estudos.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="subject-card">
-                        <div class="subject-header">
-                            <div class="subject-name">Linguagens</div>
-                            <div class="subject-teacher">Profª. Maria Fernanda Santos</div>
-                        </div>
-                        <div class="subject-details">
-                            <div class="quarters-grid">
-                                <div class="quarter-info">
-                                    <div class="quarter-label">1º Trismestres</div>
-                                    <div class="quarter-grade grade-good">8.2</div>
-                                </div>
-                                <div class="quarter-info">
-                                    <div class="quarter-label">2º Trismestres</div>
-                                    <div class="quarter-grade grade-good">8.0</div>
-                                </div>
-                                <div class="quarter-info">
-                                    <div class="quarter-label">3º Trismestres</div>
-                                    <div class="quarter-grade grade-good">8.5</div>
-                                </div>
-                                <div class="quarter-info">
-                                    <div class="quarter-label">Frequência</div>
-                                    <div class="quarter-grade">95%</div>
-                                </div>
-                            </div>
-                            <div class="subject-observations">
-                                <h4>Observações do Saber:</h4>
-                                <p>Ótimo desempenho em interpretação de texto e produção textual.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="subject-card">
-                        <div class="subject-header">
-                            <div class="subject-name">Matemática</div>
-                            <div class="subject-teacher">Prof. Roberto Almeida</div>
-                        </div>
-                        <div class="subject-details">
-                            <div class="quarters-grid">
-                                <div class="quarter-info">
-                                    <div class="quarter-label">1º Trismestres</div>
-                                    <div class="quarter-grade grade-warning">6.5</div>
-                                </div>
-                                <div class="quarter-info">
-                                    <div class="quarter-label">2º Trismestres</div>
-                                    <div class="quarter-grade grade-danger">5.8</div>
-                                </div>
-                                <div class="quarter-info">
-                                    <div class="quarter-label">3º Trismestres</div>
-                                    <div class="quarter-grade grade-warning">6.2</div>
-                                </div>                               
-                                <div class="quarter-info">
-                                    <div class="quarter-label">Frequência</div>
-                                    <div class="quarter-grade">88%</div>
-                                </div>
-                            </div>
-                            <div class="subject-observations">
-                                <h4>Observações do Saber:</h4>
-                                <p>Aluno apresentou dificuldades nos primeiros Trismestres, e não houve melhora nos resultads.</p>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="subject-card">
-                        <div class="subject-header">
-                            <div class="subject-name">Naturezas</div>
-                            <div class="subject-teacher">Profª. Ana Paula Costa</div>
-                        </div>
-                        <div class="subject-details">
-                            <div class="quarters-grid">
-                                <div class="quarter-info">
-                                    <div class="quarter-label">1º Trismestres</div>
-                                    <div class="quarter-grade grade-good">8.5</div>
-                                </div>
-                                <div class="quarter-info">
-                                    <div class="quarter-label">2º Trismestres</div>
-                                    <div class="quarter-grade grade-good">8.8</div>
-                                </div>
-                                <div class="quarter-info">
-                                    <div class="quarter-label">3º Trismestres</div>
-                                    <div class="quarter-grade grade-good">9.0</div>
-                                </div>                               
-                                <div class="quarter-info">
-                                    <div class="quarter-label">Frequência</div>
-                                    <div class="quarter-grade">97%</div>
-                                </div>
-                            </div>
-                            <div class="subject-observations">
-                                <h4>Observações do Saber:</h4>
-                                <p>Desempenho excepcional em todas as atividades.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Observações Finais -->
-                <div class="final-observations">
-                    <h4>Observações Gerais da Coordenação Pedagógica</h4>
-                    <p>Kenai demonstrou bom aproveitamento na maioria das disciplinas durante o ano letivo de 2025. É um aluno dedicado, participativo e que mantém bom relacionamento com colegas e Saberes.</p>
-                    <p>Recomenda-se maior dedicação aos estudos de Matemática. Sugerimos acompanhamento adicional dos responsáveis nesta matéria.</p>
-                    <p><strong>Data de emissão:</strong> 21 de maio de 2025</p>
-                    <p><strong>Coordenador Pedagógico:</strong> Ricardo Mendes</p>
-                    <p><strong>Diretor:</strong> João Carlos Oliveira</p>
-                </div>
+            <div class="section-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Disciplina</th>
+                            <th>Média Final</th>
+                            <th>Situação</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Matemática</td>
+                            <td>8.5</td>
+                            <td class="status-approved">Aprovado</td>
+                        </tr>
+                        <tr>
+                            <td>Português</td>
+                            <td>8.5</td>
+                            <td class="status-approved">Aprovado</td>
+                        </tr>
+                        <tr>
+                            <td>História</td>
+                            <td>8.5</td>
+                            <td class="status-approved">Aprovado</td>
+                        </tr>
+                        <tr>
+                            <td>Geografia</td>
+                            <td>8.5</td>
+                            <td class="status-approved">Aprovado</td>
+                        </tr>
+                    </tbody>
+                </table>
+                <a href="#" class="link-blue" id="btnVerBoletimCompleto">Ver boletim completo</a>
             </div>
         </div>
     </div>
@@ -662,8 +469,6 @@
 
 
        <script src="../../common/scripts/changepass.js"></script>
-       <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
-     <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>      
        <script src="../scripts/documentos.js"></script>
     <script src="../../common/scripts/exitpopup.js"></script>
     <script src="../../common/scripts/menu.js"></script>   
