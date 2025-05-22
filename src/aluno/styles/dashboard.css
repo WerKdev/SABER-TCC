@@ -143,6 +143,7 @@ body.dark-mode .summary-item {
     width: 100px;
     height: 100px;
     border-radius: 50%;
+    backgroud-color: #0c142b;
     display: flex;
     align-items: center;
     justify-content: center;
