@@ -8,6 +8,8 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../styles/calendario.css">
     <link rel="stylesheet" href="../../common/styles/menu.css">
+    <link rel="stylesheet" href="/src/common/styles/exitpopup.css">
+    <link rel="stylesheet" href="/src/common/styles/changepass.css">
 </head>
 <body>
     <!-- HEADER -->
@@ -38,8 +40,8 @@
                                 <li class="notification unread">
                                     <div class="notification-icon"><span class="material-symbols-outlined">assignment</span></div>
                                     <div class="notification-text">
-                                        <p class="notification-title">Nova aula disponível</p>
-                                        <p class="notification-desc">Matemática - Álgebra Linear</p>
+                                        <p class="notification-title">Nova atividade disponível</p>
+                                        <p class="notification-desc">Exercícios de Álgebra - Matemática</p>
                                         <p class="notification-time">há 10 minutos</p>
                                     </div>
                                 </li>
@@ -51,10 +53,26 @@
                                         <p class="notification-time">há 2 horas</p>
                                     </div>
                                 </li>
+                                <li class="notification">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">grade</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Atividade avaliada</p>
+                                        <p class="notification-desc">Revolução Industrial - História</p>
+                                        <p class="notification-time">há 1 dia</p>
+                                    </div>
+                                </li>
+                                <li class="notification">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">calendar_today</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Prazo de entrega próximo</p>
+                                        <p class="notification-desc">Análise Combinatória vence em 2 dias</p>
+                                        <p class="notification-time">há 2 dias</p>
+                                    </div>
+                                </li>
                             </ul>
                         </div>
                         <div class="popup-footer">
-                        
+                            
                         </div>
                     </div>
                 </li>
@@ -82,7 +100,11 @@
                                     <li>
                                         <a href="perfil-aluno.html">
                                             <span class="material-symbols-outlined">manage_accounts</span>
+<<<<<<< HEAD
                                             <span>Meu Perfil</span>
+=======
+                                         <a href="perfil.html">Meu Perfil</a>
+>>>>>>> 6c79d2b5c8821efbe33bd90c6c54373440740baf
                                         </a>
                                     </li>
                                     <li>
@@ -182,12 +204,13 @@
                         </a>
                     </li>
                     <li>
-                        <a href="atividades.html">
+                        <a href="atividades.html" >
                             <span class="material-symbols-outlined">assignment</span>
                             <p>Atividades</p>
                         </a>
                     </li>
                     <li>
+<<<<<<< HEAD
                         <a href="redacoes.html">
                             <span class="material-symbols-outlined">history_edu</span>
                             <p>Redações</p>
@@ -195,6 +218,9 @@
                     </li>
                     <li>
                         <a href="calendario.html" class="active">
+=======
+                        <a href="calendario.html"class="active">
+>>>>>>> 6c79d2b5c8821efbe33bd90c6c54373440740baf
                             <span class="material-symbols-outlined">event_note</span>
                             <p>Calendário</p>
                         </a>
@@ -228,6 +254,90 @@
         </nav>
     </div>
 
+            <div id="password-popup" class="popup-overlay" style="display: none;">
+        <div class="popup">
+            <div class="popup-header">
+                <h2>Alterar senha</h2>
+                <span class="material-symbols-outlined close-popup">close</span>
+            </div>
+            <div class="popup-content">
+                <p class="popup-description">Informe a senha atual e a nova senha</p>
+                <form id="change-password-form">
+                    <div class="form-group">
+                        <label for="current-password">Senha atual <span class="required">*</span></label>
+                        <div class="password-input">
+                            <input type="password" id="current-password" name="current-password" required>
+                            <span class="material-symbols-outlined toggle-password">visibility_off</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-password">Nova senha <span class="required">*</span></label>
+                        <div class="password-input">
+                            <input type="password" id="new-password" name="new-password" required>
+                            <span class="material-symbols-outlined toggle-password">visibility_off</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Confirmação de senha <span class="required">*</span></label>
+                        <div class="password-input">
+                            <input type="password" id="confirm-password" name="confirm-password" required>
+                            <span class="material-symbols-outlined toggle-password">visibility_off</span>
+                        </div>
+                    </div>
+                    <div class="forgot-password">
+                        <a href="#" id="forgot-password-link">Esqueceu a senha?</a>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel">Cancelar</button>
+                        <button type="submit" class="btn-confirm">Alterar senha</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup de Redefinição de Senha -->
+    <div id="reset-password-popup" class="popup-overlay" style="display: none;">
+        <div class="popup">
+            <div class="popup-header">
+                <h2>Redefinição de senha!</h2>
+                <span class="material-symbols-outlined close-popup">close</span>
+            </div>
+            <div class="popup-content">
+                <p class="popup-description">Informe um email e enviaremos um link para recuperação da sua senha.</p>
+                <form id="reset-password-form">
+                    <div class="form-group">
+                        <label for="recovery-email">Email <span class="required">*</span></label>
+                        <input type="email" id="recovery-email" name="recovery-email" required placeholder="seu@email.com">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-back">
+                            <span class="material-symbols-outlined">arrow_back</span>
+                            Voltar
+                        </button>
+                        <button type="submit" class="btn-send">Enviar link de recuperação</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="logout-popup" class="popup-overlay" style="display: none;">
+        <div class="popup logout-popup">
+            <div class="logout-content">
+                <div class="logout-icon">
+                    <span class="material-symbols-outlined">logout</span>
+                </div>
+                <h2 class="logout-title">Sair da conta?</h2>
+                <p class="logout-description">Você poderá entrar novamente a qualquer momento. Se quiser trocar de conta, faça isso adicionando uma conta existente.</p>
+                
+                <div class="logout-actions">
+                    <button type="button" class="btn-logout">Sair</button>
+                    <button type="button" class="btn-cancel-logout">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- CONTEÚDO PRINCIPAL -->
     <main>
         <div class="page-header">
@@ -423,6 +533,6 @@
     <script src="../scripts/calendario.js"></script>
     <script src="../../common/scripts/menu.js"></script>
     <script src="../../common/scripts/changepass.js"></script>
-    <script src="../../common/scripts/exitpopup.js"></script>
+    <script src="/src/common/scripts/exitpopup.js"></script>
 </body>
 </html>
