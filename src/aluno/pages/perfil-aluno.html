@@ -6,7 +6,7 @@
     <title>Meu Perfil - Portal do Aluno</title>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="../styles/perfil.css">
+    <link rel="stylesheet" href="../styles/perfil-aluno.css">
     <link rel="stylesheet" href="../../common/styles/menu.css">
     <link rel="stylesheet" href="../../common/styles/changepass.css">
     <link rel="stylesheet" href="../../common/styles/exitpopup.css">
@@ -82,7 +82,7 @@
                                 <p class="settings-group-title">Conta</p>
                                 <ul>
                                     <li>
-                                        <a href="#perfil">
+                                        <a href="perfil-aluno.html">
                                             <span class="material-symbols-outlined">manage_accounts</span>
                                             <span>Meu Perfil</span>
                                         </a>
@@ -161,12 +161,13 @@
         </div>
     </header>
 
-    <!-- SIDEBAR -->
+    
+<!-- SIDEBAR PORTAL DO ALUNO -->
     <div id="sidebar">
         <div class="topmenu">
             <span id="menu-icon" class="material-symbols-outlined">menu</span>
             <h3 id="menu-tittle">Menu</h3>
-            <img id="logomenu" src="../../../assets/images/logo-saber.png" alt="Logo menu">
+            <div id="logomenu"></div>
         </div>
         <nav id="menu-hidden">
             <div class="navbar">
@@ -190,15 +191,21 @@
                         </a>
                     </li>
                     <li>
+                        <a href="redacoes.html">
+                            <span class="material-symbols-outlined">history_edu</span>
+                            <p>Redações</p>
+                        </a>
+                    </li>
+                    <li>
                         <a href="calendario.html">
                             <span class="material-symbols-outlined">event_note</span>
                             <p>Calendário</p>
                         </a>
                     </li>
                     <li>
-                        <a href="redacoes.html">
-                            <span class="material-symbols-outlined">history_edu</span>
-                            <p>Redações</p>
+                        <a href="materiais.html">
+                            <span class="material-symbols-outlined">book</span>
+                            <p>Materiais</p>
                         </a>
                     </li>
                     <li>
@@ -208,21 +215,9 @@
                         </a>
                     </li>
                     <li>
-                        <a href="materiais.html">
-                            <span class="material-symbols-outlined">menu_book</span>
-                            <p>Materiais</p>
-                        </a>
-                    </li>
-                    <li>
                         <a href="mensagens.html">
                             <span class="material-symbols-outlined">chat</span>
                             <p>Comunicados</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="eventos.html">
-                            <span class="material-symbols-outlined">event</span>
-                            <p>Eventos</p>
                         </a>
                     </li>
                     <li>
@@ -800,7 +795,7 @@
         </div>
     </div>
 
-    <script src="../scripts/perfil.js"></script>
+    <script src="../scripts/perfil-aluno.js"></script>
     <script src="../../common/scripts/changepass.js"></script>
     <script src="../../common/scripts/exitpopup.js"></script>
     <script src="../../common/scripts/menu.js"></script>

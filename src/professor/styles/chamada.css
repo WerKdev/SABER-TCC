@@ -54,6 +54,10 @@ body.dark-theme .attendance-selector {
     font-size: 14px;
 }
 
+.attendance-selector{
+    margin-top: 10px;
+}
+
 body.dark-theme .selector-group label {
     color: var(--texto-escuro);
 }

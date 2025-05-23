@@ -952,3 +952,12 @@ body.dark-theme .language-options ul li.active {
         right: -70px;
     }
 }
+
+.no-transition {
+    transition: none !important;
+}
+
+/* Aplicar a todos os elementos filhos também */
+.no-transition * {
+    transition: none !important;
+}
