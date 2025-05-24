@@ -208,14 +208,7 @@ document.addEventListener("DOMContentLoaded", function() {
             clickedTab.classList.add("active");
         }
         
-        // Se não for "todas", resetar outros filtros para melhor experiência
-        if (tabName !== 'todas') {
-            if (turmaSelect) turmaSelect.value = 'todas';
-            if (periodoSelect) periodoSelect.value = 'todos';
-            if (searchInput) searchInput.value = '';
-        }
-        
-        // Aplicar filtros
+        // Aplicar filtros sem resetar os outros filtros já selecionados
         filterActivities();
     }
 
