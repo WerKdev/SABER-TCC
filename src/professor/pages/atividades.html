@@ -44,7 +44,7 @@
                                     <div class="notification-icon"><span class="material-symbols-outlined">question_answer</span></div>
                                     <div class="notification-text">
                                         <p class="notification-title">Nova dúvida</p>
-                                        <p class="notification-desc">Maria Oliveira - Química Orgânica</p>
+                                        <p class="notification-desc">Maria Oliveira - Funções Quadráticas</p>
                                         <p class="notification-time">há 15 minutos</p>
                                     </div>
                                 </li>
@@ -153,7 +153,7 @@
         <div class="topmenu">
             <span id="menu-icon" class="material-symbols-outlined">menu</span>
             <h3 id="menu-tittle">Menu</h3>
-            <div id="logomenu"></div>
+            <img id="logomenu" src="../../../assets/images/logo-saber.png" alt="Logo menu">
         </div>
         <nav id="menu-hidden">
             <div class="navbar">
@@ -183,33 +183,27 @@
                         </a>
                     </li>
                     <li>
-                        <a href="calendario-professor.html">
+                        <a href="calendario-aulas.html">
                             <span class="material-symbols-outlined">event_note</span>
                             <p>Plano de Aulas</p>
                         </a>
                     </li>
                     <li>
-                        <a href="materiais.html">
+                        <a href="#">
                             <span class="material-symbols-outlined">book</span>
                             <p>Materiais</p>
                         </a>
                     </li>
                     <li>
-                        <a href="documentos.html">
-                            <span class="material-symbols-outlined">folder</span>
-                            <p>Documentos</p>
-                        </a>
-                    </li>
-                    <li>
-                        <a href="comunicacao.html">
+                        <a href="#">
                             <span class="material-symbols-outlined">chat</span>
                             <p>Comunicação</p>
                         </a>
                     </li>
                     <li>
-                        <a href="suporte.html">
-                            <span class="material-symbols-outlined">help</span>
-                            <p>Suporte</p>
+                        <a href="#">
+                            <span class="material-symbols-outlined">insert_chart</span>
+                            <p>Relatórios</p>
                         </a>
                     </li>
                 </ul>
@@ -222,17 +216,23 @@
         <div class="page-header">
             <div class="page-title">
                 <h1>Gestão de Atividades</h1>
-                <p>Crie, gerencie e acompanhe as atividades de suas turmas</p>
+                <p>Crie, gerencie e acompanhe as atividades de matemática de suas turmas</p>
             </div>
             <div class="page-actions">
-                <button class="btn-secondary" id="btn-calendario">
-                    <span class="material-symbols-outlined">calendar_month</span>
-                    Calendário
-                </button>
-                <button class="btn-secondary" id="btn-relatorios">
-                    <span class="material-symbols-outlined">summarize</span>
-                    Relatórios
-                </button>
+                <a href="calendario.html" style="text-decoration: none;">
+                    <button class="btn-secondary" id="btn-calendario">
+                        <span class="material-symbols-outlined">calendar_month</span>
+                        Calendário
+                    </button>
+                </a>
+
+                <a href="relatorio.html" style="text-decoration: none;">
+                    <button class="btn-secondary" id="btn-relatorios">
+                        <span class="material-symbols-outlined">summarize</span>
+                        Relatórios
+                    </button>
+                </a>
+                
                 <button class="btn-primary" id="btn-criar-atividade">
                     <span class="material-symbols-outlined">add</span>
                     Nova Atividade
@@ -247,7 +247,7 @@
                     <span class="material-symbols-outlined">assignment</span>
                 </div>
                 <div class="stat-info">
-                    <h3>12</h3>
+                    <h3>8</h3>
                     <p>Atividades ativas</p>
                 </div>
             </div>
@@ -256,7 +256,7 @@
                     <span class="material-symbols-outlined">assignment_turned_in</span>
                 </div>
                 <div class="stat-info">
-                    <h3>74%</h3>
+                    <h3>60%</h3>
                     <p>Taxa de entrega</p>
                 </div>
             </div>
@@ -265,7 +265,7 @@
                     <span class="material-symbols-outlined">grading</span>
                 </div>
                 <div class="stat-info">
-                    <h3>8</h3>
+                    <h3>2</h3>
                     <p>Para avaliar</p>
                 </div>
             </div>
@@ -274,15 +274,22 @@
                     <span class="material-symbols-outlined">pending_actions</span>
                 </div>
                 <div class="stat-info">
-                    <h3>3</h3>
+                    <h3>1</h3>
                     <p>Finalizando hoje</p>
                 </div>
             </div>
         </div>
 
         <div class="content-container">
-            <!-- FILTROS -->
-            <div class="filter-section">
+            <!-- FILTROS (SEM FILTRO DE STATUS) -->
+            <div class="filter-section">                
+                <div class="filter-group search-group">
+                    <label for="search-input">Pesquisar</label>
+                    <div class="search-input-container">
+                        <input type="text" id="search-input" placeholder="Buscar atividade...">
+                        <span class="material-symbols-outlined search-icon">search</span>
+                    </div>
+                </div>
                 <div class="filter-group">
                     <label for="turma-select">Turma</label>
                     <select id="turma-select" class="select-field">
@@ -295,65 +302,32 @@
                         <option value="3-B">3º Ano B</option>
                     </select>
                 </div>
-                <div class="filter-group">
-                    <label for="materia-select">Matéria</label>
-                    <select id="materia-select" class="select-field">
-                        <option value="todas" selected>Todas as matérias</option>
-                        <option value="matematica">Matemática</option>
-                        <option value="portugues">Português</option>
-                        <option value="historia">História</option>
-                        <option value="geografia">Geografia</option>
-                        <option value="ciencias">Ciências</option>
-                        <option value="fisica">Física</option>
-                        <option value="quimica">Química</option>
-                        <option value="biologia">Biologia</option>
-                        <option value="ingles">Inglês</option>
-                    </select>
-                </div>
-                <div class="filter-group">
-                    <label for="status-select">Status</label>
-                    <select id="status-select" class="select-field">
-                        <option value="todos" selected>Todos os status</option>
-                        <option value="ativas">Ativas</option>
-                        <option value="pendentes">Com entregas pendentes</option>
-                        <option value="para-avaliar">Para avaliar</option>
-                        <option value="finalizadas">Finalizadas</option>
-                        <option value="arquivadas">Arquivadas</option>
-                    </select>
-                </div>
+                
                 <div class="filter-group">
                     <label for="periodo-select">Período</label>
                     <select id="periodo-select" class="select-field">
                         <option value="todos" selected>Todos os períodos</option>
+                        <option value="passado">Registros passados</option>
                         <option value="hoje">Hoje</option>
                         <option value="semana">Esta semana</option>
                         <option value="mes">Este mês</option>
-                        <option value="bimestre">Este bimestre</option>
-                        <option value="ano">Este ano</option>
+                        <option value="trimestre">Este trimestre</option>
                     </select>
-                </div>
-                <div class="filter-group search-group">
-                    <label for="search-input">Pesquisar</label>
-                    <div class="search-input-container">
-                        <input type="text" id="search-input" placeholder="Buscar atividade...">
-                        <span class="material-symbols-outlined search-icon">search</span>
-                    </div>
                 </div>
             </div>
 
-            <!-- ABAS DE NAVEGAÇÃO -->
-            <div class="activities-tabs">
+            <!-- ABAS DE NAVEGAÇÃO (FILTRO DE STATUS) -->
+            <div class="activities-tabs" style="overflow: hidden;">
                 <button class="tab-button active" data-tab="todas">Todas as Atividades</button>
                 <button class="tab-button" data-tab="ativas">Ativas</button>
-                <button class="tab-button" data-tab="pendentes">Entregas Pendentes</button>
-                <button class="tab-button" data-tab="avaliar">Para Avaliar</button>
+                <button class="tab-button" data-tab="avaliar">Avaliação Pendente</button>
                 <button class="tab-button" data-tab="finalizadas">Finalizadas</button>
             </div>
 
             <!-- LISTA DE ATIVIDADES -->
             <div class="activities-list">
-                <!-- Atividade 1 -->
-                <div class="activity-card" data-status="ativa" data-turma="2-A" data-materia="matematica">
+                <!-- Atividade 1 - ATIVA (Atual) -->
+                <div class="activity-card" data-status="ativa" data-turma="2-A">
                     <div class="activity-status ativa">Ativa</div>
                     <div class="activity-header">
                         <div class="activity-subject-info">
@@ -363,7 +337,7 @@
                         </div>
                         <div class="activity-date">
                             <span class="material-symbols-outlined">event</span>
-                            <span>Entrega: 16/05/2025</span>
+                            <span>Entrega: 22/05/2025</span>
                         </div>
                     </div>
                     <div class="activity-body">
@@ -378,105 +352,7 @@
                             </div>
                             <div class="delivery-stat">
                                 <span class="material-symbols-outlined">assignment_turned_in</span>
-                                <span>23 entregas (66%)</span>
-                            </div>
-                            <div class="delivery-stat">
-                                <span class="material-symbols-outlined">grading</span>
-                                <span>10 avaliados</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="activity-actions">
-                        <button class="btn-action btn-edit">
-                            <span class="material-symbols-outlined">edit</span>
-                            Editar
-                        </button>
-                        <button class="btn-action btn-view-deliveries">
-                            <span class="material-symbols-outlined">inbox</span>
-                            Entregas
-                        </button>
-                        <button class="btn-action btn-options">
-                            <span class="material-symbols-outlined">more_vert</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Atividade 2 -->
-                <div class="activity-card" data-status="ativa" data-turma="3-B" data-materia="fisica">
-                    <div class="activity-status ativa">Ativa</div>
-                    <div class="activity-header">
-                        <div class="activity-subject-info">
-                            <span class="material-symbols-outlined activity-icon">science</span>
-                            <h3 class="activity-subject">Física</h3>
-                            <span class="activity-turma">3º Ano B</span>
-                        </div>
-                        <div class="activity-date">
-                            <span class="material-symbols-outlined">event</span>
-                            <span>Entrega: 12/05/2025</span>
-                        </div>
-                    </div>
-                    <div class="activity-body">
-                        <h4 class="activity-title">Relatório: Leis de Newton</h4>
-                        <p class="activity-description">Elaboração de relatório sobre as três leis de Newton e suas aplicações práticas.</p>
-                    </div>
-                    <div class="activity-meta">
-                        <div class="delivery-stats">
-                            <div class="delivery-stat">
-                                <span class="material-symbols-outlined">people</span>
-                                <span>30 alunos</span>
-                            </div>
-                            <div class="delivery-stat">
-                                <span class="material-symbols-outlined">assignment_turned_in</span>
-                                <span>28 entregas (93%)</span>
-                            </div>
-                            <div class="delivery-stat done">
-                                <span class="material-symbols-outlined">grading</span>
-                                <span>0 avaliados</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="activity-actions">
-                        <button class="btn-action btn-edit">
-                            <span class="material-symbols-outlined">edit</span>
-                            Editar
-                        </button>
-                        <button class="btn-action btn-view-deliveries">
-                            <span class="material-symbols-outlined">inbox</span>
-                            Entregas
-                        </button>
-                        <button class="btn-action btn-options">
-                            <span class="material-symbols-outlined">more_vert</span>
-                        </button>
-                    </div>
-                </div>
-
-                <!-- Atividade 3 -->
-                <div class="activity-card" data-status="ativa" data-turma="1-A" data-materia="portugues">
-                    <div class="activity-status ativa">Ativa</div>
-                    <div class="activity-header">
-                        <div class="activity-subject-info">
-                            <span class="material-symbols-outlined activity-icon">menu_book</span>
-                            <h3 class="activity-subject">Português</h3>
-                            <span class="activity-turma">1º Ano A</span>
-                        </div>
-                        <div class="activity-date">
-                            <span class="material-symbols-outlined">event</span>
-                            <span>Entrega: 14/05/2025</span>
-                        </div>
-                    </div>
-                    <div class="activity-body">
-                        <h4 class="activity-title">Análise de Conto</h4>
-                        <p class="activity-description">Análise do conto "A Cartomante" de Machado de Assis, com foco nos elementos narrativos e estilísticos.</p>
-                    </div>
-                    <div class="activity-meta">
-                        <div class="delivery-stats">
-                            <div class="delivery-stat">
-                                <span class="material-symbols-outlined">people</span>
-                                <span>32 alunos</span>
-                            </div>
-                            <div class="delivery-stat warning">
-                                <span class="material-symbols-outlined">assignment_turned_in</span>
-                                <span>15 entregas (47%)</span>
+                                <span>18 entregas (51%)</span>
                             </div>
                             <div class="delivery-stat">
                                 <span class="material-symbols-outlined">grading</span>
@@ -499,23 +375,121 @@
                     </div>
                 </div>
 
-                <!-- Atividade 4 -->
-                <div class="activity-card" data-status="finalizada" data-turma="2-B" data-materia="historia">
+                <!-- Atividade 2 - AVALIAÇÃO PENDENTE (Passado) -->
+                <div class="activity-card" data-status="pendente" data-turma="3-B">
+                    <div class="activity-status pendente">Avaliação pendente</div>
+                    <div class="activity-header">
+                        <div class="activity-subject-info">
+                            <span class="material-symbols-outlined activity-icon">calculate</span>
+                            <h3 class="activity-subject">Matemática</h3>
+                            <span class="activity-turma">3º Ano B</span>
+                        </div>
+                        <div class="activity-date">
+                            <span class="material-symbols-outlined">event</span>
+                            <span>Entrega: 12/05/2025</span>
+                        </div>
+                    </div>
+                    <div class="activity-body">
+                        <h4 class="activity-title">Funções Trigonométricas</h4>
+                        <p class="activity-description">Resolução de exercícios sobre seno, cosseno e tangente. Aplicações em problemas geométricos.</p>
+                    </div>
+                    <div class="activity-meta">
+                        <div class="delivery-stats">
+                            <div class="delivery-stat">
+                                <span class="material-symbols-outlined">people</span>
+                                <span>30 alunos</span>
+                            </div>
+                            <div class="delivery-stat">
+                                <span class="material-symbols-outlined">assignment_turned_in</span>
+                                <span>28 entregas (93%)</span>
+                            </div>
+                            <div class="delivery-stat warning">
+                                <span class="material-symbols-outlined">grading</span>
+                                <span>15 para avaliar</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="activity-actions">
+                        <button class="btn-action btn-evaluate">
+                            <span class="material-symbols-outlined">grading</span>
+                            Avaliar
+                        </button>
+                        <button class="btn-action btn-view-deliveries">
+                            <span class="material-symbols-outlined">inbox</span>
+                            Entregas
+                        </button>
+                        <button class="btn-action btn-options">
+                            <span class="material-symbols-outlined">more_vert</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Atividade 3 - ATIVA (Futuro - 2º trimestre) -->
+                <div class="activity-card" data-status="ativa" data-turma="1-A">
+                    <div class="activity-status ativa">Ativa</div>
+                    <div class="activity-header">
+                        <div class="activity-subject-info">
+                            <span class="material-symbols-outlined activity-icon">calculate</span>
+                            <h3 class="activity-subject">Matemática</h3>
+                            <span class="activity-turma">1º Ano A</span>
+                        </div>
+                        <div class="activity-date">
+                            <span class="material-symbols-outlined">event</span>
+                            <span>Entrega: 28/05/2025</span>
+                        </div>
+                    </div>
+                    <div class="activity-body">
+                        <h4 class="activity-title">Função do Primeiro Grau</h4>
+                        <p class="activity-description">Estudo de funções lineares, construção de gráficos e interpretação geométrica do coeficiente angular.</p>
+                    </div>
+                    <div class="activity-meta">
+                        <div class="delivery-stats">
+                            <div class="delivery-stat">
+                                <span class="material-symbols-outlined">people</span>
+                                <span>32 alunos</span>
+                            </div>
+                            <div class="delivery-stat">
+                                <span class="material-symbols-outlined">assignment_turned_in</span>
+                                <span>12 entregas (38%)</span>
+                            </div>
+                            <div class="delivery-stat">
+                                <span class="material-symbols-outlined">grading</span>
+                                <span>6 avaliados</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="activity-actions">
+                        <button class="btn-action btn-edit">
+                            <span class="material-symbols-outlined">edit</span>
+                            Editar
+                        </button>
+                        <button class="btn-action btn-view-deliveries">
+                            <span class="material-symbols-outlined">inbox</span>
+                            Entregas
+                        </button>
+                        <button class="btn-action btn-options">
+                            <span class="material-symbols-outlined">more_vert</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Atividade 4 - FINALIZADA (Passado) -->
+                <div class="activity-card" data-status="finalizada" data-turma="2-B">
                     <div class="activity-status finalizada">Finalizada</div>
                     <div class="activity-header">
                         <div class="activity-subject-info">
-                            <span class="material-symbols-outlined activity-icon">history_edu</span>
-                            <h3 class="activity-subject">História</h3>
+                            <span class="material-symbols-outlined activity-icon">calculate</span>
+                            <h3 class="activity-subject">Matemática</h3>
                             <span class="activity-turma">2º Ano B</span>
                         </div>
                         <div class="activity-date">
                             <span class="material-symbols-outlined">event</span>
-                            <span>Entrega: 05/05/2025</span>
+                            <span>Entrega: 08/05/2025</span>
                         </div>
                     </div>
                     <div class="activity-body">
-                        <h4 class="activity-title">Revolução Industrial</h4>
-                        <p class="activity-description">Resumo sobre as causas e consequências da Revolução Industrial para a sociedade contemporânea.</p>
+                        <h4 class="activity-title">Logaritmos</h4>
+                        <p class="activity-description">Definição de logaritmo, propriedades logarítmicas e aplicações em problemas de crescimento exponencial.</p>
                     </div>
                     <div class="activity-meta">
                         <div class="delivery-stats">
@@ -548,13 +522,13 @@
                     </div>
                 </div>
 
-                <!-- Atividade 5 -->
-                <div class="activity-card urgente" data-status="ativa" data-turma="1-B" data-materia="ciencias">
+                <!-- Atividade 5 - URGENTE (HOJE) -->
+                <div class="activity-card urgente" data-status="ativa" data-turma="1-B">
                     <div class="activity-status ativa">Ativa</div>
                     <div class="activity-header">
                         <div class="activity-subject-info">
-                            <span class="material-symbols-outlined activity-icon">biotech</span>
-                            <h3 class="activity-subject">Ciências</h3>
+                            <span class="material-symbols-outlined activity-icon">calculate</span>
+                            <h3 class="activity-subject">Matemática</h3>
                             <span class="activity-turma">1º Ano B</span>
                         </div>
                         <div class="activity-date urgente">
@@ -563,8 +537,8 @@
                         </div>
                     </div>
                     <div class="activity-body">
-                        <h4 class="activity-title">Ciclo da Água</h4>
-                        <p class="activity-description">Elaboração de diagrama e explicação do ciclo da água na natureza e sua importância para os ecossistemas.</p>
+                        <h4 class="activity-title">Progressões Aritméticas</h4>
+                        <p class="activity-description">Conceito de PA, termo geral, soma dos termos e aplicações em situações do cotidiano.</p>
                     </div>
                     <div class="activity-meta">
                         <div class="delivery-stats">
@@ -597,23 +571,23 @@
                     </div>
                 </div>
 
-                <!-- Atividade 6 -->
-                <div class="activity-card" data-status="ativa" data-turma="3-A" data-materia="biologia">
+                <!-- Atividade 6 - ATIVA (3º trimestre) -->
+                <div class="activity-card" data-status="ativa" data-turma="3-A">
                     <div class="activity-status ativa">Ativa</div>
                     <div class="activity-header">
                         <div class="activity-subject-info">
-                            <span class="material-symbols-outlined activity-icon">biotech</span>
-                            <h3 class="activity-subject">Biologia</h3>
+                            <span class="material-symbols-outlined activity-icon">calculate</span>
+                            <h3 class="activity-subject">Matemática</h3>
                             <span class="activity-turma">3º Ano A</span>
                         </div>
                         <div class="activity-date">
                             <span class="material-symbols-outlined">event</span>
-                            <span>Entrega: 20/05/2025</span>
+                            <span>Entrega: 15/09/2025</span>
                         </div>
                     </div>
                     <div class="activity-body">
-                        <h4 class="activity-title">Genética Mendeliana</h4>
-                        <p class="activity-description">Resolução de problemas envolvendo cruzamentos e hereditariedade segundo as leis de Mendel.</p>
+                        <h4 class="activity-title">Geometria Analítica</h4>
+                        <p class="activity-description">Estudo da reta no plano cartesiano, equações da reta e distância entre pontos.</p>
                     </div>
                     <div class="activity-meta">
                         <div class="delivery-stats">
@@ -623,11 +597,11 @@
                             </div>
                             <div class="delivery-stat">
                                 <span class="material-symbols-outlined">assignment_turned_in</span>
-                                <span>10 entregas (36%)</span>
+                                <span>8 entregas (29%)</span>
                             </div>
                             <div class="delivery-stat">
                                 <span class="material-symbols-outlined">grading</span>
-                                <span>5 avaliados</span>
+                                <span>3 avaliados</span>
                             </div>
                         </div>
                     </div>
@@ -635,6 +609,104 @@
                         <button class="btn-action btn-edit">
                             <span class="material-symbols-outlined">edit</span>
                             Editar
+                        </button>
+                        <button class="btn-action btn-view-deliveries">
+                            <span class="material-symbols-outlined">inbox</span>
+                            Entregas
+                        </button>
+                        <button class="btn-action btn-options">
+                            <span class="material-symbols-outlined">more_vert</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Atividade 7 - ATIVA (2º trimestre) -->
+                <div class="activity-card" data-status="ativa" data-turma="2-B">
+                    <div class="activity-status ativa">Ativa</div>
+                    <div class="activity-header">
+                        <div class="activity-subject-info">
+                            <span class="material-symbols-outlined activity-icon">calculate</span>
+                            <h3 class="activity-subject">Matemática</h3>
+                            <span class="activity-turma">2º Ano B</span>
+                        </div>
+                        <div class="activity-date">
+                            <span class="material-symbols-outlined">event</span>
+                            <span>Entrega: 05/06/2025</span>
+                        </div>
+                    </div>
+                    <div class="activity-body">
+                        <h4 class="activity-title">Matrizes e Determinantes</h4>
+                        <p class="activity-description">Operações com matrizes, cálculo de determinantes e aplicações em sistemas lineares.</p>
+                    </div>
+                    <div class="activity-meta">
+                        <div class="delivery-stats">
+                            <div class="delivery-stat">
+                                <span class="material-symbols-outlined">people</span>
+                                <span>31 alunos</span>
+                            </div>
+                            <div class="delivery-stat">
+                                <span class="material-symbols-outlined">assignment_turned_in</span>
+                                <span>14 entregas (45%)</span>
+                            </div>
+                            <div class="delivery-stat">
+                                <span class="material-symbols-outlined">grading</span>
+                                <span>10 avaliados</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="activity-actions">
+                        <button class="btn-action btn-edit">
+                            <span class="material-symbols-outlined">edit</span>
+                            Editar
+                        </button>
+                        <button class="btn-action btn-view-deliveries">
+                            <span class="material-symbols-outlined">inbox</span>
+                            Entregas
+                        </button>
+                        <button class="btn-action btn-options">
+                            <span class="material-symbols-outlined">more_vert</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Atividade 8 - AVALIAÇÃO PENDENTE (Passado) -->
+                <div class="activity-card" data-status="pendente" data-turma="1-A">
+                    <div class="activity-status pendente">Avaliação pendente</div>
+                    <div class="activity-header">
+                        <div class="activity-subject-info">
+                            <span class="material-symbols-outlined activity-icon">calculate</span>
+                            <h3 class="activity-subject">Matemática</h3>
+                            <span class="activity-turma">1º Ano A</span>
+                        </div>
+                        <div class="activity-date">
+                            <span class="material-symbols-outlined">event</span>
+                            <span>Entrega: 10/05/2025</span>
+                        </div>
+                    </div>
+                    <div class="activity-body">
+                        <h4 class="activity-title">Conjuntos Numéricos</h4>
+                        <p class="activity-description">Revisão dos conjuntos dos números naturais, inteiros, racionais e reais. Operações e propriedades.</p>
+                    </div>
+                    <div class="activity-meta">
+                        <div class="delivery-stats">
+                            <div class="delivery-stat">
+                                <span class="material-symbols-outlined">people</span>
+                                <span>32 alunos</span>
+                            </div>
+                            <div class="delivery-stat">
+                                <span class="material-symbols-outlined">assignment_turned_in</span>
+                                <span>29 entregas (91%)</span>
+                            </div>
+                            <div class="delivery-stat warning">
+                                <span class="material-symbols-outlined">grading</span>
+                                <span>18 para avaliar</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="activity-actions">
+                        <button class="btn-action btn-evaluate">
+                            <span class="material-symbols-outlined">grading</span>
+                            Avaliar
                         </button>
                         <button class="btn-action btn-view-deliveries">
                             <span class="material-symbols-outlined">inbox</span>
@@ -679,30 +751,14 @@
                         </div>
                         <div class="form-row">
                             <div class="form-group">
-                                <label for="activity-subject">Matéria <span class="required">*</span></label>
-                                <select id="activity-subject" name="activity-subject" required>
-                                    <option value="" disabled selected>Selecione...</option>
-                                    <option value="matematica">Matemática</option>
-                                    <option value="portugues">Português</option>
-                                    <option value="historia">História</option>
-                                    <option value="geografia">Geografia</option>
-                                    <option value="ciencias">Ciências</option>
-                                    <option value="fisica">Física</option>
-                                    <option value="quimica">Química</option>
-                                    <option value="biologia">Biologia</option>
-                                    <option value="ingles">Inglês</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
                                 <label for="activity-type">Tipo de Atividade <span class="required">*</span></label>
                                 <select id="activity-type" name="activity-type" required>
                                     <option value="" disabled selected>Selecione...</option>
                                     <option value="exercicios">Exercícios</option>
-                                    <option value="redacao">Redação/Produção textual</option>
-                                    <option value="pesquisa">Pesquisa</option>
-                                    <option value="resumo">Resumo</option>
-                                    <option value="relatorio">Relatório</option>
+                                    <option value="lista">Lista de Exercícios</option>
+                                    <option value="trabalho">Trabalho</option>
                                     <option value="projeto">Projeto</option>
+                                    <option value="pesquisa">Pesquisa</option>
                                     <option value="estudo-dirigido">Estudo Dirigido</option>
                                     <option value="questionario">Questionário</option>
                                 </select>
@@ -846,16 +902,16 @@
                         <span class="stat-label">Total de Alunos</span>
                     </div>
                     <div class="delivery-stat-card success">
-                        <span class="stat-number">23</span>
-                        <span class="stat-label">Entregas (66%)</span>
+                        <span class="stat-number">18</span>
+                        <span class="stat-label">Entregas (51%)</span>
                     </div>
                     <div class="delivery-stat-card warning">
-                        <span class="stat-number">12</span>
-                        <span class="stat-label">Pendentes (34%)</span>
+                        <span class="stat-number">17</span>
+                        <span class="stat-label">Pendentes (49%)</span>
                     </div>
                     <div class="delivery-stat-card info">
-                        <span class="stat-number">10</span>
-                        <span class="stat-label">Avaliados (43%)</span>
+                        <span class="stat-number">8</span>
+                        <span class="stat-label">Avaliados (44%)</span>
                     </div>
                 </div>
 
@@ -878,8 +934,8 @@
 
                 <div class="tabs-container">
                     <div class="tabs">
-                        <button class="tab active" data-tab="submissions">Entregues (23)</button>
-                        <button class="tab" data-tab="pending">Pendentes (12)</button>
+                        <button class="tab active" data-tab="submissions">Entregues (18)</button>
+                        <button class="tab" data-tab="pending">Pendentes (17)</button>
                     </div>
 
                     <div class="tab-content active" id="submissions-tab">
@@ -902,7 +958,7 @@
                                                 <span>Ana Carolina Silva</span>
                                             </div>
                                         </td>
-                                        <td>12/05/2025 - 15:30</td>
+                                        <td>20/05/2025 - 15:30</td>
                                         <td><span class="status-badge evaluated">Avaliado</span></td>
                                         <td>9.5</td>
                                         <td>
@@ -920,7 +976,7 @@
                                                 <span>Bruno Mendes</span>
                                             </div>
                                         </td>
-                                        <td>12/05/2025 - 16:45</td>
+                                        <td>20/05/2025 - 16:45</td>
                                         <td><span class="status-badge evaluated">Avaliado</span></td>
                                         <td>8.0</td>
                                         <td>
@@ -938,44 +994,8 @@
                                                 <span>Camila Alves</span>
                                             </div>
                                         </td>
-                                        <td>13/05/2025 - 09:22</td>
+                                        <td>21/05/2025 - 09:22</td>
                                         <td><span class="status-badge pending-evaluation">Para Avaliar</span></td>
-                                        <td>-</td>
-                                        <td>
-                                            <div class="row-actions">
-                                                <button class="btn-row-action primary"><span class="material-symbols-outlined">grading</span></button>
-                                                <button class="btn-row-action"><span class="material-symbols-outlined">visibility</span></button>
-                                                <button class="btn-row-action"><span class="material-symbols-outlined">comment</span></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="student-info">
-                                                <span class="material-symbols-outlined">account_circle</span>
-                                                <span>Daniel Costa</span>
-                                            </div>
-                                        </td>
-                                        <td>13/05/2025 - 14:10</td>
-                                        <td><span class="status-badge pending-evaluation">Para Avaliar</span></td>
-                                        <td>-</td>
-                                        <td>
-                                            <div class="row-actions">
-                                                <button class="btn-row-action primary"><span class="material-symbols-outlined">grading</span></button>
-                                                <button class="btn-row-action"><span class="material-symbols-outlined">visibility</span></button>
-                                                <button class="btn-row-action"><span class="material-symbols-outlined">comment</span></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="student-info">
-                                                <span class="material-symbols-outlined">account_circle</span>
-                                                <span>Eduardo Nunes</span>
-                                            </div>
-                                        </td>
-                                        <td>16/05/2025 - 08:15</td>
-                                        <td><span class="status-badge late">Atrasado</span></td>
                                         <td>-</td>
                                         <td>
                                             <div class="row-actions">
@@ -990,11 +1010,11 @@
                         </div>
                         
                         <div class="table-pagination">
-                            <span>Exibindo 1-5 de 23 entregas</span>
+                            <span>Exibindo 1-3 de 18 entregas</span>
                             <div class="pagination-controls">
                                 <button disabled><span class="material-symbols-outlined">first_page</span></button>
                                 <button disabled><span class="material-symbols-outlined">navigate_before</span></button>
-                                <span>Página 1 de 5</span>
+                                <span>Página 1 de 6</span>
                                 <button><span class="material-symbols-outlined">navigate_next</span></button>
                                 <button><span class="material-symbols-outlined">last_page</span></button>
                             </div>
@@ -1021,7 +1041,7 @@
                                             </div>
                                         </td>
                                         <td><span class="status-badge not-started">Não Iniciado</span></td>
-                                        <td>12/05/2025 - 10:45</td>
+                                        <td>20/05/2025 - 10:45</td>
                                         <td>
                                             <div class="row-actions">
                                                 <button class="btn-row-action"><span class="material-symbols-outlined">mail</span></button>
@@ -1037,23 +1057,7 @@
                                             </div>
                                         </td>
                                         <td><span class="status-badge in-progress">Em Andamento</span></td>
-                                        <td>14/05/2025 - 16:20</td>
-                                        <td>
-                                            <div class="row-actions">
-                                                <button class="btn-row-action"><span class="material-symbols-outlined">mail</span></button>
-                                                <button class="btn-row-action"><span class="material-symbols-outlined">chat</span></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                    <tr>
-                                        <td>
-                                            <div class="student-info">
-                                                <span class="material-symbols-outlined">account_circle</span>
-                                                <span>Henrique Lima</span>
-                                            </div>
-                                        </td>
-                                        <td><span class="status-badge not-viewed">Não Visualizado</span></td>
-                                        <td>10/05/2025 - 08:50</td>
+                                        <td>21/05/2025 - 16:20</td>
                                         <td>
                                             <div class="row-actions">
                                                 <button class="btn-row-action"><span class="material-symbols-outlined">mail</span></button>
@@ -1066,11 +1070,11 @@
                         </div>
                         
                         <div class="table-pagination">
-                            <span>Exibindo 1-3 de 12 alunos</span>
+                            <span>Exibindo 1-2 de 17 alunos</span>
                             <div class="pagination-controls">
                                 <button disabled><span class="material-symbols-outlined">first_page</span></button>
                                 <button disabled><span class="material-symbols-outlined">navigate_before</span></button>
-                                <span>Página 1 de 4</span>
+                                <span>Página 1 de 9</span>
                                 <button><span class="material-symbols-outlined">navigate_next</span></button>
                                 <button><span class="material-symbols-outlined">last_page</span></button>
                             </div>
