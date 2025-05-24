@@ -383,6 +383,7 @@ body.dark-theme .tab-button:hover {
     display: flex;
     flex-direction: column;
     overflow: hidden;
+    z-index: 0;
 }
 
 body.dark-theme .activity-card {
@@ -398,34 +399,35 @@ body.dark-theme .activity-card {
     border: 2px solid var(--vermelho);
 }
 
-/* Badge de status */
+/* Badge de status - CORRIGIDO Z-INDEX */
 .activity-status {
+    position: absolute;
+    top: 10px;
+    right: 10px;
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 100px;
+    width: 120px;
     height: 30px;
-    margin: 10px 10px;
-    align-self: flex-end;
     padding: 5px 12px;
     border-radius: 20px;
     font-size: 12px;
     font-weight: 600;
+    z-index: 1;
+    text-align: center; 
+    line-height: 1.2;
 }
+
 
 .activity-status.ativa {
     background-color: var(--verde-claro);
     color: var(--verde);
 }
 
-.activity-status.avaliar {
-    background-color: var(--azul-info-claro);
-    color: var(--azul-info);
-}
-
 .activity-status.pendente {
     background-color: var(--laranja-claro);
     color: var(--laranja);
+    font-size: 11px;
 }
 
 .activity-status.finalizada {
@@ -437,7 +439,7 @@ body.dark-theme .activity-card {
 .activity-header {
     display: flex;
     justify-content: space-between;
-    padding: 0px 20px 20px 20px;
+    padding: 45px 20px 20px 20px;
     padding-bottom: 10px;
 }
 
@@ -476,7 +478,7 @@ body.dark-theme .activity-turma {
     display: flex;
     align-items: center;
     gap: 5px;
-    font-size: 13px;
+    font-size: 11px;
     color: var(--texto-secundario);
 }
 
@@ -625,9 +627,12 @@ body.dark-theme .btn-action:hover {
 /* Paginação */
 .pagination {
     display: flex;
+    justify-self: center;
     justify-content: center;
+    align-items: center;
     gap: 8px;
     margin-top: 30px;
+    padding: 15px 0;
 }
 
 .pagination-btn {
@@ -1312,6 +1317,181 @@ body.dark-theme .modal-actions {
     border-top: 1px solid #334155;
 }
 
+/* Estilos de notificação e mensagens de resultado */
+.notification-toast {
+    position: fixed;
+    bottom: -60px;
+    left: 50%;
+    transform: translateX(-50%);
+    background-color: #0048a5;
+    color: white;
+    padding: 12px 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    z-index: 2000;
+    transition: bottom 0.3s ease;
+    font-family: 'Space Grotesk', sans-serif;
+    font-size: 14px;
+}
+
+.notification-toast.show {
+    bottom: 30px;
+}
+
+.dark-theme .notification-toast {
+    background-color: #3b82f6;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+.no-results {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    background-color: #f8fafc;
+    border-radius: 12px;
+    width: 100%;
+    margin: 20px 0;
+    text-align: center;
+}
+
+.dark-theme .no-results {
+    background-color: #1e293b;
+}
+
+.no-results .material-symbols-outlined {
+    font-size: 48px;
+    color: #94a3b8;
+    margin-bottom: 16px;
+}
+
+.no-results p {
+    color: #64748b;
+    font-size: 16px;
+    margin-bottom: 16px;
+}
+
+.btn-reset-filters {
+    background-color: #f1f5f9;
+    color: #0048a5;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.btn-reset-filters:hover {
+    background-color: #e2e8f0;
+}
+
+.dark-theme .btn-reset-filters {
+    background-color: #334155;
+    color: #3b82f6;
+}
+
+.dark-theme .btn-reset-filters:hover {
+    background-color: #475569;
+}
+
+.activity-counter {
+    margin: 8px 0;
+    color: #64748b;
+    font-size: 14px;
+}
+
+.activity-counter strong {
+    color: #0048a5;
+    font-weight: 600;
+}
+
+.dark-theme .activity-counter {
+    color: #94a3b8;
+}
+
+.dark-theme .activity-counter strong {
+    color: #3b82f6;
+}
+
+.file-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 12px;
+    background-color: #f8fafc;
+    border-radius: 6px;
+    margin-bottom: 8px;
+}
+
+.dark-theme .file-item {
+    background-color: #1e293b;
+}
+
+.file-name {
+    flex: 1;
+    font-size: 14px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.btn-remove-file {
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #94a3b8;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 2px;
+    border-radius: 4px;
+}
+
+.btn-remove-file:hover {
+    background-color: #f1f5f9;
+    color: #475569;
+}
+
+.dark-theme .btn-remove-file:hover {
+    background-color: #334155;
+    color: #cbd5e1;
+}
+
+.file-upload-area.dragover {
+    border-color: #0048a5;
+    background-color: #eef6ff;
+}
+
+.dark-theme .file-upload-area.dragover {
+    border-color: #3b82f6;
+    background-color: #0f172a;
+}
+
+/* Melhorias visuais para matemática */
+.activity-subject {
+    position: relative;
+}
+
+.activity-subject::after {
+    content: "📐";
+    margin-left: 5px;
+    font-size: 12px;
+}
+
+/* Destacar atividades urgentes */
+.activity-card.urgente {
+    animation: pulse-urgent 2s infinite;
+}
+
+@keyframes pulse-urgent {
+    0% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0.4); }
+    70% { box-shadow: 0 0 0 10px rgba(220, 38, 38, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(220, 38, 38, 0); }
+}
+
 /* ===== RESPONSIVIDADE ===== */
 @media (max-width: 1200px) {
     .stats-container {
@@ -1338,6 +1518,7 @@ body.dark-theme .modal-actions {
     
     .header {
         margin-left: 0;
+        z-index: 999;
     }
     
     main {
@@ -1412,6 +1593,23 @@ body.dark-theme .modal-actions {
         gap: 10px;
         align-items: flex-start;
     }
+    
+    .activity-status {
+        width: 100px;
+        font-size: 10px;
+        height: 26px;
+        position: relative;
+        margin-bottom: 10px;
+        align-self: flex-end;
+    }
+    
+    .activity-status.pendente {
+        font-size: 9px;
+    }
+    
+    .activity-header {
+        padding-top: 20px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -1433,5 +1631,14 @@ body.dark-theme .modal-actions {
     
     .modal-actions button {
         width: 100%;
+    }
+    
+    .activity-status {
+        width: 90px;
+        font-size: 9px;
+    }
+    
+    .activity-status.pendente {
+        font-size: 8px;
     }
 }
