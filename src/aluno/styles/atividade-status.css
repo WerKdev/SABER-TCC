@@ -1,5 +1,22 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap');
 
+/* =========== ESTRUTURA DO MAIN (seguindo padrão de redações) =========== */
+main {
+    margin-left: 70px;
+    padding: 30px;
+    background-color: var(--background-claro);
+    transition: margin-left 0.3s ease;
+    min-height: calc(100vh - 70px);
+}
+
+body.dark-theme main {
+    background-color: var(--background-escuro);
+}
+
+#sidebar.active ~ main {
+    margin-left: 270px;
+}
+
 /* =========== CABEÇALHO DA PÁGINA =========== */
 .page-header {
     display: flex;
@@ -760,8 +777,163 @@ body.dark-theme ::-webkit-scrollbar-thumb:hover {
     background: #5a5a5a;
 }
 
-/* =========== RESPONSIVIDADE =========== */
+/* =========== OTIMIZAÇÕES PARA DISPOSITIVOS TOUCH (simplificado) =========== */
+.touch-device button,
+.touch-device .attach-file-btn,
+.touch-device .mark-complete-btn,
+.touch-device .send-question-btn,
+.touch-device .enviar-btn {
+    min-height: 44px;
+    touch-action: manipulation;
+}
+
+.touch-device .more-options {
+    min-height: 44px;
+    min-width: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* =========== MELHORIAS NA EXPERIÊNCIA MOBILE =========== */
 @media (max-width: 768px) {
+    /* Otimizar scrolling em mobile */
+    html {
+        -webkit-overflow-scrolling: touch;
+        scroll-behavior: smooth;
+    }
+    
+    /* Melhorar legibilidade em telas pequenas */
+    body {
+        -webkit-text-size-adjust: 100%;
+        -ms-text-size-adjust: 100%;
+    }
+    
+    /* Otimizar inputs para mobile */
+    input, textarea, select {
+        font-size: 16px; /* Previne zoom no iOS */
+        border-radius: 8px;
+    }
+    
+    /* Melhorar área de toque para elementos interativos */
+    .activity-card-header .more-options {
+        padding: 12px;
+        margin: -12px;
+    }
+    
+    /* Ajustar espaçamento entre elementos */
+    .activity-details li {
+        margin-bottom: 15px;
+        line-height: 1.6;
+    }
+    
+    /* Otimizar comentários para leitura em mobile */
+    .comment {
+        line-height: 1.5;
+        word-wrap: break-word;
+        hyphens: auto;
+    }
+    
+    /* Melhorar contraste em telas pequenas */
+    .file-attachment {
+        border: 1px solid #e2e8f0;
+    }
+    
+    body.dark-theme .file-attachment {
+        border: 1px solid #374151;
+    }
+}
+
+/* =========== RESPONSIVIDADE (baseada em redações) =========== */
+@media (max-width: 992px) {
+    .activity-container {
+        gap: 20px;
+    }
+    
+    .activity-actions {
+        min-width: 280px;
+    }
+    
+    .prazo-info, .autor-info {
+        flex-direction: column;
+        gap: 8px;
+    }
+}
+
+@media (max-width: 768px) {
+    main {
+        margin-left: 0;
+        padding: 80px 20px 20px 20px;
+    }
+    
+    #sidebar.active ~ main {
+        margin-left: 0;
+    }
+    
+    .header {
+        width: 100vw;
+        margin-left: 0px;
+        background-color: #0c142b;
+        position: fixed;
+        height: 60px;
+        top: 0px;
+    }
+
+    body.dark-theme .header {
+        background-color: #0c142b;
+    }
+
+    #sidebar.active ~ .header {
+        margin-left: 0;
+    }
+
+    #sidebar {
+        display: flex;
+        flex-direction: column;
+        width: 200px;
+        height: 100%;
+        background-color: #0c142b;
+        position: fixed;
+        top: 60px;
+        left: -200px;
+        transition: left 0.3s ease;
+        z-index: 1000;
+    }
+
+    #sidebar.active {
+        left: 0;
+        width: 200px;
+    }
+
+    #menu-icon-mobile {
+        display: block;
+    }
+
+    #user-icon, #notifications-icon {
+        color: #F1F5F9;
+        font-weight: 100;
+        font-size: 20px;
+    }
+
+    #user-name-header {
+        color: #F1F5F9;
+        font-size: 14px;
+    }
+
+    .notifications-popup {
+        position: absolute;
+        top: 60px;
+        right: 160px;
+        width: 250px;
+    }
+
+    .user-icon-popup {
+        position: absolute;
+        top: 60px;
+        right: 10px;
+        width: 220px;
+    }
+    
     .page-header {
         flex-direction: column;
         align-items: flex-start;
@@ -779,17 +951,243 @@ body.dark-theme ::-webkit-scrollbar-thumb:hover {
     
     .activity-container {
         flex-direction: column;
+        gap: 20px;
     }
     
+    .activity-content,
     .activity-actions {
         width: 100%;
+        min-width: 0;
+    }
+    
+    .activity-card {
+        padding: 20px;
     }
     
     .activity-card-header {
         gap: 10px;
+        flex-wrap: wrap;
     }
     
     .activity-card-header h2 {
         font-size: 18px;
+        line-height: 1.3;
     }
-}   
+    
+    .activity-details li {
+        font-size: 14px;
+        margin-bottom: 10px;
+    }
+    
+    .submission-box,
+    .teacher-help {
+        padding: 16px;
+    }
+    
+    .action-buttons {
+        gap: 10px;
+    }
+    
+    .attach-file-btn, 
+    .mark-complete-btn,
+    .send-question-btn,
+    .enviar-btn {
+        padding: 14px 12px;
+        font-size: 15px;
+    }
+    
+    .comment {
+        padding: 10px;
+        font-size: 13px;
+    }
+    
+    .comment.reply {
+        margin-left: 15px;
+    }
+    
+    .teacher-help textarea,
+    .comment-form-turma textarea {
+        height: 80px;
+    }
+    
+    .options-menu {
+        position: fixed !important;
+        top: 50% !important;
+        left: 50% !important;
+        transform: translate(-50%, -50%) !important;
+        width: calc(100vw - 40px);
+        max-width: 300px;
+    }
+    
+    .complete-confirm-popup .confirm-popup,
+    .cancel-confirm-popup .confirm-popup {
+        width: calc(100vw - 40px);
+        margin: 20px;
+        max-width: 350px;
+    }
+    
+    .confirm-popup .popup-header {
+        padding: 16px;
+    }
+    
+    .confirm-popup .popup-content {
+        padding: 16px;
+    }
+    
+    .confirm-popup .popup-actions {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .confirm-popup .btn-cancel,
+    .confirm-popup .btn-confirm {
+        width: 100%;
+        padding: 12px;
+        justify-content: center;
+    }
+}
+
+@media screen and (max-width: 576px) {
+    .menuheader {
+        margin-right: 15px;
+        gap: 5px;
+    }
+    
+    #user-name-header { 
+        display: none; 
+    }
+    
+    .page-title h1 {
+        font-size: 20px;
+    }
+    
+    main {
+        padding: 80px 15px 30px 15px;
+    }
+    
+    .activity-card {
+        padding: 15px;
+    }
+    
+    .activity-card h1 {
+        font-size: 18px;
+    }
+    
+    .activity-card h2 {
+        font-size: 16px;
+    }
+    
+    .activity-card-header h2 {
+        font-size: 16px;
+    }
+    
+    .activity-details h3 {
+        font-size: 15px;
+    }
+    
+    .activity-details li {
+        font-size: 13px;
+        line-height: 1.6;
+    }
+    
+    .submission-box,
+    .teacher-help {
+        padding: 12px;
+    }
+    
+    .submission-header h3,
+    .teacher-help h3 {
+        font-size: 15px;
+    }
+    
+    .class-comments h3 {
+        font-size: 15px;
+    }
+    
+    .comment {
+        padding: 8px;
+        font-size: 12px;
+    }
+    
+    .comment.reply {
+        margin-left: 10px;
+    }
+    
+    .file-attachment {
+        padding: 10px;
+        font-size: 13px;
+    }
+    
+    .deadline {
+        font-size: 12px;
+    }
+    
+    .toast {
+        bottom: 15px;
+        padding: 10px 20px;
+        font-size: 13px;
+        width: calc(100vw - 30px);
+        max-width: 300px;
+    }
+}
+
+/* =========== AJUSTES PARA TELAS MUITO PEQUENAS =========== */
+@media (max-width: 360px) {
+    main {
+        padding: 80px 10px 10px 10px;
+    }
+    
+    .page-title h1 {
+        font-size: 18px;
+    }
+    
+    .activity-card {
+        padding: 12px;
+    }
+    
+    .btn-primary, .btn-secondary {
+        padding: 12px 10px;
+        font-size: 13px;
+    }
+    
+    .submission-box,
+    .teacher-help {
+        padding: 10px;
+    }
+}
+
+/* =========== AJUSTES PARA IMPRESSÃO =========== */
+@media print {
+    main {
+        margin-left: 0 !important;
+        padding: 20px !important;
+    }
+    
+    .page-actions,
+    .activity-actions,
+    .teacher-help,
+    .options-menu,
+    .popup-overlay {
+        display: none !important;
+    }
+    
+    .activity-container {
+        flex-direction: column;
+    }
+    
+    .activity-card {
+        box-shadow: none;
+        border: 1px solid #ddd;
+        break-inside: avoid;
+    }
+    
+    .activity-details li {
+        color: #000 !important;
+    }
+    
+    .comment {
+        background: #f9f9f9 !important;
+        border: 1px solid #ddd;
+        color: #000 !important;
+    }
+}

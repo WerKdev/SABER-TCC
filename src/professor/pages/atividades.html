@@ -12,19 +12,16 @@
     <link rel="stylesheet" href="../../common/styles/exitpopup.css">
 </head>
 <body>
-    <!-- HEADER -->
+<!-- HEADER -->
     <header class="header">
         <div class="menu-icon-mobile">
             <span id="menu-icon-mobile" class="material-symbols-outlined">menu</span>
         </div>  
-        <div class="logo-Header">
-            <p class="logo"><img src="/api/placeholder/120/40" alt="Logo Escola"></p>
-        </div>
         <div class="menuheader"> 
             <ul class="menuheader-list">
                 <li class="notification-item">
                     <span id="notifications-icon" class="material-symbols-outlined">notifications</span>
-                    <span class="notification-badge">5</span>
+                    <span class="notification-badge">3</span>
                     <div id="notifications-popup" class="notifications-popup">
                         <div class="popup-header">
                             <p>Notificações</p>
@@ -33,42 +30,42 @@
                         <div class="notifications-content">
                             <ul>
                                 <li class="notification unread">
-                                    <div class="notification-icon"><span class="material-symbols-outlined">assignment_turned_in</span></div>
+                                    <div class="notification-icon"><span class="material-symbols-outlined">campaign</span></div>
                                     <div class="notification-text">
-                                        <p class="notification-title">Nova entrega</p>
-                                        <p class="notification-desc">Carlos Silva - Exercícios de Álgebra</p>
+                                        <p class="notification-title">Comunicado importante</p>
+                                        <p class="notification-desc">Alteração no calendário de provas</p>
                                         <p class="notification-time">há 5 minutos</p>
                                     </div>
                                 </li>
                                 <li class="notification unread">
-                                    <div class="notification-icon"><span class="material-symbols-outlined">question_answer</span></div>
+                                    <div class="notification-icon"><span class="material-symbols-outlined">assignment</span></div>
                                     <div class="notification-text">
-                                        <p class="notification-title">Nova dúvida</p>
-                                        <p class="notification-desc">Maria Oliveira - Funções Quadráticas</p>
-                                        <p class="notification-time">há 15 minutos</p>
+                                        <p class="notification-title">Nova atividade disponível</p>
+                                        <p class="notification-desc">Exercícios de Álgebra - Matemática</p>
+                                        <p class="notification-time">há 10 minutos</p>
                                     </div>
                                 </li>
                                 <li class="notification unread">
-                                    <div class="notification-icon"><span class="material-symbols-outlined">campaign</span></div>
+                                    <div class="notification-icon"><span class="material-symbols-outlined">quiz</span></div>
                                     <div class="notification-text">
-                                        <p class="notification-title">Reunião pedagógica</p>
-                                        <p class="notification-desc">Amanhã às 14:00 - Sala dos professores</p>
-                                        <p class="notification-time">há 1 hora</p>
+                                        <p class="notification-title">Prova agendada</p>
+                                        <p class="notification-desc">Física Quântica - 25/05 às 14:00</p>
+                                        <p class="notification-time">há 2 horas</p>
                                     </div>
                                 </li>
                                 <li class="notification">
-                                    <div class="notification-icon"><span class="material-symbols-outlined">event_available</span></div>
+                                    <div class="notification-icon"><span class="material-symbols-outlined">grade</span></div>
                                     <div class="notification-text">
-                                        <p class="notification-title">Conselho de Classe</p>
-                                        <p class="notification-desc">Agendado para 23/05 às 13:30</p>
+                                        <p class="notification-title">Atividade avaliada</p>
+                                        <p class="notification-desc">Revolução Industrial - História</p>
                                         <p class="notification-time">há 1 dia</p>
                                     </div>
                                 </li>
                                 <li class="notification">
-                                    <div class="notification-icon"><span class="material-symbols-outlined">admin_panel_settings</span></div>
+                                    <div class="notification-icon"><span class="material-symbols-outlined">calendar_today</span></div>
                                     <div class="notification-text">
-                                        <p class="notification-title">Acesso liberado</p>
-                                        <p class="notification-desc">Nova funcionalidade de relatórios</p>
+                                        <p class="notification-title">Prazo de entrega próximo</p>
+                                        <p class="notification-desc">Análise Combinatória vence em 2 dias</p>
                                         <p class="notification-time">há 2 dias</p>
                                     </div>
                                 </li>
@@ -127,6 +124,38 @@
                                             </label>
                                         </a>
                                     </li>
+                                    <li class="settings-item language-selector-container">
+                                        <a href="#idioma" class="language-selector">
+                                            <span class="material-symbols-outlined">translate</span>
+                                            <span>Idioma</span>
+                                            <span class="selected-language">Português</span>
+                                            <span class="material-symbols-outlined toggle-arrow">expand_more</span>
+                                        </a>
+                                        <div class="language-options">
+                                            <ul>
+                                                <li data-lang="pt-BR" class="active">
+                                                    <span class="language-flag">🇧🇷</span>
+                                                    <span class="language-name">Português</span>
+                                                </li>
+                                                <li data-lang="en-US">
+                                                    <span class="language-flag">🇺🇸</span>
+                                                    <span class="language-name">English</span>
+                                                </li>
+                                                <li data-lang="es-ES">
+                                                    <span class="language-flag">🇪🇸</span>
+                                                    <span class="language-name">Español</span>
+                                                </li>
+                                                <li data-lang="fr-FR">
+                                                    <span class="language-flag">🇫🇷</span>
+                                                    <span class="language-name">Français</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="settings-group">
+                                <ul>
                                     <li>
                                         <a href="#ajuda">
                                             <span class="material-symbols-outlined">help</span>
@@ -148,7 +177,7 @@
         </div>
     </header>
 
-        <!-- SIDEBAR -->
+     <!-- SIDEBAR -->
     <div id="sidebar">
         <div class="topmenu">
             <span id="menu-icon" class="material-symbols-outlined">menu</span>
@@ -171,7 +200,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="atividades.html" class="active">
+                        <a href="atividades.html"  class="active">
                             <span class="material-symbols-outlined">assignment</span>
                             <p>Atividades</p>
                         </a>
@@ -215,6 +244,91 @@
                 </ul>
             </div>
         </nav>
+    </div>
+
+    <div id="password-popup" class="popup-overlay" style="display: none;">
+        <div class="popup">
+            <div class="popup-header">
+                <h2>Alterar senha</h2>
+                <span class="material-symbols-outlined close-popup">close</span>
+            </div>
+            <div class="popup-content">
+                <p class="popup-description">Informe a senha atual e a nova senha</p>
+                <form id="change-password-form">
+                    <div class="form-group">
+                        <label for="current-password">Senha atual <span class="required">*</span></label>
+                        <div class="password-input">
+                            <input type="password" id="current-password" name="current-password" required>
+                            <span class="material-symbols-outlined toggle-password">visibility_off</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-password">Nova senha <span class="required">*</span></label>
+                        <div class="password-input">
+                            <input type="password" id="new-password" name="new-password" required>
+                            <span class="material-symbols-outlined toggle-password">visibility_off</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Confirmação de senha <span class="required">*</span></label>
+                        <div class="password-input">
+                            <input type="password" id="confirm-password" name="confirm-password" required>
+                            <span class="material-symbols-outlined toggle-password">visibility_off</span>
+                        </div>
+                    </div>
+                    <div class="forgot-password">
+                        <a href="#" id="forgot-password-link">Esqueceu a senha?</a>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel">Cancelar</button>
+                        <button type="submit" class="btn-confirm">Alterar senha</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup de Redefinição de Senha -->
+    <div id="reset-password-popup" class="popup-overlay" style="display: none;">
+        <div class="popup">
+            <div class="popup-header">
+                <h2>Redefinição de senha!</h2>
+                <span class="material-symbols-outlined close-popup">close</span>
+            </div>
+            <div class="popup-feedback-content">
+                <p class="popup-description">Informe um email e enviaremos um link para recuperação da sua senha.</p>
+                <form id="reset-password-form">
+                    <div class="form-group">
+                        <label for="recovery-email">Email <span class="required">*</span></label>
+                        <input type="email" id="recovery-email" name="recovery-email" required placeholder="seu@email.com">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-back">
+                            <span class="material-symbols-outlined">arrow_back</span>
+                            Voltar
+                        </button>
+                        <button type="submit" class="btn-send">Enviar link de recuperação</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="logout-popup" class="popup-overlay" style="display: none;">
+        <div class="popup logout-popup">
+            <div class="logout-content">
+                <div class="logout-icon">
+                    <span class="material-symbols-outlined">logout</span>
+                </div>
+                <h2 class="logout-title">Sair da conta?</h2>
+                <p class="logout-description">Você poderá entrar novamente a qualquer momento. Se quiser trocar de conta, faça isso adicionando uma conta existente.</p>
+                
+                <div class="logout-actions">
+                    <button type="button" class="btn-logout">Sair</button>
+                    <button type="button" class="btn-cancel-logout">Cancelar</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- CONTEÚDO PRINCIPAL -->

@@ -4,6 +4,10 @@ document.addEventListener("DOMContentLoaded", function() {
     const fileUpload = document.getElementById('file-upload');
     const statusText = document.querySelector('.status');
     
+    // Configurar responsividade (baseada na tela de redações)
+    window.addEventListener("resize", checkWindowSize);
+    checkWindowSize();
+    
     // Configurar botão voltar para sempre voltar para página anterior
     configurarBotaoVoltar();
     
@@ -203,6 +207,18 @@ document.addEventListener("DOMContentLoaded", function() {
         moreOptionsBtn.addEventListener('click', function(e) {
             e.stopPropagation();
             showOptionsMenu(this);
+        });
+    }
+
+    // Melhorar touch interactions em mobile (baseado na tela de redações)
+    if ('ontouchstart' in window) {
+        // Adicionar classe para devices touch
+        document.body.classList.add('touch-device');
+        
+        // Otimizar cliques em botões para touch
+        const buttons = document.querySelectorAll('button, .attach-file-btn, .mark-complete-btn');
+        buttons.forEach(button => {
+            button.style.minHeight = '44px'; // Mínimo recomendado para touch
         });
     }
 });
@@ -583,4 +599,31 @@ function isPastDeadline() {
         return currentDate > deadlineDate;
     }
     return false;
+}
+
+// Função para verificar o tamanho da janela (baseada na tela de redações)
+function checkWindowSize() {
+    const width = window.innerWidth;
+    const cards = document.querySelectorAll('.activity-card, .submission-box, .teacher-help');
+    
+    // Ajustar layout para diferentes tamanhos de tela
+    if (width <= 768) {
+        cards.forEach(card => {
+            if (card.classList.contains('activity-card')) {
+                card.style.flexBasis = '100%';
+            }
+        });
+    } else if (width <= 1334) {
+        cards.forEach(card => {
+            if (card.classList.contains('activity-card')) {
+                card.style.flexBasis = 'calc(50% - 10px)';
+            }
+        });
+    } else {
+        cards.forEach(card => {
+            if (card.classList.contains('activity-card')) {
+                card.style.flexBasis = 'calc(33.333% - 14px)';
+            }
+        });
+    }
 }
