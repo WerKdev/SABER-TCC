@@ -1,0 +1,817 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Materiais - Professor SABER</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="../styles/materiais-professor.css">
+    <link rel="stylesheet" href="../../aluno/styles/materiais-aluno.css">
+    <link rel="stylesheet" href="../../common/styles/menu.css">
+    <link rel="stylesheet" href="../../common/styles/changepass.css">
+    <link rel="stylesheet" href="../../common/styles/exitpopup.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="menu-icon-mobile">
+            <span id="menu-icon-mobile" class="material-symbols-outlined">menu</span>
+        </div>  
+        <div class="menuheader"> 
+            <ul class="menuheader-list">
+                <li class="notification-item">
+                    <span id="notifications-icon" class="material-symbols-outlined">notifications</span>
+                    <span class="notification-badge">3</span>
+                    <div id="notifications-popup" class="notifications-popup">
+                        <div class="popup-header">
+                            <p>Notificações</p>
+                            <span class="material-symbols-outlined close-popup">close</span>
+                        </div>
+                        <div class="notifications-content">
+                            <ul>
+                                <li class="notification unread">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">campaign</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Comunicado importante</p>
+                                        <p class="notification-desc">Alteração no calendário de provas</p>
+                                        <p class="notification-time">há 5 minutos</p>
+                                    </div>
+                                </li>
+                                <li class="notification unread">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">assignment</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Nova atividade disponível</p>
+                                        <p class="notification-desc">Exercícios de Álgebra - Matemática</p>
+                                        <p class="notification-time">há 10 minutos</p>
+                                    </div>
+                                </li>
+                                <li class="notification unread">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">quiz</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Prova agendada</p>
+                                        <p class="notification-desc">Física Quântica - 25/05 às 14:00</p>
+                                        <p class="notification-time">há 2 horas</p>
+                                    </div>
+                                </li>
+                                <li class="notification">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">grade</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Atividade avaliada</p>
+                                        <p class="notification-desc">Revolução Industrial - História</p>
+                                        <p class="notification-time">há 1 dia</p>
+                                    </div>
+                                </li>
+                                <li class="notification">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">calendar_today</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Prazo de entrega próximo</p>
+                                        <p class="notification-desc">Análise Combinatória vence em 2 dias</p>
+                                        <p class="notification-time">há 2 dias</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="popup-footer">
+                            <a href="#todas-notificacoes">Ver todas as notificações</a>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <p id="user-name-header">Prof. Ricardo Soares</p>
+                </li>
+                <li class="user-settings-item">
+                    <span id="user-icon" class="material-symbols-outlined">account_circle</span>
+                    <div id="user-icon-popup" class="user-icon-popup">
+                        <div class="popup-header">
+                            <div class="user-info">
+                                <div class="user-avatar">
+                                    <span class="material-symbols-outlined">person</span>
+                                </div>
+                                <div class="user-details">
+                                    <p class="user-name">Ricardo Soares</p>
+                                    <p class="user-email">ricardo.soares@escola.edu.br</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="settings-content">
+                            <div class="settings-group">
+                                <p class="settings-group-title">Conta</p>
+                                <ul>
+                                    <li>
+                                        <a href="#perfil">
+                                            <span class="material-symbols-outlined">manage_accounts</span>
+                                            <span>Meu Perfil</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="alterar-senha-link">
+                                            <span class="material-symbols-outlined">key</span>
+                                            <span>Alterar senha</span>
+                                        </a>
+                                    </li>   
+                                </ul>
+                            </div>
+                            <div class="settings-group">
+                                <p class="settings-group-title">Sistema</p>
+                                <ul>
+                                    <li>
+                                        <a href="#tema" class="theme-toggle-container">
+                                            <span class="material-symbols-outlined">dark_mode</span>
+                                            <span>Tema Escuro</span>
+                                            <label class="switch">
+                                                <input type="checkbox" id="theme-toggle">
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </a>
+                                    </li>
+                                    <li class="settings-item language-selector-container">
+                                        <a href="#idioma" class="language-selector">
+                                            <span class="material-symbols-outlined">translate</span>
+                                            <span>Idioma</span>
+                                            <span class="selected-language">Português</span>
+                                            <span class="material-symbols-outlined toggle-arrow">expand_more</span>
+                                        </a>
+                                        <div class="language-options">
+                                            <ul>
+                                                <li data-lang="pt-BR" class="active">
+                                                    <span class="language-flag">🇧🇷</span>
+                                                    <span class="language-name">Português</span>
+                                                </li>
+                                                <li data-lang="en-US">
+                                                    <span class="language-flag">🇺🇸</span>
+                                                    <span class="language-name">English</span>
+                                                </li>
+                                                <li data-lang="es-ES">
+                                                    <span class="language-flag">🇪🇸</span>
+                                                    <span class="language-name">Español</span>
+                                                </li>
+                                                <li data-lang="fr-FR">
+                                                    <span class="language-flag">🇫🇷</span>
+                                                    <span class="language-name">Français</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="settings-group">
+                                <ul>
+                                    <li>
+                                        <a href="#ajuda">
+                                            <span class="material-symbols-outlined">help</span>
+                                            <span>Ajuda</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#sair" class="logout-button">
+                                            <span class="material-symbols-outlined">logout</span>
+                                            <span>Sair</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- SIDEBAR -->
+    <div id="sidebar">
+        <div class="topmenu">
+            <span id="menu-icon" class="material-symbols-outlined">menu</span>
+            <h3 id="menu-tittle">Menu</h3>
+            <div id="logomenu"></div>
+        </div>
+        <nav id="menu-hidden">
+            <div class="navbar">
+                <ul>
+                    <li>
+                        <a href="dashboard.html">
+                            <span class="material-symbols-outlined">dashboard</span>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="turmas.html">
+                            <span class="material-symbols-outlined">groups</span>
+                            <p>Turmas</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="atividades.html">
+                            <span class="material-symbols-outlined">assignment</span>
+                            <p>Atividades</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="redacoes.html">
+                            <span class="material-symbols-outlined">history_edu</span>
+                            <p>Redações</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="calendario-professor.html">
+                            <span class="material-symbols-outlined">event_note</span>
+                            <p>Plano de Aulas</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="materiais-professor.html" class="active">
+                            <span class="material-symbols-outlined">book</span>
+                            <p>Materiais</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="documentos.html">
+                            <span class="material-symbols-outlined">folder</span>
+                            <p>Documentos</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="comunicacao.html">
+                            <span class="material-symbols-outlined">chat</span>
+                            <p>Comunicação</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="suporte.html">
+                            <span class="material-symbols-outlined">help</span>
+                            <p>Suporte</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div id="password-popup" class="popup-overlay" style="display: none;">
+        <div class="popup">
+            <div class="popup-header">
+                <h2>Alterar senha</h2>
+                <span class="material-symbols-outlined close-popup">close</span>
+            </div>
+            <div class="popup-content">
+                <p class="popup-description">Informe a senha atual e a nova senha</p>
+                <form id="change-password-form">
+                    <div class="form-group">
+                        <label for="current-password">Senha atual <span class="required">*</span></label>
+                        <div class="password-input">
+                            <input type="password" id="current-password" name="current-password" required>
+                            <span class="material-symbols-outlined toggle-password">visibility_off</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-password">Nova senha <span class="required">*</span></label>
+                        <div class="password-input">
+                            <input type="password" id="new-password" name="new-password" required>
+                            <span class="material-symbols-outlined toggle-password">visibility_off</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Confirmação de senha <span class="required">*</span></label>
+                        <div class="password-input">
+                            <input type="password" id="confirm-password" name="confirm-password" required>
+                            <span class="material-symbols-outlined toggle-password">visibility_off</span>
+                        </div>
+                    </div>
+                    <div class="forgot-password">
+                        <a href="#" id="forgot-password-link">Esqueceu a senha?</a>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel">Cancelar</button>
+                        <button type="submit" class="btn-confirm">Alterar senha</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup de Redefinição de Senha -->
+    <div id="reset-password-popup" class="popup-overlay" style="display: none;">
+        <div class="popup">
+            <div class="popup-header">
+                <h2>Redefinição de senha!</h2>
+                <span class="material-symbols-outlined close-popup">close</span>
+            </div>
+            <div class="popup-feedback-content">
+                <p class="popup-description">Informe um email e enviaremos um link para recuperação da sua senha.</p>
+                <form id="reset-password-form">
+                    <div class="form-group">
+                        <label for="recovery-email">Email <span class="required">*</span></label>
+                        <input type="email" id="recovery-email" name="recovery-email" required placeholder="seu@email.com">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-back">
+                            <span class="material-symbols-outlined">arrow_back</span>
+                            Voltar
+                        </button>
+                        <button type="submit" class="btn-send">Enviar link de recuperação</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="logout-popup" class="popup-overlay" style="display: none;">
+        <div class="popup logout-popup">
+            <div class="logout-content">
+                <div class="logout-icon">
+                    <span class="material-symbols-outlined">logout</span>
+                </div>
+                <h2 class="logout-title">Sair da conta?</h2>
+                <p class="logout-description">Você poderá entrar novamente a qualquer momento. Se quiser trocar de conta, faça isso adicionando uma conta existente.</p>
+                
+                <div class="logout-actions">
+                    <button type="button" class="btn-logout">Sair</button>
+                    <button type="button" class="btn-cancel-logout">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <div class="materials-container">
+            <!-- Header da página -->
+            <div class="page-header">
+                <div>
+                    <h1>Materiais Didáticos</h1>
+                    <p class="page-description">Gerencie e compartilhe materiais com suas turmas</p>
+                </div>
+                <button class="btn-upload" onclick="openUploadModal()">
+                    <span class="material-symbols-outlined">upload</span>
+                    <span>Adicionar Material</span>
+                </button>
+            </div>
+
+            <!-- Tabs de navegação -->
+            <div class="material-tabs">
+                <button class="tab-button active" data-tab="todos">
+                    <span class="material-symbols-outlined">library_books</span>
+                    <span>Todos os Materiais</span>
+                </button>
+                <button class="tab-button" data-tab="professor">
+                    <span class="material-symbols-outlined">menu_book</span>
+                    <span>Manual do Professor</span>
+                    <span class="badge-new">Respostas</span>
+                </button>
+                <button class="tab-button" data-tab="meus">
+                    <span class="material-symbols-outlined">folder_shared</span>
+                    <span>Meus Materiais</span>
+                </button>
+                <button class="tab-button" data-tab="compartilhados">
+                    <span class="material-symbols-outlined">share</span>
+                    <span>Compartilhados</span>
+                </button>
+            </div>
+
+            <!-- Barra de busca e filtros -->
+            <div class="search-filter-bar">
+                <div class="search-container">
+                    <span class="material-symbols-outlined search-icon">search</span>
+                    <input type="text" id="search-input" placeholder="Buscar materiais...">
+                </div>
+                
+                <div class="filters">
+                    <select id="subject-filter" class="filter-select">
+                        <option value="">Todas as disciplinas</option>
+                        <option value="matematica">Matemática</option>
+                        <option value="portugues">Português</option>
+                        <option value="historia">História</option>
+                        <option value="geografia">Geografia</option>
+                        <option value="ciencias">Ciências</option>
+                        <option value="ingles">Inglês</option>
+                    </select>
+
+                    <select id="type-filter" class="filter-select">
+                        <option value="">Todos os tipos</option>
+                        <option value="livro">Livro Didático</option>
+                        <option value="manual">Manual do Professor</option>
+                        <option value="apostila">Apostila</option>
+                        <option value="exercicios">Exercícios</option>
+                        <option value="apresentacao">Apresentação</option>
+                        <option value="video">Vídeo Aula</option>
+                    </select>
+
+                    <select id="turma-filter" class="filter-select">
+                        <option value="">Todas as turmas</option>
+                        <option value="3a">3º A - Manhã</option>
+                        <option value="3b">3º B - Manhã</option>
+                        <option value="3c">3º C - Tarde</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Grid de materiais -->
+            <div class="materials-grid" id="materials-grid">
+                <!-- Material Card 1 - Manual do Professor -->
+                <div class="material-card professor-edition" data-subject="matematica" data-type="manual">
+                    <div class="material-cover">
+                        <img src="https://via.placeholder.com/200x280/4169E1/FFFFFF?text=Manual+Professor+Mat" alt="Manual do Professor - Matemática">
+                        <div class="material-type-badge professor-badge">Manual do Professor</div>
+                        <div class="answer-key-badge">
+                            <span class="material-symbols-outlined">key</span>
+                            <span>Com Gabarito</span>
+                        </div>
+                    </div>
+                    <div class="material-info">
+                        <div class="material-content">
+                            <h3 class="material-title">Matemática - Manual do Professor 3º Ano</h3>
+                            <p class="material-author">Editora Moderna</p>
+                            <p class="material-description">Inclui orientações pedagógicas, gabarito completo e sugestões de atividades</p>
+                            <div class="material-stats">
+                                <span class="stat-item">
+                                    <span class="material-symbols-outlined">auto_stories</span>
+                                    <span>520 páginas</span>
+                                </span>
+                                <span class="stat-item">
+                                    <span class="material-symbols-outlined">download</span>
+                                    <span>3.2 MB</span>
+                                </span>
+                            </div>
+                            <div class="sharing-info">
+                                <span class="material-symbols-outlined">visibility</span>
+                                <span>Exclusivo para professores</span>
+                            </div>
+                        </div>
+                        <div class="material-actions">
+                            <button class="btn-view" onclick="viewMaterial('manual-mat-professor.pdf')">
+                                <span class="material-symbols-outlined">visibility</span>
+                                <span>Visualizar</span>
+                            </button>
+                            <button class="btn-share" onclick="shareMaterial('manual-mat-professor.pdf')">
+                                <span class="material-symbols-outlined">share</span>
+                            </button>
+                            <button class="btn-download" onclick="downloadMaterial('manual-mat-professor.pdf')">
+                                <span class="material-symbols-outlined">download</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Material Card 2 - Material Compartilhado -->
+                <div class="material-card shared-material" data-subject="portugues" data-type="apostila">
+                    <div class="material-cover">
+                        <img src="https://via.placeholder.com/200x280/DC143C/FFFFFF?text=Apostila+Redação" alt="Apostila de Redação">
+                        <div class="material-type-badge">Apostila</div>
+                        <div class="shared-badge">
+                            <span class="material-symbols-outlined">groups</span>
+                            <span>3º A, 3º B</span>
+                        </div>
+                    </div>
+                    <div class="material-info">
+                        <div class="material-content">
+                            <h3 class="material-title">Apostila de Redação ENEM</h3>
+                            <p class="material-author">Prof. Maria Silva</p>
+                            <p class="material-description">Material personalizado com técnicas de redação para o ENEM</p>
+                            <div class="material-stats">
+                                <span class="stat-item">
+                                    <span class="material-symbols-outlined">auto_stories</span>
+                                    <span>85 páginas</span>
+                                </span>
+                                <span class="stat-item">
+                                    <span class="material-symbols-outlined">download</span>
+                                    <span>1.2 MB</span>
+                                </span>
+                                <span class="stat-item access-stat">
+                                    <span class="material-symbols-outlined">visibility</span>
+                                    <span>45/60 alunos</span>
+                                </span>
+                            </div>
+                            <div class="sharing-info shared">
+                                <span class="material-symbols-outlined">check_circle</span>
+                                <span>Compartilhado com 2 turmas</span>
+                            </div>
+                        </div>
+                        <div class="material-actions">
+                            <button class="btn-view" onclick="viewMaterial('apostila-redacao.pdf')">
+                                <span class="material-symbols-outlined">visibility</span>
+                                <span>Visualizar</span>
+                            </button>
+                            <button class="btn-stats" onclick="viewStats('apostila-redacao')">
+                                <span class="material-symbols-outlined">analytics</span>
+                            </button>
+                            <button class="btn-edit" onclick="editMaterial('apostila-redacao')">
+                                <span class="material-symbols-outlined">edit</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Material Card 3 - Apresentação -->
+                <div class="material-card" data-subject="historia" data-type="apresentacao">
+                    <div class="material-cover">
+                        <img src="https://via.placeholder.com/200x280/8B4513/FFFFFF?text=Brasil+Colônia" alt="Apresentação Brasil Colônia">
+                        <div class="material-type-badge">Apresentação</div>
+                    </div>
+                    <div class="material-info">
+                        <div class="material-content">
+                            <h3 class="material-title">Brasil Colônia - Slides</h3>
+                            <p class="material-author">Prof. Maria Silva</p>
+                            <p class="material-description">Apresentação completa sobre o período colonial brasileiro</p>
+                            <div class="material-stats">
+                                <span class="stat-item">
+                                    <span class="material-symbols-outlined">slideshow</span>
+                                    <span>45 slides</span>
+                                </span>
+                                <span class="stat-item">
+                                    <span class="material-symbols-outlined">download</span>
+                                    <span>15.3 MB</span>
+                                </span>
+                            </div>
+                            <div class="sharing-info">
+                                <span class="material-symbols-outlined">lock</span>
+                                <span>Privado</span>
+                            </div>
+                        </div>
+                        <div class="material-actions">
+                            <button class="btn-view" onclick="viewPresentation('brasil-colonia.pptx')">
+                                <span class="material-symbols-outlined">visibility</span>
+                                <span>Visualizar</span>
+                            </button>
+                            <button class="btn-share" onclick="shareMaterial('brasil-colonia.pptx')">
+                                <span class="material-symbols-outlined">share</span>
+                            </button>
+                            <button class="btn-download" onclick="downloadMaterial('brasil-colonia.pptx')">
+                                <span class="material-symbols-outlined">download</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Material Card 4 - Banco de Questões -->
+                <div class="material-card question-bank" data-subject="matematica" data-type="exercicios">
+                    <div class="material-cover">
+                        <img src="https://via.placeholder.com/200x280/32CD32/FFFFFF?text=Banco+Questões" alt="Banco de Questões">
+                        <div class="material-type-badge">Banco de Questões</div>
+                        <div class="answer-key-badge">
+                            <span class="material-symbols-outlined">fact_check</span>
+                            <span>Gabarito</span>
+                        </div>
+                    </div>
+                    <div class="material-info">
+                        <div class="material-content">
+                            <h3 class="material-title">Banco de Questões - Matemática</h3>
+                            <p class="material-author">SABER</p>
+                            <p class="material-description">500+ questões categorizadas por nível de dificuldade</p>
+                            <div class="material-stats">
+                                <span class="stat-item">
+                                    <span class="material-symbols-outlined">quiz</span>
+                                    <span>500 questões</span>
+                                </span>
+                                <span class="stat-item">
+                                    <span class="material-symbols-outlined">download</span>
+                                    <span>2.8 MB</span>
+                                </span>
+                            </div>
+                            <div class="difficulty-levels">
+                                <span class="difficulty easy">Fácil: 150</span>
+                                <span class="difficulty medium">Médio: 250</span>
+                                <span class="difficulty hard">Difícil: 100</span>
+                            </div>
+                        </div>
+                        <div class="material-actions">
+                            <button class="btn-view" onclick="viewQuestionBank('banco-questoes-mat')">
+                                <span class="material-symbols-outlined">visibility</span>
+                                <span>Explorar</span>
+                            </button>
+                            <button class="btn-create-test" onclick="createTest('matematica')">
+                                <span class="material-symbols-outlined">add_task</span>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mensagem quando não há materiais -->
+            <div class="no-materials" style="display: none;">
+                <span class="material-symbols-outlined">library_books</span>
+                <p>Nenhum material encontrado</p>
+                <span>Tente ajustar os filtros de busca ou adicione um novo material</span>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal de Upload -->
+    <div id="upload-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Adicionar Novo Material</h2>
+                <button class="close-modal" onclick="closeUploadModal()">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="upload-form">
+                    <div class="form-group">
+                        <label for="material-title">Título do Material</label>
+                        <input type="text" id="material-title" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="material-description">Descrição</label>
+                        <textarea id="material-description" rows="3"></textarea>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label for="material-subject">Disciplina</label>
+                            <select id="material-subject" required>
+                                <option value="">Selecione...</option>
+                                <option value="matematica">Matemática</option>
+                                <option value="portugues">Português</option>
+                                <option value="historia">História</option>
+                                <option value="geografia">Geografia</option>
+                                <option value="ciencias">Ciências</option>
+                                <option value="ingles">Inglês</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="material-type">Tipo</label>
+                            <select id="material-type" required>
+                                <option value="">Selecione...</option>
+                                <option value="apostila">Apostila</option>
+                                <option value="apresentacao">Apresentação</option>
+                                <option value="exercicios">Exercícios</option>
+                                <option value="video">Vídeo Aula</option>
+                                <option value="outro">Outro</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Compartilhar com</label>
+                        <div class="checkbox-group">
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="3a">
+                                <span>3º A - Manhã</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="3b">
+                                <span>3º B - Manhã</span>
+                            </label>
+                            <label class="checkbox-label">
+                                <input type="checkbox" value="3c">
+                                <span>3º C - Tarde</span>
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="material-file">Arquivo</label>
+                        <div class="file-upload-area" id="file-upload-area">
+                            <span class="material-symbols-outlined">cloud_upload</span>
+                            <p>Arraste o arquivo aqui ou clique para selecionar</p>
+                            <span class="file-info">PDF, PPT, DOC, MP4 (máx. 50MB)</span>
+                            <input type="file" id="material-file" accept=".pdf,.ppt,.pptx,.doc,.docx,.mp4" hidden>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel" onclick="closeUploadModal()">Cancelar</button>
+                        <button type="submit" class="btn-submit">Adicionar Material</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Compartilhamento -->
+    <div id="share-modal" class="modal">
+        <div class="modal-content small">
+            <div class="modal-header">
+                <h2>Compartilhar Material</h2>
+                <button class="close-modal" onclick="closeShareModal()">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h3 id="share-material-title">Título do Material</h3>
+                <div class="form-group">
+                    <label>Selecione as turmas</label>
+                    <div class="checkbox-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="3a">
+                            <span>3º A - Manhã (30 alunos)</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="3b">
+                            <span>3º B - Manhã (28 alunos)</span>
+                        </label>
+                        <label class="checkbox-label">
+                            <input type="checkbox" value="3c">
+                            <span>3º C - Tarde (32 alunos)</span>
+                        </label>
+                    </div>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn-cancel" onclick="closeShareModal()">Cancelar</button>
+                    <button type="button" class="btn-submit" onclick="confirmShare()">Compartilhar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Estatísticas -->
+    <div id="stats-modal" class="modal">
+        <div class="modal-content medium">
+            <div class="modal-header">
+                <h2>Estatísticas de Acesso</h2>
+                <button class="close-modal" onclick="closeStatsModal()">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <h3>Apostila de Redação ENEM</h3>
+                <div class="stats-summary">
+                    <div class="stat-card">
+                        <span class="material-symbols-outlined">visibility</span>
+                        <div>
+                            <h4>45/60</h4>
+                            <p>Alunos visualizaram</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="material-symbols-outlined">download</span>
+                        <div>
+                            <h4>38</h4>
+                            <p>Downloads</p>
+                        </div>
+                    </div>
+                    <div class="stat-card">
+                        <span class="material-symbols-outlined">schedule</span>
+                        <div>
+                            <h4>12 min</h4>
+                            <p>Tempo médio</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="access-details">
+                    <h4>Detalhes por Turma</h4>
+                    <div class="turma-stats">
+                        <div class="turma-stat">
+                            <span>3º A - Manhã</span>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 80%"></div>
+                            </div>
+                            <span>24/30 alunos</span>
+                        </div>
+                        <div class="turma-stat">
+                            <span>3º B - Manhã</span>
+                            <div class="progress-bar">
+                                <div class="progress" style="width: 75%"></div>
+                            </div>
+                            <span>21/28 alunos</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal PDF Viewer -->
+    <div id="pdf-modal" class="pdf-modal">
+        <div class="pdf-modal-content">
+            <div class="pdf-modal-header">
+                <h2 id="pdf-title">Título do Material</h2>
+                <button class="close-modal" onclick="closePdfModal()">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <div class="pdf-modal-body">
+                <iframe id="pdf-viewer" src="" frameborder="0"></iframe>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notifications Popup -->
+    <div class="notifications-popup" id="notifications-popup">
+        <div class="popup-header">
+            <h3>Notificações</h3>
+            <span class="material-symbols-outlined close-popup">close</span>
+        </div>
+        <div class="notifications-content">
+            <!-- Conteúdo das notificações -->
+        </div>
+    </div>
+
+    <!-- User Icon Popup -->
+    <div class="user-icon-popup" id="user-icon-popup">
+        <div class="popup-header">
+            <h3>Configurações</h3>
+            <span class="material-symbols-outlined close-popup">close</span>
+        </div>
+        <div class="settings-content">
+            <!-- Conteúdo das configurações -->
+        </div>
+    </div>
+
+    <script src="../scripts/materiais-professor.js"></script>
+    <script src="../../common/scripts/changepass.js"></script>
+    <script src="../../common/scripts/exitpopup.js"></script>
+    <script src="../../common/scripts/menu.js"></script>    
+</body>
+</html>
