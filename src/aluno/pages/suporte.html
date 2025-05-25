@@ -1,0 +1,743 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Suporte - SABER</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
+    <link rel="stylesheet" href="../styles/suporte.css">
+    <link rel="stylesheet" href="../../common/styles/menu.css">
+    <link rel="stylesheet" href="../../common/styles/changepass.css">
+    <link rel="stylesheet" href="../../common/styles/exitpopup.css">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="menu-icon-mobile">
+            <span id="menu-icon-mobile" class="material-symbols-outlined">menu</span>
+        </div>  
+        <div class="menuheader"> 
+            <ul class="menuheader-list">
+                <li class="notification-item">
+                    <span id="notifications-icon" class="material-symbols-outlined">notifications</span>
+                    <span class="notification-badge">3</span>
+                    <div id="notifications-popup" class="notifications-popup">
+                        <div class="popup-header">
+                            <p>Notificações</p>
+                            <span class="material-symbols-outlined close-popup">close</span>
+                        </div>
+                        <div class="notifications-content">
+                            <ul>
+                                <li class="notification unread">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">campaign</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Comunicado importante</p>
+                                        <p class="notification-desc">Alteração no calendário de provas</p>
+                                        <p class="notification-time">há 5 minutos</p>
+                                    </div>
+                                </li>
+                                <li class="notification unread">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">assignment</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Nova atividade disponível</p>
+                                        <p class="notification-desc">Exercícios de Álgebra - Matemática</p>
+                                        <p class="notification-time">há 10 minutos</p>
+                                    </div>
+                                </li>
+                                <li class="notification unread">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">quiz</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Prova agendada</p>
+                                        <p class="notification-desc">Física Quântica - 25/05 às 14:00</p>
+                                        <p class="notification-time">há 2 horas</p>
+                                    </div>
+                                </li>
+                                <li class="notification">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">grade</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Atividade avaliada</p>
+                                        <p class="notification-desc">Revolução Industrial - História</p>
+                                        <p class="notification-time">há 1 dia</p>
+                                    </div>
+                                </li>
+                                <li class="notification">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">calendar_today</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Prazo de entrega próximo</p>
+                                        <p class="notification-desc">Análise Combinatória vence em 2 dias</p>
+                                        <p class="notification-time">há 2 dias</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="popup-footer">
+                            
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <p id="user-name-header">Kenai Almeida</p>
+                </li>
+                <li class="user-settings-item">
+                    <span id="user-icon" class="material-symbols-outlined">account_circle</span>
+                    <div id="user-icon-popup" class="user-icon-popup">
+                        <div class="popup-header">
+                            <div class="user-info">
+                                <div class="user-avatar">
+                                    <span class="material-symbols-outlined">person</span>
+                                </div>
+                                <div class="user-details">
+                                    <p class="user-name">Kenai Almeida</p>
+                                    <p class="user-email">kenai.almeida@email.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="settings-content">
+                            <div class="settings-group">
+                                <p class="settings-group-title">Conta</p>
+                                <ul>
+                                    <li>
+                                        <a href="perfil-aluno.html">
+                                            <span class="material-symbols-outlined">manage_accounts</span>
+                                            <span>Meu Perfil</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="alterar-senha-link">
+                                            <span class="material-symbols-outlined">key</span>
+                                            <span>Alterar senha</span>
+                                        </a>
+                                    </li>   
+                                </ul>
+                            </div>
+                            <div class="settings-group">
+                                <p class="settings-group-title">Sistema</p>
+                                <ul>
+                                    <li>
+                                        <a href="#tema" class="theme-toggle-container">
+                                            <span class="material-symbols-outlined">dark_mode</span>
+                                            <span>Tema Escuro</span>
+                                            <label class="switch">
+                                                <input type="checkbox" id="theme-toggle">
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </a>
+                                    </li>
+                                    <li class="settings-item language-selector-container">
+                                        <a href="#idioma" class="language-selector">
+                                            <span class="material-symbols-outlined">translate</span>
+                                            <span>Idioma</span>
+                                            <span class="selected-language">Português</span>
+                                            <span class="material-symbols-outlined toggle-arrow">expand_more</span>
+                                        </a>
+                                        <div class="language-options">
+                                            <ul>
+                                                <li data-lang="pt-BR" class="active">
+                                                    <span class="language-flag">🇧🇷</span>
+                                                    <span class="language-name">Português</span>
+                                                </li>
+                                                <li data-lang="en-US">
+                                                    <span class="language-flag">🇺🇸</span>
+                                                    <span class="language-name">English</span>
+                                                </li>
+                                                <li data-lang="es-ES">
+                                                    <span class="language-flag">🇪🇸</span>
+                                                    <span class="language-name">Español</span>
+                                                </li>
+                                                <li data-lang="fr-FR">
+                                                    <span class="language-flag">🇫🇷</span>
+                                                    <span class="language-name">Français</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="settings-group">
+                                <ul>
+                                    <li>
+                                        <a href="#ajuda">
+                                            <span class="material-symbols-outlined">help</span>
+                                            <span>Ajuda</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#sair" class="logout-button">
+                                            <span class="material-symbols-outlined">logout</span>
+                                            <span>Sair</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+   <!-- SIDEBAR PORTAL DO ALUNO -->
+    <div id="sidebar">
+        <div class="topmenu">
+            <span id="menu-icon" class="material-symbols-outlined">menu</span>
+            <h3 id="menu-tittle">Menu</h3>
+            <div id="logomenu"></div>
+        </div>
+        <nav id="menu-hidden">
+            <div class="navbar">
+                <ul>
+                    <li>
+                        <a href="dashboard.html">
+                            <span class="material-symbols-outlined">dashboard</span>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="desempenho.html">
+                            <span class="material-symbols-outlined">analytics</span>
+                            <p>Desempenho</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="atividades.html">
+                            <span class="material-symbols-outlined">assignment</span>
+                            <p>Atividades</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="redacoes.html">
+                            <span class="material-symbols-outlined">history_edu</span>
+                            <p>Redações</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="calendario.html">
+                            <span class="material-symbols-outlined">event_note</span>
+                            <p>Calendário</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="materiais-aluno.html">
+                            <span class="material-symbols-outlined">book</span>
+                            <p>Materiais</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="documentos.html">
+                            <span class="material-symbols-outlined">folder</span>
+                            <p>Documentos</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mensagens.html">
+                            <span class="material-symbols-outlined">chat</span>
+                            <p>Comunicados</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="suporte.html" class="active">
+                            <span class="material-symbols-outlined">help</span>
+                            <p>Suporte</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+            <div id="password-popup" class="popup-overlay" style="display: none;">
+        <div class="popup">
+            <div class="popup-header">
+                <h2>Alterar senha</h2>
+                <span class="material-symbols-outlined close-popup">close</span>
+            </div>
+            <div class="popup-content">
+                <p class="popup-description">Informe a senha atual e a nova senha</p>
+                <form id="change-password-form">
+                    <div class="form-group">
+                        <label for="current-password">Senha atual <span class="required">*</span></label>
+                        <div class="password-input">
+                            <input type="password" id="current-password" name="current-password" required>
+                            <span class="material-symbols-outlined toggle-password">visibility_off</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-password">Nova senha <span class="required">*</span></label>
+                        <div class="password-input">
+                            <input type="password" id="new-password" name="new-password" required>
+                            <span class="material-symbols-outlined toggle-password">visibility_off</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Confirmação de senha <span class="required">*</span></label>
+                        <div class="password-input">
+                            <input type="password" id="confirm-password" name="confirm-password" required>
+                            <span class="material-symbols-outlined toggle-password">visibility_off</span>
+                        </div>
+                    </div>
+                    <div class="forgot-password">
+                        <a href="#" id="forgot-password-link">Esqueceu a senha?</a>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel">Cancelar</button>
+                        <button type="submit" class="btn-confirm">Alterar senha</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup de Redefinição de Senha -->
+    <div id="reset-password-popup" class="popup-overlay" style="display: none;">
+        <div class="popup">
+            <div class="popup-header">
+                <h2>Redefinição de senha!</h2>
+                <span class="material-symbols-outlined close-popup">close</span>
+            </div>
+            <div class="popup-content">
+                <p class="popup-description">Informe um email e enviaremos um link para recuperação da sua senha.</p>
+                <form id="reset-password-form">
+                    <div class="form-group">
+                        <label for="recovery-email">Email <span class="required">*</span></label>
+                        <input type="email" id="recovery-email" name="recovery-email" required placeholder="seu@email.com">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-back">
+                            <span class="material-symbols-outlined">arrow_back</span>
+                            Voltar
+                        </button>
+                        <button type="submit" class="btn-send">Enviar link de recuperação</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="logout-popup" class="popup-overlay" style="display: none;">
+        <div class="popup logout-popup">
+            <div class="logout-content">
+                <div class="logout-icon">
+                    <span class="material-symbols-outlined">logout</span>
+                </div>
+                <h2 class="logout-title">Sair da conta?</h2>
+                <p class="logout-description">Você poderá entrar novamente a qualquer momento. Se quiser trocar de conta, faça isso adicionando uma conta existente.</p>
+                
+                <div class="logout-actions">
+                    <button type="button" class="btn-logout">Sair</button>
+                    <button type="button" class="btn-cancel-logout">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main>
+        <div class="support-container">
+            <!-- Hero Section -->
+            <div class="support-hero">
+                <h1>Central de Suporte</h1>
+                <p>Como podemos ajudar você hoje?</p>
+                
+                <div class="search-box">
+                    <span class="material-symbols-outlined">search</span>
+                    <input type="text" id="support-search" placeholder="Buscar ajuda, tutoriais, perguntas frequentes...">
+                </div>
+
+                <div class="quick-actions">
+                    <button class="quick-action-btn" onclick="openNewTicket()">
+                        <span class="material-symbols-outlined">confirmation_number</span>
+                        <span>Abrir Chamado</span>
+                    </button>
+                    <button class="quick-action-btn" onclick="startChat()">
+                        <span class="material-symbols-outlined">chat</span>
+                        <span>Chat ao Vivo</span>
+                    </button>
+                    <button class="quick-action-btn" onclick="viewTickets()">
+                        <span class="material-symbols-outlined">history</span>
+                        <span>Meus Chamados</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Status do Sistema -->
+            <div class="system-status">
+                <div class="status-header">
+                    <h3>Status do Sistema</h3>
+                    <span class="status-indicator online">
+                        <span class="status-dot"></span>
+                        Todos os sistemas operacionais
+                    </span>
+                </div>
+                <div class="status-services">
+                    <div class="service-status">
+                        <span class="service-name">Plataforma SABER</span>
+                        <span class="service-indicator online"></span>
+                    </div>
+                    <div class="service-status">
+                        <span class="service-name">Servidor de Arquivos</span>
+                        <span class="service-indicator online"></span>
+                    </div>
+                    <div class="service-status">
+                        <span class="service-name">Sistema de IA</span>
+                        <span class="service-indicator online"></span>
+                    </div>
+                    <div class="service-status">
+                        <span class="service-name">Banco de Dados</span>
+                        <span class="service-indicator online"></span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Categorias de Ajuda -->
+            <div class="help-categories">
+                <h2>Categorias de Ajuda</h2>
+                <div class="categories-grid">
+                    <div class="category-card" onclick="filterByCategory('conta')">
+                        <span class="material-symbols-outlined">account_circle</span>
+                        <h4>Conta e Perfil</h4>
+                        <p>Login, senha, dados pessoais</p>
+                    </div>
+                    <div class="category-card" onclick="filterByCategory('materiais')">
+                        <span class="material-symbols-outlined">menu_book</span>
+                        <h4>Materiais e Conteúdo</h4>
+                        <p>Acesso a livros, apostilas e recursos</p>
+                    </div>
+                    <div class="category-card" onclick="filterByCategory('atividades')">
+                        <span class="material-symbols-outlined">assignment</span>
+                        <h4>Atividades e Avaliações</h4>
+                        <p>Envio, prazos, notas</p>
+                    </div>
+                    <div class="category-card" onclick="filterByCategory('tecnico')">
+                        <span class="material-symbols-outlined">build</span>
+                        <h4>Problemas Técnicos</h4>
+                        <p>Erros, lentidão, compatibilidade</p>
+                    </div>
+                    <div class="category-card" onclick="filterByCategory('ia')">
+                        <span class="material-symbols-outlined">smart_toy</span>
+                        <h4>Assistente IA</h4>
+                        <p>Relatórios, análises, sugestões</p>
+                    </div>
+                    <div class="category-card" onclick="filterByCategory('outros')">
+                        <span class="material-symbols-outlined">more_horiz</span>
+                        <h4>Outros Assuntos</h4>
+                        <p>Dúvidas gerais e feedback</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FAQ Section -->
+            <div class="faq-section">
+                <h2>Perguntas Frequentes</h2>
+                <div class="faq-list">
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            <span>Como faço para recuperar minha senha?</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Para recuperar sua senha:</p>
+                            <ol>
+                                <li>Na tela de login, clique em "Esqueci minha senha"</li>
+                                <li>Digite seu e-mail cadastrado</li>
+                                <li>Verifique sua caixa de entrada e siga as instruções</li>
+                                <li>Crie uma nova senha segura</li>
+                            </ol>
+                            <p>Se não receber o e-mail, verifique a pasta de spam ou entre em contato conosco.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            <span>Como envio minhas atividades?</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Para enviar atividades:</p>
+                            <ol>
+                                <li>Acesse a seção "Atividades" no menu</li>
+                                <li>Localize a atividade desejada</li>
+                                <li>Clique em "Enviar Resposta"</li>
+                                <li>Anexe o arquivo ou digite a resposta</li>
+                                <li>Clique em "Confirmar Envio"</li>
+                            </ol>
+                            <p>Você receberá uma confirmação após o envio bem-sucedido.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item">
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            <span>Por que não consigo acessar os materiais?</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Possíveis causas e soluções:</p>
+                            <ul>
+                                <li><strong>Conexão lenta:</strong> Verifique sua internet</li>
+                                <li><strong>Navegador desatualizado:</strong> Atualize seu navegador</li>
+                                <li><strong>Cache cheio:</strong> Limpe o cache do navegador</li>
+                                <li><strong>Permissões:</strong> Verifique se o material foi compartilhado com você</li>
+                            </ul>
+                            <p>Se o problema persistir, abra um chamado.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item professor-only">
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            <span>Como compartilho materiais com minhas turmas?</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>Para compartilhar materiais:</p>
+                            <ol>
+                                <li>Vá em "Materiais" no menu</li>
+                                <li>Clique em "Adicionar Material"</li>
+                                <li>Faça o upload do arquivo</li>
+                                <li>Selecione as turmas no campo "Compartilhar com"</li>
+                                <li>Clique em "Publicar"</li>
+                            </ol>
+                            <p>Os alunos das turmas selecionadas receberão uma notificação.</p>
+                        </div>
+                    </div>
+
+                    <div class="faq-item professor-only">
+                        <button class="faq-question" onclick="toggleFAQ(this)">
+                            <span>Como gero relatórios com a IA?</span>
+                            <span class="material-symbols-outlined">expand_more</span>
+                        </button>
+                        <div class="faq-answer">
+                            <p>O sistema de IA do SABER oferece:</p>
+                            <ul>
+                                <li><strong>Relatórios de Turma:</strong> Análise geral de desempenho</li>
+                                <li><strong>Relatórios Individuais:</strong> Acompanhamento por aluno</li>
+                                <li><strong>Sugestões Pedagógicas:</strong> Metodologias personalizadas</li>
+                                <li><strong>Identificação de Dificuldades:</strong> Alertas automáticos</li>
+                            </ul>
+                            <p>Acesse "Relatórios" no menu e selecione o tipo desejado.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Tutoriais em Vídeo -->
+            <div class="tutorials-section">
+                <h2>Tutoriais em Vídeo</h2>
+                <div class="tutorials-grid">
+                    <div class="tutorial-card">
+                        <div class="tutorial-thumbnail">
+                            <span class="material-symbols-outlined">play_circle</span>
+                            <span class="duration">3:45</span>
+                        </div>
+                        <h4>Primeiros Passos no SABER</h4>
+                        <p>Conheça as principais funcionalidades</p>
+                    </div>
+                    <div class="tutorial-card">
+                        <div class="tutorial-thumbnail">
+                            <span class="material-symbols-outlined">play_circle</span>
+                            <span class="duration">5:20</span>
+                        </div>
+                        <h4>Como Usar os Materiais Didáticos</h4>
+                        <p>Acesse e organize seus estudos</p>
+                    </div>
+                    <div class="tutorial-card professor-only">
+                        <div class="tutorial-thumbnail">
+                            <span class="material-symbols-outlined">play_circle</span>
+                            <span class="duration">7:15</span>
+                        </div>
+                        <h4>Criando Avaliações Personalizadas</h4>
+                        <p>Use o banco de questões eficientemente</p>
+                    </div>
+                    <div class="tutorial-card">
+                        <div class="tutorial-thumbnail">
+                            <span class="material-symbols-outlined">play_circle</span>
+                            <span class="duration">4:30</span>
+                        </div>
+                        <h4>Recursos de Acessibilidade</h4>
+                        <p>Configure o SABER para suas necessidades</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contato Direto -->
+            <div class="contact-section">
+                <h2>Entre em Contato</h2>
+                <div class="contact-options">
+                    <div class="contact-card">
+                        <span class="material-symbols-outlined">mail</span>
+                        <h4>E-mail</h4>
+                        <p>suporte@saber.edu.br</p>
+                        <span class="response-time">Resposta em até 24h</span>
+                    </div>
+                    <div class="contact-card">
+                        <span class="material-symbols-outlined">phone</span>
+                        <h4>Telefone</h4>
+                        <p>(11) 3456-7890</p>
+                        <span class="response-time">Seg-Sex: 8h às 18h</span>
+                    </div>
+                    <div class="contact-card">
+                        <span class="material-symbols-outlined">chat</span>
+                        <h4>Chat ao Vivo</h4>
+                        <p>Atendimento instantâneo</p>
+                        <span class="response-time online-now">Online agora</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Meus Chamados -->
+            <div class="my-tickets" id="my-tickets" style="display: none;">
+                <h2>Meus Chamados</h2>
+                <div class="tickets-list">
+                    <div class="ticket-item">
+                        <div class="ticket-header">
+                            <span class="ticket-id">#2024001</span>
+                            <span class="ticket-status resolved">Resolvido</span>
+                        </div>
+                        <h4>Problema ao baixar material de Matemática</h4>
+                        <p>Não consigo fazer download do livro didático...</p>
+                        <div class="ticket-footer">
+                            <span class="ticket-date">15/01/2025</span>
+                            <span class="ticket-category">Materiais</span>
+                        </div>
+                    </div>
+                    <div class="ticket-item">
+                        <div class="ticket-header">
+                            <span class="ticket-id">#2024002</span>
+                            <span class="ticket-status in-progress">Em Andamento</span>
+                        </div>
+                        <h4>Erro ao enviar atividade</h4>
+                        <p>Aparece mensagem de erro quando tento enviar...</p>
+                        <div class="ticket-footer">
+                            <span class="ticket-date">20/01/2025</span>
+                            <span class="ticket-category">Técnico</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal Novo Chamado -->
+    <div id="ticket-modal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Abrir Novo Chamado</h2>
+                <button class="close-modal" onclick="closeTicketModal()">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="ticket-form">
+                    <div class="form-group">
+                        <label for="ticket-subject">Assunto</label>
+                        <input type="text" id="ticket-subject" required placeholder="Descreva brevemente o problema">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ticket-category">Categoria</label>
+                        <select id="ticket-category" required>
+                            <option value="">Selecione uma categoria</option>
+                            <option value="conta">Conta e Perfil</option>
+                            <option value="materiais">Materiais e Conteúdo</option>
+                            <option value="atividades">Atividades e Avaliações</option>
+                            <option value="tecnico">Problemas Técnicos</option>
+                            <option value="ia">Assistente IA</option>
+                            <option value="outros">Outros</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ticket-priority">Prioridade</label>
+                        <select id="ticket-priority" required>
+                            <option value="baixa">Baixa - Pode esperar</option>
+                            <option value="media" selected>Média - Importante</option>
+                            <option value="alta">Alta - Urgente</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ticket-description">Descrição Detalhada</label>
+                        <textarea id="ticket-description" rows="5" required placeholder="Explique detalhadamente o problema..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="ticket-attachment">Anexar Screenshot (opcional)</label>
+                        <div class="file-upload-area" id="ticket-file-area">
+                            <span class="material-symbols-outlined">image</span>
+                            <p>Arraste uma imagem ou clique para selecionar</p>
+                            <span class="file-info">PNG, JPG (máx. 5MB)</span>
+                            <input type="file" id="ticket-attachment" accept="image/*" hidden>
+                        </div>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel" onclick="closeTicketModal()">Cancelar</button>
+                        <button type="submit" class="btn-submit">Enviar Chamado</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Chat Widget -->
+    <div class="chat-widget" id="chat-widget">
+        <button class="chat-button" onclick="toggleChat()">
+            <span class="material-symbols-outlined">chat</span>
+            <span class="chat-notification">1</span>
+        </button>
+        
+        <div class="chat-window" id="chat-window">
+            <div class="chat-header">
+                <div class="chat-agent">
+                    <span class="material-symbols-outlined">support_agent</span>
+                    <div>
+                        <h4>Suporte SABER</h4>
+                        <span class="agent-status">Online</span>
+                    </div>
+                </div>
+                <button class="chat-close" onclick="toggleChat()">
+                    <span class="material-symbols-outlined">close</span>
+                </button>
+            </div>
+            
+            <div class="chat-messages">
+                <div class="message agent">
+                    <p>Olá! 👋 Sou o assistente virtual do SABER. Como posso ajudar você hoje?</p>
+                    <span class="message-time">14:30</span>
+                </div>
+            </div>
+            
+            <div class="chat-input">
+                <input type="text" placeholder="Digite sua mensagem..." id="chat-input">
+                <button onclick="sendMessage()">
+                    <span class="material-symbols-outlined">send</span>
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Notifications Popup -->
+    <div class="notifications-popup" id="notifications-popup">
+        <div class="popup-header">
+            <h3>Notificações</h3>
+            <span class="material-symbols-outlined close-popup">close</span>
+        </div>
+        <div class="notifications-content">
+            <!-- Conteúdo das notificações -->
+        </div>
+    </div>
+
+    <!-- User Icon Popup -->
+    <div class="user-icon-popup" id="user-icon-popup">
+        <div class="popup-header">
+            <h3>Configurações</h3>
+            <span class="material-symbols-outlined close-popup">close</span>
+        </div>
+        <div class="settings-content">
+            <!-- Conteúdo das configurações -->
+        </div>
+    </div>
+
+    <script src="../scripts/suporte.js"></script>
+    <script src="../../common/scripts/changepass.js"></script>
+    <script src="../../common/scripts/exitpopup.js"></script>
+    <script src="../../common/scripts/menu.js"></script>    
+</body>
+</html>
