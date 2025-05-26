@@ -1,0 +1,454 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Comunicados - SABER</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300..700&display=swap" rel="stylesheet">
+    
+    <!-- Material Icons -->
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    
+    <!-- CSS Files -->
+    <link rel="stylesheet" href="menu.css">
+    <link rel="stylesheet" href="../styles/comunicados.css  ">
+</head>
+<body>
+    <!-- HEADER -->
+    <header class="header">
+        <div class="menu-icon-mobile">
+            <span id="menu-icon-mobile" class="material-symbols-outlined">menu</span>
+        </div>  
+        <div class="menuheader"> 
+            <ul class="menuheader-list">
+                <li class="notification-item">
+                    <span id="notifications-icon" class="material-symbols-outlined">notifications</span>
+                    <span class="notification-badge">3</span>
+                    <div id="notifications-popup" class="notifications-popup">
+                        <div class="popup-header">
+                            <p>Notificações</p>
+                            <span class="material-symbols-outlined close-popup">close</span>
+                        </div>
+                        <div class="notifications-content">
+                            <ul>
+                                <li class="notification unread">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">campaign</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Comunicado importante</p>
+                                        <p class="notification-desc">Alteração no calendário de provas</p>
+                                        <p class="notification-time">há 5 minutos</p>
+                                    </div>
+                                </li>
+                                <li class="notification unread">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">assignment</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Nova atividade disponível</p>
+                                        <p class="notification-desc">Exercícios de Álgebra - Matemática</p>
+                                        <p class="notification-time">há 10 minutos</p>
+                                    </div>
+                                </li>
+                                <li class="notification unread">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">quiz</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Prova agendada</p>
+                                        <p class="notification-desc">Física Quântica - 25/05 às 14:00</p>
+                                        <p class="notification-time">há 2 horas</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <p id="user-name-header">Kenai Almeida</p>
+                </li>
+                <li class="user-settings-item">
+                    <span id="user-icon" class="material-symbols-outlined">account_circle</span>
+                    <div id="user-icon-popup" class="user-icon-popup">
+                        <div class="popup-header">
+                            <div class="user-info">
+                                <div class="user-avatar">
+                                    <span class="material-symbols-outlined">person</span>
+                                </div>
+                                <div class="user-details">
+                                    <p class="user-name">Kenai Almeida</p>
+                                    <p class="user-email">kenai.almeida@email.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="settings-content">
+                            <div class="settings-group">
+                                <p class="settings-group-title">Conta</p>
+                                <ul>
+                                    <li>
+                                        <a href="perfil-aluno.html">
+                                            <span class="material-symbols-outlined">manage_accounts</span>
+                                            <span>Meu Perfil</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="alterar-senha-link">
+                                            <span class="material-symbols-outlined">key</span>
+                                            <span>Alterar senha</span>
+                                        </a>
+                                    </li>   
+                                </ul>
+                            </div>
+                            <div class="settings-group">
+                                <p class="settings-group-title">Sistema</p>
+                                <ul>
+                                    <li>
+                                        <a href="#tema" class="theme-toggle-container">
+                                            <span class="material-symbols-outlined">dark_mode</span>
+                                            <span>Tema Escuro</span>
+                                            <label class="switch">
+                                                <input type="checkbox" id="theme-toggle">
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </a>
+                                    </li>
+                                    <li class="settings-item language-selector-container">
+                                        <a href="#idioma" class="language-selector">
+                                            <span class="material-symbols-outlined">translate</span>
+                                            <span>Idioma</span>
+                                            <span class="selected-language">Português</span>
+                                            <span class="material-symbols-outlined toggle-arrow">expand_more</span>
+                                        </a>
+                                        <div class="language-options">
+                                            <ul>
+                                                <li data-lang="pt-BR" class="active">
+                                                    <span class="language-flag">🇧🇷</span>
+                                                    <span class="language-name">Português</span>
+                                                </li>
+                                                <li data-lang="en-US">
+                                                    <span class="language-flag">🇺🇸</span>
+                                                    <span class="language-name">English</span>
+                                                </li>
+                                                <li data-lang="es-ES">
+                                                    <span class="language-flag">🇪🇸</span>
+                                                    <span class="language-name">Español</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="settings-group">
+                                <ul>
+                                    <li>
+                                        <a href="#ajuda">
+                                            <span class="material-symbols-outlined">help</span>
+                                            <span>Ajuda</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#sair" class="logout-button">
+                                            <span class="material-symbols-outlined">logout</span>
+                                            <span>Sair</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <!-- SIDEBAR PORTAL DO ALUNO -->
+    <div id="sidebar">
+        <div class="topmenu">
+            <span id="menu-icon" class="material-symbols-outlined">menu</span>
+            <h3 id="menu-tittle">Menu</h3>
+            <div id="logomenu"></div>
+        </div>
+        <nav id="menu-hidden">
+            <div class="navbar">
+                <ul id="navbar-menu">
+                    <li>
+                        <a href="dashboard.html">
+                            <span class="material-symbols-outlined">dashboard</span>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="desempenho.html">
+                            <span class="material-symbols-outlined">analytics</span>
+                            <p>Desempenho</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="atividades.html">
+                            <span class="material-symbols-outlined">assignment</span>
+                            <p>Atividades</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="redacoes.html">
+                            <span class="material-symbols-outlined">history_edu</span>
+                            <p>Redações</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="calendario.html">
+                            <span class="material-symbols-outlined">event_note</span>
+                            <p>Calendário</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="materiais-aluno.html">
+                            <span class="material-symbols-outlined">book</span>
+                            <p>Materiais</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="documentos.html">
+                            <span class="material-symbols-outlined">folder</span>
+                            <p>Documentos</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="mensagens.html" class="active">
+                            <span class="material-symbols-outlined">chat</span>
+                            <p>Comunicados</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="suporte.html">
+                            <span class="material-symbols-outlined">help</span>
+                            <p>Suporte</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <!-- MAIN CONTENT -->
+    <main>
+        <div class="comunicados-container">
+            <!-- Header da página -->
+            <div class="page-header">
+                <div class="page-title">
+                    <h1>Comunicados</h1>
+                    <p>Acompanhe todos os avisos e comunicados importantes</p>
+                </div>
+                <div class="header-actions">
+                    <button class="btn-mark-all-read">
+                        <span class="material-symbols-outlined">done_all</span>
+                        Marcar todos como lidos
+                    </button>
+                </div>
+            </div>
+
+            <!-- Filtros e busca -->
+            <div class="filters-section">
+                <div class="search-box">
+                    <span class="material-symbols-outlined search-icon">search</span>
+                    <input type="text" id="search-comunicados" placeholder="Buscar comunicados...">
+                </div>
+                
+                <div class="filter-buttons">
+                    <button class="filter-btn active" data-filter="todos">
+                        <span class="material-symbols-outlined">inbox</span>
+                        Todos
+                        <span class="count">12</span>
+                    </button>
+                    <button class="filter-btn" data-filter="escola">
+                        <span class="material-symbols-outlined">school</span>
+                        Escola
+                        <span class="count">5</span>
+                    </button>
+                    <button class="filter-btn" data-filter="professor">
+                        <span class="material-symbols-outlined">person</span>
+                        Professores
+                        <span class="count">4</span>
+                    </button>
+                    <button class="filter-btn" data-filter="sistema">
+                        <span class="material-symbols-outlined">settings</span>
+                        Sistema
+                        <span class="count">3</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Lista de comunicados -->
+            <div class="comunicados-list">
+                <!-- Comunicado não lido -->
+                <div class="comunicado-item unread" data-type="escola" data-id="1">
+                    <div class="comunicado-indicator"></div>
+                    <div class="comunicado-icon">
+                        <span class="material-symbols-outlined">campaign</span>
+                    </div>
+                    <div class="comunicado-content">
+                        <div class="comunicado-header">
+                            <h3>Alteração no calendário de provas</h3>
+                            <span class="comunicado-time">há 2 horas</span>
+                        </div>
+                        <p class="comunicado-preview">Informamos que devido aos jogos estudantis, as provas do período foram remarcadas...</p>
+                        <div class="comunicado-meta">
+                            <span class="meta-tag escola">Escola</span>
+                            <span class="meta-author">Direção Acadêmica</span>
+                        </div>
+                    </div>
+                    <div class="comunicado-actions">
+                        <button class="btn-action" title="Marcar como lido">
+                            <span class="material-symbols-outlined">mark_email_read</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Comunicado não lido -->
+                <div class="comunicado-item unread" data-type="professor" data-id="2">
+                    <div class="comunicado-indicator"></div>
+                    <div class="comunicado-icon">
+                        <span class="material-symbols-outlined">assignment</span>
+                    </div>
+                    <div class="comunicado-content">
+                        <div class="comunicado-header">
+                            <h3>Nova lista de exercícios disponível</h3>
+                            <span class="comunicado-time">há 5 horas</span>
+                        </div>
+                        <p class="comunicado-preview">Disponibilizei uma nova lista de exercícios sobre equações diferenciais. O prazo para entrega...</p>
+                        <div class="comunicado-meta">
+                            <span class="meta-tag professor">Professor</span>
+                            <span class="meta-author">Prof. Carlos Silva - Matemática</span>
+                        </div>
+                    </div>
+                    <div class="comunicado-actions">
+                        <button class="btn-action" title="Marcar como lido">
+                            <span class="material-symbols-outlined">mark_email_read</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Comunicado lido -->
+                <div class="comunicado-item" data-type="sistema" data-id="3">
+                    <div class="comunicado-icon">
+                        <span class="material-symbols-outlined">update</span>
+                    </div>
+                    <div class="comunicado-content">
+                        <div class="comunicado-header">
+                            <h3>Atualização do sistema SABER</h3>
+                            <span class="comunicado-time">ontem</span>
+                        </div>
+                        <p class="comunicado-preview">O sistema passará por manutenção no próximo sábado das 00h às 06h. Durante este período...</p>
+                        <div class="comunicado-meta">
+                            <span class="meta-tag sistema">Sistema</span>
+                            <span class="meta-author">Equipe de TI</span>
+                        </div>
+                    </div>
+                    <div class="comunicado-actions">
+                        <button class="btn-action" title="Arquivar">
+                            <span class="material-symbols-outlined">archive</span>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Mais comunicados -->
+                <div class="comunicado-item" data-type="escola" data-id="4">
+                    <div class="comunicado-icon">
+                        <span class="material-symbols-outlined">celebration</span>
+                    </div>
+                    <div class="comunicado-content">
+                        <div class="comunicado-header">
+                            <h3>Semana Cultural 2025</h3>
+                            <span class="comunicado-time">2 dias atrás</span>
+                        </div>
+                        <p class="comunicado-preview">Convidamos todos os alunos para participarem da Semana Cultural que acontecerá entre os dias...</p>
+                        <div class="comunicado-meta">
+                            <span class="meta-tag escola">Escola</span>
+                            <span class="meta-author">Coordenação de Eventos</span>
+                        </div>
+                    </div>
+                    <div class="comunicado-actions">
+                        <button class="btn-action" title="Arquivar">
+                            <span class="material-symbols-outlined">archive</span>
+                        </button>
+                    </div>
+                </div>
+
+                <div class="comunicado-item" data-type="professor" data-id="5">
+                    <div class="comunicado-icon">
+                        <span class="material-symbols-outlined">science</span>
+                    </div>
+                    <div class="comunicado-content">
+                        <div class="comunicado-header">
+                            <h3>Aula prática no laboratório</h3>
+                            <span class="comunicado-time">3 dias atrás</span>
+                        </div>
+                        <p class="comunicado-preview">Na próxima aula faremos experimentos no laboratório de química. Não esqueçam de trazer...</p>
+                        <div class="comunicado-meta">
+                            <span class="meta-tag professor">Professor</span>
+                            <span class="meta-author">Prof. Ana Martins - Química</span>
+                        </div>
+                    </div>
+                    <div class="comunicado-actions">
+                        <button class="btn-action" title="Arquivar">
+                            <span class="material-symbols-outlined">archive</span>
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Paginação -->
+            <div class="pagination">
+                <button class="pagination-btn" disabled>
+                    <span class="material-symbols-outlined">chevron_left</span>
+                </button>
+                <button class="pagination-number active">1</button>
+                <button class="pagination-number">2</button>
+                <button class="pagination-number">3</button>
+                <button class="pagination-btn">
+                    <span class="material-symbols-outlined">chevron_right</span>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal de detalhes do comunicado -->
+    <div id="comunicado-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Título do Comunicado</h2>
+                <span class="material-symbols-outlined close-modal">close</span>
+            </div>
+            <div class="modal-body">
+                <div class="modal-meta">
+                    <span class="meta-tag" id="modal-tag">Tipo</span>
+                    <span class="meta-author" id="modal-author">Autor</span>
+                    <span class="meta-date" id="modal-date">Data</span>
+                </div>
+                <div class="modal-message" id="modal-message">
+                    <!-- Conteúdo completo do comunicado -->
+                </div>
+                <div class="modal-attachments" id="modal-attachments" style="display: none;">
+                    <h4>Anexos</h4>
+                    <div class="attachments-list">
+                        <!-- Lista de anexos -->
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="btn-archive">
+                    <span class="material-symbols-outlined">archive</span>
+                    Arquivar
+                </button>
+                <button class="btn-primary" id="btn-mark-read">
+                    <span class="material-symbols-outlined">done</span>
+                    Marcar como lido
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="menu.js"></script>
+    <script src="../scripts/comunicados.js"></script>
+</body>
+</html>
