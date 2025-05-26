@@ -3,17 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Documentos - Aluno</title>
+    <title>Documentos - SABER</title>
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../common/styles/menu.css">
     <link rel="stylesheet" href="../../common/styles/changepass.css">
     <link rel="stylesheet" href="../../common/styles/exitpopup.css">
-    <link rel="stylesheet" href="../../aluno/styles/documentos.css">
-    
+    <link rel="stylesheet" href="../styles/documentos.css">
 </head>
 <body>
-<!-- HEADER -->
+    <!-- HEADER -->
     <header class="header">
         <div class="menu-icon-mobile">
             <span id="menu-icon-mobile" class="material-symbols-outlined">menu</span>
@@ -73,7 +72,7 @@
                             </ul>
                         </div>
                         <div class="popup-footer">
-                       
+                            
                         </div>
                     </div>
                 </li>
@@ -177,8 +176,8 @@
             </ul>
         </div>
     </header>
-    
-<!-- SIDEBAR PORTAL DO ALUNO -->
+
+   <!-- SIDEBAR PORTAL DO ALUNO -->
     <div id="sidebar">
         <div class="topmenu">
             <span id="menu-icon" class="material-symbols-outlined">menu</span>
@@ -187,7 +186,7 @@
         </div>
         <nav id="menu-hidden">
             <div class="navbar">
-                <ul>
+                <ul id="navbar-menu">
                     <li>
                         <a href="dashboard.html">
                             <span class="material-symbols-outlined">dashboard</span>
@@ -231,7 +230,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="mensagens.html">
+                        <a href="comunicados.html">
                             <span class="material-symbols-outlined">chat</span>
                             <p>Comunicados</p>
                         </a>
@@ -247,7 +246,7 @@
         </nav>
     </div>
 
-    <div id="password-popup" class="popup-overlay" style="display: none;">
+            <div id="password-popup" class="popup-overlay" style="display: none;">
         <div class="popup">
             <div class="popup-header">
                 <h2>Alterar senha</h2>
@@ -331,146 +330,168 @@
             </div>
         </div>
     </div>
- <!-- Main Content -->
+
+    <!-- Loading overlay -->
+    <div id="loading-overlay" class="loading-overlay" style="display: none;">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <p>Gerando documento...</p>
+        </div>
+    </div>
+
+    <!-- Main Content -->
     <main class="main">
         <div class="page-header">
             <div class="page-title">
-                <h1>Documentos do Aluno</h1>
+                <h1 id="page-title">Documentos</h1>
+                <p id="page-subtitle">Acesse e baixe seus documentos escolares</p>
+            </div>
+            <div class="header-actions">
+                <button class="btn-secondary" id="btn-help">
+                    <span class="material-symbols-outlined">help</span>
+                    Ajuda
+                </button>
+                <button class="btn-primary" id="btn-refresh">
+                    <span class="material-symbols-outlined">refresh</span>
+                    Atualizar
+                </button>
+            </div>
+        </div>
+
+        <!-- Search and Filters -->
+        <div class="search-section">
+            <div class="search-container">
+                <div class="search-input-group">
+                    <span class="material-symbols-outlined">search</span>
+                    <input type="text" id="search-input" placeholder="Pesquisar documentos...">
+                </div>
+                <div class="filter-group">
+                    <select id="category-filter">
+                        <option value="">Todas as categorias</option>
+                        <option value="academicos">Acadêmicos</option>
+                        <option value="administrativos">Administrativos</option>
+                        <option value="pessoais">Pessoais</option>
+                        <option value="pedagogicos">Pedagógicos</option>
+                    </select>
+                    <select id="status-filter">
+                        <option value="">Todos os status</option>
+                        <option value="disponivel">Disponível</option>
+                        <option value="processando">Processando</option>
+                        <option value="pendente">Pendente</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+
+        <!-- Documents Grid -->
+        <div class="documents-container">
+            <!-- Categoria: Documentos Acadêmicos -->
+            <div class="category-section" data-category="academicos">
+                <div class="category-header">
+                    <div class="category-info">
+                        <span class="material-symbols-outlined category-icon">school</span>
+                        <div>
+                            <h2>Documentos Acadêmicos</h2>
+                            <p>Relatórios e comprovantes da vida escolar</p>
+                        </div>
+                    </div>
+                    <span class="category-count">6 documentos</span>
+                </div>
+                <div class="documents-grid">
+                    <!-- Cards de documentos serão inseridos aqui via JS -->
+                </div>
             </div>
 
-           <div class="container">
-        <!-- Seção 1: Informações do Aluno -->
-        <div class="info-section">
-            <div class="section-header">Informações do Aluno</div>
-            <div class="section-content">
-                <div class="info-row">
-                    <div class="info-col">
-                        <div class="info-label">Nome Completo</div>
-                        <div class="info-value">Guilherme Moura</div>
+            <!-- Categoria: Documentos Administrativos -->
+            <div class="category-section" data-category="administrativos">
+                <div class="category-header">
+                    <div class="category-info">
+                        <span class="material-symbols-outlined category-icon">business</span>
+                        <div>
+                            <h2>Documentos Administrativos</h2>
+                            <p>Comprovantes e declarações institucionais</p>
+                        </div>
                     </div>
-                    <div class="info-col">
-                        <div class="info-label">Série/Turma</div>
-                        <div class="info-value">3º O</div>
-                    </div>
+                    <span class="category-count">4 documentos</span>
                 </div>
-                <div class="info-row">
-                    <div class="info-col">
-                        <div class="info-label">Matrícula</div>
-                        <div class="info-value">0002931822</div>
-                    </div>
-                    <div class="info-col">
-                        <div class="info-label">Curso</div>
-                        <div class="info-value">Ensino Médio</div>
-                    </div>
+                <div class="documents-grid">
+                    <!-- Cards de documentos serão inseridos aqui via JS -->
                 </div>
-                <div class="info-row">
-                    <div class="info-col">
-                        <div class="info-label">Email Institucional</div>
-                        <div class="info-value">Guilherme.nobre@saber.br</div>
+            </div>
+
+            <!-- Categoria: Documentos Pessoais -->
+            <div class="category-section" data-category="pessoais">
+                <div class="category-header">
+                    <div class="category-info">
+                        <span class="material-symbols-outlined category-icon">person</span>
+                        <div>
+                            <h2>Documentos Pessoais</h2>
+                            <p>Informações e dados pessoais</p>
+                        </div>
                     </div>
-                    <div class="info-col">
-                        <div class="info-label">Turno</div>
-                        <div class="info-value">Matutino</div>
+                    <span class="category-count">3 documentos</span>
+                </div>
+                <div class="documents-grid">
+                    <!-- Cards de documentos serão inseridos aqui via JS -->
+                </div>
+            </div>
+
+            <!-- Categoria: Documentos Pedagógicos (apenas para professores) -->
+            <div class="category-section professor-only" data-category="pedagogicos" style="display: none;">
+                <div class="category-header">
+                    <div class="category-info">
+                        <span class="material-symbols-outlined category-icon">psychology</span>
+                        <div>
+                            <h2>Documentos Pedagógicos</h2>
+                            <p>Materiais e recursos para ensino</p>
+                        </div>
                     </div>
+                    <span class="category-count">5 documentos</span>
+                </div>
+                <div class="documents-grid">
+                    <!-- Cards de documentos serão inseridos aqui via JS -->
                 </div>
             </div>
         </div>
-        
-        <!-- Seção 2: Situação Acadêmica -->
-        <div class="info-section">
-            <div class="section-header">
-                Situação Acadêmica
-                <button class="btn-download" id="btnBaixarComprovante">↓ Baixar Comprovante</button>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="empty-state" style="display: none;">
+            <div class="empty-icon">
+                <span class="material-symbols-outlined">description</span>
             </div>
-            <div class="section-content">
-                <div class="info-row">
-                    <div class="info-col">
-                        <div class="info-label">Ano Letivo</div>
-                        <div class="info-value">2025</div>
-                    </div>
-                    <div class="info-col">
-                        <div class="info-label">Data de Matrícula</div>
-                        <div class="info-value">15/01/2025</div>
-                    </div>
-                </div>
-                <div class="info-row">
-                    <div class="info-col">
-                        <div class="info-label">Situação</div>
-                        <div class="info-value" style="color: #3498db;">Ativa</div>
-                    </div>
-                    <div class="info-col">
-                        <div class="info-label">Mensalidade</div>
-                        <div class="info-value">R$ 750,00 <span class="small-text">(Vencimento dia 10 de cada mês)</span></div>
-                    </div>
-                </div>
-            </div>
+            <h3>Nenhum documento encontrado</h3>
+            <p>Tente ajustar os filtros ou aguarde novos documentos serem disponibilizados.</p>
         </div>
-        
-        <!-- Seção 3: Boletim Escolar -->
-        <div class="info-section">
-            <div class="section-header">
-                Boletim Escolar
-                <button class="btn-download" id="btnBaixarBoletim">↓ Baixar Boletim</button>
+    </main>
+
+    <!-- Document Preview Modal -->
+    <div id="document-preview-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Visualizar Documento</h2>
+                <span class="material-symbols-outlined close-modal">close</span>
             </div>
-            <div class="section-content">
-                <table>
-                    <thead>
-                        <tr>
-                            <th>Disciplina</th>
-                            <th>Média Final</th>
-                            <th>Situação</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr>
-                            <td>Matemática</td>
-                            <td>8.5</td>
-                            <td class="status-approved">Aprovado</td>
-                        </tr>
-                        <tr>
-                            <td>Português</td>
-                            <td>8.5</td>
-                            <td class="status-approved">Aprovado</td>
-                        </tr>
-                        <tr>
-                            <td>História</td>
-                            <td>8.5</td>
-                            <td class="status-approved">Aprovado</td>
-                        </tr>
-                        <tr>
-                            <td>Geografia</td>
-                            <td>8.5</td>
-                            <td class="status-approved">Aprovado</td>
-                        </tr>
-                    </tbody>
-                </table>
-                <a href="#" class="link-blue" id="btnVerBoletimCompleto">Ver boletim completo</a>
+            <div class="modal-body">
+                <div class="document-preview" id="document-preview">
+                    <!-- Preview content will be inserted here -->
+                </div>
+                <div class="modal-actions">
+                    <button class="btn-secondary" id="btn-print">
+                        <span class="material-symbols-outlined">print</span>
+                        Imprimir
+                    </button>
+                    <button class="btn-primary" id="btn-download-modal">
+                        <span class="material-symbols-outlined">download</span>
+                        Baixar PDF
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 
-
-            
-            
-         
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-       <script src="../../common/scripts/changepass.js"></script>
-       <script src="../scripts/documentos.js"></script>
+    <script src="../../common/scripts/changepass.js"></script>
     <script src="../../common/scripts/exitpopup.js"></script>
-    <script src="../../common/scripts/menu.js"></script>   
+    <script src="../../common/scripts/menu.js"></script>
+    <script src="../scripts/documentos.js"></script>
 </body>
 </html>

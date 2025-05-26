@@ -1,14 +1,15 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Materiais - SABER</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@24,400,0,0" />
-    <link rel="stylesheet" href="../styles/materiais-aluno.css">
+    <title>Documentos - SABER</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="../../common/styles/menu.css">
     <link rel="stylesheet" href="../../common/styles/changepass.css">
     <link rel="stylesheet" href="../../common/styles/exitpopup.css">
+    <link rel="stylesheet" href="../styles/documentos.css">
 </head>
 <body>
     <!-- HEADER -->
@@ -52,10 +53,26 @@
                                         <p class="notification-time">há 2 horas</p>
                                     </div>
                                 </li>
+                                <li class="notification">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">grade</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Atividade avaliada</p>
+                                        <p class="notification-desc">Revolução Industrial - História</p>
+                                        <p class="notification-time">há 1 dia</p>
+                                    </div>
+                                </li>
+                                <li class="notification">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">calendar_today</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Prazo de entrega próximo</p>
+                                        <p class="notification-desc">Análise Combinatória vence em 2 dias</p>
+                                        <p class="notification-time">há 2 dias</p>
+                                    </div>
+                                </li>
                             </ul>
                         </div>
                         <div class="popup-footer">
-                           
+                            
                         </div>
                     </div>
                 </li>
@@ -160,8 +177,7 @@
         </div>
     </header>
 
-    
-<!-- SIDEBAR PORTAL DO ALUNO -->
+   <!-- SIDEBAR PORTAL DO ALUNO -->
     <div id="sidebar">
         <div class="topmenu">
             <span id="menu-icon" class="material-symbols-outlined">menu</span>
@@ -170,7 +186,7 @@
         </div>
         <nav id="menu-hidden">
             <div class="navbar">
-                <ul>
+                <ul id="navbar-menu">
                     <li>
                         <a href="dashboard.html">
                             <span class="material-symbols-outlined">dashboard</span>
@@ -202,19 +218,19 @@
                         </a>
                     </li>
                     <li>
-                        <a href="materiais-aluno.html" class="active">
+                        <a href="materiais-aluno.html">
                             <span class="material-symbols-outlined">book</span>
                             <p>Materiais</p>
                         </a>
                     </li>
                     <li>
-                        <a href="documentos.html">
+                        <a href="documentos.html" class="active">
                             <span class="material-symbols-outlined">folder</span>
                             <p>Documentos</p>
                         </a>
                     </li>
                     <li>
-                        <a href="comunicados.html">
+                        <a href="mensagens.html">
                             <span class="material-symbols-outlined">chat</span>
                             <p>Comunicados</p>
                         </a>
@@ -230,8 +246,7 @@
         </nav>
     </div>
 
-    <!-- Popups de senha -->
-    <div id="password-popup" class="popup-overlay" style="display: none;">
+            <div id="password-popup" class="popup-overlay" style="display: none;">
         <div class="popup">
             <div class="popup-header">
                 <h2>Alterar senha</h2>
@@ -273,13 +288,14 @@
         </div>
     </div>
 
+    <!-- Popup de Redefinição de Senha -->
     <div id="reset-password-popup" class="popup-overlay" style="display: none;">
         <div class="popup">
             <div class="popup-header">
                 <h2>Redefinição de senha!</h2>
                 <span class="material-symbols-outlined close-popup">close</span>
             </div>
-            <div class="popup-content">
+            <div class="popup-feedback-content">
                 <p class="popup-description">Informe um email e enviaremos um link para recuperação da sua senha.</p>
                 <form id="reset-password-form">
                     <div class="form-group">
@@ -315,231 +331,167 @@
         </div>
     </div>
 
+    <!-- Loading overlay -->
+    <div id="loading-overlay" class="loading-overlay" style="display: none;">
+        <div class="loading-content">
+            <div class="spinner"></div>
+            <p>Gerando documento...</p>
+        </div>
+    </div>
+
     <!-- Main Content -->
-    <main>
-        <div class="materials-container">
-            <!-- Header da página -->
-            <div class="page-header">
-                <h1>Materiais Didáticos</h1>
-                <p class="page-description">Acesse seus livros e materiais de estudo</p>
+    <main class="main">
+        <div class="page-header">
+            <div class="page-title">
+                <h1 id="page-title">Documentos</h1>
+                <p id="page-subtitle">Acesse e baixe seus documentos escolares</p>
             </div>
+            <div class="header-actions">
+                <button class="btn-secondary" id="btn-help">
+                    <span class="material-symbols-outlined">help</span>
+                    Ajuda
+                </button>
+                <button class="btn-primary" id="btn-refresh">
+                    <span class="material-symbols-outlined">refresh</span>
+                    Atualizar
+                </button>
+            </div>
+        </div>
 
-            <!-- Barra de busca e filtros -->
-            <div class="search-filter-bar">
-                <div class="search-container">
-                    <span class="material-symbols-outlined search-icon">search</span>
-                    <input type="text" id="search-input" placeholder="Buscar materiais...">
+        <!-- Search and Filters -->
+        <div class="search-section">
+            <div class="search-container">
+                <div class="search-input-group">
+                    <span class="material-symbols-outlined">search</span>
+                    <input type="text" id="search-input" placeholder="Pesquisar documentos...">
                 </div>
-                
-                <div class="filters">
-                    <select id="subject-filter" class="filter-select">
-                        <option value="">Todas as disciplinas</option>
-                        <option value="matematica">Matemática</option>
-                        <option value="portugues">Português</option>
-                        <option value="historia">História</option>
-                        <option value="geografia">Geografia</option>
-                        <option value="ciencias">Ciências</option>
-                        <option value="ingles">Inglês</option>
+                <div class="filter-group">
+                    <select id="category-filter">
+                        <option value="">Todas as categorias</option>
+                        <option value="academicos">Acadêmicos</option>
+                        <option value="administrativos">Administrativos</option>
+                        <option value="pessoais">Pessoais</option>
+                        <option value="pedagogicos">Pedagógicos</option>
                     </select>
-
-                    <select id="type-filter" class="filter-select">
-                        <option value="">Todos os tipos</option>
-                        <option value="livro">Livro Didático</option>
-                        <option value="apostila">Apostila</option>
-                        <option value="exercicios">Caderno de Exercícios</option>
+                    <select id="status-filter">
+                        <option value="">Todos os status</option>
+                        <option value="disponivel">Disponível</option>
+                        <option value="processando">Processando</option>
+                        <option value="pendente">Pendente</option>
                     </select>
                 </div>
             </div>
+        </div>
 
-            <!-- Grid de materiais -->
-            <div class="materials-grid">
-                <!-- Material Card 1 - Matemática -->
-                <div class="material-card" data-subject="matematica" data-type="livro">
-                    <div class="material-cover">
-                        <img src="https://via.placeholder.com/200x280/4169E1/FFFFFF?text=Matemática+3º+Ano" alt="Matemática 3º Ano">
-                        <div class="material-type-badge">Livro Didático</div>
-                    </div>
-                    <div class="material-info">
-                        <div class="material-content">
-                            <h3 class="material-title">Matemática - 3º Ano</h3>
-                            <p class="material-author">Editora Moderna</p>
-                            <p class="material-description">Livro completo de matemática para o 3º ano do ensino médio</p>
-                            <div class="material-stats">
-                                <span class="stat-item">
-                                    <span class="material-symbols-outlined">auto_stories</span>
-                                    <span>425 páginas</span>
-                                </span>
-                                <span class="stat-item">
-                                    <span class="material-symbols-outlined">download</span>
-                                    <span>2.3 MB</span>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="material-actions">
-                            <button class="btn-view" onclick="viewMaterial('matematica-3ano.pdf')">
-                                <span class="material-symbols-outlined">visibility</span>
-                                <span>Visualizar</span>
-                            </button>
-                            <button class="btn-download" onclick="downloadMaterial('matematica-3ano.pdf')">
-                                <span class="material-symbols-outlined">download</span>
-                            </button>
+        <!-- Documents Grid -->
+        <div class="documents-container">
+            <!-- Categoria: Documentos Acadêmicos -->
+            <div class="category-section" data-category="academicos">
+                <div class="category-header">
+                    <div class="category-info">
+                        <span class="material-symbols-outlined category-icon">school</span>
+                        <div>
+                            <h2>Documentos Acadêmicos</h2>
+                            <p>Relatórios e comprovantes da vida escolar</p>
                         </div>
                     </div>
+                    <span class="category-count">6 documentos</span>
                 </div>
-
-                <!-- Material Card 2 - Português -->
-                <div class="material-card" data-subject="portugues" data-type="livro">
-                    <div class="material-cover">
-                        <img src="https://via.placeholder.com/200x280/DC143C/FFFFFF?text=Português+3º+Ano" alt="Português 3º Ano">
-                        <div class="material-type-badge">Livro Didático</div>
-                    </div>
-                    <div class="material-info">
-                        <div class="material-content">
-                            <h3 class="material-title">Português - 3º Ano</h3>
-                            <p class="material-author">Editora Ática</p>
-                            <p class="material-description">Literatura, gramática e produção textual</p>
-                            <div class="material-stats">
-                                <span class="stat-item">
-                                    <span class="material-symbols-outlined">auto_stories</span>
-                                    <span>380 páginas</span>
-                                </span>
-                                <span class="stat-item">
-                                    <span class="material-symbols-outlined">download</span>
-                                    <span>1.8 MB</span>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="material-actions">
-                            <button class="btn-view" onclick="viewMaterial('portugues-3ano.pdf')">
-                                <span class="material-symbols-outlined">visibility</span>
-                                <span>Visualizar</span>
-                            </button>
-                            <button class="btn-download" onclick="downloadMaterial('portugues-3ano.pdf')">
-                                <span class="material-symbols-outlined">download</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Material Card 3 - História -->
-                <div class="material-card" data-subject="historia" data-type="livro">
-                    <div class="material-cover">
-                        <img src="https://via.placeholder.com/200x280/8B4513/FFFFFF?text=História+3º+Ano" alt="História 3º Ano">
-                        <div class="material-type-badge">Livro Didático</div>
-                    </div>
-                    <div class="material-info">
-                        <div class="material-content">
-                            <h3 class="material-title">História - 3º Ano</h3>
-                            <p class="material-author">Editora FTD</p>
-                            <p class="material-description">História do Brasil e História Geral</p>
-                            <div class="material-stats">
-                                <span class="stat-item">
-                                    <span class="material-symbols-outlined">auto_stories</span>
-                                    <span>320 páginas</span>
-                                </span>
-                                <span class="stat-item">
-                                    <span class="material-symbols-outlined">download</span>
-                                    <span>2.1 MB</span>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="material-actions">
-                            <button class="btn-view" onclick="viewMaterial('historia-3ano.pdf')">
-                                <span class="material-symbols-outlined">visibility</span>
-                                <span>Visualizar</span>
-                            </button>
-                            <button class="btn-download" onclick="downloadMaterial('historia-3ano.pdf')">
-                                <span class="material-symbols-outlined">download</span>
-                            </button>
-                        </div>
-                    </div>
-                </div>
-
-                <!-- Material Card 4 - Apostila de Exercícios -->
-                <div class="material-card" data-subject="matematica" data-type="exercicios">
-                    <div class="material-cover">
-                        <img src="https://via.placeholder.com/200x280/32CD32/FFFFFF?text=Exercícios+Matemática" alt="Exercícios Matemática">
-                        <div class="material-type-badge">Exercícios</div>
-                    </div>
-                    <div class="material-info">
-                        <div class="material-content">
-                            <h3 class="material-title">Caderno de Exercícios - Matemática</h3>
-                            <p class="material-author">SABER</p>
-                            <p class="material-description">Exercícios complementares de matemática</p>
-                            <div class="material-stats">
-                                <span class="stat-item">
-                                    <span class="material-symbols-outlined">auto_stories</span>
-                                    <span>150 páginas</span>
-                                </span>
-                                <span class="stat-item">
-                                    <span class="material-symbols-outlined">download</span>
-                                    <span>0.8 MB</span>
-                                </span>
-                            </div>
-                        </div>
-                        <div class="material-actions">
-                            <button class="btn-view" onclick="viewMaterial('exercicios-mat.pdf')">
-                                <span class="material-symbols-outlined">visibility</span>
-                                <span>Visualizar</span>
-                            </button>
-                            <button class="btn-download" onclick="downloadMaterial('exercicios-mat.pdf')">
-                                <span class="material-symbols-outlined">download</span>
-                            </button>
-                        </div>
-                    </div>
+                <div class="documents-grid">
+                    <!-- Cards de documentos serão inseridos aqui via JS -->
                 </div>
             </div>
 
-            <!-- Mensagem quando não há materiais -->
-            <div class="no-materials" style="display: none;">
-                <span class="material-symbols-outlined">library_books</span>
-                <p>Nenhum material encontrado</p>
-                <span>Tente ajustar os filtros de busca</span>
+            <!-- Categoria: Documentos Administrativos -->
+            <div class="category-section" data-category="administrativos">
+                <div class="category-header">
+                    <div class="category-info">
+                        <span class="material-symbols-outlined category-icon">business</span>
+                        <div>
+                            <h2>Documentos Administrativos</h2>
+                            <p>Comprovantes e declarações institucionais</p>
+                        </div>
+                    </div>
+                    <span class="category-count">4 documentos</span>
+                </div>
+                <div class="documents-grid">
+                    <!-- Cards de documentos serão inseridos aqui via JS -->
+                </div>
             </div>
+
+            <!-- Categoria: Documentos Pessoais -->
+            <div class="category-section" data-category="pessoais">
+                <div class="category-header">
+                    <div class="category-info">
+                        <span class="material-symbols-outlined category-icon">person</span>
+                        <div>
+                            <h2>Documentos Pessoais</h2>
+                            <p>Informações e dados pessoais</p>
+                        </div>
+                    </div>
+                    <span class="category-count">3 documentos</span>
+                </div>
+                <div class="documents-grid">
+                    <!-- Cards de documentos serão inseridos aqui via JS -->
+                </div>
+            </div>
+
+            <!-- Categoria: Documentos Pedagógicos (apenas para professores) -->
+            <div class="category-section professor-only" data-category="pedagogicos" style="display: none;">
+                <div class="category-header">
+                    <div class="category-info">
+                        <span class="material-symbols-outlined category-icon">psychology</span>
+                        <div>
+                            <h2>Documentos Pedagógicos</h2>
+                            <p>Materiais e recursos para ensino</p>
+                        </div>
+                    </div>
+                    <span class="category-count">5 documentos</span>
+                </div>
+                <div class="documents-grid">
+                    <!-- Cards de documentos serão inseridos aqui via JS -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Empty State -->
+        <div class="empty-state" id="empty-state" style="display: none;">
+            <div class="empty-icon">
+                <span class="material-symbols-outlined">description</span>
+            </div>
+            <h3>Nenhum documento encontrado</h3>
+            <p>Tente ajustar os filtros ou aguarde novos documentos serem disponibilizados.</p>
         </div>
     </main>
 
-    <!-- Modal PDF Viewer -->
-    <div id="pdf-modal" class="pdf-modal">
-        <div class="pdf-modal-content">
-            <div class="pdf-modal-header">
-                <h2 id="pdf-title">Título do Material</h2>
-                <button class="close-modal" onclick="closePdfModal()">
-                    <span class="material-symbols-outlined">close</span>
-                </button>
+    <!-- Document Preview Modal -->
+    <div id="document-preview-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 id="modal-title">Visualizar Documento</h2>
+                <span class="material-symbols-outlined close-modal">close</span>
             </div>
-            <div class="pdf-modal-body">
-                <iframe id="pdf-viewer" src="" frameborder="0"></iframe>
+            <div class="modal-body">
+                <div class="document-preview" id="document-preview">
+                    <!-- Preview content will be inserted here -->
+                </div>
+                <div class="modal-actions">
+                    <button class="btn-secondary" id="btn-print">
+                        <span class="material-symbols-outlined">print</span>
+                        Imprimir
+                    </button>
+                    <button class="btn-primary" id="btn-download-modal">
+                        <span class="material-symbols-outlined">download</span>
+                        Baixar PDF
+                    </button>
+                </div>
             </div>
         </div>
     </div>
 
-    <!-- Notifications Popup -->
-    <div class="notifications-popup" id="notifications-popup">
-        <div class="popup-header">
-            <h3>Notificações</h3>
-            <span class="material-symbols-outlined close-popup">close</span>
-        </div>
-        <div class="notifications-content">
-            <!-- Conteúdo das notificações -->
-        </div>
-    </div>
-
-    <!-- User Icon Popup -->
-    <div class="user-icon-popup" id="user-icon-popup">
-        <div class="popup-header">
-            <h3>Configurações</h3>
-            <span class="material-symbols-outlined close-popup">close</span>
-        </div>
-        <div class="settings-content">
-            <!-- Conteúdo das configurações -->
-        </div>
-    </div>
-
-    
-    <script src="../scripts/materiais-aluno.js"></script>
     <script src="../../common/scripts/changepass.js"></script>
     <script src="../../common/scripts/exitpopup.js"></script>
     <script src="../../common/scripts/menu.js"></script>
+    <script src="../scripts/documentos.js"></script>
 </body>
 </html>
