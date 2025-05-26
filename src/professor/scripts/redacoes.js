@@ -1,8 +1,25 @@
 document.addEventListener("DOMContentLoaded", function() {
+    // Sidebar elements (assumindo que existem no HTML)
+    const sidebar = document.getElementById("sidebar");
+    const menuIconSidebar = document.getElementById("menu-icon");
+    const menuIconMobile = document.getElementById("menu-icon-mobile");
+
+    // Sidebar toggle functionality
+    if (menuIconSidebar) {
+        menuIconSidebar.addEventListener("click", function() {
+            sidebar.classList.toggle("active");
+        });
+    }
+
+    if (menuIconMobile) {
+        menuIconMobile.addEventListener("click", function() {
+            sidebar.classList.toggle("active"); 
+        });
+    }
 
     // Responsive check
     function checkWindowSize() {
-        if (window.innerWidth > 768) {
+        if (window.innerWidth > 768 && sidebar) {
             sidebar.classList.remove("active");
         }
     }
@@ -22,14 +39,18 @@ document.addEventListener("DOMContentLoaded", function() {
     let redacoes = [];
     
     // Abrir modal de nova redação
-    novaRedacaoBtn.addEventListener("click", function() {
-        modal.style.display = "block";
-    });
+    if (novaRedacaoBtn) {
+        novaRedacaoBtn.addEventListener("click", function() {
+            modal.style.display = "block";
+        });
+    }
     
     // Fechar modal
-    closeModal.addEventListener("click", function() {
-        modal.style.display = "none";
-    });
+    if (closeModal) {
+        closeModal.addEventListener("click", function() {
+            modal.style.display = "none";
+        });
+    }
     
     // Fechar modal ao clicar fora
     window.addEventListener("click", function(event) {
@@ -59,8 +80,10 @@ document.addEventListener("DOMContentLoaded", function() {
         return new Date(dateString).toLocaleDateString('pt-BR', options);
     }
     
-    // Modifique a função renderRedacoes para incluir links clicáveis para os arquivos
+    // Função corrigida para renderizar redações
     function renderRedacoes(filter = '') {
+        if (!redacoesList) return;
+        
         redacoesList.innerHTML = '';
         
         const filteredRedacoes = redacoes.filter(redacao => 
@@ -108,182 +131,218 @@ document.addEventListener("DOMContentLoaded", function() {
             `;
             
             redacoesList.appendChild(redacaoCard);
+        });
+        
+        // IMPORTANTE: Adicionar os event listeners APÓS os elementos serem criados
+        setupCardEventListeners();
+    }
+    
+    // Função separada para configurar os event listeners dos cards
+    function setupCardEventListeners() {
+        // Remover listeners anteriores para evitar duplicação
+        const cards = document.querySelectorAll('.redacao-card');
+        
+        cards.forEach(card => {
+            const redacaoId = card.getAttribute('data-redacao-id');
             
-            // Adicionar evento de clique para o card inteiro (redirecionamento para detalhes)
-            redacaoCard.addEventListener('click', function(event) {
-                // Verifica se o clique não foi no menu de opções ou no arquivo
-                if (!event.target.closest('.redacao-options') && !event.target.closest('.redacao-file')) {
-                    const redacaoId = this.getAttribute('data-redacao-id');
-                    window.location.href = `redacao-details.html?id=${redacaoId}`;
+            // Event listener para o card inteiro (navegação para detalhes)
+            card.addEventListener('click', function(event) {
+                // Verifica se o clique não foi em elementos específicos
+                if (!event.target.closest('.redacao-options') && 
+                    !event.target.closest('.redacao-file') &&
+                    !event.target.closest('.options-menu')) {
+                    
+                    console.log('Navegando para redacao-status.html?id=' + redacaoId); // Debug
+                    window.location.href = `redacao-status.html?id=${redacaoId}`;
                 }
             });
             
-            // Adicionar estilo de cursor pointer para indicar que é clicável
-            redacaoCard.style.cursor = 'pointer';
+            // Adicionar estilo de cursor pointer
+            card.style.cursor = 'pointer';
             
-            // Adicionar evento de clique para arquivos se existirem
-            if (redacao.arquivo) {
-                const fileElement = redacaoCard.querySelector('.redacao-file');
+            // Event listener para arquivos
+            const fileElement = card.querySelector('.redacao-file');
+            if (fileElement) {
                 fileElement.style.cursor = 'pointer';
                 fileElement.title = 'Clique para abrir o arquivo';
                 
                 fileElement.addEventListener('click', function(event) {
-                    event.stopPropagation(); // Impede que o clique no arquivo acione o evento do card
-                    abrirArquivo(redacao.id);
+                    event.stopPropagation();
+                    console.log('Abrindo arquivo para redação ID:', redacaoId); // Debug
+                    abrirArquivo(redacaoId);
                 });
             }
             
-            // Evento para o botão de opções
-            const optionsIcon = redacaoCard.querySelector('.options-icon');
-            optionsIcon.addEventListener('click', function(event) {
-                const redacaoId = this.getAttribute('data-redacao-id');
-                const optionsMenu = document.getElementById(`options-menu-${redacaoId}`);
-                
-                // Fecha todos os outros menus abertos
-                document.querySelectorAll('.options-menu').forEach(menu => {
-                    if (menu.id !== `options-menu-${redacaoId}`) {
-                        menu.classList.remove('active');
-                    }
+            // Event listener para o menu de opções
+            const optionsIcon = card.querySelector('.options-icon');
+            if (optionsIcon) {
+                optionsIcon.addEventListener('click', function(event) {
+                    event.stopPropagation();
+                    
+                    const optionsMenu = document.getElementById(`options-menu-${redacaoId}`);
+                    
+                    // Fechar outros menus
+                    document.querySelectorAll('.options-menu').forEach(menu => {
+                        if (menu.id !== `options-menu-${redacaoId}`) {
+                            menu.classList.remove('active');
+                        }
+                    });
+                    
+                    // Alternar menu atual
+                    optionsMenu.classList.toggle('active');
                 });
-                
-                // Alterna a visibilidade do menu atual
-                optionsMenu.classList.toggle('active');
-                event.stopPropagation(); // Impede que o clique no menu acione o evento do card
-            });
+            }
             
-            // Evento para editar redação
-            const editOption = redacaoCard.querySelector('.edit-option');
-            editOption.addEventListener('click', function(event) {
-                event.stopPropagation(); // Impede que o clique no editar acione o evento do card
-                const redacaoId = this.getAttribute('data-redacao-id');
-                editarRedacao(redacaoId);
-            });
+            // Event listeners para as opções do menu
+            const editOption = card.querySelector('.edit-option');
+            if (editOption) {
+                editOption.addEventListener('click', function(event) {
+                    event.stopPropagation();
+                    editarRedacao(redacaoId);
+                });
+            }
             
-            // Evento para excluir redação
-            const deleteOption = redacaoCard.querySelector('.delete-option');
-            deleteOption.addEventListener('click', function(event) {
-                event.stopPropagation(); // Impede que o clique no excluir acione o evento do card
-                const redacaoId = this.getAttribute('data-redacao-id');
-                excluirRedacao(redacaoId);
-            });
+            const deleteOption = card.querySelector('.delete-option');
+            if (deleteOption) {
+                deleteOption.addEventListener('click', function(event) {
+                    event.stopPropagation();
+                    excluirRedacao(redacaoId);
+                });
+            }
         });
-        
-        // Fechar menu ao clicar fora
-        document.addEventListener('click', function() {
+    }
+    
+    // Event listener global para fechar menus
+    document.addEventListener('click', function(event) {
+        if (!event.target.closest('.redacao-options')) {
             document.querySelectorAll('.options-menu').forEach(menu => {
                 menu.classList.remove('active');
             });
-        });
-    }
+        }
+    });
     
     // Função para editar uma redação
     function editarRedacao(redacaoId) {
         const redacao = redacoes.find(r => r.id === parseInt(redacaoId));
         
         if (redacao) {
+            // Fechar menu de opções
+            document.querySelectorAll('.options-menu').forEach(menu => {
+                menu.classList.remove('active');
+            });
+            
             // Preencher o formulário com os dados da redação
             document.getElementById('redacao-tema').value = redacao.tema;
             document.getElementById('redacao-descricao').value = redacao.descricao;
             document.getElementById('redacao-entrega').value = redacao.dataEntrega;
             
             // Armazenar o ID da redação que está sendo editada
-            document.getElementById('nova-redacao-form').setAttribute('data-editing-id', redacaoId);
+            redacaoForm.setAttribute('data-editing-id', redacaoId);
             
             // Mudar o título e texto do botão
             document.querySelector('.modal-content h2').textContent = 'Editar Redação';
             document.querySelector('.modal-content button[type="submit"]').textContent = 'Salvar Alterações';
             
             // Exibir o modal
-            document.getElementById('nova-redacao-modal').style.display = 'block';
+            modal.style.display = 'block';
         }
     }
     
     // Função para excluir uma redação
     function excluirRedacao(redacaoId) {
+        // Fechar menu de opções
+        document.querySelectorAll('.options-menu').forEach(menu => {
+            menu.classList.remove('active');
+        });
+        
         if (confirm('Tem certeza que deseja excluir esta redação?')) {
             redacoes = redacoes.filter(r => r.id !== parseInt(redacaoId));
             renderRedacoes();
         }
     }
     
-    // Enviar nova redação - Refatorado para corrigir o problema do card vazio
-    redacaoForm.addEventListener("submit", function(e) {
-        e.preventDefault();
-        
-        const tema = document.getElementById("redacao-tema").value;
-        const descricao = document.getElementById("redacao-descricao").value;
-        const dataEntrega = document.getElementById("redacao-entrega").value;
-        const arquivoInput = document.getElementById("redacao-arquivo");
-        
-        // Verificar se estamos editando ou criando uma nova redação
-        const editingId = this.getAttribute('data-editing-id');
-        
-        if (editingId) {
-            // Estamos editando uma redação existente
-            const index = redacoes.findIndex(r => r.id === parseInt(editingId));
+    // Event listener para o formulário
+    if (redacaoForm) {
+        redacaoForm.addEventListener("submit", function(e) {
+            e.preventDefault();
             
-            if (index !== -1) {
-                // Manter o arquivo original se nenhum novo for selecionado
-                let arquivo = redacoes[index].arquivo;
-                let arquivoObj = redacoes[index].arquivoObj;
+            const tema = document.getElementById("redacao-tema").value;
+            const descricao = document.getElementById("redacao-descricao").value;
+            const dataEntrega = document.getElementById("redacao-entrega").value;
+            const arquivoInput = document.getElementById("redacao-arquivo");
+            
+            // Verificar se estamos editando ou criando uma nova redação
+            const editingId = this.getAttribute('data-editing-id');
+            
+            if (editingId) {
+                // Estamos editando uma redação existente
+                const index = redacoes.findIndex(r => r.id === parseInt(editingId));
                 
-                // Se um novo arquivo foi selecionado, atualizá-lo
+                if (index !== -1) {
+                    // Manter o arquivo original se nenhum novo for selecionado
+                    let arquivo = redacoes[index].arquivo;
+                    let arquivoObj = redacoes[index].arquivoObj;
+                    
+                    // Se um novo arquivo foi selecionado, atualizá-lo
+                    if (arquivoInput.files.length > 0) {
+                        arquivo = arquivoInput.files[0].name;
+                        arquivoObj = arquivoInput.files[0];
+                    }
+                    
+                    // Atualizar a redação
+                    redacoes[index] = {
+                        ...redacoes[index],
+                        tema: tema,
+                        descricao: descricao,
+                        dataEntrega: dataEntrega,
+                        arquivo: arquivo,
+                        arquivoObj: arquivoObj
+                    };
+                }
+                
+                // Limpar o atributo de edição
+                this.removeAttribute('data-editing-id');
+                
+                // Restaurar o título e texto do botão
+                document.querySelector('.modal-content h2').textContent = 'Nova Redação';
+                document.querySelector('.modal-content button[type="submit"]').textContent = 'Enviar Redação';
+            } else {
+                // Estamos criando uma nova redação
+                let arquivo = null;
+                let arquivoObj = null;
+                
                 if (arquivoInput.files.length > 0) {
                     arquivo = arquivoInput.files[0].name;
                     arquivoObj = arquivoInput.files[0];
                 }
                 
-                // Atualizar a redação
-                redacoes[index] = {
-                    ...redacoes[index],
+                const novaRedacao = {
+                    id: redacoes.length > 0 ? Math.max(...redacoes.map(r => r.id)) + 1 : 1,
                     tema: tema,
                     descricao: descricao,
                     dataEntrega: dataEntrega,
+                    dataCriacao: new Date().toISOString().split('T')[0],
                     arquivo: arquivo,
                     arquivoObj: arquivoObj
                 };
+                
+                redacoes.unshift(novaRedacao);
             }
             
-            // Limpar o atributo de edição
-            this.removeAttribute('data-editing-id');
+            renderRedacoes();
             
-            // Restaurar o título e texto do botão
-            document.querySelector('.modal-content h2').textContent = 'Nova Redação';
-            document.querySelector('.modal-content button[type="submit"]').textContent = 'Enviar Redação';
-        } else {
-            // Estamos criando uma nova redação
-            let arquivo = null;
-            let arquivoObj = null;
-            
-            if (arquivoInput.files.length > 0) {
-                arquivo = arquivoInput.files[0].name;
-                arquivoObj = arquivoInput.files[0];
-            }
-            
-            const novaRedacao = {
-                id: redacoes.length > 0 ? Math.max(...redacoes.map(r => r.id)) + 1 : 1,
-                tema: tema,
-                descricao: descricao,
-                dataEntrega: dataEntrega,
-                dataCriacao: new Date().toISOString().split('T')[0],
-                arquivo: arquivo,
-                arquivoObj: arquivoObj
-            };
-            
-            redacoes.unshift(novaRedacao);
-        }
-        
-        renderRedacoes();
-        
-        // Resetar form e fechar modal
-        redacaoForm.reset();
-        document.getElementById('nova-redacao-modal').style.display = 'none';
-    });
+            // Resetar form e fechar modal
+            this.reset();
+            modal.style.display = 'none';
+        });
+    }
     
-    // Pesquisar redações
-    searchInput.addEventListener('input', function() {
-        renderRedacoes(this.value);
-    });
+    // Event listener para pesquisa
+    if (searchInput) {
+        searchInput.addEventListener('input', function() {
+            renderRedacoes(this.value);
+        });
+    }
     
     // Carregar redações ao iniciar
     renderRedacoes();
