@@ -17,12 +17,12 @@
     <header class="header">
         <div class="menu-icon-mobile">
             <span id="menu-icon-mobile" class="material-symbols-outlined">menu</span>
-        </div>
-        <div class="menuheader">
+        </div>  
+        <div class="menuheader"> 
             <ul class="menuheader-list">
                 <li class="notification-item">
                     <span id="notifications-icon" class="material-symbols-outlined">notifications</span>
-                    <span class="notification-badge">5</span>
+                    <span class="notification-badge">3</span>
                     <div id="notifications-popup" class="notifications-popup">
                         <div class="popup-header">
                             <p>Notificações</p>
@@ -31,49 +31,49 @@
                         <div class="notifications-content">
                             <ul>
                                 <li class="notification unread">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">campaign</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Comunicado importante</p>
+                                        <p class="notification-desc">Alteração no calendário de provas</p>
+                                        <p class="notification-time">há 5 minutos</p>
+                                    </div>
+                                </li>
+                                <li class="notification unread">
                                     <div class="notification-icon"><span class="material-symbols-outlined">assignment</span></div>
                                     <div class="notification-text">
-                                        <p class="notification-title">Nova nota postada</p>
-                                        <p class="notification-desc">Cálculo I - Prova 2: 8,5</p>
+                                        <p class="notification-title">Nova atividade disponível</p>
+                                        <p class="notification-desc">Exercícios de Álgebra - Matemática</p>
                                         <p class="notification-time">há 10 minutos</p>
                                     </div>
                                 </li>
                                 <li class="notification unread">
-                                    <div class="notification-icon"><span class="material-symbols-outlined">calendar_today</span></div>
+                                    <div class="notification-icon"><span class="material-symbols-outlined">quiz</span></div>
                                     <div class="notification-text">
-                                        <p class="notification-title">Lembrete de entrega</p>
-                                        <p class="notification-desc">Projeto final de Banco de Dados vence amanhã</p>
-                                        <p class="notification-time">há 30 minutos</p>
-                                    </div>
-                                </li>
-                                <li class="notification unread">
-                                    <div class="notification-icon"><span class="material-symbols-outlined">chat</span></div>
-                                    <div class="notification-text">
-                                        <p class="notification-title">Novo comentário</p>
-                                        <p class="notification-desc">Seu professor comentou no seu trabalho</p>
+                                        <p class="notification-title">Prova agendada</p>
+                                        <p class="notification-desc">Física Quântica - 25/05 às 14:00</p>
                                         <p class="notification-time">há 2 horas</p>
                                     </div>
                                 </li>
                                 <li class="notification">
-                                    <div class="notification-icon"><span class="material-symbols-outlined">campaign</span></div>
+                                    <div class="notification-icon"><span class="material-symbols-outlined">grade</span></div>
                                     <div class="notification-text">
-                                        <p class="notification-title">Comunicado da Coordenação</p>
-                                        <p class="notification-desc">Alteração no horário das monitorias</p>
+                                        <p class="notification-title">Atividade avaliada</p>
+                                        <p class="notification-desc">Revolução Industrial - História</p>
                                         <p class="notification-time">há 1 dia</p>
                                     </div>
                                 </li>
                                 <li class="notification">
-                                    <div class="notification-icon"><span class="material-symbols-outlined">quiz</span></div>
+                                    <div class="notification-icon"><span class="material-symbols-outlined">calendar_today</span></div>
                                     <div class="notification-text">
-                                        <p class="notification-title">Nova atividade disponível</p>
-                                        <p class="notification-desc">Lista de exercícios - Estrutura de Dados</p>
+                                        <p class="notification-title">Prazo de entrega próximo</p>
+                                        <p class="notification-desc">Análise Combinatória vence em 2 dias</p>
                                         <p class="notification-time">há 2 dias</p>
                                     </div>
                                 </li>
                             </ul>
                         </div>
                         <div class="popup-footer">
-                           
+                        
                         </div>
                     </div>
                 </li>
@@ -90,7 +90,7 @@
                                 </div>
                                 <div class="user-details">
                                     <p class="user-name">Kenai Almeida</p>
-                                    <p class="user-email">kenai.almeida@aluno.edu.br</p>
+                                    <p class="user-email">kenai.almeida@email.com</p>
                                 </div>
                             </div>
                         </div>
@@ -109,7 +109,7 @@
                                             <span class="material-symbols-outlined">key</span>
                                             <span>Alterar senha</span>
                                         </a>
-                                    </li>
+                                    </li>   
                                 </ul>
                             </div>
                             <div class="settings-group">
@@ -132,6 +132,26 @@
                                             <span class="selected-language">Português</span>
                                             <span class="material-symbols-outlined toggle-arrow">expand_more</span>
                                         </a>
+                                        <div class="language-options">
+                                            <ul>
+                                                <li data-lang="pt-BR" class="active">
+                                                    <span class="language-flag">🇧🇷</span>
+                                                    <span class="language-name">Português</span>
+                                                </li>
+                                                <li data-lang="en-US">
+                                                    <span class="language-flag">🇺🇸</span>
+                                                    <span class="language-name">English</span>
+                                                </li>
+                                                <li data-lang="es-ES">
+                                                    <span class="language-flag">🇪🇸</span>
+                                                    <span class="language-name">Español</span>
+                                                </li>
+                                                <li data-lang="fr-FR">
+                                                    <span class="language-flag">🇫🇷</span>
+                                                    <span class="language-name">Français</span>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </li>
                                 </ul>
                             </div>
@@ -158,7 +178,7 @@
         </div>
     </header>
 
-  <!-- SIDEBAR PORTAL DO ALUNO -->
+<!-- SIDEBAR PORTAL DO ALUNO -->
     <div id="sidebar">
         <div class="topmenu">
             <span id="menu-icon" class="material-symbols-outlined">menu</span>
@@ -225,6 +245,91 @@
                 </ul>
             </div>
         </nav>
+    </div>
+
+    <!-- Popups -->
+    <div id="password-popup" class="popup-overlay" style="display: none;">
+        <div class="popup">
+            <div class="popup-header">
+                <h2>Alterar senha</h2>
+                <span class="material-symbols-outlined close-popup">close</span>
+            </div>
+            <div class="popup-content">
+                <p class="popup-description">Informe a senha atual e a nova senha</p>
+                <form id="change-password-form">
+                    <div class="form-group">
+                        <label for="current-password">Senha atual <span class="required">*</span></label>
+                        <div class="password-input">
+                            <input type="password" id="current-password" name="current-password" required>
+                            <span class="material-symbols-outlined toggle-password">visibility_off</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-password">Nova senha <span class="required">*</span></label>
+                        <div class="password-input">
+                            <input type="password" id="new-password" name="new-password" required>
+                            <span class="material-symbols-outlined toggle-password">visibility_off</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Confirmação de senha <span class="required">*</span></label>
+                        <div class="password-input">
+                            <input type="password" id="confirm-password" name="confirm-password" required>
+                            <span class="material-symbols-outlined toggle-password">visibility_off</span>
+                        </div>
+                    </div>
+                    <div class="forgot-password">
+                        <a href="#" id="forgot-password-link">Esqueceu a senha?</a>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel">Cancelar</button>
+                        <button type="submit" class="btn-confirm">Alterar senha</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="reset-password-popup" class="popup-overlay" style="display: none;">
+        <div class="popup">
+            <div class="popup-header">
+                <h2>Redefinição de senha!</h2>
+                <span class="material-symbols-outlined close-popup">close</span>
+            </div>
+            <div class="popup-content">
+                <p class="popup-description">Informe um email e enviaremos um link para recuperação da sua senha.</p>
+                <form id="reset-password-form">
+                    <div class="form-group">
+                        <label for="recovery-email">Email <span class="required">*</span></label>
+                        <input type="email" id="recovery-email" name="recovery-email" required placeholder="seu@email.com">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-back">
+                            <span class="material-symbols-outlined">arrow_back</span>
+                            Voltar
+                        </button>
+                        <button type="submit" class="btn-send">Enviar link de recuperação</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="logout-popup" class="popup-overlay" style="display: none;">
+        <div class="popup logout-popup">
+            <div class="logout-content">
+                <div class="logout-icon">
+                    <span class="material-symbols-outlined">logout</span>
+                </div>
+                <h2 class="logout-title">Sair da conta?</h2>
+                <p class="logout-description">Você poderá entrar novamente a qualquer momento. Se quiser trocar de conta, faça isso adicionando uma conta existente.</p>
+                
+                <div class="logout-actions">
+                    <button type="button" class="btn-logout">Sair</button>
+                    <button type="button" class="btn-cancel-logout">Cancelar</button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <main class="main">
