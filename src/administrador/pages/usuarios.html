@@ -1,0 +1,564 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestão de Usuários - SABER</title>
+    <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined" rel="stylesheet" />
+    <link rel="stylesheet" href="../styles/usuarios.css">
+    <link rel="stylesheet" href="../../common/styles/menu.css">
+    <link rel="stylesheet" href="../../common/styles/changepass.css">
+    <link rel="stylesheet" href="../../common/styles/exitpopup.css">
+    </head>
+<body>
+    <header class="header">
+        <div class="menu-icon-mobile">
+            <span id="menu-icon-mobile" class="material-symbols-outlined">menu</span>
+        </div>  
+        <div class="menuheader"> 
+            <ul class="menuheader-list">
+                <li class="notification-item">
+                    <span id="notifications-icon" class="material-symbols-outlined">notifications</span>
+                    <span class="notification-badge">3</span>
+                    <div id="notifications-popup" class="notifications-popup">
+                        <div class="popup-header">
+                            <p>Notificações</p>
+                            <span class="material-symbols-outlined close-popup">close</span>
+                        </div>
+                        <div class="notifications-content">
+                            <ul>
+                                <li class="notification unread">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">campaign</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Comunicado importante</p>
+                                        <p class="notification-desc">Alteração no calendário de provas</p>
+                                        <p class="notification-time">há 5 minutos</p>
+                                    </div>
+                                </li>
+                                <li class="notification unread">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">assignment</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Nova atividade disponível</p>
+                                        <p class="notification-desc">Exercícios de Álgebra - Matemática</p>
+                                        <p class="notification-time">há 10 minutos</p>
+                                    </div>
+                                </li>
+                                <li class="notification unread">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">quiz</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Prova agendada</p>
+                                        <p class="notification-desc">Física Quântica - 25/05 às 14:00</p>
+                                        <p class="notification-time">há 2 horas</p>
+                                    </div>
+                                </li>
+                                <li class="notification">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">grade</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Atividade avaliada</p>
+                                        <p class="notification-desc">Revolução Industrial - História</p>
+                                        <p class="notification-time">há 1 dia</p>
+                                    </div>
+                                </li>
+                                <li class="notification">
+                                    <div class="notification-icon"><span class="material-symbols-outlined">calendar_today</span></div>
+                                    <div class="notification-text">
+                                        <p class="notification-title">Prazo de entrega próximo</p>
+                                        <p class="notification-desc">Análise Combinatória vence em 2 dias</p>
+                                        <p class="notification-time">há 2 dias</p>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                        <div class="popup-footer">
+                    
+                        </div>
+                    </div>
+                </li>
+                <li>
+                    <p id="user-name-header">Kenai Almeida</p>
+                </li>
+                <li class="user-settings-item">
+                    <span id="user-icon" class="material-symbols-outlined">account_circle</span>
+                    <div id="user-icon-popup" class="user-icon-popup">
+                        <div class="popup-header">
+                            <div class="user-info">
+                                <div class="user-avatar">
+                                    <span class="material-symbols-outlined">person</span>
+                                </div>
+                                <div class="user-details">
+                                    <p class="user-name">Kenai Almeida</p>
+                                    <p class="user-email">kenai.almeida@email.com</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="settings-content">
+                            <div class="settings-group">
+                                <p class="settings-group-title">Conta</p>
+                                <ul>
+                                    <li>
+                                        <a href="perfil-aluno.html">
+                                            <span class="material-symbols-outlined">manage_accounts</span>
+                                            <span>Meu Perfil</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="#" class="alterar-senha-link">
+                                            <span class="material-symbols-outlined">key</span>
+                                            <span>Alterar senha</span>
+                                        </a>
+                                    </li>   
+                                </ul>
+                            </div>
+                            <div class="settings-group">
+                                <p class="settings-group-title">Sistema</p>
+                                <ul>
+                                    <li>
+                                        <a href="#tema" class="theme-toggle-container">
+                                            <span class="material-symbols-outlined">dark_mode</span>
+                                            <span>Tema Escuro</span>
+                                            <label class="switch">
+                                                <input type="checkbox" id="theme-toggle">
+                                                <span class="slider round"></span>
+                                            </label>
+                                        </a>
+                                    </li>
+                                    <li class="settings-item language-selector-container">
+                                        <a href="#idioma" class="language-selector">
+                                            <span class="material-symbols-outlined">translate</span>
+                                            <span>Idioma</span>
+                                            <span class="selected-language">Português</span>
+                                            <span class="material-symbols-outlined toggle-arrow">expand_more</span>
+                                        </a>
+                                        <div class="language-options">
+                                            <ul>
+                                                <li data-lang="pt-BR" class="active">
+                                                    <span class="language-flag">🇧🇷</span>
+                                                    <span class="language-name">Português</span>
+                                                </li>
+                                                <li data-lang="en-US">
+                                                    <span class="language-flag">🇺🇸</span>
+                                                    <span class="language-name">English</span>
+                                                </li>
+                                                <li data-lang="es-ES">
+                                                    <span class="language-flag">🇪🇸</span>
+                                                    <span class="language-name">Español</span>
+                                                </li>
+                                                <li data-lang="fr-FR">
+                                                    <span class="language-flag">🇫🇷</span>
+                                                    <span class="language-name">Français</span>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="settings-group">
+                                <ul>
+                                    <li>
+                                        <a href="#ajuda">
+                                            <span class="material-symbols-outlined">help</span>
+                                            <span>Ajuda</span>
+                                        </a>
+                                    </li>
+                                    <li>
+                                        <a href="main/pages/login.html" class="logout-button">
+                                            <span class="material-symbols-outlined">logout</span>
+                                            <span>Sair</span>
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <div id="sidebar">
+        <div class="topmenu">
+            <span id="menu-icon" class="material-symbols-outlined">menu</span>
+            <h3 id="menu-tittle">Menu</h3>
+            <div id="logomenu"></div>
+        </div>
+        <nav id="menu-hidden">
+            <div class="navbar">
+                <ul>
+                    <li>
+                        <a href="dashboard.html">
+                            <span class="material-symbols-outlined">dashboard</span>
+                            <p>Dashboard</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="usuarios.html" class="active">
+                            <span class="material-symbols-outlined">group</span>
+                            <p>Gestão de Usuários</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="turmas.html">
+                            <span class="material-symbols-outlined">school</span>
+                            <p>Gestão de Turmas</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="comunicacao.html">
+                            <span class="material-symbols-outlined">chat</span>
+                            <p>Comunicação</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="relatorios.html">
+                            <span class="material-symbols-outlined">analytics</span>
+                            <p>Central de Relatórios</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="configuracoes.html">
+                            <span class="material-symbols-outlined">settings</span>
+                            <p>Configurações</p>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="suporte.html">
+                            <span class="material-symbols-outlined">help</span>
+                            <p>Suporte</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+
+    <div id="password-popup" class="popup-overlay" style="display: none;">
+        <div class="popup">
+            <div class="popup-header">
+                <h2>Alterar senha</h2>
+                <span class="material-symbols-outlined close-popup">close</span>
+            </div>
+            <div class="popup-content">
+                <p class="popup-description">Informe a senha atual e a nova senha</p>
+                <form id="change-password-form">
+                    <div class="form-group">
+                        <label for="current-password">Senha atual <span class="required">*</span></label>
+                        <div class="password-input">
+                            <input type="password" id="current-password" name="current-password" required>
+                            <span class="material-symbols-outlined toggle-password">visibility_off</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="new-password">Nova senha <span class="required">*</span></label>
+                        <div class="password-input">
+                            <input type="password" id="new-password" name="new-password" required>
+                            <span class="material-symbols-outlined toggle-password">visibility_off</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="confirm-password">Confirmação de senha <span class="required">*</span></label>
+                        <div class="password-input">
+                            <input type="password" id="confirm-password" name="confirm-password" required>
+                            <span class="material-symbols-outlined toggle-password">visibility_off</span>
+                        </div>
+                    </div>
+                    <div class="forgot-password">
+                        <a href="#" id="forgot-password-link">Esqueceu a senha?</a>
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-cancel">Cancelar</button>
+                        <button type="submit" class="btn-confirm">Alterar senha</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup de Redefinição de Senha -->
+    <div id="reset-password-popup" class="popup-overlay" style="display: none;">
+        <div class="popup">
+            <div class="popup-header">
+                <h2>Redefinição de senha!</h2>
+                <span class="material-symbols-outlined close-popup">close</span>
+            </div>
+            <div class="popup-content">
+                <p class="popup-description">Informe um email e enviaremos um link para recuperação da sua senha.</p>
+                <form id="reset-password-form">
+                    <div class="form-group">
+                        <label for="recovery-email">Email <span class="required">*</span></label>
+                        <input type="email" id="recovery-email" name="recovery-email" required placeholder="seu@email.com">
+                    </div>
+                    <div class="form-actions">
+                        <button type="button" class="btn-back">
+                            <span class="material-symbols-outlined">arrow_back</span>
+                            Voltar
+                        </button>
+                        <button type="submit" class="btn-send">Enviar link de recuperação</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div id="logout-popup" class="popup-overlay" style="display: none;">
+        <div class="popup logout-popup">
+            <div class="logout-content">
+                <div class="logout-icon">
+                    <span class="material-symbols-outlined">logout</span>
+                </div>
+                <h2 class="logout-title">Sair da conta?</h2>
+                <p class="logout-description">Você poderá entrar novamente a qualquer momento. Se quiser trocar de conta, faça isso adicionando uma conta existente.</p>
+                
+                <div class="logout-actions">
+                    <button type="button" class="btn-logout">Sair</button>
+                    <button type="button" class="btn-cancel-logout">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <main class="main">
+        <div class="users-container">
+            <div class="page-header">
+                <div> <h1>Gerenciamento de Usuários</h1>
+                    
+                    <div class="user-limit-indicator">
+                        <span class="material-symbols-outlined">alternate_email</span>
+                        <span>E-mails Disponíveis:</span>
+                        <strong id="current-users-count">...</strong>
+                        <span>/</span>
+                        <strong id="max-users-count">...</strong>
+                        <span id="remaining-users-text">(... restantes)</span>
+                    </div>
+
+                    <div id="limit-alert-message" class="limit-alert-message">
+                        <span class="material-symbols-outlined">warning</span>
+                        <span>Você está perto de atingir seu limite de usuários. Para cadastrar mais, por favor, <a href="#">atualize seu plano</a>.</span>
+                    </div>
+
+                </div>
+                <div class="header-actions">
+                    <button id="import-users-btn" class="btn btn-secondary">
+                        <span class="material-symbols-outlined">upload</span>
+                        Importar Usuários
+                    </button>
+                    <button id="add-user-btn" class="btn btn-primary">
+                        <span class="material-symbols-outlined">add</span>
+                        Adicionar Novo Usuário
+                    </button>
+                </div>
+            </div>
+
+            <div class="filter-card">
+                <div class="filter-group">
+                    <span class="material-symbols-outlined">search</span>
+                    <input type="text" id="search-name" placeholder="Buscar por nome ou e-mail...">
+                </div>
+                <div class="filter-group">
+                    <label for="filter-role">Tipo:</label>
+                    <select id="filter-role">
+                        <option value="todos">Todos</option>
+                        <option value="Aluno">Aluno</option>
+                        <option value="Professor">Professor</option>
+                        <option value="Administrador">Administrador</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label for="filter-status">Status:</label>
+                    <select id="filter-status">
+                        <option value="todos">Todos</option>
+                        <option value="ativo">Ativo</option>
+                        <option value="inativo">Inativo</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="users-table-card">
+                <table class="users-table">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>E-mail</th>
+                            <th>Tipo</th>
+                            <th>Turma / Cargo</th>
+                            <th>Status</th>
+                            <th>Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody id="users-table-body">
+                        <tr>
+                            <td>Ana Clara de Souza</td>
+                            <td>ana.souza@email.com</td>
+                            <td>Aluno</td>
+                            <td>9º Ano A</td>
+                            <td><span class="badge badge-active">Ativo</span></td>
+                            <td class="action-icons">
+                                <span class="material-symbols-outlined" title="Editar">edit</span>
+                                <span class="material-symbols-outlined" title="Resetar Senha">key</span>
+                                <span class="material-symbols-outlined" title="Desativar">toggle_on</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Ricardo Mendes</td>
+                            <td>ricardo.mendes@email.com</td>
+                            <td>Professor</td>
+                            <td>Matemática</td>
+                            <td><span class="badge badge-active">Ativo</span></td>
+                            <td class="action-icons">
+                                <span class="material-symbols-outlined" title="Alocar Aulas">calendar_month</span>
+                                <span class="material-symbols-outlined" title="Editar">edit</span>
+                                <span class="material-symbols-outlined" title="Resetar Senha">key</span>
+                                <span class="material-symbols-outlined" title="Desativar">toggle_on</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Beatriz Lima</td>
+                            <td>beatriz.lima@email.com</td>
+                            <td>Administrador</td>
+                            <td>Coordenação</td>
+                            <td><span class="badge badge-active">Ativo</span></td>
+                            <td class="action-icons">
+                                <span class="material-symbols-outlined" title="Editar">edit</span>
+                                <span class="material-symbols-outlined" title="Resetar Senha">key</span>
+                                <span class="material-symbols-outlined" title="Desativar">toggle_on</span>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Lucas Martins</td>
+                            <td>lucas.martins@email.com</td>
+                            <td>Aluno</td>
+                            <td>2º Ano B</td>
+                            <td><span class="badge badge-inactive">Inativo</span></td>
+                            <td class="action-icons">
+                                <span class="material-symbols-outlined" title="Editar">edit</span>
+                                <span class="material-symbols-outlined" title="Resetar Senha">key</span>
+                                <span class="material-symbols-outlined" title="Ativar">toggle_off</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </main>
+
+    <div id="import-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Importar Usuários em Massa</h2>
+                <span id="close-import-modal" class="material-symbols-outlined close-icon">close</span>
+            </div>
+            
+            <div id="import-step-1" class="import-step">
+                <p>Faça o download do nosso modelo de planilha e preencha com os dados dos usuários. Depois, faça o upload do arquivo preenchido.</p>
+                <button class="btn btn-secondary btn-download">
+                    <span class="material-symbols-outlined">download</span> Baixar Modelo da Planilha (.xlsx)
+                </button>
+                <div id="drop-zone" class="drop-zone">
+                    <span class="material-symbols-outlined">cloud_upload</span>
+                    <p>Arraste e solte o arquivo aqui, ou <strong>clique para selecionar</strong></p>
+                    <input type="file" id="file-input" accept=".xlsx, .csv" hidden>
+                </div>
+                <div id="file-name-display" class="file-name-display" style="display: none;"></div>
+            </div>
+
+            <div id="import-step-2" class="import-step" style="display: none;">
+                <p>Verificamos sua planilha. Revise os dados antes de confirmar a importação.</p>
+                <div class="validation-summary">
+                    <span class="summary-success"><span class="material-symbols-outlined">check_circle</span> <strong>254</strong> usuários válidos</span>
+                    <span class="summary-error"><span class="material-symbols-outlined">cancel</span> <strong>3</strong> usuários com erros</span>
+                </div>
+                <div class="validation-table-container">
+                    <table class="validation-table">
+                        <thead>
+                            <tr><th>Nome</th><th>E-mail</th><th>Status</th><th>Erro</th></tr>
+                        </thead>
+                        <tbody>
+                            <tr class="row-success"><td>Mariana Costa</td><td>mariana.c@email.com</td><td><span class="badge badge-active">Válido</span></td><td>-</td></tr>
+                            <tr class="row-error"><td>Jorge Abreu</td><td>jorge.abreu@email.com</td><td><span class="badge badge-inactive">Erro</span></td><td>E-mail já cadastrado</td></tr>
+                            <tr class="row-success"><td>Fernanda Dias</td><td>fernanda.d@email.com</td><td><span class="badge badge-active">Válido</span></td><td>-</td></tr>
+                             <tr class="row-error"><td></td><td>invalido@email.com</td><td><span class="badge badge-inactive">Erro</span></td><td>Nome é obrigatório</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="modal-actions">
+                <button id="cancel-import-btn" class="btn btn-secondary">Cancelar</button>
+                <button id="next-step-btn" class="btn btn-primary" disabled>Verificar Planilha</button>
+            </div>
+        </div>
+    </div>
+
+    <div id="add-user-modal" class="modal-overlay" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Adicionar Novo Usuário</h2>
+                <span id="close-add-user-modal" class="material-symbols-outlined close-icon">close</span>
+            </div>
+            <form id="add-user-form">
+                <div class="form-grid">
+                    <div class="form-group">
+                        <label for="user-fullname">Nome Completo <span class="required">*</span></label>
+                        <input type="text" id="user-fullname" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="user-email">E-mail <span class="required">*</span></label>
+                        <input type="email" id="user-email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="user-type">Tipo de Usuário <span class="required">*</span></label>
+                        <select id="user-type" required>
+                            <option value="" disabled selected>Selecione um tipo</option>
+                            <option value="Aluno">Aluno</option>
+                            <option value="Professor">Professor</option>
+                            <option value="Administrador">Administrador</option>
+                        </select>
+                    </div>
+                    
+                    <div id="dynamic-field-container" class="form-group" style="display: none;">
+                        <div id="turma-field" style="display: none;">
+                            <label for="user-turma">Turma <span class="required">*</span></label>
+                            <select id="user-turma">
+                                <option value="6A">6º Ano A</option>
+                                <option value="7B">7º Ano B</option>
+                                <option value="8A">8º Ano A</option>
+                                <option value="9C">9º Ano C</option>
+                                <option value="1M-A">1º Ano Médio A</option>
+                                <option value="2M-B">2º Ano Médio B</option>
+                                <option value="3M-A">3º Ano Médio A</option>
+                            </select>
+                        </div>
+                        <div id="cargo-field" style="display: none;">
+                            <label for="user-cargo">Cargo / Disciplina <span class="required">*</span></label>
+                            <input type="text" id="user-cargo" placeholder="Ex: Matemática, Coordenação">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="user-password">Senha Provisória <span class="required">*</span></label>
+                        <div class="password-input">
+                            <input type="password" id="user-password" required>
+                            <span class="material-symbols-outlined toggle-password">visibility_off</span>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="user-confirm-password">Confirmar Senha <span class="required">*</span></label>
+                        <div class="password-input">
+                            <input type="password" id="user-confirm-password" required>
+                            <span class="material-symbols-outlined toggle-password">visibility_off</span>
+                        </div>
+                    </div>
+                </div>
+            </form>
+            <div class="modal-actions">
+                <button id="cancel-add-user-btn" class="btn btn-secondary">Cancelar</button>
+                <button id="save-user-btn" type="submit" form="add-user-form" class="btn btn-primary">Salvar Usuário</button>
+            </div>
+        </div>
+    </div>
+        
+    <script src="../scripts/usuarios.js"></script>
+    <script src="../../common/scripts/changepass.js"></script>
+    <script src="../../common/scripts/exitpopup.js"></script>
+    <script src="../../common/scripts/menu.js"></script>   
+</body>
+</html>

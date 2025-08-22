@@ -1,0 +1,23 @@
+{
+  "name": "saber-tcc",
+  "version": "1.0.0",
+  "description": "O **SABER** é uma plataforma educacional inteligente que utiliza **Inteligência Artificial** para analisar o desempenho dos alunos, gerar relatórios personalizados, corrigir redações e oferecer insights que ajudam professores a aplicar intervenções direcionadas de forma mais eficaz.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/WerKdev/SABER-TCC.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/WerKdev/SABER-TCC/issues"
+  },
+  "homepage": "https://github.com/WerKdev/SABER-TCC#readme",
+  "dependencies": {
+    "express": "^5.1.0"
+  }
+}
