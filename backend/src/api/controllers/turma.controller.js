@@ -54,4 +54,124 @@ exports.getTurmasByInstituicao = async (req, res) => {
     console.error('Erro ao listar turmas:', error);
     res.status(500).json({ message: 'Erro interno no servidor.' });
   }
+  exports.matricularAluno = async (req, res) => {
+  try {
+    const { turmaId } = req.params;
+    const { usuarioId } = req.body;
+
+    // 1. Validar a entrada
+    if (!usuarioId) {
+      return res.status(400).json({ message: 'O ID do usuário é obrigatório.' });
+    }
+
+    // 2. Encontrar a turma no banco
+    const turma = await Turma.findByPk(turmaId);
+    if (!turma) {
+      return res.status(404).json({ message: 'Turma não encontrada.' });
+    }
+
+    // 3. Encontrar o usuário e verificar se é um aluno
+    const aluno = await Usuario.findOne({ where: { id_usuario: usuarioId, tipo: 'aluno' } });
+    if (!aluno) {
+      return res.status(404).json({ message: 'Usuário não encontrado ou não é um aluno.' });
+    }
+
+    // 4. Usar o método 'add' do Sequelize para criar a associação
+    // O apelido 'alunos' vem do que definimos em 'models/index.js'
+    await turma.addAluno(aluno);
+
+    res.status(200).json({ message: `Aluno ${aluno.nome} matriculado na turma ${turma.nome} com sucesso.` });
+
+  } catch (error) {
+    // Tratar erro caso o aluno já esteja na turma
+    if (error.name === 'SequelizeUniqueConstraintError') {
+        return res.status(409).json({ message: 'Este aluno já está matriculado nesta turma.' });
+    }
+    console.error('Erro ao matricular aluno:', error);
+    res.status(500).json({ message: 'Erro interno no servidor.' });
+  }
+};
+// backend/src/api/controllers/turma.controller.js
+
+// ... (imports e outras funções existentes) ...
+
+// Função para buscar uma turma específica pelo ID com seus participantes
+exports.getTurmaById = async (req, res) => {
+  try {
+    const { turmaId } = req.params;
+
+    const turma = await Turma.findByPk(turmaId, {
+      // Usamos 'include' para carregar os dados associados
+      include: [
+        {
+          model: Usuario,
+          as: 'alunos', // O mesmo 'as' que definimos na associação
+          attributes: ['id_usuario', 'nome', 'email'], // Seleciona apenas campos seguros
+          through: { attributes: [] } // Não traz informações da tabela de junção
+        },
+        {
+          model: Usuario,
+          as: 'professores',
+          attributes: ['id_usuario', 'nome', 'email'],
+          through: { attributes: [] }
+        },
+        {
+          model: Instituicao, // Também podemos incluir a instituição, se necessário
+          as: 'instituicao',
+          attributes: ['id_instituicao', 'nome']
+        }
+      ]
+    });
+
+    if (!turma) {
+      return res.status(404).json({ message: 'Turma não encontrada.' });
+    }
+
+    res.status(200).json(turma);
+
+  } catch (error) {
+    console.error('Erro ao buscar detalhes da turma:', error);
+    res.status(500).json({ message: 'Erro interno no servidor.' });
+  }
+};
+
+// backend/src/api/controllers/turma.controller.js
+
+// ... (imports e outras funções existentes) ...
+
+// Função para vincular um professor a uma turma
+exports.vincularProfessor = async (req, res) => {
+  try {
+    const { turmaId } = req.params;
+    const { usuarioId } = req.body;
+
+    if (!usuarioId) {
+      return res.status(400).json({ message: 'O ID do usuário é obrigatório.' });
+    }
+
+    const turma = await Turma.findByPk(turmaId);
+    if (!turma) {
+      return res.status(404).json({ message: 'Turma não encontrada.' });
+    }
+
+    // A única diferença: verificamos se o tipo do usuário é 'professor'
+    const professor = await Usuario.findOne({ where: { id_usuario: usuarioId, tipo: 'professor' } });
+    if (!professor) {
+      return res.status(404).json({ message: 'Usuário não encontrado ou não é um professor.' });
+    }
+
+    // Usamos o método 'addProfessor' do Sequelize
+    await turma.addProfessor(professor);
+
+    res.status(200).json({ message: `Professor ${professor.nome} vinculado à turma ${turma.nome} com sucesso.` });
+
+  } catch (error) {
+     if (error.name === 'SequelizeUniqueConstraintError') {
+        return res.status(409).json({ message: 'Este professor já está vinculado a esta turma.' });
+    }
+    console.error('Erro ao vincular professor:', error);
+    res.status(500).json({ message: 'Erro interno no servidor.' });
+  }
+};
+
 };

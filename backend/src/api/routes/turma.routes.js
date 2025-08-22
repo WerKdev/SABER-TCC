@@ -14,4 +14,11 @@ router.post('/', isAdmin, turmaController.createTurma);
 // GET /api/turmas/instituicao/:instituicaoId - Lista turmas de uma instituição
 router.get('/instituicao/:instituicaoId', isAdmin, turmaController.getTurmasByInstituicao);
 
+// GET /api/turmas/:turmaId - Busca os detalhes de uma turma específica
+router.get('/:turmaId', isAdmin, turmaController.getTurmaById);
+
+router.post('/:turmaId/matricular-aluno', isAdmin, turmaController.matricularAluno);
+
+router.post('/:turmaId/vincular-professor', isAdmin, turmaController.vincularProfessor);
+
 module.exports = router;
