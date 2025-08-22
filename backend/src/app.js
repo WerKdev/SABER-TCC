@@ -9,10 +9,14 @@ app.use(express.json());
 
 // --- ROTAS DA API ---
 const authRoutes = require('./api/routes/auth.routes');
-const userRoutes = require('./api/routes/user.routes'); // 1. Importe as rotas de usuário
+const userRoutes = require('./api/routes/user.routes');
+const instituicaoRoutes = require('./api/routes/instituicao.routes');
+const turmaRoutes = require('./api/routes/turma.routes'); // 1. Importe
 
 app.use('/api/auth', authRoutes);
-app.use('/api/users', userRoutes); // 2. Use as rotas com o prefixo /api/users
+app.use('/api/users', userRoutes);
+app.use('/api/instituicoes', instituicaoRoutes);
+app.use('/api/turmas', turmaRoutes); // 2. Use as rotas
 
 // Rota de teste inicial (pode manter ou remover)
 app.get('/', (req, res) => {
