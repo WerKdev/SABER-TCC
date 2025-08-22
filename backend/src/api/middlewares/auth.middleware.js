@@ -28,3 +28,25 @@ exports.isAdmin = (req, res, next) => {
     res.status(400).json({ message: 'Token inválido.' });
   }
 };
+exports.isProfessor = (req, res, next) => {
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+
+  if (!token) {
+    return res.status(401).json({ message: 'Acesso negado. Nenhum token fornecido.' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    
+    // A única mudança: verificamos se o tipo é 'professor'
+    if (decoded.tipo !== 'professor') {
+      return res.status(403).json({ message: 'Acesso proibido. Requer privilégios de professor.' });
+    }
+
+    req.usuario = decoded; // Adiciona os dados do token na requisição
+    next();
+  } catch (error) {
+    res.status(400).json({ message: 'Token inválido.' });
+  }
+};
