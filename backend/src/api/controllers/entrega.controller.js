@@ -1,6 +1,6 @@
 // backend/src/api/controllers/entrega.controller.js
 
-const { EntregaAtividade, Avaliacao, Turma } = require('../../models');
+const { EntregaAtividade, Avaliacao, Turma, Usuario } = require('../../models');
 
 // Função para um professor corrigir uma entrega (adicionar nota e feedback)
 exports.corrigirEntrega = async (req, res) => {
@@ -50,6 +50,47 @@ exports.corrigirEntrega = async (req, res) => {
 
   } catch (error) {
     console.error('Erro ao corrigir entrega:', error);
+    res.status(500).json({ message: 'Erro interno no servidor.' });
+  }
+};
+exports.enviarAtividade = async (req, res) => {
+  try {
+    const { avaliacaoId } = req.params;
+    const alunoId = req.usuario.id;
+
+    // 1. Verificar se um arquivo foi enviado
+    if (!req.file) {
+      return res.status(400).json({ message: 'Nenhum arquivo enviado.' });
+    }
+
+    // 2. Buscar a avaliação e verificar se o aluno pertence à turma
+    const avaliacao = await Avaliacao.findByPk(avaliacaoId, {
+      include: { model: Turma, as: 'turma' }
+    });
+
+    if (!avaliacao) {
+        return res.status(404).json({ message: 'Avaliação não encontrada.' });
+    }
+
+    const isAlunoDaTurma = await avaliacao.turma.hasAluno(alunoId);
+    if (!isAlunoDaTurma) {
+      return res.status(403).json({ message: 'Acesso negado. Você não está matriculado na turma desta avaliação.' });
+    }
+
+    // 3. Criar o registro da entrega no banco
+    const novaEntrega = await EntregaAtividade.create({
+      avaliacao_id: avaliacaoId,
+      aluno_id: alunoId,
+      conteudo_enviado: req.file.path // Salva o caminho do arquivo salvo pelo multer
+    });
+
+    res.status(201).json({
+        message: 'Atividade enviada com sucesso!',
+        entrega: novaEntrega
+    });
+
+  } catch (error) {
+    console.error('Erro ao enviar atividade:', error);
     res.status(500).json({ message: 'Erro interno no servidor.' });
   }
 };

@@ -50,3 +50,23 @@ exports.isProfessor = (req, res, next) => {
     res.status(400).json({ message: 'Token inválido.' });
   }
 };
+exports.isAluno = (req, res, next) => {
+  // A lógica é a mesma, só muda o tipo verificado
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];
+
+  if (!token) {
+    return res.status(401).json({ message: 'Acesso negado. Nenhum token fornecido.' });
+  }
+
+  try {
+    const decoded = jwt.verify(token, process.env.JWT_SECRET);
+    if (decoded.tipo !== 'aluno') {
+      return res.status(403).json({ message: 'Acesso proibido. Rota exclusiva para alunos.' });
+    }
+    req.usuario = decoded;
+    next();
+  } catch (error) {
+    res.status(400).json({ message: 'Token inválido.' });
+  }
+};
