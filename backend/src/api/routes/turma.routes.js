@@ -5,7 +5,7 @@ const router = express.Router();
 
 const turmaController = require('../controllers/turma.controller');
 const avaliacaoController = require('../controllers/avaliacao.controller'); // 1. Importe o controller de avaliação
-const { isAdmin, isProfessor } = require('../middlewares/auth.middleware'); // 2. Importe o middleware isProfessor
+const { isAdmin, isProfessor, isAluno, isAuthenticated } = require('../middlewares/auth.middleware');
 
 // Rotas para /api/turmas
 
@@ -25,6 +25,6 @@ router.post('/:turmaId/vincular-professor', isAdmin, turmaController.vincularPro
 router.post('/:turmaId/avaliacoes', isProfessor, avaliacaoController.createAvaliacao);
 
 // GET /api/turmas/:turmaId/avaliacoes - Professor lista as avaliações da turma
-router.get('/:turmaId/avaliacoes', isProfessor, avaliacaoController.getAvaliacoesByTurma);
+router.get('/:turmaId/avaliacoes', isAuthenticated, avaliacaoController.getAvaliacoesByTurma);
 
 module.exports = router;

@@ -52,35 +52,30 @@ exports.createAvaliacao = async (req, res) => {
 exports.getAvaliacoesByTurma = async (req, res) => {
   try {
     const { turmaId } = req.params;
-    const professorId = req.usuario.id; // ID do professor logado
+    const usuarioLogado = req.usuario; // Dados do usuário vêm do token
 
-    // 1. Verificar se o professor pertence à turma (mesma verificação de segurança)
+    // 1. Buscar a turma
     const turma = await Turma.findByPk(turmaId);
     if (!turma) {
       return res.status(404).json({ message: 'Turma não encontrada.' });
     }
-    const isProfessorDaTurma = await turma.hasProfessor(professorId);
-    if (!isProfessorDaTurma) {
-      return res.status(403).json({ message: 'Acesso negado. Você não é professor desta turma.' });
+
+    // 2. VERIFICAÇÃO DE SEGURANÇA: O usuário logado é professor OU aluno desta turma?
+    const isProfessorDaTurma = await turma.hasProfessor(usuarioLogado.id);
+    const isAlunoDaTurma = await turma.hasAluno(usuarioLogado.id);
+
+    if (!isProfessorDaTurma && !isAlunoDaTurma) {
+      return res.status(403).json({ message: 'Acesso negado. Você não faz parte desta turma.' });
     }
 
-    // 2. Buscar todas as avaliações da turma
+    // 3. Se a permissão for válida, buscar as avaliações
     const avaliacoes = await Avaliacao.findAll({
       where: { turma_id: turmaId },
-      // Incluir dados do professor e da disciplina para exibição no frontend
       include: [
-        {
-          model: Usuario,
-          as: 'professor',
-          attributes: ['nome']
-        },
-        {
-          model: Disciplina,
-          as: 'disciplina',
-          attributes: ['nome']
-        }
+        { model: Usuario, as: 'professor', attributes: ['nome'] },
+        { model: Disciplina, as: 'disciplina', attributes: ['nome'] }
       ],
-      order: [['data_entrega', 'ASC']] // Ordenar por data de entrega
+      order: [['data_entrega', 'ASC']]
     });
 
     res.status(200).json(avaliacoes);

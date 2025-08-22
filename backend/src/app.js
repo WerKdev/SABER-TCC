@@ -15,6 +15,8 @@ const turmaRoutes = require('./api/routes/turma.routes'); // 1. Importe
 const disciplinaRoutes = require('./api/routes/disciplina.routes');
 const avaliacaoRoutes = require('./api/routes/avaliacao.routes');
 const entregaRoutes = require('./api/routes/entrega.routes');
+const alunoRoutes = require('./api/routes/aluno.routes');
+const iaRoutes = require('./api/routes/ia.routes');
 
 app.use('/api/auth', authRoutes);
 app.use('/api/users', userRoutes);
@@ -23,6 +25,8 @@ app.use('/api/turmas', turmaRoutes); // 2. Use as rotas
 app.use('/api/disciplinas', disciplinaRoutes);
 app.use('/api/avaliacoes', avaliacaoRoutes);
 app.use('/api/entregas', entregaRoutes);
+app.use('/api/aluno', alunoRoutes);
+app.use('/api/ia', iaRoutes);
 
 // Rota de teste inicial (pode manter ou remover)
 app.get('/', (req, res) => {
